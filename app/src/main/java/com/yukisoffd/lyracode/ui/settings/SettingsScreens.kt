@@ -377,6 +377,7 @@ internal fun SettingsScreen(
                         customFontScale = customFontScale,
                         onOpenThemeModeSettings = { detail = "theme_mode" },
                         onOpenThemePresetSettings = { detail = "theme_preset" },
+                        onOpenCustomThemeJson = { detail = "custom_theme_json" },
                         onOpenFontSettings = { detail = "font" },
                         onOpenRefreshRateSettings = { detail = "refresh_rate" },
                         onOpenChatBackgroundSettings = { detail = "chat_background" },

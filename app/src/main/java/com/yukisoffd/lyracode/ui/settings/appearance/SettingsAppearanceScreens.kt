@@ -12,6 +12,7 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.border
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.verticalScroll
@@ -56,6 +57,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -992,7 +994,7 @@ internal fun ThemePresetSettings(
     controller: ChatController,
     onThemePresetChange: (String) -> Unit,
 ) {
-    val currentPreset by remember { mutableStateOf(settings.selectedThemePreset) }
+    var currentPreset by remember { mutableStateOf(settings.selectedThemePreset) }
     ModernCardBox {
         Text(uiText(R.string.title_theme_preset), style = MaterialTheme.typography.titleMedium)
         Text(
@@ -1179,7 +1181,7 @@ internal fun CustomThemeJsonSettings(
                             showPasteDialog = false
                             pasteText = ""
                         } else {
-                            importNotice = result.error ?: uiText(R.string.notice_theme_import_failed)
+                            importNotice = result.exceptionOrNull()?.message ?: uiText(R.string.notice_theme_import_failed)
                         }
                         controller.settingsRevision.intValue++
                     },
