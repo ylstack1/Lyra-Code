@@ -72,7 +72,6 @@
     <string name="label_nickname">Nickname</string>
     <string name="label_gender">Gender</string>
     <string name="label_age">Age</string>
-    <string name="label_gender">Gender</string>
     <string name="gender_male">Male</string>
     <string name="gender_female">Female</string>
     <string name="gender_other">Other</string>
