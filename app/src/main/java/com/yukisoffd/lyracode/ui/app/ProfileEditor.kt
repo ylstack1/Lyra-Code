@@ -175,9 +175,44 @@ internal fun ProfileEditDialog(
                     Text(context.getString(R.string.label_vertical_position), color = ModernMutedDark, style = MaterialTheme.typography.labelMedium)
                     Slider(value = offsetY, onValueChange = { offsetY = it }, valueRange = -1f..1f)
                 }
-                KimiSectionLabel(context.getString(R.string.mengxi_third_party_accounts))
-                ModernCardBox { NewApiAccountSection(settings, onServicesChanged, onOpenAccount) }
-                ModernCardBox { ChatGptAccountSection(settings, onOpenChatGptAccount) }
+                KimiSectionLabel(context.getString(R.string.label_profile_details))
+                ModernCardBox {
+                    Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                        OutlinedTextField(
+                            value = draftName,
+                            onValueChange = { draftName = it },
+                            modifier = Modifier.fillMaxWidth(),
+                            label = { Text(context.getString(R.string.label_nickname)) },
+                            singleLine = true,
+                        )
+                        OutlinedTextField(
+                            value = settings.userGender,
+                            onValueChange = { settings.userGender = it },
+                            modifier = Modifier.fillMaxWidth(),
+                            label = { Text(uiText(R.string.label_gender)) },
+                            singleLine = true,
+                        )
+                        OutlinedTextField(
+                            value = settings.userAge,
+                            onValueChange = { settings.userAge = it },
+                            modifier = Modifier.fillMaxWidth(),
+                            label = { Text(uiText(R.string.label_age)) },
+                            singleLine = true,
+                        )
+                        OutlinedTextField(
+                            value = settings.userBio,
+                            onValueChange = { settings.userBio = it },
+                            modifier = Modifier.fillMaxWidth().heightIn(min = 80.dp),
+                            label = { Text(uiText(R.string.label_bio)) },
+                            singleLine = false,
+                        )
+                        Text(
+                            uiText(R.string.profile_ai_context_desc),
+                            color = ModernMutedDark,
+                            style = MaterialTheme.typography.bodySmall,
+                        )
+                    }
+                }
             }
         },
         confirmButton = {

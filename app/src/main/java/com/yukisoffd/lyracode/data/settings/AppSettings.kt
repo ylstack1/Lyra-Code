@@ -287,6 +287,10 @@ class AppSettings(context: Context) {
         get() = normalizeHexColor(plainPrefs.getString(KEY_CUSTOM_THEME_COLOR, DEFAULT_CUSTOM_THEME_COLOR).orEmpty())
         set(value) = plainPrefs.edit().putString(KEY_CUSTOM_THEME_COLOR, normalizeHexColor(value)).apply()
 
+    var selectedThemePreset: String
+        get() = plainPrefs.getString(KEY_SELECTED_THEME_PRESET, "vercel_dark").orEmpty().ifBlank { "vercel_dark" }
+        set(value) = plainPrefs.edit().putString(KEY_SELECTED_THEME_PRESET, value).apply()
+
     var languageMode: String
         get() = normalizeLanguageMode(
             plainPrefs.getString(KEY_LANGUAGE_MODE, LANGUAGE_SYSTEM)
@@ -459,6 +463,18 @@ class AppSettings(context: Context) {
     var userAvatarPath: String?
         get() = plainPrefs.getString(KEY_USER_AVATAR_PATH, null)
         set(value) = plainPrefs.edit().putString(KEY_USER_AVATAR_PATH, value).apply()
+
+    var userGender: String
+        get() = plainPrefs.getString(KEY_USER_GENDER, "").orEmpty()
+        set(value) = plainPrefs.edit().putString(KEY_USER_GENDER, value.trim()).apply()
+
+    var userAge: String
+        get() = plainPrefs.getString(KEY_USER_AGE, "").orEmpty()
+        set(value) = plainPrefs.edit().putString(KEY_USER_AGE, value.trim()).apply()
+
+    var userBio: String
+        get() = plainPrefs.getString(KEY_USER_BIO, "").orEmpty()
+        set(value) = plainPrefs.edit().putString(KEY_USER_BIO, value.trim()).apply()
 
     fun memories(): List<MemoryEntry> {
         val raw = plainPrefs.getString(KEY_MEMORIES, null).orEmpty()
@@ -1478,6 +1494,7 @@ class AppSettings(context: Context) {
             .put("predictiveBackEnabled", predictiveBackEnabled)
             .put("customThemeColorEnabled", customThemeColorEnabled)
             .put("customThemeColor", customThemeColor)
+            .put("selectedThemePreset", selectedThemePreset)
             .put("languageMode", languageMode)
             .put("refreshRateMode", refreshRateMode)
             .put("fontScaleMode", fontScaleMode)
@@ -1487,6 +1504,9 @@ class AppSettings(context: Context) {
             .put("customSuCommand", customSuCommand)
             .put("userNickname", userNickname)
             .put("userAvatarPath", userAvatarPath.orEmpty())
+            .put("userGender", userGender)
+            .put("userAge", userAge)
+            .put("userBio", userBio)
             .put("memories", JSONArray().also { array -> memories().forEach { array.put(memoryJson(it)) } })
             .put("streamingAnimationMode", streamingAnimationMode)
             .put("chatBackgroundPath", chatBackgroundPath.orEmpty())
@@ -1612,6 +1632,7 @@ class AppSettings(context: Context) {
         root.optString("themeMode").takeIf { it.isNotBlank() }?.let { themeMode = it }
         if (root.has("customThemeColorEnabled")) customThemeColorEnabled = root.optBoolean("customThemeColorEnabled")
         root.optString("customThemeColor").takeIf { it.isNotBlank() }?.let { customThemeColor = it }
+        root.optString("selectedThemePreset").takeIf { it.isNotBlank() }?.let { selectedThemePreset = it }
         if (root.has("dynamicColorEnabled")) dynamicColorEnabled = root.optBoolean("dynamicColorEnabled")
         if (root.has("predictiveBackEnabled")) predictiveBackEnabled = root.optBoolean("predictiveBackEnabled")
         root.optString("languageMode").takeIf { it.isNotBlank() }?.let { languageMode = it }
@@ -1623,6 +1644,9 @@ class AppSettings(context: Context) {
         root.optString("customSuCommand").takeIf { it.isNotBlank() }?.let { customSuCommand = it }
         root.optString("userNickname").takeIf { it.isNotBlank() }?.let { userNickname = it }
         root.optString("userAvatarPath").takeIf { it.isNotBlank() }?.let { userAvatarPath = it }
+        root.optString("userGender").takeIf { it.isNotBlank() }?.let { userGender = it }
+        root.optString("userAge").takeIf { it.isNotBlank() }?.let { userAge = it }
+        root.optString("userBio").takeIf { it.isNotBlank() }?.let { userBio = it }
         root.optJSONArray("memories")?.let { array ->
             val imported = parseMemories(array)
             saveMemories(if (supplement) mergeMemories(memories(), imported) else imported)
@@ -2357,6 +2381,7 @@ class AppSettings(context: Context) {
         private const val KEY_DEVICE_INTERACTION_EXPERIMENTAL_ENABLED = "device_interaction_experimental_enabled"
         private const val KEY_CUSTOM_THEME_COLOR_ENABLED = "custom_theme_color_enabled"
         private const val KEY_CUSTOM_THEME_COLOR = "custom_theme_color"
+        private const val KEY_SELECTED_THEME_PRESET = "selected_theme_preset"
         private const val KEY_LANGUAGE_MODE = "language_mode"
         private const val KEY_REFRESH_RATE_MODE = "refresh_rate_mode"
         private const val KEY_DOWNLOAD_COMPLETION_NOTIFICATIONS = "download_completion_notifications"
@@ -2373,6 +2398,9 @@ class AppSettings(context: Context) {
         private const val KEY_CUSTOM_SU_COMMAND = "custom_su_command"
         private const val KEY_USER_NICKNAME = "user_nickname"
         private const val KEY_USER_AVATAR_PATH = "user_avatar_path"
+        private const val KEY_USER_GENDER = "user_gender"
+        private const val KEY_USER_AGE = "user_age"
+        private const val KEY_USER_BIO = "user_bio"
         private const val KEY_MEMORIES = "memories"
         private const val MAX_MEMORY_COUNT = 200
         private const val MAX_MEMORY_CONTENT_CHARS = 2_000

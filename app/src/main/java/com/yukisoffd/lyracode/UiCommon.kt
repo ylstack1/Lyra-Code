@@ -223,6 +223,9 @@ internal fun LyraCodeTheme(
     dynamicColorRevision: Int,
     content: @Composable () -> Unit,
 ) {
+    val selectedPreset = remember(settingsRevision, settings.selectedThemePreset) {
+        findThemePreset(settings.selectedThemePreset) ?: defaultThemePreset()
+    }
     val context = LocalContext.current
     val density = LocalDensity.current
     val textFontFamily = remember(settingsRevision, settings.textFontPath) {
@@ -243,36 +246,36 @@ internal fun LyraCodeTheme(
     val darkSurface = customBackground?.let { lerp(it, Color.Black, 0.55f) } ?: ModernSurfaceDark
     val darkSurfaceVariant = customBackground?.let { lerp(it, Color.Black, 0.40f) } ?: ModernSurfaceElevatedDark
     val light = lightColorScheme(
-        primary = ModernAccentLight,
+        primary = if (settings.customThemeColorEnabled) ModernAccentLight else selectedPreset.accent,
         onPrimary = Color.White,
-        primaryContainer = ModernAccentLight.copy(alpha = 0.12f),
-        onPrimaryContainer = ModernAccentLight,
-        secondary = ModernMutedLight,
+        primaryContainer = if (settings.customThemeColorEnabled) ModernAccentLight.copy(alpha = 0.12f) else selectedPreset.accentContainer,
+        onPrimaryContainer = if (settings.customThemeColorEnabled) ModernAccentLight else selectedPreset.accent,
+        secondary = if (settings.customThemeColorEnabled) ModernMutedLight else selectedPreset.muted,
         onSecondary = ModernTextLight,
-        background = customBackground ?: ModernBgLight,
-        surface = ModernSurfaceLight,
+        background = customBackground ?: if (settings.customThemeColorEnabled) ModernBgLight else selectedPreset.background,
+        surface = if (settings.customThemeColorEnabled) ModernSurfaceLight else selectedPreset.surface,
         surfaceVariant = Color(0xFFF5F5F4),
         onSurface = ModernTextLight,
-        onSurfaceVariant = ModernMutedLight,
-        outline = ModernBorderLight,
-        outlineVariant = ModernBorderLight.copy(alpha = 0.5f),
-        surfaceTint = ModernAccentLight,
+        onSurfaceVariant = if (settings.customThemeColorEnabled) ModernMutedLight else selectedPreset.muted,
+        outline = if (settings.customThemeColorEnabled) ModernBorderLight else selectedPreset.border,
+        outlineVariant = if (settings.customThemeColorEnabled) ModernBorderLight.copy(alpha = 0.5f) else selectedPreset.outlineVariant,
+        surfaceTint = if (settings.customThemeColorEnabled) ModernAccentLight else selectedPreset.accent,
     )
     val dark = darkColorScheme(
-        primary = ModernAccentDark,
+        primary = if (settings.customThemeColorEnabled) ModernAccentDark else selectedPreset.accent,
         onPrimary = Color.White,
-        primaryContainer = ModernAccentDark.copy(alpha = 0.15f),
-        onPrimaryContainer = ModernAccentDark,
-        secondary = ModernMutedDark,
+        primaryContainer = if (settings.customThemeColorEnabled) ModernAccentDark.copy(alpha = 0.15f) else selectedPreset.accentContainer,
+        onPrimaryContainer = if (settings.customThemeColorEnabled) ModernAccentDark else selectedPreset.accent,
+        secondary = if (settings.customThemeColorEnabled) ModernMutedDark else selectedPreset.muted,
         onSecondary = ModernTextDark,
-        background = customBackground ?: ModernBgDark,
-        surface = ModernSurfaceDark,
-        surfaceVariant = ModernSurfaceElevatedDark,
+        background = customBackground ?: if (settings.customThemeColorEnabled) ModernBgDark else selectedPreset.background,
+        surface = if (settings.customThemeColorEnabled) ModernSurfaceDark else selectedPreset.surface,
+        surfaceVariant = if (settings.customThemeColorEnabled) ModernSurfaceElevatedDark else selectedPreset.surfaceElevated,
         onSurface = ModernTextDark,
-        onSurfaceVariant = ModernMutedDark,
-        outline = ModernBorderDark,
-        outlineVariant = ModernBorderDark.copy(alpha = 0.4f),
-        surfaceTint = ModernAccentDark,
+        onSurfaceVariant = if (settings.customThemeColorEnabled) ModernMutedDark else selectedPreset.muted,
+        outline = if (settings.customThemeColorEnabled) ModernBorderDark else selectedPreset.border,
+        outlineVariant = if (settings.customThemeColorEnabled) ModernBorderDark.copy(alpha = 0.4f) else selectedPreset.outlineVariant,
+        surfaceTint = if (settings.customThemeColorEnabled) ModernAccentDark else selectedPreset.accent,
     )
     val baseScheme = if (darkMode) dark else light
     val colorScheme = if (dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
@@ -347,6 +350,119 @@ internal val ModernAccentLight = Color(0xFF4F46E5)
 internal val ModernCardShape = RoundedCornerShape(12.dp)
 internal val ModernPillShape = RoundedCornerShape(999.dp)
 internal val ModernShape = RoundedCornerShape(8.dp)
+
+// ============================================================================
+// Theme Preset System - Built-in dark themes (Vercel, Obsidian, GitHub, etc.)
+// ============================================================================
+
+internal data class ThemePreset(
+    val id: String,
+    val name: String,
+    val description: String,
+    val background: Color,
+    val surface: Color,
+    val surfaceElevated: Color,
+    val border: Color,
+    val text: Color,
+    val muted: Color,
+    val accent: Color,
+    val accentContainer: Color,
+    val outlineVariant: Color,
+)
+
+internal val ThemePresetGitHubDark = ThemePreset(
+    id = "github_dark",
+    name = "GitHub Dark",
+    description = "Deep dark with subtle blue accents",
+    background = Color(0xFF0D1117),
+    surface = Color(0xFF161B22),
+    surfaceElevated = Color(0xFF21262D),
+    border = Color(0xFF30363D),
+    text = Color(0xFFC9D1D9),
+    muted = Color(0xFF8B949E),
+    accent = Color(0xFF58A6FF),
+    accentContainer = Color(0xFF1F6FEB).copy(alpha = 0.15f),
+    outlineVariant = Color(0xFF30363D).copy(alpha = 0.7f),
+)
+
+internal val ThemePresetVercelDark = ThemePreset(
+    id = "vercel_dark",
+    name = "Vercel Dark",
+    description = "Near-black canvas with indigo accents",
+    background = Color(0xFF0A0A0A),
+    surface = Color(0xFF141414),
+    surfaceElevated = Color(0xFF1C1C1C),
+    border = Color(0xFF2A2A2A),
+    text = Color(0xFFEAEAEA),
+    muted = Color(0xFF8E8E8E),
+    accent = Color(0xFF0000FF),
+    accentContainer = Color(0xFF0000FF).copy(alpha = 0.12f),
+    outlineVariant = Color(0xFF2A2A2A).copy(alpha = 0.6f),
+)
+
+internal val ThemePresetObsidian = ThemePreset(
+    id = "obsidian",
+    name = "Obsidian",
+    description = "True black with high-contrast text",
+    background = Color(0xFF0B0E11),
+    surface = Color(0xFF13161F),
+    surfaceElevated = Color(0xFF1A1D26),
+    border = Color(0xFF2A2E3A),
+    text = Color(0xFFC0C0C0),
+    muted = Color(0xFF737373),
+    accent = Color(0xFF7C3AED),
+    accentContainer = Color(0xFF7C3AED).copy(alpha = 0.15f),
+    outlineVariant = Color(0xFF2A2E3A).copy(alpha = 0.6f),
+)
+
+internal val ThemePresetGoldenDragon = ThemePreset(
+    id = "golden_dragon",
+    name = "Golden Dragon Dark",
+    description = "Deep black with gold accents",
+    background = Color(0xFF050505),
+    surface = Color(0xFF0A0A0A),
+    surfaceElevated = Color(0xFF121212),
+    border = Color(0xFF1F1F1F),
+    text = Color(0xFFFFFFFF),
+    muted = Color(0xFFB8860B),
+    accent = Color(0xFFFFD700),
+    accentContainer = Color(0xFFFFD700).copy(alpha = 0.15f),
+    outlineVariant = Color(0xFF1F1F1F).copy(alpha = 0.6f),
+)
+
+internal val ThemePresetMatte = ThemePreset(
+    id = "matte",
+    name = "Matte Dark",
+    description = "Soft matte gray with muted tones",
+    background = Color(0xFF121212),
+    surface = Color(0xFF1E1E1E),
+    surfaceElevated = Color(0xFF2A2A2A),
+    border = Color(0xFF3A3A3A),
+    text = Color(0xFFE0E0E0),
+    muted = Color(0xFFA0A0A0),
+    accent = Color(0xFFBB86FC),
+    accentContainer = Color(0xFFBB86FC).copy(alpha = 0.15f),
+    outlineVariant = Color(0xFF3A3A3A).copy(alpha = 0.6f),
+)
+
+internal val AllThemePresets = listOf(
+    ThemePresetGitHubDark,
+    ThemePresetVercelDark,
+    ThemePresetObsidian,
+    ThemePresetGoldenDragon,
+    ThemePresetMatte,
+)
+
+internal fun findThemePreset(id: String): ThemePreset? =
+    AllThemePresets.firstOrNull { it.id == id }
+
+internal fun defaultThemePreset(): ThemePreset = ThemePresetVercelDark
+
+// ============================================================================
+// End Theme Preset System
+// ============================================================================
+
+
 
 @Composable
 internal fun ModernCardBox(

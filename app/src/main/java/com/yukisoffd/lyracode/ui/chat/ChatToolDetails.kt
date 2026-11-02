@@ -54,6 +54,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
+import com.yukisoffd.lyracode.LocalCodeFontFamily
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -69,27 +70,216 @@ internal fun ToolResultContent(
     inlineDetails: Boolean = false,
 ) {
     val summary = if (toolName.isNotBlank()) {
-        uiText(R.string.ui_tool_call) + " $toolName · " + uiText(R.string.ui_view_details)
+        uiText(R.string.ui_tool_call) + " $toolName"
     } else {
-        uiText(R.string.ui_tool_call_2) + " · " + uiText(R.string.ui_view_details)
+        uiText(R.string.ui_tool_call_2)
     }
-    ToolCallSummaryButton(text = summary, compact = compact, onClick = onToggle)
-    if (expanded && inlineDetails) {
-        // Application overlays have no Activity token for the full-screen detail Dialog.
-        androidx.compose.foundation.text.selection.SelectionContainer {
-            Column(Modifier.fillMaxWidth().padding(10.dp)) {
-                Text(content.ifBlank { uiText(R.string.label_empty_result) },
-                    style = MaterialTheme.typography.bodySmall.copy(fontFamily = FontFamily.Monospace),
-                    color = MaterialTheme.colorScheme.onSurface)
+    Column(
+        Modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
+        ToolCallSummaryCard(
+            text = summary,
+            compact = compact,
+            onClick = onToggle,
+            expanded = expanded,
+        )
+        if (expanded) {
+            ToolResultCard(
+                toolName = toolName,
+                toolInput = toolInput.ifBlank { "{}" },
+                toolOutput = content.ifBlank { uiText(R.string.label_empty_result) },
+                onCopy = { },
+            )
+        }
+    }
+}
+
+@Composable
+private fun ToolCallSummaryCard(
+    text: String,
+    compact: Boolean,
+    onClick: () -> Unit,
+    expanded: Boolean,
+) {
+    Card(
+        Modifier
+            .fillMaxWidth()
+            .clickable(onClick = onClick),
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = if (expanded) 0.18f else 0.12f),
+        ),
+        border = BorderStroke(
+            1.dp,
+            MaterialTheme.colorScheme.primary.copy(alpha = if (expanded) 0.5f else 0.3f),
+        ),
+    ) {
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .padding(horizontal = if (compact) 12.dp else 16.dp, vertical = if (compact) 8.dp else 12.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(10.dp),
+        ) {
+            Icon(
+                Icons.Default.Build,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.size(if (compact) 16.dp else 20.dp),
+            )
+            Text(
+                text,
+                modifier = Modifier.weight(1f),
+                color = MaterialTheme.colorScheme.primary,
+                style = if (compact) MaterialTheme.typography.labelMedium else MaterialTheme.typography.titleMedium,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis,
+            )
+            Icon(
+                if (expanded) Icons.Default.ExpandLess else Icons.Default.ExpandMore,
+                contentDescription = if (expanded) uiText(R.string.ui_collapse) else uiText(R.string.ui_view_details),
+                tint = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.size(if (compact) 18.dp else 24.dp),
+            )
+        }
+    }
+}
+
+@Composable
+private fun ToolResultCard(
+    toolName: String,
+    toolInput: String,
+    toolOutput: String,
+    onCopy: () -> Unit,
+) {
+    Column(
+        Modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
+        Card(
+            Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(12.dp),
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.35f),
+            ),
+            border = BorderStroke(
+                1.dp,
+                MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f),
+            ),
+        ) {
+            Column(
+                Modifier.padding(horizontal = 14.dp, vertical = 10.dp),
+                verticalArrangement = Arrangement.spacedBy(6.dp),
+            ) {
+                Row(
+                    Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                ) {
+                    Icon(
+                        Icons.Default.Input,
+                        contentDescription = null,
+                        modifier = Modifier.size(18.dp),
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                    Text(
+                        uiText(R.string.tool_input_title),
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                    Spacer(Modifier.weight(1f))
+                    IconButton(onClick = { }) {
+                        Icon(
+                            Icons.Default.ContentCopy,
+                            contentDescription = uiText(R.string.file_action_copy),
+                            tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                            modifier = Modifier.size(18.dp),
+                        )
+                    }
+                }
+                ModernDivider()
+                SelectionContainer {
+                    Text(
+                        highlightedJsonForDisplay(
+                            value = toolInput,
+                            keyColor = MaterialTheme.colorScheme.primary,
+                            stringColor = MaterialTheme.colorScheme.tertiary,
+                            numberColor = MaterialTheme.colorScheme.secondary,
+                            literalColor = MaterialTheme.colorScheme.error,
+                            punctuationColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                        ),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .horizontalScroll(rememberScrollState())
+                            .padding(horizontal = 14.dp, vertical = 8.dp),
+                        style = MaterialTheme.typography.bodySmall.copy(fontFamily = LocalCodeFontFamily.current),
+                    )
+                }
             }
         }
-    } else if (expanded) {
-        ToolCallDetailPage(
-            toolName = toolName,
-            toolInput = toolInput.ifBlank { "{}" },
-            toolOutput = content.ifBlank { uiText(R.string.label_empty_result) },
-            onClose = onToggle,
-        )
+
+        Card(
+            Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(12.dp),
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f),
+            ),
+            border = BorderStroke(
+                1.dp,
+                MaterialTheme.colorScheme.outline.copy(alpha = 0.3f),
+            ),
+        ) {
+            Column(
+                Modifier.padding(horizontal = 14.dp, vertical = 10.dp),
+                verticalArrangement = Arrangement.spacedBy(6.dp),
+            ) {
+                Row(
+                    Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                ) {
+                    Icon(
+                        Icons.Default.Output,
+                        contentDescription = null,
+                        modifier = Modifier.size(18.dp),
+                        tint = MaterialTheme.colorScheme.primary,
+                    )
+                    Text(
+                        uiText(R.string.tool_output_title),
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.primary,
+                    )
+                    Spacer(Modifier.weight(1f))
+                    IconButton(onClick = { }) {
+                        Icon(
+                            Icons.Default.ContentCopy,
+                            contentDescription = uiText(R.string.file_action_copy),
+                            tint = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.size(18.dp),
+                        )
+                    }
+                }
+                ModernDivider()
+                SelectionContainer {
+                    Text(
+                        highlightedJsonForDisplay(
+                            value = toolOutput,
+                            keyColor = MaterialTheme.colorScheme.primary,
+                            stringColor = MaterialTheme.colorScheme.tertiary,
+                            numberColor = MaterialTheme.colorScheme.secondary,
+                            literalColor = MaterialTheme.colorScheme.error,
+                            punctuationColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                        ),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .horizontalScroll(rememberScrollState())
+                            .padding(horizontal = 14.dp, vertical = 8.dp),
+                        style = MaterialTheme.typography.bodySmall.copy(fontFamily = LocalCodeFontFamily.current),
+                    )
+                }
+            }
+        }
     }
 }
 

@@ -376,6 +376,7 @@ internal fun SettingsScreen(
                         fontScaleMode = fontScaleMode,
                         customFontScale = customFontScale,
                         onOpenThemeModeSettings = { detail = "theme_mode" },
+                        onOpenThemePresetSettings = { detail = "theme_preset" },
                         onOpenFontSettings = { detail = "font" },
                         onOpenRefreshRateSettings = { detail = "refresh_rate" },
                         onOpenChatBackgroundSettings = { detail = "chat_background" },
@@ -388,6 +389,13 @@ internal fun SettingsScreen(
                         themeMode = themeMode,
                         onOpenCustomThemeColor = { detail = "custom_theme_color" },
                         onThemeModeChange = onThemeModeChange,
+                    )
+                    "theme_preset" -> ThemePresetSettings(
+                        settings = settings,
+                        controller = controller,
+                        onThemePresetChange = { presetId ->
+                            // Preset change is handled inside ThemePresetSettings
+                        },
                     )
                     "custom_theme_color" -> CustomThemeColorSettings(settings, controller)
                     "language" -> LanguageSettings(

@@ -75,9 +75,13 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import com.yukisoffd.lyracode.data.AppSettings
 import com.yukisoffd.lyracode.data.FontLibraryItem
+import com.yukisoffd.lyracode.AllThemePresets
+import com.yukisoffd.lyracode.findThemePreset
 import kotlinx.coroutines.launch
 import java.util.Locale
 import kotlin.math.roundToInt
+import org.json.JSONObject
+import org.json.JSONException
 
 
 
@@ -94,6 +98,8 @@ internal fun ThemeSettings(
     fontScaleMode: String,
     customFontScale: Float,
     onOpenThemeModeSettings: () -> Unit,
+    onOpenThemePresetSettings: () -> Unit,
+    onOpenCustomThemeJson: () -> Unit,
     onOpenFontSettings: () -> Unit,
     onOpenRefreshRateSettings: () -> Unit,
     onOpenChatBackgroundSettings: () -> Unit,
@@ -129,6 +135,10 @@ internal fun ThemeSettings(
         }
         ModernDivider()
         KimiMenuRow(Icons.Default.Palette, uiText(R.string.title_theme_mode), if (settings.customThemeColorEnabled) uiText(R.string.custom_theme_color_value, settings.customThemeColor) else themeName(themeMode), onClick = onOpenThemeModeSettings)
+        ModernDivider()
+        KimiMenuRow(Icons.Default.FormatColorFill, uiText(R.string.title_theme_preset), presetName(settings.selectedThemePreset), onClick = onOpenThemePresetSettings)
+        ModernDivider()
+        KimiMenuRow(Icons.Default.Code, uiText(R.string.title_custom_theme_json), uiText(R.string.custom_theme_json_desc), onClick = onOpenCustomThemeJson)
         ModernDivider()
         KimiMenuRow(Icons.Default.Apps, stringResource(R.string.app_icon_title), stringResource(AppIcon.fromId(settings.appIconId).title), onClick = onOpenAppIconSettings)
         ModernDivider()
@@ -970,6 +980,254 @@ internal fun fontScaleName(mode: String, customFontScale: Float): String = when 
     AppSettings.FONT_SCALE_EXTRA_LARGE -> uiText(R.string.font_name_extra_large)
     AppSettings.FONT_SCALE_CUSTOM -> uiText(R.string.font_scale_custom, (customFontScale * 100).roundToInt())
     else -> uiText(R.string.font_name_system)
+}
+
+internal fun presetName(presetId: String): String {
+    return findThemePreset(presetId)?.name ?: uiText(R.string.title_theme_preset)
+}
+
+@Composable
+internal fun ThemePresetSettings(
+    settings: AppSettings,
+    controller: ChatController,
+    onThemePresetChange: (String) -> Unit,
+) {
+    val currentPreset by remember { mutableStateOf(settings.selectedThemePreset) }
+    ModernCardBox {
+        Text(uiText(R.string.title_theme_preset), style = MaterialTheme.typography.titleMedium)
+        Text(
+            uiText(R.string.theme_preset_desc),
+            color = ModernMutedDark,
+            style = MaterialTheme.typography.bodySmall,
+        )
+        ModernDivider()
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(4.dp),
+        ) {
+            AllThemePresets.forEach { preset ->
+                ThemePresetOptionRow(
+                    preset = preset,
+                    selected = currentPreset == preset.id,
+                    onSelect = {
+                        currentPreset = preset.id
+                        settings.selectedThemePreset = preset.id
+                        controller.settingsRevision.intValue++
+                        onThemePresetChange(preset.id)
+                    },
+                )
+                if (preset.id != AllThemePresets.last().id) ModernDivider()
+            }
+        }
+    }
+}
+
+@Composable
+private fun ThemePresetOptionRow(
+    preset: ThemePreset,
+    selected: Boolean,
+    onSelect: () -> Unit,
+) {
+    Row(
+        Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(16.dp))
+            .clickable { onSelect() }
+            .padding(vertical = 14.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(12.dp),
+    ) {
+        Box(
+            modifier = Modifier
+                .size(32.dp)
+                .clip(RoundedCornerShape(8.dp))
+                .background(preset.background)
+                .border(1.dp, preset.border, RoundedCornerShape(8.dp)),
+            contentAlignment = Alignment.Center,
+        ) {
+            Box(
+                modifier = Modifier.size(14.dp).clip(RoundedCornerShape(4.dp)).background(preset.accent),
+            )
+        }
+        Column(Modifier.weight(1f)) {
+            Text(preset.name, style = MaterialTheme.typography.titleMedium)
+            Text(preset.description, color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+        }
+        if (selected) {
+            Icon(Icons.Default.Check, contentDescription = uiText(R.string.streaming_selected), tint = MaterialTheme.colorScheme.primary)
+        }
+    }
+}
+
+@Composable
+internal fun CustomThemeJsonSettings(
+    settings: AppSettings,
+    controller: ChatController,
+) {
+    var jsonText by remember { mutableStateOf("") }
+    var importNotice by remember { mutableStateOf("") }
+    var showPasteDialog by remember { mutableStateOf(false) }
+    var pasteText by remember { mutableStateOf("") }
+
+    val currentThemeJson = remember(settings.selectedThemePreset, settings.customThemeColor, settings.customThemeColorEnabled) {
+        buildThemeJson(settings)
+    }
+
+    ModernCardBox {
+        Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                Icon(
+                    Icons.Default.Code,
+                    contentDescription = null,
+                    modifier = Modifier.size(20.dp),
+                    tint = MaterialTheme.colorScheme.primary,
+                )
+                Text(uiText(R.string.title_custom_theme_json), style = MaterialTheme.typography.titleMedium)
+            }
+            Text(
+                uiText(R.string.custom_theme_json_desc),
+                color = ModernMutedDark,
+                style = MaterialTheme.typography.bodySmall,
+            )
+
+            Row(
+                Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+            ) {
+                OutlinedButton(
+                    onClick = {
+                        jsonText = currentThemeJson
+                    },
+                    shape = ModernPillShape,
+                ) {
+                    Text(uiText(R.string.action_export_theme_json))
+                }
+                Button(
+                    onClick = {
+                        jsonText = currentThemeJson
+                    },
+                    shape = ModernPillShape,
+                ) {
+                    Text(uiText(R.string.action_copy_theme_json))
+                }
+            }
+
+            if (jsonText.isNotBlank()) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(120.dp)
+                        .clip(RoundedCornerShape(12.dp))
+                        .background(MaterialTheme.colorScheme.surfaceVariant),
+                ) {
+                    Text(
+                        text = jsonText,
+                        modifier = Modifier.padding(12.dp),
+                        style = MaterialTheme.typography.bodySmall,
+                        maxLines = 6,
+                        overflow = TextOverflow.Ellipsis,
+                    )
+                }
+            }
+
+            Row(
+                Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+            ) {
+                OutlinedButton(
+                    onClick = { showPasteDialog = true },
+                    shape = ModernPillShape,
+                ) {
+                    Text(uiText(R.string.action_import_theme_json))
+                }
+                Button(
+                    onClick = { showPasteDialog = true },
+                    shape = ModernPillShape,
+                ) {
+                    Text(uiText(R.string.action_paste_theme_json))
+                }
+            }
+
+            if (importNotice.isNotBlank()) {
+                Text(importNotice, color = MaterialTheme.colorScheme.primary, style = MaterialTheme.typography.bodySmall)
+            }
+        }
+    }
+
+    if (showPasteDialog) {
+        AlertDialog(
+            onDismissRequest = { showPasteDialog = false },
+            title = { Text(uiText(R.string.title_import_theme_json)) },
+            text = {
+                Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                    Text(uiText(R.string.custom_theme_json_paste_desc), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+                    OutlinedTextField(
+                        value = pasteText,
+                        onValueChange = { pasteText = it },
+                        modifier = Modifier.fillMaxWidth().height(120.dp),
+                        label = { Text(uiText(R.string.label_theme_json)) },
+                        singleLine = false,
+                    )
+                }
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        val result = applyThemeJson(pasteText, settings, controller)
+                        if (result.isSuccess) {
+                            importNotice = uiText(R.string.notice_theme_imported)
+                            showPasteDialog = false
+                            pasteText = ""
+                        } else {
+                            importNotice = result.error ?: uiText(R.string.notice_theme_import_failed)
+                        }
+                        controller.settingsRevision.intValue++
+                    },
+                    enabled = pasteText.isNotBlank(),
+                ) { Text(uiText(R.string.action_apply)) }
+            },
+            dismissButton = { TextButton(onClick = { showPasteDialog = false }) { Text(uiText(R.string.action_cancel)) } },
+        )
+    }
+}
+
+internal fun buildThemeJson(settings: AppSettings): String {
+    val preset = findThemePreset(settings.selectedThemePreset) ?: defaultThemePreset()
+    return JSONObject()
+        .put("schema", "lyra_theme_v1")
+        .put("name", preset.name)
+        .put("preset_id", settings.selectedThemePreset)
+        .put("custom_enabled", settings.customThemeColorEnabled)
+        .put("custom_color", settings.customThemeColor)
+        .put("background", preset.background.toArgb())
+        .put("surface", preset.surface.toArgb())
+        .put("surface_elevated", preset.surfaceElevated.toArgb())
+        .put("border", preset.border.toArgb())
+        .put("text", preset.text.toArgb())
+        .put("muted", preset.muted.toArgb())
+        .put("accent", preset.accent.toArgb())
+        .put("accent_container", preset.accentContainer.toArgb())
+        .put("outline_variant", preset.outlineVariant.toArgb())
+        .toString()
+}
+
+internal fun applyThemeJson(json: String, settings: AppSettings, controller: ChatController): Result<Unit> {
+    return runCatching {
+        val root = JSONObject(json)
+        val presetId = root.optString("preset_id", "vercel_dark")
+        if (findThemePreset(presetId) != null) {
+            settings.selectedThemePreset = presetId
+        }
+        if (root.has("custom_enabled")) {
+            settings.customThemeColorEnabled = root.optBoolean("custom_enabled")
+        }
+        root.optString("custom_color").takeIf { it.isNotBlank() }?.let { settings.customThemeColor = it }
+        controller.settingsRevision.intValue++
+    }
+}
+
+internal fun themeJsonExample(): String {
+    return "{\"schema\": \"lyra_theme_v1\", \"name\": \"My Custom Theme\", \"preset_id\": \"vercel_dark\", \"custom_enabled\": true, \"custom_color\": \"#FF0000FF\"}"
 }
 
 

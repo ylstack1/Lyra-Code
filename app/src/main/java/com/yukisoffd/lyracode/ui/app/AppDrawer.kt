@@ -276,9 +276,6 @@ internal fun KimiDrawerContent(
     if (editingProfile) {
         ProfileEditDialog(
             settings = settings,
-            onServicesChanged = controller::reloadProfiles,
-            onOpenAccount = { notice -> editingProfile = false; onOpenAccount(notice) },
-            onOpenChatGptAccount = { editingProfile = false; onOpenChatGptAccount() },
             nickname = nickname,
             avatarPath = avatarPath,
             onDismiss = { editingProfile = false },
