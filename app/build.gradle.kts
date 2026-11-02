@@ -50,7 +50,7 @@ val bundledProotRuntimeHashes = mapOf(
 
 android {
     namespace = "com.yukisoffd.lyracode"
-    compileSdk = 37
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.yukisoffd.lyracode"
