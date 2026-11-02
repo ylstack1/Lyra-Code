@@ -60,6 +60,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.geometry.Size
@@ -807,7 +808,7 @@ internal fun AboutIconBadge(icon: ImageVector) {
             imageVector = icon,
             contentDescription = null,
             modifier = Modifier.size(23.dp),
-            tint = Color.WhiteContainer,
+            tint = IconColor.Secondary,
         )
     }
 }
@@ -827,7 +828,7 @@ internal fun AboutIconBadge(
             painter = painterResource(iconRes),
             contentDescription = null,
             modifier = Modifier.size(23.dp),
-            tint = Color.WhiteContainer,
+            tint = IconColor.Secondary,
         )
     }
 }

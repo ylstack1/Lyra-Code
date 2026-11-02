@@ -939,7 +939,7 @@ internal fun ModelServiceSettings(
                         Icon(
                             Icons.Default.Add,
                             contentDescription = uiText(R.string.action_add_model_service),
-                            tint = Color.WhiteContainer,
+                            tint = IconColor.Secondary,
                         )
                     }
                 }

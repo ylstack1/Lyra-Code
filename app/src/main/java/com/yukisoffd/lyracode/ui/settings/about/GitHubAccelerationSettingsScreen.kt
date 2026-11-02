@@ -47,6 +47,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalFocusManager
@@ -64,6 +65,7 @@ import com.yukisoffd.lyracode.data.GitHubConnectionResult
 import com.yukisoffd.lyracode.data.isGitHubDownloadUrl
 import com.yukisoffd.lyracode.data.normalizeGitHubAcceleratorPrefix
 import com.yukisoffd.lyracode.data.probeGitHubConnection
+import com.yukisoffd.lyracode.IconColor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -254,7 +256,7 @@ private fun GitHubSettingsIcon(icon: ImageVector) {
         Modifier.size(36.dp).clip(CircleShape).background(MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.72f)),
         contentAlignment = Alignment.Center,
     ) {
-        Icon(icon, contentDescription = null, modifier = Modifier.size(21.dp), tint = Color.WhiteContainer)
+        Icon(icon, contentDescription = null, modifier = Modifier.size(21.dp), tint = IconColor.Secondary)
     }
 }
 

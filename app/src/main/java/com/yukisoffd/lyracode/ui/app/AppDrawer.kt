@@ -695,7 +695,7 @@ private fun NewProjectButton(onClick: () -> Unit) {
             Icon(
                 Icons.Default.CreateNewFolder,
                 contentDescription = context.getString(R.string.action_create_project),
-                tint = Color.WhiteContainer,
+                tint = IconColor.Secondary,
             )
         }
     }

@@ -431,7 +431,7 @@ internal fun ProotLinuxSettings() {
             verticalArrangement = Arrangement.spacedBy(6.dp),
         ) {
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                Icon(Icons.Default.Info, contentDescription = null, tint = Color.WhiteContainer)
+                Icon(Icons.Default.Info, contentDescription = null, tint = IconColor.Secondary)
                 Text(
                     if (architecture != null) uiText(R.string.proot_linux_device_architecture, architecture.abi)
                     else uiText(R.string.proot_linux_architecture_unavailable),

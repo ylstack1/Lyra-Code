@@ -1456,7 +1456,7 @@ private fun FileRow(
         Icon(
             Icons.Default.CheckCircle,
             contentDescription = null,
-            tint = Color.WhiteContainer,
+            tint = IconColor.Secondary,
             modifier = Modifier
                 .align(if (displayedOffset >= 0f) Alignment.CenterStart else Alignment.CenterEnd)
                 .padding(horizontal = 16.dp)

@@ -72,6 +72,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
+import com.yukisoffd.lyracode.IconColor
 import com.yukisoffd.lyracode.data.AppSettings
 import kotlinx.coroutines.launch
 import java.io.File
@@ -117,7 +118,7 @@ internal fun ProfileEditDialog(
             Column(
                 Modifier
                     .verticalScroll(rememberScrollState())
-                    .padding(horizontal = 16.dp, vertical = 12.dp),
+                    .padding(horizontal = 20.dp, vertical = 16.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
@@ -125,7 +126,7 @@ internal fun ProfileEditDialog(
                 Column(
                     Modifier.align(Alignment.CenterHorizontally),
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                    verticalArrangement = Arrangement.spacedBy(12.dp),
                 ) {
                     Box(
                         Modifier
@@ -194,12 +195,12 @@ internal fun ProfileEditDialog(
                                     .weight(1f)
                                     .clip(RoundedCornerShape(10.dp))
                                     .background(
-                                        if (isSelected) Color(0xFF6366F1).copy(alpha = 0.15f)
+                                        if (isSelected) IconColor.Primary.copy(alpha = 0.15f)
                                         else MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)
                                     )
                                     .border(
                                         if (isSelected) 2.dp else 1.dp,
-                                        if (isSelected) Color(0xFF6366F1) else MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f),
+                                        if (isSelected) IconColor.Primary else MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f),
                                         RoundedCornerShape(10.dp),
                                     )
                                     .clickable { settings.userGender = value },
@@ -208,7 +209,7 @@ internal fun ProfileEditDialog(
                                 Text(
                                     label,
                                     style = MaterialTheme.typography.labelMedium,
-                                    color = if (isSelected) Color(0xFF6366F1) else MaterialTheme.colorScheme.onSurfaceVariant,
+                                    color = if (isSelected) IconColor.Primary else MaterialTheme.colorScheme.onSurfaceVariant,
                                 )
                             }
                         }
@@ -244,16 +245,18 @@ internal fun ProfileEditDialog(
         confirmButton = {
             Button(
                 onClick = {
-                    val newAvatarPath = selectedUri?.let { saveCroppedAvatar(context, it, 1f, 0f, 0f) } ?: avatarPath
+                    val newAvatarPath = selectedUri?.let { saveCroppedAvatar(context, it, zoom, offsetX, offsetY) } ?: avatarPath
                     settings.userNickname = draftName
                     settings.userAvatarPath = newAvatarPath
                     onSaved(settings.userNickname, newAvatarPath)
                 },
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF6366F1)),
             ) { Text(context.getString(R.string.action_save)) }
         },
-        dismissButton = { TextButton(onClick = onDismiss) { Text(context.getString(R.string.action_cancel)) } }
-    )(context: Context, uri: Uri): Bitmap? {
+        dismissButton = { TextButton(onClick = onDismiss) { Text(context.getString(R.string.action_cancel)) } },
+    )
+}
+
+internal fun decodeBitmap(context: Context, uri: Uri): Bitmap? {
     return runCatching {
         context.contentResolver.openInputStream(uri)?.use { BitmapFactory.decodeStream(it) }
     }.getOrNull()
