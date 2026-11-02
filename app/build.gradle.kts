@@ -88,7 +88,7 @@ android {
         debug {
             applicationIdSuffix = ".dev"
             versionNameSuffix = "-dev"
-            resValue("string", "app_name", ""Lyra Code Dev"")
+            resValue("string", "app_name", "Lyra Code Dev")
         }
         create("beta") {
             applicationIdSuffix = ".beta"
