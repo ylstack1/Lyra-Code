@@ -33,6 +33,8 @@ import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.text.KeyboardType
 import androidx.compose.material3.Button
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.MaterialTheme
@@ -186,19 +188,54 @@ internal fun ProfileEditDialog(
                             label = { Text(context.getString(R.string.label_nickname)) },
                             singleLine = true,
                         )
-                        OutlinedTextField(
-                            value = settings.userGender,
-                            onValueChange = { settings.userGender = it },
+                        // Gender selection chips
+                        Text(uiText(R.string.label_gender), style = MaterialTheme.typography.labelSmall, color = ModernMutedDark)
+                        Row(
                             modifier = Modifier.fillMaxWidth(),
-                            label = { Text(uiText(R.string.label_gender)) },
-                            singleLine = true,
-                        )
+                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        ) {
+                            val genders = listOf(
+                                uiText(R.string.gender_male) to "male",
+                                uiText(R.string.gender_female) to "female",
+                                uiText(R.string.gender_other) to "other",
+                                uiText(R.string.gender_prefer_not_to_say) to "prefer_not_to_say",
+                            )
+                            genders.forEachIndexed { index, (label, value) ->
+                                val isSelected = settings.userGender == value
+                                Box(
+                                    modifier = Modifier
+                                        .weight(1f)
+                                        .clip(RoundedCornerShape(12.dp))
+                                        .background(
+                                            if (isSelected) MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.4f)
+                                            else MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)
+                                        )
+                                        .border(
+                                            if (isSelected) 2.dp else 1.dp,
+                                            if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f),
+                                            RoundedCornerShape(12.dp),
+                                        )
+                                        .clickable { settings.userGender = value },
+                                    contentAlignment = Alignment.Center,
+                                ) {
+                                    Text(
+                                        label,
+                                        style = MaterialTheme.typography.labelMedium,
+                                        color = if (isSelected) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.onSurfaceVariant,
+                                    )
+                                }
+                            }
+                        }
+
+                        // Age input
+                        var draftAge by remember(settings.userAge) { mutableStateOf(settings.userAge) }
                         OutlinedTextField(
-                            value = settings.userAge,
-                            onValueChange = { settings.userAge = it },
+                            value = draftAge,
+                            onValueChange = { draftAge = it; settings.userAge = it },
                             modifier = Modifier.fillMaxWidth(),
                             label = { Text(uiText(R.string.label_age)) },
                             singleLine = true,
+                            keyboardOptions = androidx.compose.foundation.text.KeyboardOptions(keyboardType = androidx.compose.foundation.text.KeyboardType.Number),
                         )
                         OutlinedTextField(
                             value = settings.userBio,
