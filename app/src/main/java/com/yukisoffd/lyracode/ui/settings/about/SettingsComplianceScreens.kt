@@ -61,7 +61,7 @@ internal fun ServiceAgreementScreen(onOpenDocument: (String) -> Unit) {
             Icon(Icons.Default.Policy, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
             Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
                 Text(stringResource(R.string.compliance_service_agreements), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
-                Text(stringResource(R.string.compliance_index_intro), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+                Text(stringResource(R.string.compliance_index_intro), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
             }
         }
     }
@@ -88,7 +88,7 @@ internal fun ServiceAgreementScreen(onOpenDocument: (String) -> Unit) {
         }
     }
     ModernCardBox {
-        Text(stringResource(R.string.compliance_review_notice), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+        Text(stringResource(R.string.compliance_review_notice), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
     }
 }
 
@@ -119,7 +119,7 @@ internal fun ComplianceDocumentScreen(pageId: String) {
             }
         }
         SelectionContainer {
-            Text(stringResource(document.summary), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+            Text(stringResource(document.summary), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
         }
     }
     document.sections.forEach { section ->

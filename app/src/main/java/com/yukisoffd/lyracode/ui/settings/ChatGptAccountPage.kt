@@ -70,7 +70,7 @@ internal fun ChatGptAccountSection(settings: AppSettings, onOpen: () -> Unit) {
         Column(Modifier.weight(1f)) {
             Text("ChatGPT", style = MaterialTheme.typography.titleSmall)
             Text(account?.label ?: uiText(R.string.chatgpt_continue),
-                style = MaterialTheme.typography.bodySmall, color = ModernMutedDark, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 1, overflow = TextOverflow.Ellipsis)
         }
     }
 }
@@ -172,11 +172,11 @@ internal fun ChatGptSignInPage(
             ChatGptLogo(Modifier.size(42.dp))
             Column {
                 Text("ChatGPT", style = MaterialTheme.typography.titleLarge)
-                Text(uiText(R.string.chatgpt_provided_by), style = MaterialTheme.typography.bodySmall, color = ModernMutedDark)
+                Text(uiText(R.string.chatgpt_provided_by), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
         }
         Text(uiText(R.string.chatgpt_disclosure), style = MaterialTheme.typography.bodySmall)
-        Text(uiText(R.string.chatgpt_privacy), style = MaterialTheme.typography.bodySmall, color = ModernMutedDark)
+        Text(uiText(R.string.chatgpt_privacy), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
     }
     if (busy || !loaded) LinearProgressIndicator(Modifier.fillMaxWidth())
     if (notice.isNotBlank()) Text(notice, color = if (failed) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary,
@@ -186,8 +186,8 @@ internal fun ChatGptSignInPage(
     }
     if (selected != null) ModernCardBox {
         Text(selected.email.ifBlank { uiText(R.string.chatgpt_email_unavailable) }, style = MaterialTheme.typography.titleMedium)
-        Text(uiText(if (selected.isCodex) R.string.chatgpt_mode_codex else R.string.chatgpt_mode_official), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
-        if (selected.isCodex) Text(uiText(R.string.chatgpt_codex_disclosure), style = MaterialTheme.typography.bodySmall, color = ModernMutedDark)
+        Text(uiText(if (selected.isCodex) R.string.chatgpt_mode_codex else R.string.chatgpt_mode_official), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
+        if (selected.isCodex) Text(uiText(R.string.chatgpt_codex_disclosure), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
         ChatGptSignInButton(enabled = canSignIn, codex = selected.isCodex) { signIn() }
     } else {
         ModernCardBox {
@@ -196,7 +196,7 @@ internal fun ChatGptSignInPage(
         }
         ModernCardBox {
             Text(uiText(R.string.chatgpt_mode_codex), style = MaterialTheme.typography.titleSmall)
-            Text(uiText(R.string.chatgpt_codex_disclosure), style = MaterialTheme.typography.bodySmall, color = ModernMutedDark)
+            Text(uiText(R.string.chatgpt_codex_disclosure), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             ChatGptSignInButton(enabled = canSignIn, codex = true) { signIn(codex = true) }
         }
     }
@@ -279,5 +279,5 @@ internal fun ChatGptComposerIdentity(controller: ChatController, settings: AppSe
     val allowance = chatGptComposerAllowance(current?.account, current?.windows.orEmpty(), now)
     val percentage = allowance.remainingPercent?.let { String.format(Locale.getDefault(), "%.1f%%", it) } ?: uiText(R.string.chatgpt_not_provided)
     val remaining = uiText(if (allowance.minutes == 10080) R.string.chatgpt_composer_weekly_remaining else R.string.chatgpt_composer_five_hour_remaining, percentage)
-    Text("${uiText(R.string.chatgpt_using_plan)} · $remaining", modifier = Modifier.fillMaxWidth(), style = MaterialTheme.typography.labelSmall, color = ModernMutedDark)
+    Text("${uiText(R.string.chatgpt_using_plan)} · $remaining", modifier = Modifier.fillMaxWidth(), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
 }

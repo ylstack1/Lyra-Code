@@ -871,7 +871,7 @@ private fun AnimatedConversationStatus(status: String) {
     ) {
         Text(
             text = status,
-            color = ModernMutedDark,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             style = MaterialTheme.typography.labelMedium,
             maxLines = 2,
             overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis,

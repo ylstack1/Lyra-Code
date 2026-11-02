@@ -169,11 +169,11 @@ internal fun ProfileEditDialog(
                     Text(context.getString(R.string.action_select_avatar))
                 }
                 if (previewBitmap != null) {
-                    Text(context.getString(R.string.label_crop_zoom), color = ModernMutedDark, style = MaterialTheme.typography.labelMedium)
+                    Text(context.getString(R.string.label_crop_zoom), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.labelMedium)
                     Slider(value = zoom, onValueChange = { zoom = it }, valueRange = 1f..3f)
-                    Text(context.getString(R.string.label_horizontal_position), color = ModernMutedDark, style = MaterialTheme.typography.labelMedium)
+                    Text(context.getString(R.string.label_horizontal_position), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.labelMedium)
                     Slider(value = offsetX, onValueChange = { offsetX = it }, valueRange = -1f..1f)
-                    Text(context.getString(R.string.label_vertical_position), color = ModernMutedDark, style = MaterialTheme.typography.labelMedium)
+                    Text(context.getString(R.string.label_vertical_position), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.labelMedium)
                     Slider(value = offsetY, onValueChange = { offsetY = it }, valueRange = -1f..1f)
                 }
                 KimiSectionLabel(context.getString(R.string.label_profile_details))
@@ -187,7 +187,7 @@ internal fun ProfileEditDialog(
                             singleLine = true,
                         )
                         // Gender selection chips
-                        Text(uiText(R.string.label_gender), style = MaterialTheme.typography.labelSmall, color = ModernMutedDark)
+                        Text(uiText(R.string.label_gender), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                         Row(
                             modifier = Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -244,7 +244,7 @@ internal fun ProfileEditDialog(
                         )
                         Text(
                             uiText(R.string.profile_ai_context_desc),
-                            color = ModernMutedDark,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
                             style = MaterialTheme.typography.bodySmall,
                         )
                     }

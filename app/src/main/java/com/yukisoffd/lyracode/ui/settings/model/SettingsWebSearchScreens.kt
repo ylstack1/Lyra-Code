@@ -75,7 +75,7 @@ internal fun DeepSeekWebSettings(
                 Text(uiText(if (search) R.string.deepseek_enable_search else R.string.deepseek_enable_fetch), style = MaterialTheme.typography.titleSmall)
                 Text(
                     uiText(if (search) R.string.deepseek_search_description else R.string.deepseek_fetch_description),
-                    color = ModernMutedDark,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     style = MaterialTheme.typography.bodySmall,
                 )
             }
@@ -111,7 +111,7 @@ internal fun DeepSeekWebSettings(
             singleLine = true,
         )
         if (invalidKey) Text(uiText(R.string.deepseek_key_required), color = MaterialTheme.colorScheme.error)
-        Text(uiText(R.string.deepseek_config_hint), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+        Text(uiText(R.string.deepseek_config_hint), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
         Button(
             onClick = {
                 val current = if (search) settings.deepSeekSearchConfig else settings.deepSeekFetchConfig

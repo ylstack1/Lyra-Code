@@ -223,7 +223,7 @@ internal fun OpenSourceLicensesScreen() {
                 Text(uiText(R.string.title_licenses), style = MaterialTheme.typography.titleMedium)
                 Text(
                     uiText(R.string.licenses_desc),
-                    color = ModernMutedDark,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     style = MaterialTheme.typography.bodySmall,
                 )
             }
@@ -237,7 +237,7 @@ internal fun OpenSourceLicensesScreen() {
                     Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                         Text(notice.name, style = MaterialTheme.typography.titleSmall)
                         Text(notice.license, style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary)
-                        Text(notice.note, color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+                        Text(notice.note, color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
                     }
                     Icon(Icons.Default.ChevronRight, contentDescription = null, tint = ModernMutedDark)
                 }
@@ -509,7 +509,7 @@ internal fun AboutSoftwareScreen(
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     Text(
                         uiText(R.string.about_description),
-                        color = ModernMutedDark,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                         style = MaterialTheme.typography.bodySmall,
                     )
                 }
@@ -549,7 +549,7 @@ internal fun AboutSoftwareScreen(
                     Spacer(Modifier.width(14.dp))
                     Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
                         Text(uiText(R.string.label_no_update_prompt), style = MaterialTheme.typography.titleSmall)
-                        Text(uiText(R.string.no_update_prompt_desc), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+                        Text(uiText(R.string.no_update_prompt_desc), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
                     }
                     Switch(
                         checked = updatePromptDisabled,
@@ -654,7 +654,7 @@ internal fun DeviceInfoScreen() {
                     }
                     Text(
                         uiText(R.string.device_info_desc),
-                        color = ModernMutedDark,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                         style = MaterialTheme.typography.bodySmall,
                     )
                 }
@@ -696,7 +696,7 @@ internal fun DeviceInfoRow(item: DeviceInfoItem) {
         Text(
             item.value,
             modifier = Modifier.weight(1f),
-            color = ModernMutedDark,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             style = MaterialTheme.typography.bodyMedium,
         )
     }
@@ -922,7 +922,7 @@ internal fun UpdateDialog(
                 if (info.apkSha256.isNotBlank()) {
                     Text(
                         "SHA-256：${info.apkSha256}",
-                        color = ModernMutedDark,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                         style = MaterialTheme.typography.bodySmall.copy(fontFamily = FontFamily.Monospace),
                     )
                 }
@@ -935,7 +935,7 @@ internal fun UpdateDialog(
                         val totalText = if (it.totalBytes > 0) " / ${formatBytes(it.totalBytes)}" else ""
                         Text(
                             "${it.status} ${formatBytes(it.downloadedBytes)}$totalText",
-                            color = ModernMutedDark,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
                             style = MaterialTheme.typography.bodySmall,
                         )
                     }

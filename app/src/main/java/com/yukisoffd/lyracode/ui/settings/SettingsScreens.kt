@@ -517,7 +517,7 @@ internal fun SettingsScreen(
                     CompliancePageIds.PERSONAL_INFO,
                     CompliancePageIds.THIRD_PARTY,
                     CompliancePageIds.APP_PERMISSIONS -> ComplianceDocumentScreen(target)
-                    else -> Text(context.getString(R.string.settings_not_available), color = ModernMutedDark)
+                    else -> Text(context.getString(R.string.settings_not_available), color = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                 }
                 return@pageContent
@@ -819,7 +819,7 @@ internal fun WorkspaceSettings(
         KimiMenuRow(Icons.Default.Folder, uiText(R.string.menu_current_directory), workspaceDisplayName, onClick = onPickWorkspace)
         ModernDivider()
         KimiMenuRow(Icons.Default.Terminal, uiText(R.string.menu_termux_path), workspaceManager.termuxRootPath() ?: uiText(R.string.termux_path_primary))
-        Text(uiText(R.string.workspace_hint), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+        Text(uiText(R.string.workspace_hint), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
     }
 }
 

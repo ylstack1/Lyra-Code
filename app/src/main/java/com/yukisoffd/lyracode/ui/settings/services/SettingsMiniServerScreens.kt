@@ -184,24 +184,24 @@ internal fun MiniServerSettings(
             Spacer(Modifier.width(12.dp))
             Column(Modifier.weight(1f)) {
                 Text(uiText(R.string.title_workspace_mini_server), style = MaterialTheme.typography.titleMedium)
-                Text(uiText(R.string.mini_server_desc), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+                Text(uiText(R.string.mini_server_desc), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
             }
             Text(if (status.running) uiText(R.string.label_server_running) else uiText(R.string.notice_server_stopped), color = if (status.running) MaterialTheme.colorScheme.primary else ModernMutedDark)
         }
         ModernDivider()
         Text(
             stringResource(R.string.label_local_address, status.url),
-            color = ModernMutedDark,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             style = MaterialTheme.typography.bodySmall,
         )
         if (lanUrls.isNotEmpty()) {
-            Text(uiText(R.string.ui_lan_address) + lanUrls.joinToString("  "), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+            Text(uiText(R.string.ui_lan_address) + lanUrls.joinToString("  "), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
         }
         if (customUrls.isNotEmpty()) {
-            Text(uiText(R.string.ui_bound_domains) + customUrls.joinToString("  "), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+            Text(uiText(R.string.ui_bound_domains) + customUrls.joinToString("  "), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
         }
         if (status.message.isNotBlank()) {
-            Text(status.message, color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+            Text(status.message, color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
         }
         if (statusText.isNotBlank()) {
             Text(statusText, color = MaterialTheme.colorScheme.primary, style = MaterialTheme.typography.bodySmall)
@@ -236,7 +236,7 @@ internal fun MiniServerSettings(
             Text(uiText(R.string.notice_https_self_signed), color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodySmall)
         }
         OutlinedTextField(value = host, onValueChange = { host = it }, modifier = Modifier.fillMaxWidth(), label = { Text(uiText(R.string.label_listen_host)) }, singleLine = true)
-        Text(uiText(R.string.listen_host_hint), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+        Text(uiText(R.string.listen_host_hint), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
         OutlinedTextField(value = portText, onValueChange = { portText = it.filter(Char::isDigit).take(5) }, modifier = Modifier.fillMaxWidth(), label = { Text(uiText(R.string.label_port)) }, singleLine = true)
         OutlinedTextField(value = username, onValueChange = { username = it }, modifier = Modifier.fillMaxWidth(), label = { Text(uiText(R.string.label_access_username)) }, singleLine = true)
         OutlinedTextField(value = password, onValueChange = { password = it }, modifier = Modifier.fillMaxWidth(), label = { Text(uiText(R.string.label_access_password_optional)) }, visualTransformation = PasswordVisualTransformation(), singleLine = true)
@@ -256,7 +256,7 @@ internal fun MiniServerSettings(
     ModernCardBox {
         Text(uiText(R.string.title_https_cert), style = MaterialTheme.typography.titleMedium)
         ModernDivider()
-        Text(uiText(R.string.https_cert_desc), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+        Text(uiText(R.string.https_cert_desc), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.fillMaxWidth()) {
             OutlinedButton(
                 onClick = { keyStoreLauncher.launch("*/*") },
@@ -392,7 +392,7 @@ internal fun MiniServerLogSettings(miniServerManager: MiniServerManager) {
                 Text(uiText(R.string.title_terminal_log), style = MaterialTheme.typography.titleMedium)
                 Text(
                     uiText(R.string.terminal_log_desc),
-                    color = ModernMutedDark,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     style = MaterialTheme.typography.bodySmall,
                 )
             }
@@ -415,7 +415,7 @@ internal fun MiniServerLogSettings(miniServerManager: MiniServerManager) {
         ) {
             Text(
                 "${if (payload.optBoolean("running")) "RUNNING" else "STOPPED"} · ${payload.optString("workspace")} · ${payload.optInt("count")} lines",
-                color = ModernMutedDark,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
                 fontFamily = FontFamily.Monospace,
                 style = MaterialTheme.typography.labelMedium,
                 maxLines = 1,

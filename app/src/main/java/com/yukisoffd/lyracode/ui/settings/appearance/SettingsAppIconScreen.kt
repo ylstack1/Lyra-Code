@@ -43,7 +43,7 @@ internal fun AppIconSettings(settings: AppSettings) {
         onDispose { lifecycleOwner.lifecycle.removeObserver(observer) }
     }
     ModernCardBox {
-        Text(stringResource(R.string.app_icon_description), style = MaterialTheme.typography.bodyMedium, color = ModernMutedDark)
+        Text(stringResource(R.string.app_icon_description), style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
         Column(Modifier.selectableGroup()) {
             AppIcon.entries.forEach { icon ->
                 val preview = remember(icon, context) {

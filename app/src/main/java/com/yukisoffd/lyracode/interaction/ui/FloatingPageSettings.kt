@@ -69,7 +69,7 @@ internal fun FloatingPageSettings() {
                 Modifier.weight(1f).verticalScroll(rememberScrollState()),
                 verticalArrangement = Arrangement.spacedBy(12.dp),
             ) {
-                Text(context.getString(R.string.floating_page_auto_save), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+                Text(context.getString(R.string.floating_page_auto_save), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
                 ModernCardBox {
                     OptionSlider(R.string.floating_page_width, "floating-width", options.widthDp, 240f..600f) { update(options.copy(widthDp = it)) }
                     OptionSlider(R.string.floating_page_height, "floating-height", options.heightDp, 64f..160f) { update(options.copy(heightDp = it)) }
@@ -90,7 +90,7 @@ private fun OptionSlider(labelId: Int, tag: String, value: Int, range: ClosedFlo
     Column {
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
             Text(label, style = MaterialTheme.typography.bodyMedium)
-            Text(if (percent) "$value%" else "$value dp", color = ModernMutedDark, style = MaterialTheme.typography.labelMedium)
+            Text(if (percent) "$value%" else "$value dp", color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.labelMedium)
         }
         Slider(value.toFloat(), { onChange(it.roundToInt()) }, valueRange = range,
             modifier = Modifier.fillMaxWidth().testTag(tag).semantics { contentDescription = label })

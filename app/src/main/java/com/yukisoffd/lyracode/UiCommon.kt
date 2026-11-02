@@ -257,7 +257,7 @@ internal fun LyraCodeTheme(
         surface = if (settings.customThemeColorEnabled) ModernSurfaceLight else selectedPreset.surface,
         surfaceVariant = Color(0xFFF5F5F4),
         onSurface = Color.White,
-        onSurfaceVariant = if (settings.customThemeColorEnabled) ModernMutedLight else selectedPreset.muted,
+        onSurfaceVariant = Color(0xFFB0B0B0),
         onBackground = Color.White,
         outline = if (settings.customThemeColorEnabled) ModernBorderLight else selectedPreset.border,
         outlineVariant = if (settings.customThemeColorEnabled) ModernBorderLight.copy(alpha = 0.5f) else selectedPreset.outlineVariant,
@@ -275,7 +275,7 @@ internal fun LyraCodeTheme(
         surface = if (settings.customThemeColorEnabled) ModernSurfaceDark else selectedPreset.surface,
         surfaceVariant = if (settings.customThemeColorEnabled) ModernSurfaceElevatedDark else selectedPreset.surfaceElevated,
         onSurface = Color.White,
-        onSurfaceVariant = if (settings.customThemeColorEnabled) ModernMutedDark else selectedPreset.muted,
+        onSurfaceVariant = Color(0xFFB0B0B0),
         onBackground = Color.White,
         outline = if (settings.customThemeColorEnabled) ModernBorderDark else selectedPreset.border,
         outlineVariant = if (settings.customThemeColorEnabled) ModernBorderDark.copy(alpha = 0.4f) else selectedPreset.outlineVariant,
@@ -823,7 +823,7 @@ internal fun ConfirmDeleteDialog(
         title = { Text(title) },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                Text(message, color = ModernMutedDark, style = MaterialTheme.typography.bodyMedium)
+                Text(message, color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodyMedium)
                 Text(targetName, style = MaterialTheme.typography.titleSmall, maxLines = 2, overflow = TextOverflow.Ellipsis)
                 Text(
                     if (remaining > 0) uiText(R.string.ui_please_wait) + remaining + uiText(R.string.ui_seconds_before_confirming_deletion) else uiText(R.string.ui_this_cannot_be_restored_automatically_please_confirm),

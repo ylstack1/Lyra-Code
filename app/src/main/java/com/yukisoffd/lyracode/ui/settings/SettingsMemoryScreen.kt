@@ -63,12 +63,12 @@ internal fun MemorySettingsScreen(settings: AppSettings) {
             Text(context.getString(R.string.memory_page_title), style = MaterialTheme.typography.titleMedium)
             Text(
                 context.getString(R.string.memory_page_description),
-                color = ModernMutedDark,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
                 style = MaterialTheme.typography.bodySmall,
             )
             Text(
                 context.getString(R.string.memory_page_privacy),
-                color = ModernMutedDark,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
                 style = MaterialTheme.typography.bodySmall,
             )
             OutlinedButton(
@@ -93,7 +93,7 @@ internal fun MemorySettingsScreen(settings: AppSettings) {
                 Text(context.getString(R.string.memory_empty_title), style = MaterialTheme.typography.titleSmall)
                 Text(
                     context.getString(R.string.memory_empty_description),
-                    color = ModernMutedDark,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     style = MaterialTheme.typography.bodySmall,
                 )
             }
@@ -132,7 +132,7 @@ internal fun MemorySettingsScreen(settings: AppSettings) {
                                     memoryCategoryLabel(memory.category),
                                     formatTime(memory.updatedAt),
                                 ),
-                                color = ModernMutedDark,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
                                 style = MaterialTheme.typography.bodySmall,
                             )
                         }
@@ -251,7 +251,7 @@ private fun MemoryEditDialog(
                         Text(context.getString(R.string.memory_enabled_label), style = MaterialTheme.typography.titleSmall)
                         Text(
                             context.getString(R.string.memory_enabled_description),
-                            color = ModernMutedDark,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
                             style = MaterialTheme.typography.bodySmall,
                         )
                     }

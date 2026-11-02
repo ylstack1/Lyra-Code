@@ -134,7 +134,7 @@ internal fun TaskScreen(
                         Text(uiText(R.string.notification_channel_name), style = MaterialTheme.typography.titleMedium)
                         Text(
                             uiText(R.string.ui_send_system_notifications_when_downloads_or_scheduled_tasks_complete),
-                            color = ModernMutedDark,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
                             style = MaterialTheme.typography.bodySmall,
                         )
                     }
@@ -183,7 +183,7 @@ internal fun TaskScreen(
                     Text(uiText(R.string.ui_no_scheduled_tasks), style = MaterialTheme.typography.titleMedium)
                     Text(
                         uiText(R.string.ui_add_tasks_manually_here_or_ask_the_ai_to),
-                        color = ModernMutedDark,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                         style = MaterialTheme.typography.bodyMedium,
                     )
                 }
@@ -220,7 +220,7 @@ internal fun TaskScreen(
                     Text(uiText(R.string.ui_no_download_tasks), style = MaterialTheme.typography.titleMedium)
                     Text(
                         uiText(R.string.ui_when_the_ai_uses_the_download_tool_progress_speed),
-                        color = ModernMutedDark,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                         style = MaterialTheme.typography.bodyMedium,
                     )
                 }
@@ -275,14 +275,14 @@ private fun ScheduledTaskCard(
             )
             Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(5.dp)) {
                 Text(task.title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
-                Text(task.prompt, color = ModernMutedDark, maxLines = 3, overflow = TextOverflow.Ellipsis)
+                Text(task.prompt, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 3, overflow = TextOverflow.Ellipsis)
                 Text(
                     "${scheduleLabel(task)} · ${task.model}",
-                    color = ModernMutedDark,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     style = MaterialTheme.typography.bodySmall,
                 )
                 if (task.nextRunAt > 0L) {
-                    Text(uiText(R.string.ui_next_run_1_s, formatTaskTime(task.nextRunAt)), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+                    Text(uiText(R.string.ui_next_run_1_s, formatTaskTime(task.nextRunAt)), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
                 }
                 if (task.lastRunAt > 0L) {
                     Text(
@@ -333,7 +333,7 @@ private fun ScheduledTaskDetailDialog(
                             uiText(R.string.task_schedule_format, scheduleLabel(task)) +
                             uiText(R.string.task_model_format, task.model) +
                             if (task.lastRunAt > 0L) uiText(R.string.task_last_run_format, formatTaskTime(task.lastRunAt)) else uiText(R.string.ui_not_run_yet),
-                        color = ModernMutedDark,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                         style = MaterialTheme.typography.bodySmall,
                     )
                 }
@@ -592,7 +592,7 @@ private fun DownloadTaskCard(task: DownloadTask) {
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis,
                 )
-                Text(task.path, color = ModernMutedDark, style = MaterialTheme.typography.bodySmall, maxLines = 2, overflow = TextOverflow.Ellipsis)
+                Text(task.path, color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall, maxLines = 2, overflow = TextOverflow.Ellipsis)
                 if (task.status == DownloadTaskStatus.RUNNING) {
                     if (progress != null) {
                         LinearProgressIndicator(progress = { progress }, modifier = Modifier.fillMaxWidth())
@@ -602,11 +602,11 @@ private fun DownloadTaskCard(task: DownloadTask) {
                     Row(Modifier.fillMaxWidth()) {
                         Text(
                             "${formatTaskBytes(task.downloadedBytes)} / ${formatTaskTotal(task.totalBytes)}",
-                            color = ModernMutedDark,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
                             style = MaterialTheme.typography.labelMedium,
                             modifier = Modifier.weight(1f),
                         )
-                        Text("${formatTaskBytes(task.bytesPerSecond)}/s", color = ModernMutedDark, style = MaterialTheme.typography.labelMedium)
+                        Text("${formatTaskBytes(task.bytesPerSecond)}/s", color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.labelMedium)
                     }
                 } else {
                     Text(
@@ -620,7 +620,7 @@ private fun DownloadTaskCard(task: DownloadTask) {
                         style = MaterialTheme.typography.bodySmall,
                     )
                 }
-                Text(formatTaskTime(task.startedAt), color = ModernMutedDark, style = MaterialTheme.typography.labelSmall)
+                Text(formatTaskTime(task.startedAt), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.labelSmall)
             }
         }
     }

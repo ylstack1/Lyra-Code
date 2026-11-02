@@ -104,15 +104,15 @@ internal fun StorageCacheSettings() {
         KimiMenuRow(Icons.Default.Memory, uiText(R.string.menu_system_cache), currentScan?.let { formatBytes(it.cacheBytes) } ?: calculating)
         ModernDivider()
         KimiMenuRow(Icons.Default.CleaningServices, uiText(R.string.menu_cleanable_cache), currentScan?.let { formatBytes(it.cleanableBytes) } ?: calculating)
-        Text(uiText(R.string.storage_explanation), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+        Text(uiText(R.string.storage_explanation), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
     }
     currentScan?.items.orEmpty().forEach { item ->
         ModernCardBox {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                     Text(item.title, style = MaterialTheme.typography.titleSmall)
-                    Text(item.path, color = ModernMutedDark, maxLines = 1, overflow = TextOverflow.Ellipsis, style = MaterialTheme.typography.labelSmall)
-                    Text(uiText(R.string.storage_item_summary, formatBytes(item.bytes), item.fileCount), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+                    Text(item.path, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 1, overflow = TextOverflow.Ellipsis, style = MaterialTheme.typography.labelSmall)
+                    Text(uiText(R.string.storage_item_summary, formatBytes(item.bytes), item.fileCount), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
                 }
                 if (item.cleanable && item.bytes > 0L) {
                     OutlinedButton(
@@ -138,8 +138,8 @@ internal fun StorageCacheSettings() {
             shape = ModernPillShape,
         ) { Text(uiText(R.string.action_clean_all_cache)) }
     }
-    if (scanning) Text(calculating, color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
-    if (status.isNotBlank()) Text(status, color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+    if (scanning) Text(calculating, color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
+    if (status.isNotBlank()) Text(status, color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
 }
 
 internal data class StorageScanResult(

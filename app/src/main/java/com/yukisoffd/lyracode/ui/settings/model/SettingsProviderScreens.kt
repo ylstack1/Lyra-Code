@@ -66,7 +66,7 @@ internal fun ProviderPresetPicker(
     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
         Text(
             uiText(R.string.ui_choose_a_preset_to_configure_its_endpoint_and_api),
-            color = ModernMutedDark,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             style = MaterialTheme.typography.bodySmall,
         )
         CustomProviderPresetRow(onClick = onCustom)
@@ -104,7 +104,7 @@ internal fun ProviderPresetPicker(
                                         append(plan.displayName())
                                     }
                                 },
-                                color = ModernMutedDark,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
                                 style = MaterialTheme.typography.bodySmall,
                                 maxLines = 1,
                                 overflow = TextOverflow.Ellipsis,
@@ -158,7 +158,7 @@ private fun CustomProviderPresetRow(onClick: () -> Unit) {
                 Text(uiText(R.string.ui_custom_provider), style = MaterialTheme.typography.titleMedium)
                 Text(
                     uiText(R.string.ui_configure_the_api_format_base_url_and_request_path),
-                    color = ModernMutedDark,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     style = MaterialTheme.typography.bodySmall,
                 )
             }
@@ -191,7 +191,7 @@ internal fun ModelProviderRow(
             Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(5.dp)) {
                 Text(profile.name.ifBlank { uiText(R.string.label_unnamed_platform) }, style = MaterialTheme.typography.titleMedium, maxLines = 1, overflow = TextOverflow.Ellipsis)
                 if (profile.baseUrl.isNotBlank()) {
-                    Text(profile.baseUrl, color = ModernMutedDark, style = MaterialTheme.typography.bodySmall, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                    Text(profile.baseUrl, color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall, maxLines = 1, overflow = TextOverflow.Ellipsis)
                 }
                 Text(
                     uiText(R.string.label_models_count, profile.enabledModels.size),
@@ -259,7 +259,7 @@ internal fun WebSearchBlacklistSettings(
                 Text(uiText(R.string.title_domain_blacklist), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
                 Text(
                     uiText(R.string.blacklist_desc),
-                    color = ModernMutedDark,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     style = MaterialTheme.typography.bodySmall,
                 )
             }
@@ -280,7 +280,7 @@ internal fun WebSearchBlacklistSettings(
         )
         Text(
             uiText(R.string.blacklist_normalize_hint),
-            color = ModernMutedDark,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             style = MaterialTheme.typography.bodySmall,
         )
         Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {

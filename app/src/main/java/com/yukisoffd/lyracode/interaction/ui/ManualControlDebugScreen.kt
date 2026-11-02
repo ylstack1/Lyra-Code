@@ -95,7 +95,7 @@ internal fun ManualControlDebugScreen(settings: AppSettings, onOpenFloatingPageS
         Text(context.getString(R.string.manual_control_title), style = MaterialTheme.typography.titleSmall)
         Text(
             context.getString(R.string.manual_control_instructions),
-            color = ModernMutedDark,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             style = MaterialTheme.typography.bodySmall,
         )
         Text(
@@ -147,7 +147,7 @@ internal fun ManualControlDebugScreen(settings: AppSettings, onOpenFloatingPageS
         state.lastResult?.let { result ->
             Text(
                 context.getString(R.string.manual_control_last_result, result.status.name),
-                color = ModernMutedDark,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
                 style = MaterialTheme.typography.bodySmall,
             )
         }
@@ -156,7 +156,7 @@ internal fun ManualControlDebugScreen(settings: AppSettings, onOpenFloatingPageS
     ModernCardBox {
         Text(
             context.getString(R.string.manual_control_scope_notice),
-            color = ModernMutedDark,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             style = MaterialTheme.typography.bodySmall,
         )
     }

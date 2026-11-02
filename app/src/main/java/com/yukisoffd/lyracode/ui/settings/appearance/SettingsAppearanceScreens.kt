@@ -216,7 +216,7 @@ private fun StreamingAnimationOptionRow(
         Icon(icon, contentDescription = null, modifier = Modifier.width(36.dp).size(24.dp), tint = MaterialTheme.colorScheme.primary)
         Column(Modifier.weight(1f)) {
             Text(title, style = MaterialTheme.typography.titleMedium)
-            Text(subtitle, color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+            Text(subtitle, color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
         }
         if (value == selected) Icon(Icons.Default.Check, contentDescription = stringResource(R.string.streaming_selected), tint = MaterialTheme.colorScheme.primary)
     }
@@ -325,7 +325,7 @@ internal fun ChatBackgroundSettings(settings: AppSettings) {
                         )
                         Text(
                             uiText(R.string.mask_opacity_hint),
-                            color = ModernMutedDark,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
                             style = MaterialTheme.typography.bodySmall,
                         )
                     }
@@ -365,7 +365,7 @@ internal fun ThemeModeSettings(
         Row(verticalAlignment = Alignment.CenterVertically) {
             Column(Modifier.weight(1f)) {
                 Text(uiText(R.string.ui_custom_theme_color), style = MaterialTheme.typography.titleMedium)
-                Text(uiText(R.string.ui_when_enabled_the_selected_color_coordinates_the_interface_background), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+                Text(uiText(R.string.ui_when_enabled_the_selected_color_coordinates_the_interface_background), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
             }
             Switch(
                 checked = customEnabled,
@@ -393,7 +393,7 @@ internal fun ThemeModeSettings(
         Text(uiText(R.string.title_theme_mode), style = MaterialTheme.typography.titleMedium)
         Text(
             if (customEnabled) uiText(R.string.ui_turn_off_custom_theme_color_to_select_a_theme) else uiText(R.string.theme_mode_desc),
-            color = ModernMutedDark,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             style = MaterialTheme.typography.bodySmall,
         )
         ModernDivider()
@@ -417,7 +417,7 @@ internal fun CustomThemeColorSettings(settings: AppSettings, controller: ChatCon
         Text(uiText(R.string.ui_choose_theme_color), style = MaterialTheme.typography.titleMedium)
         Text(
             uiText(R.string.ui_the_color_ring_and_input_only_update_the_preview),
-            color = ModernMutedDark,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             style = MaterialTheme.typography.bodySmall,
         )
         ThemeColorRing(normalized) { selected ->
@@ -520,7 +520,7 @@ internal fun LanguageSettings(
         Text(uiText(R.string.detail_language), style = MaterialTheme.typography.titleMedium)
         Text(
             uiText(R.string.ui_follows_the_system_language_by_default_if_no_matching),
-            color = ModernMutedDark,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             style = MaterialTheme.typography.bodySmall,
         )
         ModernDivider()
@@ -543,7 +543,7 @@ internal fun RefreshRateSettings(
         Text(uiText(R.string.title_refresh_rate), style = MaterialTheme.typography.titleMedium)
         Text(
             uiText(R.string.refresh_rate_desc),
-            color = ModernMutedDark,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             style = MaterialTheme.typography.bodySmall,
         )
         ModernDivider()
@@ -606,7 +606,7 @@ internal fun LanguageOptionRow(
         )
         Column(Modifier.weight(1f)) {
             Text(title, style = MaterialTheme.typography.titleMedium)
-            Text(subtitle, color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+            Text(subtitle, color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
         }
         if (value == selected) {
             Icon(Icons.Default.Check, contentDescription = uiText(R.string.streaming_selected), tint = MaterialTheme.colorScheme.primary)
@@ -683,7 +683,7 @@ internal fun FontSizeSettings(
                     CompositionLocalProvider(LocalDensity provides Density(currentDensity.density, previewScale)) {
                         Column(Modifier.padding(horizontal = 18.dp, vertical = 12.dp)) {
                             Text(uiText(R.string.title_preview_font), style = MaterialTheme.typography.titleMedium)
-                            Text(fontScaleLabel(previewScale), color = ModernMutedDark, style = MaterialTheme.typography.labelMedium)
+                            Text(fontScaleLabel(previewScale), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.labelMedium)
                         }
                     }
                 }
@@ -714,7 +714,7 @@ internal fun FontSizeSettings(
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(14.dp)) {
                 Text("A", style = MaterialTheme.typography.titleMedium)
                 Column(Modifier.weight(1f), horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text(fontScaleLabel(draftScale), color = ModernMutedDark, style = MaterialTheme.typography.labelMedium)
+                    Text(fontScaleLabel(draftScale), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.labelMedium)
                     Slider(
                         value = draftScale,
                         onValueChange = { draftScale = it.coerceIn(AppSettings.MIN_FONT_SCALE, AppSettings.MAX_FONT_SCALE) },
@@ -742,7 +742,7 @@ internal fun FontSizeSettings(
                 Spacer(Modifier.width(12.dp))
                 Column(Modifier.weight(1f)) {
                     Text(uiText(R.string.ui_font_library), style = MaterialTheme.typography.titleMedium)
-                    Text(uiText(R.string.ui_import_preview_and_switch_fonts_in_the_font_library), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+                    Text(uiText(R.string.ui_import_preview_and_switch_fonts_in_the_font_library), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
                 }
                 Icon(Icons.Default.ChevronRight, contentDescription = uiText(R.string.ui_open_font_library), tint = ModernMutedDark)
             }
@@ -803,7 +803,7 @@ internal fun FontLibrarySettings(
                         Text(uiText(R.string.ui_font_library), style = MaterialTheme.typography.titleMedium)
                         Text(
                             uiText(R.string.ui_import_multiple_ttf_otf_and_ttc_fonts_preview_each),
-                            color = ModernMutedDark,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
                             style = MaterialTheme.typography.bodySmall,
                         )
                     }
@@ -821,7 +821,7 @@ internal fun FontLibrarySettings(
         if (fontLibrary.isEmpty()) {
             item {
                 ModernCardBox {
-                    Text(uiText(R.string.ui_the_font_library_is_empty_tap_import_fonts_to), color = ModernMutedDark, style = MaterialTheme.typography.bodyMedium)
+                    Text(uiText(R.string.ui_the_font_library_is_empty_tap_import_fonts_to), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodyMedium)
                 }
             }
         } else {
@@ -862,7 +862,7 @@ internal fun FontLibrarySettings(
             title = { Text(uiText(R.string.ui_font_preview)) },
             text = {
                 Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                    Text(item.name, color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+                    Text(item.name, color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
                     Text(
                         uiText(R.string.ui_the_quick_brown_fox_jumps_over_the_lazy_dog),
                         fontFamily = previewFamily,
@@ -893,7 +893,7 @@ private fun FontSelectionSummary(
             Text(title, style = MaterialTheme.typography.titleSmall)
             Text(
                 currentName ?: uiText(R.string.ui_system_default),
-                color = ModernMutedDark,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
                 style = MaterialTheme.typography.bodySmall,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
@@ -925,7 +925,7 @@ private fun FontLibraryRow(
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Column(Modifier.weight(1f)) {
                     Text(item.name, fontFamily = itemFamily, style = MaterialTheme.typography.titleMedium, maxLines = 1, overflow = TextOverflow.Ellipsis)
-                    Text(item.extension, color = ModernMutedDark, style = MaterialTheme.typography.labelSmall)
+                    Text(item.extension, color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.labelSmall)
                 }
                 IconButton(onClick = onPreview) { Icon(Icons.Default.Visibility, contentDescription = uiText(R.string.ui_preview)) }
                 IconButton(onClick = onDelete) { Icon(Icons.Default.DeleteOutline, contentDescription = uiText(R.string.ui_remove_from_font_library)) }
@@ -999,7 +999,7 @@ internal fun ThemePresetSettings(
         Text(uiText(R.string.title_theme_preset), style = MaterialTheme.typography.titleMedium)
         Text(
             uiText(R.string.theme_preset_desc),
-            color = ModernMutedDark,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             style = MaterialTheme.typography.bodySmall,
         )
         ModernDivider()
@@ -1053,7 +1053,7 @@ private fun ThemePresetOptionRow(
         }
         Column(Modifier.weight(1f)) {
             Text(preset.name, style = MaterialTheme.typography.titleMedium)
-            Text(preset.description, color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+            Text(preset.description, color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
         }
         if (selected) {
             Icon(Icons.Default.Check, contentDescription = uiText(R.string.streaming_selected), tint = MaterialTheme.colorScheme.primary)
@@ -1088,7 +1088,7 @@ internal fun CustomThemeJsonSettings(
             }
             Text(
                 uiText(R.string.custom_theme_json_desc),
-                color = ModernMutedDark,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
                 style = MaterialTheme.typography.bodySmall,
             )
 
@@ -1162,7 +1162,7 @@ internal fun CustomThemeJsonSettings(
             title = { Text(uiText(R.string.title_import_theme_json)) },
             text = {
                 Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                    Text(uiText(R.string.custom_theme_json_paste_desc), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+                    Text(uiText(R.string.custom_theme_json_paste_desc), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
                     OutlinedTextField(
                         value = pasteText,
                         onValueChange = { pasteText = it },

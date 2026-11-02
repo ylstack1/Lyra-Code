@@ -126,7 +126,7 @@ internal fun SystemPermissionSettings(
                 Text(uiText(R.string.title_root_permission), style = MaterialTheme.typography.titleSmall)
                 Text(
                     uiText(R.string.root_permission_desc),
-                    color = ModernMutedDark,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     style = MaterialTheme.typography.bodySmall,
                 )
             }
@@ -210,7 +210,7 @@ internal fun SystemPermissionSettings(
                 Text(uiText(R.string.action_detect_root))
             }
         }
-        Text(rootStatus, color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+        Text(rootStatus, color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
         ModernDivider()
         SettingsExternalLinkRow(
             icon = Icons.Default.Link,
@@ -221,7 +221,7 @@ internal fun SystemPermissionSettings(
     }
     Text(
         uiText(R.string.system_permissions_hint),
-        color = ModernMutedDark,
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
         style = MaterialTheme.typography.bodySmall,
     )
 }
@@ -269,7 +269,7 @@ internal fun PermissionSettings(termuxExecutor: TermuxExecutor) {
             if (index != permissions.lastIndex) ModernDivider()
         }
     }
-    Text(uiText(R.string.permission_hint), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+    Text(uiText(R.string.permission_hint), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
 }
 
 @Composable
@@ -310,13 +310,13 @@ internal fun AgentToolSettings(settings: AppSettings, termuxExecutor: TermuxExec
                     filteredLocalTools.size + filteredMcpTools.size,
                     localTools.size + mcpTools.size,
                 ),
-            color = ModernMutedDark,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             style = MaterialTheme.typography.labelSmall,
         )
     }
     ModernCardBox {
         if (filteredLocalTools.isEmpty() && filteredMcpTools.isEmpty()) {
-            Text(uiText(R.string.notice_no_matching_tools), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+            Text(uiText(R.string.notice_no_matching_tools), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
         }
         filteredLocalTools.forEachIndexed { index, tool ->
             val lockedByPermission = tool.name == "run_command" && !termuxGranted
@@ -324,16 +324,16 @@ internal fun AgentToolSettings(settings: AppSettings, termuxExecutor: TermuxExec
             Row(Modifier.fillMaxWidth().padding(vertical = 8.dp), verticalAlignment = Alignment.CenterVertically) {
                 Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
                     Text(tool.title, style = MaterialTheme.typography.titleSmall)
-                    Text(tool.name, color = ModernMutedDark, style = MaterialTheme.typography.labelSmall)
-                    Text(tool.description, color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+                    Text(tool.name, color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.labelSmall)
+                    Text(tool.description, color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
                     if (lockedByPermission) {
                         Text(uiText(R.string.notice_termux_permission_required), color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.labelSmall)
                     }
                     if (tool.name == "ssh_exec" && !sshToolsEnabled) {
-                        Text(uiText(R.string.notice_ssh_not_configured), color = ModernMutedDark, style = MaterialTheme.typography.labelSmall)
+                        Text(uiText(R.string.notice_ssh_not_configured), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.labelSmall)
                     }
                     if (protectedTool) {
-                        Text(uiText(R.string.notice_protected_tool), color = ModernMutedDark, style = MaterialTheme.typography.labelSmall)
+                        Text(uiText(R.string.notice_protected_tool), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.labelSmall)
                     }
                 }
                 Switch(
@@ -352,8 +352,8 @@ internal fun AgentToolSettings(settings: AppSettings, termuxExecutor: TermuxExec
             Row(Modifier.fillMaxWidth().padding(vertical = 8.dp), verticalAlignment = Alignment.CenterVertically) {
                 Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
                     Text("MCP · ${server.name} / ${tool.name}", style = MaterialTheme.typography.titleSmall)
-                    Text(functionName, color = ModernMutedDark, style = MaterialTheme.typography.labelSmall)
-                    Text(tool.description.ifBlank { uiText(R.string.label_remote_mcp_tool) }, color = ModernMutedDark, style = MaterialTheme.typography.bodySmall, maxLines = 2, overflow = TextOverflow.Ellipsis)
+                    Text(functionName, color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.labelSmall)
+                    Text(tool.description.ifBlank { uiText(R.string.label_remote_mcp_tool) }, color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall, maxLines = 2, overflow = TextOverflow.Ellipsis)
                 }
                 Switch(
                     checked = functionName !in disabled,
@@ -418,7 +418,7 @@ internal fun ProotLinuxSettings() {
                 Text(uiText(R.string.proot_linux_title), style = MaterialTheme.typography.titleSmall)
                 Text(
                     if (runtime.isSupported()) uiText(R.string.proot_linux_count, state.instances.size) else uiText(R.string.debian_runtime_unsupported),
-                    color = ModernMutedDark,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     style = MaterialTheme.typography.bodySmall,
                 )
             }
@@ -453,7 +453,7 @@ internal fun ProotLinuxSettings() {
             )
             Text(
                 state.message.ifBlank { uiText(R.string.proot_linux_working) },
-                color = ModernMutedDark,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
                 style = MaterialTheme.typography.bodySmall,
             )
         }
@@ -483,7 +483,7 @@ internal fun ProotLinuxSettings() {
     }
     ModernCardBox {
         Text(uiText(R.string.proot_linux_supported_files), style = MaterialTheme.typography.titleSmall)
-        Text(uiText(R.string.proot_linux_supported_files_desc), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+        Text(uiText(R.string.proot_linux_supported_files_desc), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
         Text(uiText(R.string.proot_linux_iso_warning), color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodySmall)
         ModernDivider()
         Text(uiText(R.string.proot_linux_download_sources), style = MaterialTheme.typography.titleSmall)
@@ -523,7 +523,7 @@ internal fun ProotLinuxSettings() {
                 Row(Modifier.fillMaxWidth().padding(vertical = 8.dp), verticalAlignment = Alignment.CenterVertically) {
                     Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
                         Text(linux.name, style = MaterialTheme.typography.titleSmall)
-                        Text("Linux ID: ${linux.id}", color = ModernMutedDark, style = MaterialTheme.typography.labelSmall)
+                        Text("Linux ID: ${linux.id}", color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.labelSmall)
                     }
                     Switch(checked = linux.enabled, onCheckedChange = { runtime.setEnabled(linux.id, it) })
                     IconButton(onClick = { deleteId = linux.id }) {
@@ -536,7 +536,7 @@ internal fun ProotLinuxSettings() {
     }
     Text(
         uiText(R.string.proot_linux_preservation_hint),
-        color = ModernMutedDark,
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
         style = MaterialTheme.typography.bodySmall,
     )
 
@@ -791,7 +791,7 @@ internal fun TermuxSetupGuide() {
             }
             Text(
                 uiText(R.string.termux_config_desc),
-                color = ModernMutedDark,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
                 style = MaterialTheme.typography.bodySmall,
             )
             TermuxGuideStep("1", uiText(R.string.termux_step1))
@@ -839,7 +839,7 @@ internal fun SettingsExternalLinkRow(
         Icon(icon, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
             Text(title, style = MaterialTheme.typography.titleSmall)
-            Text(subtitle, color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+            Text(subtitle, color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
         }
         Icon(Icons.Default.ChevronRight, contentDescription = null, tint = ModernMutedDark)
     }
@@ -857,7 +857,7 @@ internal fun TermuxGuideStep(index: String, text: String) {
         ) {
             Text(index, color = MaterialTheme.colorScheme.primary, style = MaterialTheme.typography.labelMedium)
         }
-        Text(text, modifier = Modifier.weight(1f), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+        Text(text, modifier = Modifier.weight(1f), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
     }
 }
 

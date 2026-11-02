@@ -77,11 +77,11 @@ internal fun PromptSettingsScreen(settings: AppSettings, externalRevision: Int =
                         settings.purePromptMode = it
                     })
                 }
-                Text(uiText(R.string.prompt_pure_mode_hint), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+                Text(uiText(R.string.prompt_pure_mode_hint), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
                 Text(uiText(R.string.title_system_prompt), style = MaterialTheme.typography.titleMedium)
                 Text(
                     uiText(R.string.ui_the_app_native_prompt_is_used_when_no_custom),
-                    color = ModernMutedDark,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     style = MaterialTheme.typography.bodySmall,
                 )
             }
@@ -123,7 +123,7 @@ internal fun PromptSettingsScreen(settings: AppSettings, externalRevision: Int =
                         Text(uiText(R.string.ui_app_native_prompt), style = MaterialTheme.typography.titleSmall)
                         Text(
                             uiText(R.string.ui_maintained_by_lyra_code_and_adapted_to_the_current),
-                            color = ModernMutedDark,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
                             style = MaterialTheme.typography.bodySmall,
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
@@ -154,7 +154,7 @@ internal fun PromptSettingsScreen(settings: AppSettings, externalRevision: Int =
                             val desc = preset.prompt.lineSequence().firstOrNull { it.isNotBlank() }.orEmpty()
                             Text(
                                 if (preset.exampleConversation.isBlank()) desc else uiText(R.string.prompt_description_with_example, desc),
-                                color = ModernMutedDark,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
                                 style = MaterialTheme.typography.bodySmall,
                                 maxLines = 1,
                                 overflow = TextOverflow.Ellipsis,

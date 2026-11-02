@@ -66,7 +66,7 @@ internal fun ComposerSettingsSection(
                 )
                 Text(
                     stringResource(R.string.composer_delivery_enabled_desc),
-                    color = ModernMutedDark,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     style = MaterialTheme.typography.bodySmall,
                 )
             }
@@ -76,7 +76,7 @@ internal fun ComposerSettingsSection(
             ModernDivider()
             Text(
                 stringResource(R.string.composer_delivery_disabled_hint),
-                color = ModernMutedDark,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
                 style = MaterialTheme.typography.bodySmall,
             )
         }

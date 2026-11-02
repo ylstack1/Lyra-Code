@@ -60,7 +60,7 @@ internal fun SkillDrawerRow(skill: SkillPack, onToggle: () -> Unit, onDelete: ()
     ) {
         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
             Text(skill.name, maxLines = 1, overflow = TextOverflow.Ellipsis, style = MaterialTheme.typography.bodyLarge)
-            Text(context.getString(R.string.label_files_count_enabled, skill.fileCount, if (skill.enabled) context.getString(R.string.skill_status_enabled) else context.getString(R.string.skill_status_disabled)), color = ModernMutedDark, style = MaterialTheme.typography.labelSmall)
+            Text(context.getString(R.string.label_files_count_enabled, skill.fileCount, if (skill.enabled) context.getString(R.string.skill_status_enabled) else context.getString(R.string.skill_status_disabled)), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.labelSmall)
         }
         KimiChip(if (skill.enabled) context.getString(R.string.action_disable) else context.getString(R.string.action_enable), onClick = onToggle)
         Spacer(Modifier.width(6.dp))
@@ -140,7 +140,7 @@ internal fun SkillsScreen(
                     Text(context.getString(R.string.label_skills_capability), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
                     Text(
                         context.getString(R.string.skills_description),
-                        color = ModernMutedDark,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                         style = MaterialTheme.typography.bodySmall,
                     )
                 }
@@ -154,7 +154,7 @@ internal fun SkillsScreen(
             )
         }
         if (status.isNotBlank()) {
-            Text(status, color = ModernMutedDark, style = MaterialTheme.typography.labelMedium)
+            Text(status, color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.labelMedium)
         }
         if (skills.isEmpty()) {
             ModernCardBox {
@@ -162,7 +162,7 @@ internal fun SkillsScreen(
                         Icon(Icons.Default.Extension, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
                         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                             Text(context.getString(R.string.notice_no_skills), style = MaterialTheme.typography.titleMedium)
-                            Text(context.getString(R.string.skills_empty_hint), color = ModernMutedDark)
+                            Text(context.getString(R.string.skills_empty_hint), color = MaterialTheme.colorScheme.onSurfaceVariant)
                         }
                     }
                 }
@@ -435,7 +435,7 @@ internal fun SkillSettingsRow(skill: SkillPack, onToggle: () -> Unit, onDelete: 
                     style = MaterialTheme.typography.bodySmall,
                 )
             }
-            Text(context.getString(R.string.label_files_and_id, skill.fileCount, skill.id), color = ModernMutedDark, style = MaterialTheme.typography.labelSmall)
+            Text(context.getString(R.string.label_files_and_id, skill.fileCount, skill.id), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.labelSmall)
         }
         Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(4.dp)) {
             Switch(checked = skill.enabled, onCheckedChange = { onToggle() })

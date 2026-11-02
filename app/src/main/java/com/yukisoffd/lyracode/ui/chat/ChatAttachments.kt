@@ -104,7 +104,7 @@ internal fun UploadedFileCard(file: UploadedFilePreview) {
                     .joinToString(" · ")
                 Text(
                     meta,
-                    color = ModernMutedDark,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     style = MaterialTheme.typography.bodySmall,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
@@ -211,7 +211,7 @@ internal fun WorkspaceReferenceCardColumn(files: List<WorkspaceReferencePreview>
                     Icon(Icons.Default.Description, contentDescription = null, modifier = Modifier.size(20.dp))
                     Column(Modifier.weight(1f)) {
                         Text(file.name, maxLines = 1, overflow = TextOverflow.Ellipsis, style = MaterialTheme.typography.labelLarge)
-                        Text(file.path, maxLines = 1, overflow = TextOverflow.Ellipsis, color = ModernMutedDark, style = MaterialTheme.typography.labelSmall)
+                        Text(file.path, maxLines = 1, overflow = TextOverflow.Ellipsis, color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.labelSmall)
                     }
                 }
             }

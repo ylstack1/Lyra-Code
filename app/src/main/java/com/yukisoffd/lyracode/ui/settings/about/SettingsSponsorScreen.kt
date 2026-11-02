@@ -88,7 +88,7 @@ internal fun SponsorDevelopmentScreen() {
                         Text(
                             stringResource(R.string.sponsor_thanks),
                             style = MaterialTheme.typography.bodySmall,
-                            color = ModernMutedDark,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
                     }
                 }
@@ -108,7 +108,7 @@ internal fun SponsorDevelopmentScreen() {
                     Text(
                         stringResource(R.string.sponsor_scan_hint),
                         style = MaterialTheme.typography.bodySmall,
-                        color = ModernMutedDark,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
                     Button(
                         onClick = { saveImage.launch("Lyra-Code-WeChat-Sponsor.jpg") },

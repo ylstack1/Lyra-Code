@@ -116,7 +116,7 @@ internal fun DeviceInteractionSettings(
                             DeviceInteractionAvailability.MIN_SUPPORTED_SDK,
                         )
                     },
-                    color = ModernMutedDark,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     style = MaterialTheme.typography.bodySmall,
                 )
             }
@@ -148,7 +148,7 @@ internal fun DeviceInteractionSettings(
                     context.getString(R.string.device_interaction_accessibility_title),
                     style = MaterialTheme.typography.titleSmall,
                 )
-                Text(statusText, color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+                Text(statusText, color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
             }
         }
         OutlinedButton(
@@ -169,7 +169,7 @@ internal fun DeviceInteractionSettings(
         }
         Text(
             context.getString(R.string.device_interaction_restricted_settings_notice),
-            color = ModernMutedDark,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             style = MaterialTheme.typography.bodySmall,
         )
         ModernDivider()
@@ -192,7 +192,7 @@ internal fun DeviceInteractionSettings(
                             R.string.device_interaction_overlay_required
                         },
                     ),
-                    color = ModernMutedDark,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     style = MaterialTheme.typography.bodySmall,
                 )
             }
@@ -219,7 +219,7 @@ internal fun DeviceInteractionSettings(
                 Text(context.getString(R.string.device_full_access_title), style = MaterialTheme.typography.titleSmall)
                 Text(
                     context.getString(if (fullAccessEnabled) R.string.device_full_access_enabled else R.string.device_full_access_desc),
-                    color = ModernMutedDark,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     style = MaterialTheme.typography.bodySmall,
                 )
             }
@@ -257,7 +257,7 @@ internal fun DeviceInteractionSettings(
         )
         if (authenticating) Text(
             context.getString(R.string.device_full_access_auth_pending),
-            color = ModernMutedDark,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             style = MaterialTheme.typography.bodySmall,
         )
         authenticationError?.let { Text(it, color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodySmall) }
@@ -270,7 +270,7 @@ internal fun DeviceInteractionSettings(
         )
         Text(
             context.getString(R.string.device_interaction_scope_desc),
-            color = ModernMutedDark,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             style = MaterialTheme.typography.bodySmall,
         )
         OutlinedButton(
@@ -284,7 +284,7 @@ internal fun DeviceInteractionSettings(
 
     Text(
         context.getString(R.string.device_interaction_privacy_notice),
-        color = ModernMutedDark,
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
         style = MaterialTheme.typography.bodySmall,
     )
 }

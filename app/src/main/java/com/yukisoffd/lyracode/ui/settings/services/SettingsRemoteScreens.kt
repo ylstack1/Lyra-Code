@@ -108,17 +108,17 @@ internal fun WebDavSettings(settings: AppSettings, webDavClient: WebDavClient, e
         Row(verticalAlignment = Alignment.CenterVertically) {
             Column(Modifier.weight(1f)) {
                 Text("WebDAV", style = MaterialTheme.typography.titleMedium)
-                Text(uiText(R.string.webdav_desc), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+                Text(uiText(R.string.webdav_desc), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
             }
             Button(onClick = { editing = defaultWebDavServer() }, shape = ModernPillShape) { Text(uiText(R.string.action_add)) }
         }
-        if (status.isNotBlank()) Text(status, color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+        if (status.isNotBlank()) Text(status, color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
     }
 
     if (servers.isEmpty()) {
         ModernCardBox {
             Text(uiText(R.string.notice_no_webdav), style = MaterialTheme.typography.titleSmall)
-            Text(uiText(R.string.webdav_empty_hint), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+            Text(uiText(R.string.webdav_empty_hint), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
         }
     }
 
@@ -127,8 +127,8 @@ internal fun WebDavSettings(settings: AppSettings, webDavClient: WebDavClient, e
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                     Text(server.name, style = MaterialTheme.typography.titleMedium)
-                    Text(if (server.hideAddressInDrawer) uiText(R.string.label_address_hidden) else server.url, color = ModernMutedDark, maxLines = 1, overflow = TextOverflow.Ellipsis, style = MaterialTheme.typography.bodySmall)
-                    Text(server.username.ifBlank { uiText(R.string.label_anonymous) } + " · " + server.initialPath.ifBlank { "/" }, color = ModernMutedDark, style = MaterialTheme.typography.labelMedium)
+                    Text(if (server.hideAddressInDrawer) uiText(R.string.label_address_hidden) else server.url, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 1, overflow = TextOverflow.Ellipsis, style = MaterialTheme.typography.bodySmall)
+                    Text(server.username.ifBlank { uiText(R.string.label_anonymous) } + " · " + server.initialPath.ifBlank { "/" }, color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.labelMedium)
                     if (server.url.startsWith("http://", ignoreCase = true)) {
                         Text(uiText(R.string.notice_http_warning_webdav), color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.labelSmall)
                     }
@@ -241,7 +241,7 @@ internal fun WebDavSwitchRow(title: String, subtitle: String, checked: Boolean, 
     Row(verticalAlignment = Alignment.CenterVertically) {
         Column(Modifier.weight(1f)) {
             Text(title, style = MaterialTheme.typography.titleSmall)
-            Text(subtitle, color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+            Text(subtitle, color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
         }
         Switch(checked = checked, onCheckedChange = onCheckedChange)
     }
@@ -308,17 +308,17 @@ internal fun FileTransferSettings(settings: AppSettings, fileTransferClient: Fil
         Row(verticalAlignment = Alignment.CenterVertically) {
             Column(Modifier.weight(1f)) {
                 Text("FTP / FTPS / SFTP", style = MaterialTheme.typography.titleMedium)
-                Text(uiText(R.string.file_transfer_desc), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+                Text(uiText(R.string.file_transfer_desc), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
             }
             Button(onClick = { editing = defaultFileTransferServer(AppSettings.FILE_TRANSFER_SFTP) }, shape = ModernPillShape) { Text(uiText(R.string.action_add)) }
         }
-        if (status.isNotBlank()) Text(status, color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+        if (status.isNotBlank()) Text(status, color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
     }
 
     if (servers.isEmpty()) {
         ModernCardBox {
             Text(uiText(R.string.notice_no_file_transfer), style = MaterialTheme.typography.titleSmall)
-            Text(uiText(R.string.file_transfer_empty_hint), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+            Text(uiText(R.string.file_transfer_empty_hint), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
         }
     }
 
@@ -329,13 +329,13 @@ internal fun FileTransferSettings(settings: AppSettings, fileTransferClient: Fil
                     Text(server.name, style = MaterialTheme.typography.titleMedium)
                     Text(
                         if (server.hideAddressInDrawer) uiText(R.string.label_address_hidden) else "${server.protocol.uppercase(Locale.US)}://${server.host}:${server.port}",
-                        color = ModernMutedDark,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
                         style = MaterialTheme.typography.bodySmall,
                     )
                     val auth = if (server.protocol == AppSettings.FILE_TRANSFER_SFTP && server.usePrivateKey) uiText(R.string.label_key_login) else server.username.ifBlank { uiText(R.string.label_anonymous) }
-                    Text("$auth · ${server.initialPath.ifBlank { "/" }}", color = ModernMutedDark, style = MaterialTheme.typography.labelMedium)
+                    Text("$auth · ${server.initialPath.ifBlank { "/" }}", color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.labelMedium)
                     if (server.protocol == AppSettings.FILE_TRANSFER_FTP) {
                         Text(uiText(R.string.notice_ftp_warning), color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.labelSmall)
                     }
@@ -567,7 +567,7 @@ internal fun BackupSettings(
 
     ModernCardBox {
         Text(uiText(R.string.title_export_content), style = MaterialTheme.typography.titleMedium)
-        Text(uiText(R.string.backup_desc), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+        Text(uiText(R.string.backup_desc), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
         BackupIncludeRow(uiText(R.string.backup_include_profile), includeProfile) { includeProfile = it }
         BackupIncludeRow(uiText(R.string.backup_include_conversations), includeConversations) { includeConversations = it }
 
@@ -603,22 +603,22 @@ internal fun BackupSettings(
 
     ModernCardBox {
         Text(uiText(R.string.title_import_backup), style = MaterialTheme.typography.titleMedium)
-        Text(uiText(R.string.import_desc), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+        Text(uiText(R.string.import_desc), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             OutlinedButton(onClick = { onImportBackup("supplement") }, shape = ModernPillShape) { Text(uiText(R.string.action_supplement_import)) }
             OutlinedButton(onClick = { onImportBackup("replace") }, shape = ModernPillShape) { Text(uiText(R.string.action_replace_import)) }
         }
-        if (status.isNotBlank()) Text(status, color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+        if (status.isNotBlank()) Text(status, color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
     }
 
     ModernCardBox {
         Text(uiText(R.string.title_webdav_backup), style = MaterialTheme.typography.titleMedium)
         if (webDavServers.isEmpty()) {
-            Text(uiText(R.string.notice_no_webdav_for_backup), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+            Text(uiText(R.string.notice_no_webdav_for_backup), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
         } else {
             WebDavServerPicker(webDavServers, selectedServerId) { selectedServerId = it }
             OutlinedTextField(value = remotePath, onValueChange = { remotePath = it }, modifier = Modifier.fillMaxWidth(), label = { Text(uiText(R.string.label_remote_backup_path)) }, singleLine = true)
-            if (transferStatus.isNotBlank()) Text(transferStatus, color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+            if (transferStatus.isNotBlank()) Text(transferStatus, color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 OutlinedButton(
                     onClick = {
@@ -771,17 +771,17 @@ internal fun SshSettings(settings: AppSettings, sshExecutor: SshExecutor, extern
         Row(verticalAlignment = Alignment.CenterVertically) {
             Column(Modifier.weight(1f)) {
                 Text(uiText(R.string.detail_ssh), style = MaterialTheme.typography.titleMedium)
-                Text(uiText(R.string.ssh_desc), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+                Text(uiText(R.string.ssh_desc), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
             }
             Button(onClick = { editing = defaultSshServer() }, shape = ModernPillShape) { Text(uiText(R.string.action_add)) }
         }
-        if (status.isNotBlank()) Text(status, color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+        if (status.isNotBlank()) Text(status, color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
     }
 
     if (servers.isEmpty()) {
         ModernCardBox {
             Text(uiText(R.string.notice_no_ssh), style = MaterialTheme.typography.titleSmall)
-            Text(uiText(R.string.ssh_empty_hint), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+            Text(uiText(R.string.ssh_empty_hint), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
         }
     }
 
@@ -790,8 +790,8 @@ internal fun SshSettings(settings: AppSettings, sshExecutor: SshExecutor, extern
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                     Text(server.name, style = MaterialTheme.typography.titleMedium)
-                    Text(server.stableId, color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
-                    Text("${server.username} · ${sshAuthLabel(server.authType)} · ${server.timeoutSeconds}s", color = ModernMutedDark, style = MaterialTheme.typography.labelMedium)
+                    Text(server.stableId, color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
+                    Text("${server.username} · ${sshAuthLabel(server.authType)} · ${server.timeoutSeconds}s", color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.labelMedium)
                 }
                 Switch(
                     checked = server.enabled,
@@ -831,7 +831,7 @@ internal fun SshSettings(settings: AppSettings, sshExecutor: SshExecutor, extern
         Text(uiText(R.string.title_ssh_usage), style = MaterialTheme.typography.titleSmall)
         Text(
             uiText(R.string.ssh_usage_desc),
-            color = ModernMutedDark,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             style = MaterialTheme.typography.bodySmall,
         )
     }
@@ -885,11 +885,11 @@ internal fun SshServerDialog(
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Column(Modifier.weight(1f)) {
                         Text(uiText(R.string.title_enable_connection), style = MaterialTheme.typography.titleSmall)
-                        Text(uiText(R.string.enable_connection_desc), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+                        Text(uiText(R.string.enable_connection_desc), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
                     }
                     Switch(checked = enabled, onCheckedChange = { enabled = it })
                 }
-                Text(uiText(R.string.ui_stable_identifier_will_use) + host.ifBlank { "host" } + ":" + port.ifBlank { "22" } + uiText(R.string.ui_the_ai_uses_this_identifier_when_calling_ssh_tools), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+                Text(uiText(R.string.ui_stable_identifier_will_use) + host.ifBlank { "host" } + ":" + port.ifBlank { "22" } + uiText(R.string.ui_the_ai_uses_this_identifier_when_calling_ssh_tools), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
             }
         },
         confirmButton = {

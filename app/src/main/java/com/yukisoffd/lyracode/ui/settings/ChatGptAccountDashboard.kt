@@ -108,7 +108,7 @@ internal fun ChatGptAccountPage(
         ChatGptLogo(Modifier.size(42.dp))
         Column(verticalArrangement = Arrangement.spacedBy(3.dp)) {
             Text("ChatGPT", style = MaterialTheme.typography.titleLarge)
-            Text(uiText(R.string.chatgpt_provided_by), style = MaterialTheme.typography.bodySmall, color = ModernMutedDark)
+            Text(uiText(R.string.chatgpt_provided_by), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
     }
     if (busy || !loaded) LinearProgressIndicator(Modifier.fillMaxWidth())
@@ -125,7 +125,7 @@ internal fun ChatGptAccountPage(
                         account.isLoggedIn && account.clientId == settings.selectedProfile().chatGptAccountId -> R.string.chatgpt_active_account
                         account.isLoggedIn -> R.string.chatgpt_connected
                         else -> R.string.chatgpt_signed_out
-                    }), style = MaterialTheme.typography.bodySmall, color = ModernMutedDark)
+                    }), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
             }
         }
@@ -183,7 +183,7 @@ private fun ChatGptIdentityCard(label: String, value: String, modifier: Modifier
     Card(modifier.heightIn(min = 124.dp).fillMaxHeight(), shape = ModernCardShape,
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.32f))) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            Text(label, style = MaterialTheme.typography.labelMedium, color = ModernMutedDark)
+            Text(label, style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
             SelectionContainer {
                 Text(value, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold,
                     maxLines = 4, overflow = TextOverflow.Ellipsis)
@@ -204,7 +204,7 @@ private fun ChatGptAllowanceCard(account: ChatGptAccount, minutes: Int, window: 
     Card(modifier.heightIn(min = 236.dp).fillMaxHeight(), shape = ModernCardShape,
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.32f))) {
         Column(Modifier.fillMaxSize().padding(16.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(label, style = MaterialTheme.typography.labelMedium, color = ModernMutedDark, modifier = Modifier.align(Alignment.Start))
+            Text(label, style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.align(Alignment.Start))
             Spacer(Modifier.height(18.dp))
             Box(Modifier.size(96.dp).clearAndSetSemantics { contentDescription = description }, contentAlignment = Alignment.Center) {
                 CircularProgressIndicator(progress = { ((remaining ?: 0.0) / 100).toFloat() }, modifier = Modifier.fillMaxSize(),
@@ -217,7 +217,7 @@ private fun ChatGptAllowanceCard(account: ChatGptAccount, minutes: Int, window: 
                 window?.resetsAt?.takeIf { account.isLoggedIn && it > now }?.let {
                     DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(Date(it))
                 } ?: uiText(R.string.chatgpt_not_provided)),
-                style = MaterialTheme.typography.bodySmall, color = ModernMutedDark, textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth())
+                style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant, textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth())
         }
     }
 }
