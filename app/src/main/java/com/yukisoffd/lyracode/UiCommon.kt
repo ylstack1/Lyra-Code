@@ -786,11 +786,11 @@ internal fun KimiChip(
     )
 }
 
-@Composable
 internal enum class NoticeType {
     SUCCESS, WARNING, ERROR, INFO
 }
 
+@Composable
 internal fun TransientNotice(
     message: String,
     type: NoticeType = NoticeType.SUCCESS,
@@ -807,11 +807,11 @@ internal fun TransientNotice(
         kotlinx.coroutines.delay(220)
         onDismiss()
     }
-    val (bgColor, icon, iconRes) = when (type) {
-        NoticeType.SUCCESS -> Color(0xFF4CAF50) to Icons.Default.CheckCircle to null
-        NoticeType.WARNING -> Color(0xFFFF9800) to Icons.Default.Warning to null
-        NoticeType.ERROR -> Color(0xFFF44336) to Icons.Default.Error to null
-        NoticeType.INFO -> Color(0xFF2196F3) to Icons.Default.Info to null
+    val (bgColor, icon) = when (type) {
+        NoticeType.SUCCESS -> Color(0xFF4CAF50) to Icons.Default.CheckCircle
+        NoticeType.WARNING -> Color(0xFFFF9800) to Icons.Default.Warning
+        NoticeType.ERROR -> Color(0xFFF44336) to Icons.Default.Error
+        NoticeType.INFO -> Color(0xFF2196F3) to Icons.Default.Info
     }
     Box(modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
         AnimatedVisibility(

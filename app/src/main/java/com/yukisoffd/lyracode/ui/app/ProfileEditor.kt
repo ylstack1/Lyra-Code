@@ -139,9 +139,8 @@ internal fun ProfileEditDialog(
                             Image(
                                 bitmap = previewBitmap.asImageBitmap(),
                                 contentDescription = null,
-                                modifier = Modifier
-                                    .fillMaxSize()
-                                    .contentScale(ContentScale.Crop),
+                                modifier = Modifier.fillMaxSize(),
+                                contentScale = ContentScale.Crop,
                             )
                         } else {
                             Text(
