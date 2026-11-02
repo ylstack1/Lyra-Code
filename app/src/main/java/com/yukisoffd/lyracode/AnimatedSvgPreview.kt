@@ -65,7 +65,7 @@ internal fun AnimatedSvgPreview(
     val data = document
     if (data == null) {
         Text(uiText(if (failed) R.string.notice_image_decode_failed else R.string.ui_loading_media),
-            modifier = modifier, color = if (failed) MaterialTheme.colorScheme.error else KimiMuted,
+            modifier = modifier, color = if (failed) MaterialTheme.colorScheme.error else ModernMutedDark,
             style = MaterialTheme.typography.bodySmall)
         return
     }

@@ -98,7 +98,7 @@ private fun ToolCallSummaryButton(text: String, compact: Boolean, onClick: () ->
     Row(
         Modifier
             .fillMaxWidth()
-            .clip(KimiPillShape)
+            .clip(ModernPillShape)
             .clickable(onClick = onClick)
             .background(MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.78f))
             .padding(horizontal = if (compact) 10.dp else 14.dp, vertical = if (compact) 5.dp else 10.dp),
@@ -226,7 +226,7 @@ private fun ToolJsonSection(title: String, content: String, onCopy: () -> Unit) 
                         Icon(Icons.Default.ContentCopy, contentDescription = uiText(R.string.file_action_copy), tint = MaterialTheme.colorScheme.primary)
                     }
                 }
-                KimiDivider()
+                ModernDivider()
                 SelectionContainer {
                     Text(
                         highlightedJson,

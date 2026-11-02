@@ -91,7 +91,7 @@ class DesktopPetSettingsActivity : ComponentActivity() {
             snackbarHost = { SnackbarHost(snackbar) }, containerColor = MaterialTheme.colorScheme.background
         ) { padding ->
             Column(Modifier.fillMaxSize().padding(padding).verticalScroll(rememberScrollState()).padding(horizontal = 16.dp), verticalArrangement = Arrangement.spacedBy(20.dp)) {
-                Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer), shape = RoundedCornerShape(28.dp)) {
+                Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer), shape = RoundedCornerShape(12.dp)) {
                     Column(Modifier.fillMaxWidth().padding(20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
                         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(16.dp)) {
                             Icon(Icons.Default.Pets, null, Modifier.size(40.dp), tint = MaterialTheme.colorScheme.onSecondaryContainer)

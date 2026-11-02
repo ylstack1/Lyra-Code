@@ -48,7 +48,7 @@ internal fun ComposerSettingsSection(
     enabled: Boolean,
     onEnabledChange: (Boolean) -> Unit,
 ) {
-    KimiCardBox {
+    ModernCardBox {
         Row(
             Modifier.fillMaxWidth().padding(vertical = 4.dp),
             verticalAlignment = Alignment.CenterVertically,
@@ -66,17 +66,17 @@ internal fun ComposerSettingsSection(
                 )
                 Text(
                     stringResource(R.string.composer_delivery_enabled_desc),
-                    color = KimiMuted,
+                    color = ModernMutedDark,
                     style = MaterialTheme.typography.bodySmall,
                 )
             }
             Switch(checked = enabled, onCheckedChange = onEnabledChange)
         }
         if (!enabled) {
-            KimiDivider()
+            ModernDivider()
             Text(
                 stringResource(R.string.composer_delivery_disabled_hint),
-                color = KimiMuted,
+                color = ModernMutedDark,
                 style = MaterialTheme.typography.bodySmall,
             )
         }

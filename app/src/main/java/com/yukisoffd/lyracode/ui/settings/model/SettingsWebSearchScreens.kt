@@ -34,19 +34,19 @@ internal fun WebSearchSettings(
 ) {
     val search = remember(externalRevision) { settings.deepSeekSearchConfig }
     val fetch = remember(externalRevision) { settings.deepSeekFetchConfig }
-    KimiCardBox {
+    ModernCardBox {
         KimiMenuRow(
             Icons.Default.Search, uiText(R.string.deepseek_search_title),
             uiText(if (search.enabled) R.string.deepseek_backend_enabled else R.string.deepseek_backend_disabled),
             onClick = onOpenDeepSeekSearch,
         )
-        KimiDivider()
+        ModernDivider()
         KimiMenuRow(
             Icons.Default.Description, uiText(R.string.deepseek_fetch_title),
             uiText(if (fetch.enabled) R.string.deepseek_backend_enabled else R.string.deepseek_backend_disabled),
             onClick = onOpenDeepSeekFetch,
         )
-        KimiDivider()
+        ModernDivider()
         KimiMenuRow(
             Icons.Default.Block, uiText(R.string.title_domain_blacklist),
             uiText(R.string.web_search_blacklist_scope), onClick = onOpenBlacklist,
@@ -69,13 +69,13 @@ internal fun DeepSeekWebSettings(
     var saved by remember(search) { mutableStateOf(false) }
     var invalidKey by remember(search) { mutableStateOf(false) }
     var invalidUrl by remember(search) { mutableStateOf(false) }
-    KimiCardBox {
+    ModernCardBox {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Column(Modifier.weight(1f)) {
                 Text(uiText(if (search) R.string.deepseek_enable_search else R.string.deepseek_enable_fetch), style = MaterialTheme.typography.titleSmall)
                 Text(
                     uiText(if (search) R.string.deepseek_search_description else R.string.deepseek_fetch_description),
-                    color = KimiMuted,
+                    color = ModernMutedDark,
                     style = MaterialTheme.typography.bodySmall,
                 )
             }
@@ -90,7 +90,7 @@ internal fun DeepSeekWebSettings(
                 },
             )
         }
-        KimiDivider()
+        ModernDivider()
         OutlinedTextField(
             value = baseUrl,
             onValueChange = { baseUrl = it; invalidUrl = false; saved = false },
@@ -111,7 +111,7 @@ internal fun DeepSeekWebSettings(
             singleLine = true,
         )
         if (invalidKey) Text(uiText(R.string.deepseek_key_required), color = MaterialTheme.colorScheme.error)
-        Text(uiText(R.string.deepseek_config_hint), color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+        Text(uiText(R.string.deepseek_config_hint), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
         Button(
             onClick = {
                 val current = if (search) settings.deepSeekSearchConfig else settings.deepSeekFetchConfig
@@ -126,7 +126,7 @@ internal fun DeepSeekWebSettings(
                     onChanged()
                 }
             },
-            shape = KimiPillShape,
+            shape = ModernPillShape,
         ) { Text(uiText(R.string.file_editor_save)) }
         if (saved) Text(uiText(R.string.deepseek_config_saved), color = MaterialTheme.colorScheme.primary)
     }

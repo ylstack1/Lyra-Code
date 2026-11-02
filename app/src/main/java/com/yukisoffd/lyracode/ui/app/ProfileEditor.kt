@@ -164,20 +164,20 @@ internal fun ProfileEditDialog(
                     label = { Text(context.getString(R.string.label_nickname)) },
                     singleLine = true,
                 )
-                OutlinedButton(onClick = { avatarLauncher.launch("image/*") }, shape = KimiPillShape) {
+                OutlinedButton(onClick = { avatarLauncher.launch("image/*") }, shape = ModernPillShape) {
                     Text(context.getString(R.string.action_select_avatar))
                 }
                 if (previewBitmap != null) {
-                    Text(context.getString(R.string.label_crop_zoom), color = KimiMuted, style = MaterialTheme.typography.labelMedium)
+                    Text(context.getString(R.string.label_crop_zoom), color = ModernMutedDark, style = MaterialTheme.typography.labelMedium)
                     Slider(value = zoom, onValueChange = { zoom = it }, valueRange = 1f..3f)
-                    Text(context.getString(R.string.label_horizontal_position), color = KimiMuted, style = MaterialTheme.typography.labelMedium)
+                    Text(context.getString(R.string.label_horizontal_position), color = ModernMutedDark, style = MaterialTheme.typography.labelMedium)
                     Slider(value = offsetX, onValueChange = { offsetX = it }, valueRange = -1f..1f)
-                    Text(context.getString(R.string.label_vertical_position), color = KimiMuted, style = MaterialTheme.typography.labelMedium)
+                    Text(context.getString(R.string.label_vertical_position), color = ModernMutedDark, style = MaterialTheme.typography.labelMedium)
                     Slider(value = offsetY, onValueChange = { offsetY = it }, valueRange = -1f..1f)
                 }
                 KimiSectionLabel(context.getString(R.string.mengxi_third_party_accounts))
-                KimiCardBox { NewApiAccountSection(settings, onServicesChanged, onOpenAccount) }
-                KimiCardBox { ChatGptAccountSection(settings, onOpenChatGptAccount) }
+                ModernCardBox { NewApiAccountSection(settings, onServicesChanged, onOpenAccount) }
+                ModernCardBox { ChatGptAccountSection(settings, onOpenChatGptAccount) }
             }
         },
         confirmButton = {
@@ -535,8 +535,8 @@ internal fun ImageModeChip(label: String, selected: Boolean, onClick: () -> Unit
     Text(
         label,
         modifier = Modifier
-            .clip(KimiPillShape)
-            .background(if (selected) KimiBlue else Color(0xFF242424))
+            .clip(ModernPillShape)
+            .background(if (selected) ModernAccentDark else Color(0xFF242424))
             .clickable(onClick = onClick)
             .padding(horizontal = 14.dp, vertical = 8.dp),
         color = Color.White,

@@ -42,9 +42,9 @@ import androidx.core.net.toUri
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
-import com.yukisoffd.lyracode.KimiCardBox
-import com.yukisoffd.lyracode.KimiDivider
-import com.yukisoffd.lyracode.KimiMuted
+import com.yukisoffd.lyracode.ModernCardBox
+import com.yukisoffd.lyracode.ModernDivider
+import com.yukisoffd.lyracode.ModernMutedDark
 import com.yukisoffd.lyracode.R
 import com.yukisoffd.lyracode.data.AppSettings
 import com.yukisoffd.lyracode.interaction.DeviceInteractionAvailability
@@ -91,7 +91,7 @@ internal fun DeviceInteractionSettings(
         else -> context.getString(R.string.device_interaction_status_service_off)
     }
 
-    KimiCardBox {
+    ModernCardBox {
         Row(
             modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
             verticalAlignment = Alignment.CenterVertically,
@@ -116,7 +116,7 @@ internal fun DeviceInteractionSettings(
                             DeviceInteractionAvailability.MIN_SUPPORTED_SDK,
                         )
                     },
-                    color = KimiMuted,
+                    color = ModernMutedDark,
                     style = MaterialTheme.typography.bodySmall,
                 )
             }
@@ -136,7 +136,7 @@ internal fun DeviceInteractionSettings(
                 },
             )
         }
-        KimiDivider()
+        ModernDivider()
         Row(
             modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
             verticalAlignment = Alignment.CenterVertically,
@@ -148,7 +148,7 @@ internal fun DeviceInteractionSettings(
                     context.getString(R.string.device_interaction_accessibility_title),
                     style = MaterialTheme.typography.titleSmall,
                 )
-                Text(statusText, color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+                Text(statusText, color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
             }
         }
         OutlinedButton(
@@ -169,10 +169,10 @@ internal fun DeviceInteractionSettings(
         }
         Text(
             context.getString(R.string.device_interaction_restricted_settings_notice),
-            color = KimiMuted,
+            color = ModernMutedDark,
             style = MaterialTheme.typography.bodySmall,
         )
-        KimiDivider()
+        ModernDivider()
         Row(
             modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
             verticalAlignment = Alignment.CenterVertically,
@@ -192,7 +192,7 @@ internal fun DeviceInteractionSettings(
                             R.string.device_interaction_overlay_required
                         },
                     ),
-                    color = KimiMuted,
+                    color = ModernMutedDark,
                     style = MaterialTheme.typography.bodySmall,
                 )
             }
@@ -208,7 +208,7 @@ internal fun DeviceInteractionSettings(
         }
     }
 
-    KimiCardBox {
+    ModernCardBox {
         Row(
             modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
             verticalAlignment = Alignment.CenterVertically,
@@ -219,7 +219,7 @@ internal fun DeviceInteractionSettings(
                 Text(context.getString(R.string.device_full_access_title), style = MaterialTheme.typography.titleSmall)
                 Text(
                     context.getString(if (fullAccessEnabled) R.string.device_full_access_enabled else R.string.device_full_access_desc),
-                    color = KimiMuted,
+                    color = ModernMutedDark,
                     style = MaterialTheme.typography.bodySmall,
                 )
             }
@@ -257,20 +257,20 @@ internal fun DeviceInteractionSettings(
         )
         if (authenticating) Text(
             context.getString(R.string.device_full_access_auth_pending),
-            color = KimiMuted,
+            color = ModernMutedDark,
             style = MaterialTheme.typography.bodySmall,
         )
         authenticationError?.let { Text(it, color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodySmall) }
     }
 
-    KimiCardBox {
+    ModernCardBox {
         Text(
             context.getString(R.string.device_interaction_scope_title),
             style = MaterialTheme.typography.titleSmall,
         )
         Text(
             context.getString(R.string.device_interaction_scope_desc),
-            color = KimiMuted,
+            color = ModernMutedDark,
             style = MaterialTheme.typography.bodySmall,
         )
         OutlinedButton(
@@ -284,7 +284,7 @@ internal fun DeviceInteractionSettings(
 
     Text(
         context.getString(R.string.device_interaction_privacy_notice),
-        color = KimiMuted,
+        color = ModernMutedDark,
         style = MaterialTheme.typography.bodySmall,
     )
 }

@@ -43,8 +43,8 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
-import com.yukisoffd.lyracode.KimiCardBox
-import com.yukisoffd.lyracode.KimiMuted
+import com.yukisoffd.lyracode.ModernCardBox
+import com.yukisoffd.lyracode.ModernMutedDark
 import com.yukisoffd.lyracode.R
 import com.yukisoffd.lyracode.interaction.model.CompactOverlayOptions
 import com.yukisoffd.lyracode.interaction.overlay.CompactChatBar
@@ -61,7 +61,7 @@ internal fun FloatingPageSettings() {
         val previewHeight = (maxHeight * .30f).coerceIn(100.dp, 190.dp)
         Column(Modifier.fillMaxSize(), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             // This card stays visible while the controls below it scroll.
-            KimiCardBox {
+            ModernCardBox {
                 Text(context.getString(R.string.floating_page_preview), style = MaterialTheme.typography.titleSmall)
                 CompactOverlayPreview(options, previewHeight)
             }
@@ -69,8 +69,8 @@ internal fun FloatingPageSettings() {
                 Modifier.weight(1f).verticalScroll(rememberScrollState()),
                 verticalArrangement = Arrangement.spacedBy(12.dp),
             ) {
-                Text(context.getString(R.string.floating_page_auto_save), color = KimiMuted, style = MaterialTheme.typography.bodySmall)
-                KimiCardBox {
+                Text(context.getString(R.string.floating_page_auto_save), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+                ModernCardBox {
                     OptionSlider(R.string.floating_page_width, "floating-width", options.widthDp, 240f..600f) { update(options.copy(widthDp = it)) }
                     OptionSlider(R.string.floating_page_height, "floating-height", options.heightDp, 64f..160f) { update(options.copy(heightDp = it)) }
                     OptionSlider(R.string.floating_page_transparency, "floating-transparency", options.transparency, 0f..100f, percent = true) { update(options.copy(transparency = it)) }
@@ -90,7 +90,7 @@ private fun OptionSlider(labelId: Int, tag: String, value: Int, range: ClosedFlo
     Column {
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
             Text(label, style = MaterialTheme.typography.bodyMedium)
-            Text(if (percent) "$value%" else "$value dp", color = KimiMuted, style = MaterialTheme.typography.labelMedium)
+            Text(if (percent) "$value%" else "$value dp", color = ModernMutedDark, style = MaterialTheme.typography.labelMedium)
         }
         Slider(value.toFloat(), { onChange(it.roundToInt()) }, valueRange = range,
             modifier = Modifier.fillMaxWidth().testTag(tag).semantics { contentDescription = label })

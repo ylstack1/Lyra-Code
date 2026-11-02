@@ -27,8 +27,8 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
-import com.yukisoffd.lyracode.KimiCardBox
-import com.yukisoffd.lyracode.KimiMuted
+import com.yukisoffd.lyracode.ModernCardBox
+import com.yukisoffd.lyracode.ModernMutedDark
 import com.yukisoffd.lyracode.interaction.DeviceInteractionAvailability
 import com.yukisoffd.lyracode.R
 import com.yukisoffd.lyracode.data.AppSettings
@@ -91,11 +91,11 @@ internal fun ManualControlDebugScreen(settings: AppSettings, onOpenFloatingPageS
         startSession()
     }
 
-    KimiCardBox {
+    ModernCardBox {
         Text(context.getString(R.string.manual_control_title), style = MaterialTheme.typography.titleSmall)
         Text(
             context.getString(R.string.manual_control_instructions),
-            color = KimiMuted,
+            color = ModernMutedDark,
             style = MaterialTheme.typography.bodySmall,
         )
         Text(
@@ -111,7 +111,7 @@ internal fun ManualControlDebugScreen(settings: AppSettings, onOpenFloatingPageS
                 )
                 else -> context.getString(R.string.manual_control_idle)
             },
-            color = if (active) MaterialTheme.colorScheme.primary else KimiMuted,
+            color = if (active) MaterialTheme.colorScheme.primary else ModernMutedDark,
             style = MaterialTheme.typography.bodyMedium,
         )
         Row(
@@ -147,16 +147,16 @@ internal fun ManualControlDebugScreen(settings: AppSettings, onOpenFloatingPageS
         state.lastResult?.let { result ->
             Text(
                 context.getString(R.string.manual_control_last_result, result.status.name),
-                color = KimiMuted,
+                color = ModernMutedDark,
                 style = MaterialTheme.typography.bodySmall,
             )
         }
     }
 
-    KimiCardBox {
+    ModernCardBox {
         Text(
             context.getString(R.string.manual_control_scope_notice),
-            color = KimiMuted,
+            color = ModernMutedDark,
             style = MaterialTheme.typography.bodySmall,
         )
     }

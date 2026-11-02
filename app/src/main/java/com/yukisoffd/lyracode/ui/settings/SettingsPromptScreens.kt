@@ -69,7 +69,7 @@ internal fun PromptSettingsScreen(settings: AppSettings, externalRevision: Int =
                 .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.spacedBy(10.dp),
         ) {
-            KimiCardBox {
+            ModernCardBox {
                 Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                     Text(uiText(R.string.prompt_pure_mode), Modifier.weight(1f), style = MaterialTheme.typography.titleMedium)
                     androidx.compose.material3.Switch(checked = pureMode, onCheckedChange = {
@@ -77,15 +77,15 @@ internal fun PromptSettingsScreen(settings: AppSettings, externalRevision: Int =
                         settings.purePromptMode = it
                     })
                 }
-                Text(uiText(R.string.prompt_pure_mode_hint), color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+                Text(uiText(R.string.prompt_pure_mode_hint), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
                 Text(uiText(R.string.title_system_prompt), style = MaterialTheme.typography.titleMedium)
                 Text(
                     uiText(R.string.ui_the_app_native_prompt_is_used_when_no_custom),
-                    color = KimiMuted,
+                    color = ModernMutedDark,
                     style = MaterialTheme.typography.bodySmall,
                 )
             }
-            KimiCardBox {
+            ModernCardBox {
                 Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                     Text(uiText(R.string.title_prompt_config), modifier = Modifier.weight(1f), style = MaterialTheme.typography.titleMedium)
                     Button(
@@ -97,7 +97,7 @@ internal fun PromptSettingsScreen(settings: AppSettings, externalRevision: Int =
                                 builtIn = false,
                             )
                         },
-                        shape = KimiPillShape,
+                        shape = ModernPillShape,
                         contentPadding = PaddingValues(horizontal = 14.dp, vertical = 8.dp),
                     ) {
                         Icon(Icons.Default.Add, contentDescription = null, modifier = Modifier.size(18.dp))
@@ -123,7 +123,7 @@ internal fun PromptSettingsScreen(settings: AppSettings, externalRevision: Int =
                         Text(uiText(R.string.ui_app_native_prompt), style = MaterialTheme.typography.titleSmall)
                         Text(
                             uiText(R.string.ui_maintained_by_lyra_code_and_adapted_to_the_current),
-                            color = KimiMuted,
+                            color = ModernMutedDark,
                             style = MaterialTheme.typography.bodySmall,
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
@@ -133,7 +133,7 @@ internal fun PromptSettingsScreen(settings: AppSettings, externalRevision: Int =
                         Icon(Icons.Default.Check, contentDescription = uiText(R.string.streaming_selected))
                     }
                 }
-                if (presets.isNotEmpty()) KimiDivider()
+                if (presets.isNotEmpty()) ModernDivider()
                 presets.forEach { preset ->
                     Row(
                         Modifier
@@ -154,7 +154,7 @@ internal fun PromptSettingsScreen(settings: AppSettings, externalRevision: Int =
                             val desc = preset.prompt.lineSequence().firstOrNull { it.isNotBlank() }.orEmpty()
                             Text(
                                 if (preset.exampleConversation.isBlank()) desc else uiText(R.string.prompt_description_with_example, desc),
-                                color = KimiMuted,
+                                color = ModernMutedDark,
                                 style = MaterialTheme.typography.bodySmall,
                                 maxLines = 1,
                                 overflow = TextOverflow.Ellipsis,
@@ -165,7 +165,7 @@ internal fun PromptSettingsScreen(settings: AppSettings, externalRevision: Int =
                             Icon(Icons.Default.Edit, contentDescription = uiText(R.string.ui_edit))
                         }
                     }
-                    if (preset != presets.last()) KimiDivider()
+                    if (preset != presets.last()) ModernDivider()
                 }
             }
             Spacer(Modifier.height(72.dp))
@@ -265,7 +265,7 @@ internal fun PromptEditDialog(
                         ),
                     )
                 },
-                shape = KimiPillShape,
+                shape = ModernPillShape,
             ) { Text(uiText(R.string.file_editor_save)) }
         },
         dismissButton = {

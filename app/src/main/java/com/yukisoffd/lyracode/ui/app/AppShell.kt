@@ -394,7 +394,7 @@ internal fun LyraCodeApp(
 
     val renderAppTopBar: @Composable (Int) -> Unit = { page ->
         if (page != PAGE_FILES && page != PAGE_SETTINGS) TopAppBar(
-            expandedHeight = 56.dp,
+            expandedHeight = 48.dp,
             colors = TopAppBarDefaults.topAppBarColors(
                 containerColor = MaterialTheme.colorScheme.background,
                 titleContentColor = MaterialTheme.colorScheme.onBackground,
@@ -487,7 +487,7 @@ internal fun LyraCodeApp(
         gesturesEnabled = safeSelectedPage != PAGE_FILES,
         drawerContent = {
             ModalDrawerSheet(
-                modifier = Modifier.fillMaxWidth(0.86f),
+                modifier = Modifier.fillMaxWidth(0.78f),
                 drawerContainerColor = MaterialTheme.colorScheme.background,
             ) {
                 Box(
@@ -603,9 +603,8 @@ internal fun LyraCodeApp(
                         if (skipNextPageTransition) {
                             EnterTransition.None togetherWith ExitTransition.None
                         } else {
-                            val forward = targetState > initialState
-                            slideInHorizontally(animationSpec = tween(260)) { fullWidth -> if (forward) fullWidth else -fullWidth } togetherWith
-                                slideOutHorizontally(animationSpec = tween(260)) { fullWidth -> if (forward) -fullWidth else fullWidth }
+                            fadeIn(animationSpec = tween(220)) togetherWith
+                                fadeOut(animationSpec = tween(180))
                         }
                     },
                     label = "page-transition",
@@ -723,10 +722,10 @@ internal fun LyraCodeApp(
                         shrinkTowards = Alignment.Top,
                     ) + fadeOut(animationSpec = tween(140)),
                 ) {
-                    KimiCardBox(
+                    ModernCardBox(
                         modifier = Modifier
-                            .shadow(12.dp, KimiCardShape)
-                            .background(MaterialTheme.colorScheme.surface, KimiCardShape),
+                            .shadow(12.dp, ModernCardShape)
+                            .background(MaterialTheme.colorScheme.surface, ModernCardShape),
                     ) {
                         Row(
                             Modifier.fillMaxWidth(),

@@ -78,30 +78,30 @@ internal fun EmailSettings(settings: AppSettings, externalRevision: Int = 0) {
         )
     }
 
-    KimiCardBox {
+    ModernCardBox {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                 Text(uiText(R.string.menu_email), style = MaterialTheme.typography.titleMedium)
-                Text(uiText(R.string.ui_passwords_are_encrypted_on_this_device_reading_a_message), color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+                Text(uiText(R.string.ui_passwords_are_encrypted_on_this_device_reading_a_message), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
             }
-            Button(onClick = { editing = defaultEmailServer() }, shape = KimiPillShape) { Text(uiText(R.string.action_add)) }
+            Button(onClick = { editing = defaultEmailServer() }, shape = ModernPillShape) { Text(uiText(R.string.action_add)) }
         }
-        if (status.isNotBlank()) Text(status, color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+        if (status.isNotBlank()) Text(status, color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
     }
 
     if (accounts.isEmpty()) {
-        KimiCardBox {
+        ModernCardBox {
             Text(uiText(R.string.ui_no_email_servers_yet), style = MaterialTheme.typography.titleSmall)
-            Text(uiText(R.string.ui_use_an_app_specific_password_from_your_email_provider), color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+            Text(uiText(R.string.ui_use_an_app_specific_password_from_your_email_provider), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
         }
     }
     accounts.forEach { account ->
-        KimiCardBox {
+        ModernCardBox {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
                     Text(account.name, style = MaterialTheme.typography.titleMedium)
-                    Text(account.emailAddress, color = KimiMuted, style = MaterialTheme.typography.bodySmall)
-                    Text("IMAP ${account.imapHost}:${account.imapPort} · SMTP ${account.smtpHost}:${account.smtpPort}", color = KimiMuted, style = MaterialTheme.typography.labelSmall)
+                    Text(account.emailAddress, color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+                    Text("IMAP ${account.imapHost}:${account.imapPort} · SMTP ${account.smtpHost}:${account.smtpPort}", color = ModernMutedDark, style = MaterialTheme.typography.labelSmall)
                     if (account.imapSecurity == AppSettings.EMAIL_SECURITY_NONE || account.smtpSecurity == AppSettings.EMAIL_SECURITY_NONE) {
                         Text(uiText(R.string.ui_security_warning_this_connection_is_unencrypted_so_account_cr), color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.labelSmall)
                     }
@@ -123,7 +123,7 @@ internal fun EmailSettings(settings: AppSettings, externalRevision: Int = 0) {
                         }
                     }
                 },
-                shape = KimiPillShape,
+                shape = ModernPillShape,
             ) { Text(uiText(R.string.ui_test_imap)) }
         }
     }
@@ -166,7 +166,7 @@ private fun EmailServerDialog(
                     OutlinedTextField(smtpPort, { smtpPort = it.filter(Char::isDigit) }, Modifier.weight(1f), label = { Text(uiText(R.string.label_port)) }, singleLine = true)
                     SecurityField(smtpSecurity, { smtpSecurity = it }, Modifier.weight(1f))
                 }
-                Text(uiText(R.string.ui_enter_ssl_starttls_or_none_ssl_is_recommended_use), color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+                Text(uiText(R.string.ui_enter_ssl_starttls_or_none_ssl_is_recommended_use), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
                 if (error.isNotBlank()) Text(error, color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodySmall)
             }
         },

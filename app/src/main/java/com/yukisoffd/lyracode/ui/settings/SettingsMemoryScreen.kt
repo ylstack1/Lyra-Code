@@ -59,16 +59,16 @@ internal fun MemorySettingsScreen(settings: AppSettings) {
                 .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-        KimiCardBox {
+        ModernCardBox {
             Text(context.getString(R.string.memory_page_title), style = MaterialTheme.typography.titleMedium)
             Text(
                 context.getString(R.string.memory_page_description),
-                color = KimiMuted,
+                color = ModernMutedDark,
                 style = MaterialTheme.typography.bodySmall,
             )
             Text(
                 context.getString(R.string.memory_page_privacy),
-                color = KimiMuted,
+                color = ModernMutedDark,
                 style = MaterialTheme.typography.bodySmall,
             )
             OutlinedButton(
@@ -80,7 +80,7 @@ internal fun MemorySettingsScreen(settings: AppSettings) {
                     )
                 },
                 modifier = Modifier.fillMaxWidth(),
-                shape = KimiPillShape,
+                shape = ModernPillShape,
             ) {
                 Icon(Icons.Default.Add, contentDescription = null, modifier = Modifier.size(18.dp))
                 Spacer(Modifier.width(8.dp))
@@ -89,17 +89,17 @@ internal fun MemorySettingsScreen(settings: AppSettings) {
         }
 
         if (memories.isEmpty()) {
-            KimiCardBox {
+            ModernCardBox {
                 Text(context.getString(R.string.memory_empty_title), style = MaterialTheme.typography.titleSmall)
                 Text(
                     context.getString(R.string.memory_empty_description),
-                    color = KimiMuted,
+                    color = ModernMutedDark,
                     style = MaterialTheme.typography.bodySmall,
                 )
             }
         } else {
             memories.forEach { memory ->
-                KimiCardBox {
+                ModernCardBox {
                     Row(
                         Modifier
                             .fillMaxWidth()
@@ -132,7 +132,7 @@ internal fun MemorySettingsScreen(settings: AppSettings) {
                                     memoryCategoryLabel(memory.category),
                                     formatTime(memory.updatedAt),
                                 ),
-                                color = KimiMuted,
+                                color = ModernMutedDark,
                                 style = MaterialTheme.typography.bodySmall,
                             )
                         }
@@ -251,7 +251,7 @@ private fun MemoryEditDialog(
                         Text(context.getString(R.string.memory_enabled_label), style = MaterialTheme.typography.titleSmall)
                         Text(
                             context.getString(R.string.memory_enabled_description),
-                            color = KimiMuted,
+                            color = ModernMutedDark,
                             style = MaterialTheme.typography.bodySmall,
                         )
                     }
@@ -263,7 +263,7 @@ private fun MemoryEditDialog(
             Button(
                 enabled = content.isNotBlank(),
                 onClick = { onSave(content, category, enabled) },
-                shape = KimiPillShape,
+                shape = ModernPillShape,
             ) {
                 Text(context.getString(R.string.action_save))
             }

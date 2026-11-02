@@ -185,7 +185,7 @@ internal fun UsageStatsScreen(
         )
 
         when {
-            loading -> KimiCardBox {
+            loading -> ModernCardBox {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.spacedBy(12.dp),
@@ -194,7 +194,7 @@ internal fun UsageStatsScreen(
                     Text(context.getString(R.string.stats_loading), color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
             }
-            error.isNotBlank() -> KimiCardBox {
+            error.isNotBlank() -> ModernCardBox {
                 Text(error, color = MaterialTheme.colorScheme.error)
             }
             summary != null -> UsageStatsContent(summary!!, compactNumbers)
@@ -216,7 +216,7 @@ private fun StatsRangeCard(
     onRefresh: () -> Unit,
 ) {
     val context = LocalContext.current
-    KimiCardBox {
+    ModernCardBox {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Box(
                 modifier = Modifier
@@ -310,7 +310,7 @@ private fun UsageStatsContent(summary: UsageStatsSummary, compactNumbers: Boolea
     val context = LocalContext.current
     val totalTokens = summary.userInputTokens + summary.aiOutputTokens
 
-    KimiCardBox {
+    ModernCardBox {
         Text(
             context.getString(R.string.stats_total_tokens),
             color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -329,19 +329,19 @@ private fun UsageStatsContent(summary: UsageStatsSummary, compactNumbers: Boolea
     }
 
     KimiSectionLabel(context.getString(R.string.stats_quick_overview))
-    KimiCardBox {
+    ModernCardBox {
         StatsValueRow(
             Icons.Default.Forum,
             context.getString(R.string.stats_conversation_count),
             formatStatsNumber(summary.conversationCount.toLong(), compactNumbers),
         )
-        KimiDivider()
+        ModernDivider()
         StatsValueRow(
             Icons.Default.SmartToy,
             context.getString(R.string.stats_total_requests),
             formatStatsNumber(summary.modelRequestCount.toLong(), compactNumbers),
         )
-        KimiDivider()
+        ModernDivider()
         StatsValueRow(
             Icons.Default.DataUsage,
             context.getString(R.string.stats_total_tokens),
@@ -368,7 +368,7 @@ private fun UsageStatsContent(summary: UsageStatsSummary, compactNumbers: Boolea
             total = totalTokens,
             compactNumbers = compactNumbers,
         )
-        KimiDivider()
+        ModernDivider()
         StatsValueRow(
             Icons.Default.DataUsage,
             context.getString(R.string.stats_total_tokens),
@@ -386,19 +386,19 @@ private fun UsageStatsContent(summary: UsageStatsSummary, compactNumbers: Boolea
             context.getString(R.string.stats_model_requests),
             formatStatsNumber(summary.modelRequestCount.toLong(), compactNumbers),
         )
-        KimiDivider()
+        ModernDivider()
         StatsValueRow(
             Icons.Default.Forum,
             context.getString(R.string.stats_user_messages),
             formatStatsNumber(summary.userMessageCount.toLong(), compactNumbers),
         )
-        KimiDivider()
+        ModernDivider()
         StatsValueRow(
             Icons.Default.SmartToy,
             context.getString(R.string.stats_ai_messages),
             formatStatsNumber(summary.assistantMessageCount.toLong(), compactNumbers),
         )
-        KimiDivider()
+        ModernDivider()
         StatsValueRow(
             Icons.Default.Build,
             context.getString(R.string.stats_tool_results),
@@ -418,7 +418,7 @@ private fun StatsExpandableCard(
     content: @Composable ColumnScope.() -> Unit,
 ) {
     var expanded by rememberSaveable(title) { mutableStateOf(initiallyExpanded) }
-    KimiCardBox(
+    ModernCardBox(
         modifier = Modifier.animateContentSize(),
     ) {
         Row(
@@ -536,7 +536,7 @@ private fun TopModelsCard(models: List<ModelUsageStat>, compactNumbers: Boolean)
                     totalRequests = totalRequests,
                     compactNumbers = compactNumbers,
                 )
-                if (index != visibleModels.lastIndex) KimiDivider()
+                if (index != visibleModels.lastIndex) ModernDivider()
             }
             if (models.size > 3) {
                 TextButton(

@@ -110,7 +110,7 @@ internal fun GitHubAccelerationSettingsScreen(
     ) {
         item { KimiSectionLabel(uiText(R.string.github_acceleration_automatic_section)) }
         item {
-            KimiCardBox {
+            ModernCardBox {
                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                     GitHubSettingsIcon(Icons.Default.Sync)
                     Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
@@ -127,7 +127,7 @@ internal fun GitHubAccelerationSettingsScreen(
         }
         item { KimiSectionLabel(uiText(R.string.github_acceleration_test_section)) }
         item {
-            KimiCardBox {
+            ModernCardBox {
                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                     GitHubSettingsIcon(Icons.Default.Link)
                     Text(uiText(R.string.github_acceleration_test_url), Modifier.weight(1f), style = MaterialTheme.typography.titleSmall)
@@ -200,7 +200,7 @@ internal fun GitHubAccelerationSettingsScreen(
             )
         }
         if (config.links.isEmpty()) {
-            item { KimiCardBox { Text(uiText(R.string.github_acceleration_empty), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall) } }
+            item { ModernCardBox { Text(uiText(R.string.github_acceleration_empty), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall) } }
         }
     }
 
@@ -274,7 +274,7 @@ private fun GitHubRouteCard(
     onTest: () -> Unit,
     moreActions: (@Composable () -> Unit)? = null,
 ) {
-    KimiCardBox {
+    ModernCardBox {
         BoxWithConstraints {
             val inlineActions = maxWidth >= 280.dp && LocalDensity.current.fontScale <= 1.1f
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {

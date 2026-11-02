@@ -27,7 +27,7 @@ internal fun WebAccessSettings(settings: AppSettings, manager: WebAccessManager)
     var port by remember { mutableStateOf(settings.webAccessPort.toString()) }
     var token by remember { mutableStateOf(settings.webAccessToken) }
     var lan by remember { mutableStateOf(settings.webAccessHost == "0.0.0.0") }
-    KimiCardBox {
+    ModernCardBox {
         Text(context.getString(R.string.web_access_title), style = MaterialTheme.typography.titleLarge)
         Text(context.getString(R.string.web_access_desc), style = MaterialTheme.typography.bodyMedium)
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
@@ -53,7 +53,7 @@ internal fun WebAccessSettings(settings: AppSettings, manager: WebAccessManager)
             context.startActivity(Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION,Uri.parse("package:${context.packageName}")))
         }) { Text(context.getString(R.string.web_access_storage_permission)) }
     }
-    KimiCardBox {
+    ModernCardBox {
         Text(context.getString(R.string.web_access_addresses), style = MaterialTheme.typography.titleMedium)
         state.addresses.forEach { address ->
             SelectionContainer { Text(address) }

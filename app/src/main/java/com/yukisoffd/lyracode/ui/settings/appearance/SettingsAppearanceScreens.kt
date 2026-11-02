@@ -101,7 +101,7 @@ internal fun ThemeSettings(
     onOpenAppIconSettings: () -> Unit,
 ) {
     val hasBackground = !settings.chatBackgroundPath.isNullOrBlank()
-    KimiCardBox {
+    ModernCardBox {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(
                 Icons.Default.AutoAwesome,
@@ -112,7 +112,7 @@ internal fun ThemeSettings(
             Text(uiText(R.string.label_dynamic_color), modifier = Modifier.weight(1f), style = MaterialTheme.typography.titleMedium)
             Switch(checked = dynamicColorEnabled, onCheckedChange = onDynamicColorChange)
         }
-        KimiDivider()
+        ModernDivider()
         Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(
                 Icons.Default.Gesture,
@@ -127,22 +127,22 @@ internal fun ThemeSettings(
             )
             Switch(checked = predictiveBackEnabled, onCheckedChange = onPredictiveBackChange)
         }
-        KimiDivider()
+        ModernDivider()
         KimiMenuRow(Icons.Default.Palette, uiText(R.string.title_theme_mode), if (settings.customThemeColorEnabled) uiText(R.string.custom_theme_color_value, settings.customThemeColor) else themeName(themeMode), onClick = onOpenThemeModeSettings)
-        KimiDivider()
+        ModernDivider()
         KimiMenuRow(Icons.Default.Apps, stringResource(R.string.app_icon_title), stringResource(AppIcon.fromId(settings.appIconId).title), onClick = onOpenAppIconSettings)
-        KimiDivider()
+        ModernDivider()
         KimiMenuRow(Icons.Default.FormatSize, uiText(R.string.ui_fonts_and_size), fontScaleName(fontScaleMode, customFontScale), onClick = onOpenFontSettings)
-        KimiDivider()
+        ModernDivider()
         KimiMenuRow(Icons.Default.Speed, uiText(R.string.title_refresh_rate), refreshRateName(refreshRateMode), onClick = onOpenRefreshRateSettings)
-        KimiDivider()
+        ModernDivider()
         KimiMenuRow(
             Icons.Default.Animation,
             stringResource(R.string.streaming_output_title),
             streamingAnimationModeName(settings.streamingAnimationMode),
             onClick = onOpenStreamingOutputSettings,
         )
-        KimiDivider()
+        ModernDivider()
         KimiMenuRow(
             Icons.Default.Image,
             uiText(R.string.menu_chat_background),
@@ -160,7 +160,7 @@ internal fun streamingAnimationModeName(mode: String): String = when (AppSetting
 @Composable
 internal fun StreamingOutputSettings(settings: AppSettings, controller: ChatController) {
     var selected by remember { mutableStateOf(settings.streamingAnimationMode) }
-    KimiCardBox {
+    ModernCardBox {
         StreamingAnimationOptionRow(
             icon = Icons.Default.Keyboard,
             title = stringResource(R.string.streaming_typewriter_title),
@@ -172,7 +172,7 @@ internal fun StreamingOutputSettings(settings: AppSettings, controller: ChatCont
             settings.streamingAnimationMode = value
             controller.settingsRevision.intValue++
         }
-        KimiDivider()
+        ModernDivider()
         StreamingAnimationOptionRow(
             icon = Icons.Default.Gradient,
             title = stringResource(R.string.streaming_fade_title),
@@ -204,7 +204,7 @@ private fun StreamingAnimationOptionRow(
         Icon(icon, contentDescription = null, modifier = Modifier.width(36.dp).size(24.dp), tint = MaterialTheme.colorScheme.primary)
         Column(Modifier.weight(1f)) {
             Text(title, style = MaterialTheme.typography.titleMedium)
-            Text(subtitle, color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+            Text(subtitle, color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
         }
         if (value == selected) Icon(Icons.Default.Check, contentDescription = stringResource(R.string.streaming_selected), tint = MaterialTheme.colorScheme.primary)
     }
@@ -259,7 +259,7 @@ internal fun ChatBackgroundSettings(settings: AppSettings) {
         mutableStateOf(settings.chatBackgroundMaskOpacity.coerceIn(0f, 1f))
     }
 
-    KimiCardBox {
+    ModernCardBox {
         KimiMenuRow(
             Icons.Default.Image,
             uiText(R.string.ui_upload_background),
@@ -268,14 +268,14 @@ internal fun ChatBackgroundSettings(settings: AppSettings) {
             backgroundLauncher.launch("image/*")
         }
         if (hasBackground) {
-            KimiDivider()
+            ModernDivider()
             Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                 if (backgroundPreview != null) {
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(180.dp)
-                            .clip(RoundedCornerShape(28.dp))
+                            .clip(RoundedCornerShape(12.dp))
                             .background(MaterialTheme.colorScheme.surfaceVariant),
                     ) {
                         Image(
@@ -313,7 +313,7 @@ internal fun ChatBackgroundSettings(settings: AppSettings) {
                         )
                         Text(
                             uiText(R.string.mask_opacity_hint),
-                            color = KimiMuted,
+                            color = ModernMutedDark,
                             style = MaterialTheme.typography.bodySmall,
                         )
                     }
@@ -327,7 +327,7 @@ internal fun ChatBackgroundSettings(settings: AppSettings) {
                     valueRange = 0f..1f,
                 )
             }
-            KimiDivider()
+            ModernDivider()
             KimiMenuRow(Icons.Default.DeleteOutline, uiText(R.string.action_remove_background), uiText(R.string.remove_background_hint)) {
                 settings.clearChatBackground()
                 notice = uiText(R.string.notice_restored_solid)
@@ -349,11 +349,11 @@ internal fun ThemeModeSettings(
     onThemeModeChange: (String) -> Unit,
 ) {
     var customEnabled by remember { mutableStateOf(settings.customThemeColorEnabled) }
-    KimiCardBox {
+    ModernCardBox {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Column(Modifier.weight(1f)) {
                 Text(uiText(R.string.ui_custom_theme_color), style = MaterialTheme.typography.titleMedium)
-                Text(uiText(R.string.ui_when_enabled_the_selected_color_coordinates_the_interface_background), color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+                Text(uiText(R.string.ui_when_enabled_the_selected_color_coordinates_the_interface_background), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
             }
             Switch(
                 checked = customEnabled,
@@ -369,7 +369,7 @@ internal fun ThemeModeSettings(
             color = MaterialTheme.colorScheme.error,
             style = MaterialTheme.typography.bodySmall,
         )
-        KimiDivider()
+        ModernDivider()
         KimiMenuRow(
             Icons.Default.ColorLens,
             uiText(R.string.ui_set_custom_theme_color),
@@ -377,18 +377,18 @@ internal fun ThemeModeSettings(
             onClick = onOpenCustomThemeColor,
         )
     }
-    KimiCardBox {
+    ModernCardBox {
         Text(uiText(R.string.title_theme_mode), style = MaterialTheme.typography.titleMedium)
         Text(
             if (customEnabled) uiText(R.string.ui_turn_off_custom_theme_color_to_select_a_theme) else uiText(R.string.theme_mode_desc),
-            color = KimiMuted,
+            color = ModernMutedDark,
             style = MaterialTheme.typography.bodySmall,
         )
-        KimiDivider()
+        ModernDivider()
         ThemeOptionRow(uiText(R.string.theme_name_system), AppSettings.THEME_SYSTEM, themeMode, onThemeModeChange, !customEnabled)
-        KimiDivider()
+        ModernDivider()
         ThemeOptionRow(uiText(R.string.theme_name_light), AppSettings.THEME_LIGHT, themeMode, onThemeModeChange, !customEnabled)
-        KimiDivider()
+        ModernDivider()
         ThemeOptionRow(uiText(R.string.theme_name_dark), AppSettings.THEME_DARK, themeMode, onThemeModeChange, !customEnabled)
     }
 }
@@ -401,11 +401,11 @@ internal fun CustomThemeColorSettings(settings: AppSettings, controller: ChatCon
     val inputValid = colorText.matches(Regex("#[0-9A-F]{6}"))
     val normalized = if (inputValid) colorText else AppSettings.normalizeHexColor(settings.customThemeColor)
 
-    KimiCardBox {
+    ModernCardBox {
         Text(uiText(R.string.ui_choose_theme_color), style = MaterialTheme.typography.titleMedium)
         Text(
             uiText(R.string.ui_the_color_ring_and_input_only_update_the_preview),
-            color = KimiMuted,
+            color = ModernMutedDark,
             style = MaterialTheme.typography.bodySmall,
         )
         ThemeColorRing(normalized) { selected ->
@@ -504,20 +504,20 @@ internal fun LanguageSettings(
     languageMode: String,
     onLanguageModeChange: (String) -> Unit,
 ) {
-    KimiCardBox {
+    ModernCardBox {
         Text(uiText(R.string.detail_language), style = MaterialTheme.typography.titleMedium)
         Text(
             uiText(R.string.ui_follows_the_system_language_by_default_if_no_matching),
-            color = KimiMuted,
+            color = ModernMutedDark,
             style = MaterialTheme.typography.bodySmall,
         )
-        KimiDivider()
+        ModernDivider()
         LanguageOptionRow(uiText(R.string.theme_name_system), uiText(R.string.ui_use_device_language_first), AppSettings.LANGUAGE_SYSTEM, languageMode, onLanguageModeChange)
-        KimiDivider()
+        ModernDivider()
         LanguageOptionRow(uiText(R.string.language_autonym_simplified_chinese), uiText(R.string.ui_simplified_chinese), AppSettings.LANGUAGE_ZH_CN, languageMode, onLanguageModeChange)
-        KimiDivider()
+        ModernDivider()
         LanguageOptionRow(uiText(R.string.language_autonym_traditional_chinese), uiText(R.string.ui_traditional_chinese), AppSettings.LANGUAGE_ZH_TW, languageMode, onLanguageModeChange)
-        KimiDivider()
+        ModernDivider()
         LanguageOptionRow(uiText(R.string.language_autonym_english), uiText(R.string.ui_english), AppSettings.LANGUAGE_EN, languageMode, onLanguageModeChange)
     }
 }
@@ -527,22 +527,22 @@ internal fun RefreshRateSettings(
     refreshRateMode: String,
     onRefreshRateModeChange: (String) -> Unit,
 ) {
-    KimiCardBox {
+    ModernCardBox {
         Text(uiText(R.string.title_refresh_rate), style = MaterialTheme.typography.titleMedium)
         Text(
             uiText(R.string.refresh_rate_desc),
-            color = KimiMuted,
+            color = ModernMutedDark,
             style = MaterialTheme.typography.bodySmall,
         )
-        KimiDivider()
+        ModernDivider()
         RefreshRateOptionRow(uiText(R.string.refresh_rate_follow_system), AppSettings.REFRESH_RATE_SYSTEM, refreshRateMode, onRefreshRateModeChange)
-        KimiDivider()
+        ModernDivider()
         RefreshRateOptionRow("30 Hz", AppSettings.REFRESH_RATE_30, refreshRateMode, onRefreshRateModeChange)
-        KimiDivider()
+        ModernDivider()
         RefreshRateOptionRow("60 Hz", AppSettings.REFRESH_RATE_60, refreshRateMode, onRefreshRateModeChange)
-        KimiDivider()
+        ModernDivider()
         RefreshRateOptionRow("90 Hz", AppSettings.REFRESH_RATE_90, refreshRateMode, onRefreshRateModeChange)
-        KimiDivider()
+        ModernDivider()
         RefreshRateOptionRow("120 Hz", AppSettings.REFRESH_RATE_120, refreshRateMode, onRefreshRateModeChange)
     }
 }
@@ -563,7 +563,7 @@ internal fun ThemeOptionRow(title: String, value: String, selected: String, onSe
             modifier = Modifier.width(36.dp).size(24.dp),
             tint = MaterialTheme.colorScheme.primary,
         )
-        Text(title, modifier = Modifier.weight(1f), color = if (enabled) MaterialTheme.colorScheme.onSurface else KimiMuted, style = MaterialTheme.typography.titleMedium)
+        Text(title, modifier = Modifier.weight(1f), color = if (enabled) MaterialTheme.colorScheme.onSurface else ModernMutedDark, style = MaterialTheme.typography.titleMedium)
         if (value == selected && enabled) {
             Icon(Icons.Default.Check, contentDescription = uiText(R.string.streaming_selected), tint = MaterialTheme.colorScheme.primary)
         }
@@ -594,7 +594,7 @@ internal fun LanguageOptionRow(
         )
         Column(Modifier.weight(1f)) {
             Text(title, style = MaterialTheme.typography.titleMedium)
-            Text(subtitle, color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+            Text(subtitle, color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
         }
         if (value == selected) {
             Icon(Icons.Default.Check, contentDescription = uiText(R.string.streaming_selected), tint = MaterialTheme.colorScheme.primary)
@@ -671,7 +671,7 @@ internal fun FontSizeSettings(
                     CompositionLocalProvider(LocalDensity provides Density(currentDensity.density, previewScale)) {
                         Column(Modifier.padding(horizontal = 18.dp, vertical = 12.dp)) {
                             Text(uiText(R.string.title_preview_font), style = MaterialTheme.typography.titleMedium)
-                            Text(fontScaleLabel(previewScale), color = KimiMuted, style = MaterialTheme.typography.labelMedium)
+                            Text(fontScaleLabel(previewScale), color = ModernMutedDark, style = MaterialTheme.typography.labelMedium)
                         }
                     }
                 }
@@ -684,7 +684,7 @@ internal fun FontSizeSettings(
                 )
             }
         }
-        KimiCardBox {
+        ModernCardBox {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(uiText(R.string.theme_name_system), modifier = Modifier.weight(1f), style = MaterialTheme.typography.titleMedium)
                 Switch(
@@ -702,7 +702,7 @@ internal fun FontSizeSettings(
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(14.dp)) {
                 Text("A", style = MaterialTheme.typography.titleMedium)
                 Column(Modifier.weight(1f), horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text(fontScaleLabel(draftScale), color = KimiMuted, style = MaterialTheme.typography.labelMedium)
+                    Text(fontScaleLabel(draftScale), color = ModernMutedDark, style = MaterialTheme.typography.labelMedium)
                     Slider(
                         value = draftScale,
                         onValueChange = { draftScale = it.coerceIn(AppSettings.MIN_FONT_SCALE, AppSettings.MAX_FONT_SCALE) },
@@ -721,7 +721,7 @@ internal fun FontSizeSettings(
                 Text("A", style = MaterialTheme.typography.headlineSmall)
             }
         }
-        KimiCardBox {
+        ModernCardBox {
             Row(
                 Modifier.fillMaxWidth().clip(RoundedCornerShape(14.dp)).clickable(onClick = onOpenFontLibrary).padding(vertical = 4.dp),
                 verticalAlignment = Alignment.CenterVertically,
@@ -730,11 +730,11 @@ internal fun FontSizeSettings(
                 Spacer(Modifier.width(12.dp))
                 Column(Modifier.weight(1f)) {
                     Text(uiText(R.string.ui_font_library), style = MaterialTheme.typography.titleMedium)
-                    Text(uiText(R.string.ui_import_preview_and_switch_fonts_in_the_font_library), color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+                    Text(uiText(R.string.ui_import_preview_and_switch_fonts_in_the_font_library), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
                 }
-                Icon(Icons.Default.ChevronRight, contentDescription = uiText(R.string.ui_open_font_library), tint = KimiMuted)
+                Icon(Icons.Default.ChevronRight, contentDescription = uiText(R.string.ui_open_font_library), tint = ModernMutedDark)
             }
-            KimiDivider()
+            ModernDivider()
             FontSelectionSummary(
                 title = uiText(R.string.ui_text_font),
                 currentName = currentTextFontName,
@@ -785,17 +785,17 @@ internal fun FontLibrarySettings(
         verticalArrangement = Arrangement.spacedBy(10.dp),
     ) {
         item {
-            KimiCardBox {
+            ModernCardBox {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Column(Modifier.weight(1f)) {
                         Text(uiText(R.string.ui_font_library), style = MaterialTheme.typography.titleMedium)
                         Text(
                             uiText(R.string.ui_import_multiple_ttf_otf_and_ttc_fonts_preview_each),
-                            color = KimiMuted,
+                            color = ModernMutedDark,
                             style = MaterialTheme.typography.bodySmall,
                         )
                     }
-                    OutlinedButton(onClick = { fontLibraryLauncher.launch(fontMimeTypes) }, shape = KimiPillShape) {
+                    OutlinedButton(onClick = { fontLibraryLauncher.launch(fontMimeTypes) }, shape = ModernPillShape) {
                         Icon(Icons.Default.Add, contentDescription = null, modifier = Modifier.size(18.dp))
                         Spacer(Modifier.width(6.dp))
                         Text(uiText(R.string.ui_import_fonts), maxLines = 1)
@@ -808,8 +808,8 @@ internal fun FontLibrarySettings(
         }
         if (fontLibrary.isEmpty()) {
             item {
-                KimiCardBox {
-                    Text(uiText(R.string.ui_the_font_library_is_empty_tap_import_fonts_to), color = KimiMuted, style = MaterialTheme.typography.bodyMedium)
+                ModernCardBox {
+                    Text(uiText(R.string.ui_the_font_library_is_empty_tap_import_fonts_to), color = ModernMutedDark, style = MaterialTheme.typography.bodyMedium)
                 }
             }
         } else {
@@ -850,7 +850,7 @@ internal fun FontLibrarySettings(
             title = { Text(uiText(R.string.ui_font_preview)) },
             text = {
                 Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                    Text(item.name, color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+                    Text(item.name, color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
                     Text(
                         uiText(R.string.ui_the_quick_brown_fox_jumps_over_the_lazy_dog),
                         fontFamily = previewFamily,
@@ -881,7 +881,7 @@ private fun FontSelectionSummary(
             Text(title, style = MaterialTheme.typography.titleSmall)
             Text(
                 currentName ?: uiText(R.string.ui_system_default),
-                color = KimiMuted,
+                color = ModernMutedDark,
                 style = MaterialTheme.typography.bodySmall,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
@@ -913,7 +913,7 @@ private fun FontLibraryRow(
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Column(Modifier.weight(1f)) {
                     Text(item.name, fontFamily = itemFamily, style = MaterialTheme.typography.titleMedium, maxLines = 1, overflow = TextOverflow.Ellipsis)
-                    Text(item.extension, color = KimiMuted, style = MaterialTheme.typography.labelSmall)
+                    Text(item.extension, color = ModernMutedDark, style = MaterialTheme.typography.labelSmall)
                 }
                 IconButton(onClick = onPreview) { Icon(Icons.Default.Visibility, contentDescription = uiText(R.string.ui_preview)) }
                 IconButton(onClick = onDelete) { Icon(Icons.Default.DeleteOutline, contentDescription = uiText(R.string.ui_remove_from_font_library)) }

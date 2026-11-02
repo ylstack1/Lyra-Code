@@ -73,7 +73,7 @@ internal fun SponsorDevelopmentScreen() {
 
     Box(Modifier.fillMaxWidth()) {
         Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            KimiCardBox {
+            ModernCardBox {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.spacedBy(12.dp),
@@ -88,12 +88,12 @@ internal fun SponsorDevelopmentScreen() {
                         Text(
                             stringResource(R.string.sponsor_thanks),
                             style = MaterialTheme.typography.bodySmall,
-                            color = KimiMuted,
+                            color = ModernMutedDark,
                         )
                     }
                 }
             }
-            KimiCardBox {
+            ModernCardBox {
                 Column(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalAlignment = Alignment.CenterHorizontally,
@@ -108,7 +108,7 @@ internal fun SponsorDevelopmentScreen() {
                     Text(
                         stringResource(R.string.sponsor_scan_hint),
                         style = MaterialTheme.typography.bodySmall,
-                        color = KimiMuted,
+                        color = ModernMutedDark,
                     )
                     Button(
                         onClick = { saveImage.launch("Lyra-Code-WeChat-Sponsor.jpg") },

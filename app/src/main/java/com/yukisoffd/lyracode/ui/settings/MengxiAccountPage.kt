@@ -114,7 +114,7 @@ internal fun MengxiAccountPage(settings: AppSettings, initialNotice: String, onS
         }
     }
     if (!loggedIn || user == null) {
-        KimiCardBox {
+        ModernCardBox {
             Icon(Icons.Default.Cloud, null, Modifier.size(40.dp), tint = MaterialTheme.colorScheme.primary)
             Text(uiText(R.string.mengxi_not_signed_in), style = MaterialTheme.typography.titleMedium)
             Button(enabled = !busy, onClick = { showLogin = true }) { Text(uiText(R.string.new_api_sign_in_register)) }
@@ -123,7 +123,7 @@ internal fun MengxiAccountPage(settings: AppSettings, initialNotice: String, onS
         val username = user.optString("username")
         val displayName = user.optString("display_name").ifBlank { username }
         Column(
-            Modifier.fillMaxWidth().clip(RoundedCornerShape(26.dp))
+            Modifier.fillMaxWidth().clip(RoundedCornerShape(12.dp))
                 .background(Brush.linearGradient(listOf(MaterialTheme.colorScheme.primaryContainer, MaterialTheme.colorScheme.tertiaryContainer)))
                 .padding(22.dp),
             verticalArrangement = Arrangement.spacedBy(18.dp),
@@ -172,7 +172,7 @@ internal fun MengxiAccountPage(settings: AppSettings, initialNotice: String, onS
             AccountMetric(uiText(R.string.new_api_request_count), NumberFormat.getIntegerInstance().format(user.optLong("request_count")), Modifier.weight(1f))
         }
         KimiSectionLabel(uiText(R.string.section_model_service))
-        KimiCardBox {
+        ModernCardBox {
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(20.dp)) {
                 Row(Modifier.weight(1f), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     Icon(Icons.Default.Key, null, tint = MaterialTheme.colorScheme.primary)
@@ -232,7 +232,7 @@ private fun AccountPill(value: String) {
 
 @Composable
 private fun AccountMetric(label: String, value: String, modifier: Modifier) {
-    KimiCardBox(modifier) {
+    ModernCardBox(modifier) {
         Text(label, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
         Text(value, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.SemiBold)
     }

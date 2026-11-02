@@ -300,7 +300,7 @@ internal fun ProcessDurationHeader(
     Row(verticalAlignment = Alignment.CenterVertically) {
         Text(
             text = if (active) uiText(R.string.label_task_processing) else uiText(R.string.label_task_duration),
-            color = KimiMuted,
+            color = ModernMutedDark,
             style = MaterialTheme.typography.labelSmall,
         )
         ProcessDurationText(
@@ -329,7 +329,7 @@ internal fun ProcessDurationText(
     val endAt = if (active) now else (finishedAt ?: now)
     Text(
         text = formatProcessDuration((endAt - startedAt).coerceAtLeast(0L)),
-        color = KimiMuted,
+        color = ModernMutedDark,
         style = MaterialTheme.typography.labelSmall,
     )
 }
@@ -440,7 +440,7 @@ internal fun UserQuestionDialog(
                 if (pending.request.options.isNotEmpty()) {
                     Text(
                         stringResource(R.string.ask_user_multi_select_hint),
-                        color = KimiMuted,
+                        color = ModernMutedDark,
                         style = MaterialTheme.typography.bodySmall,
                     )
                     pending.request.options.forEach { option ->
@@ -498,7 +498,7 @@ internal fun UserQuestionDialog(
                 )
                 Text(
                     stringResource(R.string.ask_user_idle_timeout_hint),
-                    color = KimiMuted,
+                    color = ModernMutedDark,
                     style = MaterialTheme.typography.labelSmall,
                 )
             }
@@ -795,7 +795,7 @@ internal fun ConversationChangesPanel(
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
                                     Text(fileNameForDisplay(change.path), maxLines = 1, overflow = TextOverflow.Ellipsis, style = MaterialTheme.typography.titleSmall)
-                                    Text(change.path, color = KimiMuted, maxLines = 1, overflow = TextOverflow.Ellipsis, style = MaterialTheme.typography.labelSmall)
+                                    Text(change.path, color = ModernMutedDark, maxLines = 1, overflow = TextOverflow.Ellipsis, style = MaterialTheme.typography.labelSmall)
                                 }
                                 Text("+${change.added}", color = Color(0xFF188038), style = MaterialTheme.typography.labelMedium)
                                 Spacer(Modifier.width(8.dp))
@@ -987,7 +987,7 @@ internal fun MessageCard(
                             ),
                         ) {
                             if (!isUser && !isMedia && message.role != "assistant" && !compactToolResult) {
-                                Text(uiText(R.string.stats_tool_results), color = KimiMuted, style = MaterialTheme.typography.labelMedium)
+                                Text(uiText(R.string.stats_tool_results), color = ModernMutedDark, style = MaterialTheme.typography.labelMedium)
                             }
                             if (message.thinking.isNotBlank()) {
                                 CollapsedStatusLine(
@@ -1043,14 +1043,14 @@ internal fun MessageCard(
                                                 ?.let { speed ->
                                                     Text(
                                                         speed,
-                                                        color = KimiMuted,
+                                                        color = ModernMutedDark,
                                                         style = MaterialTheme.typography.labelSmall,
                                                     )
                                                 }
                                             message.deepSeekCacheHitRate?.let { rate ->
                                                 Text(
                                                     uiText(R.string.deepseek_cache_hit_rate, rate.coerceIn(0.0, 100.0)),
-                                                    color = KimiMuted,
+                                                    color = ModernMutedDark,
                                                     style = MaterialTheme.typography.labelSmall,
                                                 )
                                             }
@@ -1087,7 +1087,7 @@ internal fun MessageCard(
                                         }
                                     }
                                 } else if (message.role == "assistant" && !inProcessRecord) {
-                                    Text(uiText(R.string.ui_composing_response), color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+                                    Text(uiText(R.string.ui_composing_response), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
                                 }
                             }
                         }
@@ -1307,13 +1307,13 @@ internal fun CollapsedStatusLine(
     Row(
         Modifier
             .fillMaxWidth()
-            .clip(KimiPillShape)
+            .clip(ModernPillShape)
             .clickable(onClick = onClick)
             .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.45f))
             .padding(horizontal = 12.dp, vertical = 7.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Text(text, modifier = Modifier.weight(1f), color = KimiMuted, style = MaterialTheme.typography.labelMedium)
+        Text(text, modifier = Modifier.weight(1f), color = ModernMutedDark, style = MaterialTheme.typography.labelMedium)
         Icon(
             if (expanded) Icons.Default.ExpandLess else Icons.Default.ExpandMore,
             contentDescription = if (expanded) uiText(R.string.cd_expand) else uiText(R.string.cd_expand_alt),

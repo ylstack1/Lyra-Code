@@ -239,43 +239,39 @@ internal fun LyraCodeTheme(
             runCatching { Color(android.graphics.Color.parseColor(settings.customThemeColor)) }.getOrNull()
         } else null
     }
-    val lightSurface = customBackground?.let { lerp(it, Color.White, 0.72f) } ?: Color(0xFFFFFFFF)
-    val lightSurfaceVariant = customBackground?.let { lerp(it, Color.White, 0.56f) } ?: Color(0xFFEDEDEB)
-    val darkSurface = customBackground?.let { lerp(it, Color.Black, 0.55f) } ?: KimiCard
-    val darkSurfaceVariant = customBackground?.let { lerp(it, Color.Black, 0.40f) } ?: KimiCardAlt
+    val darkSurface = customBackground?.let { lerp(it, Color.Black, 0.55f) } ?: ModernSurfaceDark
+    val darkSurfaceVariant = customBackground?.let { lerp(it, Color.Black, 0.40f) } ?: ModernSurfaceElevatedDark
     val light = lightColorScheme(
-        primary = Color(0xFF181818),
-        secondary = Color(0xFF4E7DFF),
-        background = customBackground ?: Color(0xFFF6F6F4),
-        surface = lightSurface,
-        surfaceVariant = lightSurfaceVariant,
-        surfaceContainerLowest = customBackground?.let { lerp(it, Color.White, 0.82f) } ?: Color.White,
-        surfaceContainerLow = customBackground?.let { lerp(it, Color.White, 0.76f) } ?: lightSurface,
-        surfaceContainer = lightSurface,
-        surfaceContainerHigh = customBackground?.let { lerp(it, Color.White, 0.64f) } ?: lightSurfaceVariant,
-        surfaceContainerHighest = lightSurfaceVariant,
-        onBackground = Color(0xFF111111),
-        onSurface = Color(0xFF171717),
-        onSurfaceVariant = Color(0xFF4F4F4F),
-        outline = customBackground?.let { lerp(it, Color.Black, 0.42f) } ?: Color(0xFF797979),
-        outlineVariant = customBackground?.let { lerp(it, Color.White, 0.38f) } ?: Color(0xFFC8C8C8),
+        primary = ModernAccentLight,
+        onPrimary = Color.White,
+        primaryContainer = ModernAccentLight.copy(alpha = 0.12f),
+        onPrimaryContainer = ModernAccentLight,
+        secondary = ModernMutedLight,
+        onSecondary = ModernTextLight,
+        background = customBackground ?: ModernBgLight,
+        surface = ModernSurfaceLight,
+        surfaceVariant = Color(0xFFF5F5F4),
+        onSurface = ModernTextLight,
+        onSurfaceVariant = ModernMutedLight,
+        outline = ModernBorderLight,
+        outlineVariant = ModernBorderLight.copy(alpha = 0.5f),
+        surfaceTint = ModernAccentLight,
     )
     val dark = darkColorScheme(
-        primary = Color(0xFFE8E8E8),
-        secondary = Color(0xFF70A4FF),
-        background = customBackground ?: KimiBg,
-        surface = darkSurface,
-        surfaceVariant = darkSurfaceVariant,
-        surfaceContainerLowest = customBackground?.let { lerp(it, Color.Black, 0.68f) } ?: KimiBg,
-        surfaceContainerLow = customBackground?.let { lerp(it, Color.Black, 0.60f) } ?: darkSurface,
-        surfaceContainer = darkSurface,
-        surfaceContainerHigh = customBackground?.let { lerp(it, Color.Black, 0.48f) } ?: darkSurfaceVariant,
-        surfaceContainerHighest = darkSurfaceVariant,
-        onBackground = Color(0xFFF2F2F2),
-        onSurface = Color(0xFFF0F0F0),
-        onSurfaceVariant = Color(0xFFC8C8C8),
-        outline = customBackground?.let { lerp(it, Color.White, 0.34f) } ?: KimiLine,
-        outlineVariant = customBackground?.let { lerp(it, Color.Black, 0.25f) } ?: KimiLine,
+        primary = ModernAccentDark,
+        onPrimary = Color.White,
+        primaryContainer = ModernAccentDark.copy(alpha = 0.15f),
+        onPrimaryContainer = ModernAccentDark,
+        secondary = ModernMutedDark,
+        onSecondary = ModernTextDark,
+        background = customBackground ?: ModernBgDark,
+        surface = ModernSurfaceDark,
+        surfaceVariant = ModernSurfaceElevatedDark,
+        onSurface = ModernTextDark,
+        onSurfaceVariant = ModernMutedDark,
+        outline = ModernBorderDark,
+        outlineVariant = ModernBorderDark.copy(alpha = 0.4f),
+        surfaceTint = ModernAccentDark,
     )
     val baseScheme = if (darkMode) dark else light
     val colorScheme = if (dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
@@ -309,21 +305,21 @@ internal fun LyraCodeTheme(
     }
     val defaults = Typography()
     val typography = defaults.copy(
-        displayLarge = defaults.displayLarge.copy(fontFamily = textFontFamily),
-        displayMedium = defaults.displayMedium.copy(fontFamily = textFontFamily),
-        displaySmall = defaults.displaySmall.copy(fontFamily = textFontFamily),
-        headlineLarge = defaults.headlineLarge.copy(fontFamily = textFontFamily),
-        headlineMedium = defaults.headlineMedium.copy(fontFamily = textFontFamily),
-        headlineSmall = defaults.headlineSmall.copy(fontFamily = textFontFamily),
-        titleLarge = defaults.titleLarge.copy(fontFamily = textFontFamily),
-        titleMedium = defaults.titleMedium.copy(fontFamily = textFontFamily),
-        titleSmall = defaults.titleSmall.copy(fontFamily = textFontFamily),
-        bodyLarge = defaults.bodyLarge.copy(fontFamily = textFontFamily),
-        bodyMedium = defaults.bodyMedium.copy(fontFamily = textFontFamily),
-        bodySmall = defaults.bodySmall.copy(fontFamily = textFontFamily),
-        labelLarge = defaults.labelLarge.copy(fontFamily = textFontFamily),
-        labelMedium = defaults.labelMedium.copy(fontFamily = textFontFamily),
-        labelSmall = defaults.labelSmall.copy(fontFamily = textFontFamily),
+        displayLarge = defaults.displayLarge.copy(fontFamily = textFontFamily, fontSize = 32.sp, fontWeight = FontWeight.SemiBold),
+        displayMedium = defaults.displayMedium.copy(fontFamily = textFontFamily, fontSize = 28.sp, fontWeight = FontWeight.SemiBold),
+        displaySmall = defaults.displaySmall.copy(fontFamily = textFontFamily, fontSize = 24.sp, fontWeight = FontWeight.SemiBold),
+        headlineLarge = defaults.headlineLarge.copy(fontFamily = textFontFamily, fontSize = 22.sp, fontWeight = FontWeight.SemiBold),
+        headlineMedium = defaults.headlineMedium.copy(fontFamily = textFontFamily, fontSize = 20.sp, fontWeight = FontWeight.SemiBold),
+        headlineSmall = defaults.headlineSmall.copy(fontFamily = textFontFamily, fontSize = 18.sp, fontWeight = FontWeight.SemiBold),
+        titleLarge = defaults.titleLarge.copy(fontFamily = textFontFamily, fontSize = 22.sp, fontWeight = FontWeight.SemiBold),
+        titleMedium = defaults.titleMedium.copy(fontFamily = textFontFamily, fontSize = 16.sp, fontWeight = FontWeight.Medium),
+        titleSmall = defaults.titleSmall.copy(fontFamily = textFontFamily, fontSize = 14.sp, fontWeight = FontWeight.Medium),
+        bodyLarge = defaults.bodyLarge.copy(fontFamily = textFontFamily, fontSize = 16.sp),
+        bodyMedium = defaults.bodyMedium.copy(fontFamily = textFontFamily, fontSize = 14.sp),
+        bodySmall = defaults.bodySmall.copy(fontFamily = textFontFamily, fontSize = 12.sp),
+        labelLarge = defaults.labelLarge.copy(fontFamily = textFontFamily, fontSize = 14.sp, fontWeight = FontWeight.Medium),
+        labelMedium = defaults.labelMedium.copy(fontFamily = textFontFamily, fontSize = 12.sp, fontWeight = FontWeight.Medium),
+        labelSmall = defaults.labelSmall.copy(fontFamily = textFontFamily, fontSize = 11.sp, fontWeight = FontWeight.Medium),
     )
     CompositionLocalProvider(
         LocalDensity provides Density(density.density, fontScale.coerceIn(AppSettings.MIN_FONT_SCALE, AppSettings.MAX_FONT_SCALE)),
@@ -332,36 +328,44 @@ internal fun LyraCodeTheme(
         MaterialTheme(colorScheme = colorScheme, typography = typography, content = content)
     }
 }
-internal val KimiBg = Color(0xFF0B0B0B)
-internal val KimiCard = Color(0xFF202020)
-internal val KimiCardAlt = Color(0xFF2A2A2A)
-internal val KimiLine = Color(0xFF3A3A3A)
-internal val KimiMuted = Color(0xFF8E8E8E)
-internal val KimiGreen = Color(0xFF62B47B)
-internal val KimiRed = Color(0xFFE06464)
-internal val KimiBlue = Color(0xFF70A4FF)
-internal val KimiCardShape = RoundedCornerShape(26.dp)
-internal val KimiPillShape = RoundedCornerShape(999.dp)
+internal val ModernBgDark = Color(0xFF0A0A0A)
+internal val ModernSurfaceDark = Color(0xFF141414)
+internal val ModernSurfaceElevatedDark = Color(0xFF1C1C1C)
+internal val ModernBorderDark = Color(0xFF2A2A2A)
+internal val ModernTextDark = Color(0xFFEAEAEA)
+internal val ModernMutedDark = Color(0xFF8E8E8E)
+internal val ModernAccentDark = Color(0xFF6366F1)
+
+internal val ModernBgLight = Color(0xFFFAFAF9)
+internal val ModernSurfaceLight = Color(0xFFFFFFFF)
+internal val ModernBorderLight = Color(0xFFE7E5E4)
+internal val ModernTextLight = Color(0xFF18181B)
+internal val ModernMutedLight = Color(0xFF71717A)
+internal val ModernAccentLight = Color(0xFF4F46E5)
+
+internal val ModernCardShape = RoundedCornerShape(12.dp)
+internal val ModernPillShape = RoundedCornerShape(999.dp)
+internal val ModernShape = RoundedCornerShape(8.dp)
 
 @Composable
-internal fun KimiCardBox(
+internal fun ModernCardBox(
     modifier: Modifier = Modifier,
     content: @Composable ColumnScope.() -> Unit,
 ) {
     Card(
         modifier = modifier.fillMaxWidth(),
-        shape = KimiCardShape,
+        shape = ModernCardShape,
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.32f),
+            containerColor = MaterialTheme.colorScheme.surface,
         ),
         border = BorderStroke(
             1.dp,
-            MaterialTheme.colorScheme.outline.copy(alpha = 0.14f),
+            MaterialTheme.colorScheme.outline.copy(alpha = 0.35f),
         ),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Column(
-            Modifier.padding(horizontal = 18.dp, vertical = 14.dp),
+            Modifier.padding(horizontal = 16.dp, vertical = 12.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp),
             content = content,
         )
@@ -369,13 +373,13 @@ internal fun KimiCardBox(
 }
 
 @Composable
-internal fun KimiDivider() {
+internal fun ModernDivider() {
     Box(
         Modifier
             .fillMaxWidth()
-            .padding(start = 52.dp)
+            .padding(start = 16.dp, end = 16.dp)
             .height(0.5.dp)
-            .background(MaterialTheme.colorScheme.outline.copy(alpha = 0.16f)),
+            .background(MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.6f)),
     )
 }
 
@@ -410,14 +414,14 @@ internal fun KimiMenuRow(
     Row(
         Modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(18.dp))
+            .clip(ModernCardShape)
             .clickable(onClick = onClick)
-            .padding(vertical = 8.dp),
+            .padding(vertical = 6.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Box(
             modifier = Modifier
-                .size(44.dp)
+                .size(40.dp)
                 .clip(CircleShape)
                 .background(iconContainer),
             contentAlignment = Alignment.Center,
@@ -465,15 +469,15 @@ internal fun KimiMenuRow(
     Row(
         Modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(18.dp))
+            .clip(ModernCardShape)
             .clickable(enabled = enabled || onDisabledClick != null) { if (enabled) onClick() else onDisabledClick?.invoke() }
             .then(if (enabled) Modifier else Modifier.graphicsLayer { alpha = 0.38f })
-            .padding(vertical = 8.dp),
+            .padding(vertical = 6.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Box(
             Modifier
-                .size(44.dp)
+                .size(40.dp)
                 .clip(CircleShape)
                 .background(iconContainer),
             contentAlignment = Alignment.Center,
@@ -525,14 +529,14 @@ internal fun KimiMenuRowWithLongClick(
     Row(
         Modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(18.dp))
+            .clip(ModernCardShape)
             .combinedClickable(onClick = onClick, onLongClick = onLongClick)
-            .padding(vertical = 8.dp),
+            .padding(vertical = 6.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Box(
             Modifier
-                .size(44.dp)
+                .size(40.dp)
                 .clip(CircleShape)
                 .background(iconContainer),
             contentAlignment = Alignment.Center,
@@ -600,7 +604,7 @@ internal fun KimiChip(
     Text(
         text,
         modifier = modifier
-            .clip(KimiPillShape)
+            .clip(ModernPillShape)
             .clickable(onClick = onClick)
             .background(MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.62f))
             .padding(horizontal = 14.dp, vertical = 7.dp),
@@ -634,7 +638,7 @@ internal fun TransientNotice(
             exit = fadeOut(),
         ) {
             Surface(
-                shape = KimiPillShape,
+                shape = ModernPillShape,
                 color = MaterialTheme.colorScheme.inverseSurface.copy(alpha = 0.94f),
                 tonalElevation = 8.dp,
                 shadowElevation = 8.dp,
@@ -680,11 +684,11 @@ internal fun ConfirmDeleteDialog(
         title = { Text(title) },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                Text(message, color = KimiMuted, style = MaterialTheme.typography.bodyMedium)
+                Text(message, color = ModernMutedDark, style = MaterialTheme.typography.bodyMedium)
                 Text(targetName, style = MaterialTheme.typography.titleSmall, maxLines = 2, overflow = TextOverflow.Ellipsis)
                 Text(
                     if (remaining > 0) uiText(R.string.ui_please_wait) + remaining + uiText(R.string.ui_seconds_before_confirming_deletion) else uiText(R.string.ui_this_cannot_be_restored_automatically_please_confirm),
-                    color = if (remaining > 0) KimiMuted else MaterialTheme.colorScheme.error,
+                    color = if (remaining > 0) ModernMutedDark else MaterialTheme.colorScheme.error,
                     style = MaterialTheme.typography.bodySmall,
                 )
             }

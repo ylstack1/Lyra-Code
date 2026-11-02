@@ -362,7 +362,7 @@ internal fun MarkdownMediaPreview(alt: String, url: String) {
                 MarkdownText("[$url]($url)", style = MaterialTheme.typography.bodySmall)
             }
             if (saveStatus.isNotBlank()) {
-                Text(saveStatus, color = KimiMuted, style = MaterialTheme.typography.labelSmall)
+                Text(saveStatus, color = ModernMutedDark, style = MaterialTheme.typography.labelSmall)
             }
         }
     }
@@ -401,7 +401,7 @@ internal fun SourceImagePreview(source: String) {
             contentScale = ContentScale.Fit,
         )
     } else {
-        Text(status, color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+        Text(status, color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
     }
     if (previewOpen && bitmap != null) {
         FullscreenMediaPreviewDialog(
@@ -433,7 +433,7 @@ internal fun EmbeddedMediaPlayer(source: String, kind: String) {
         }
     }
     if (uri == null) {
-        Text(uiText(R.string.ui_unrecognized_media_url) + source, color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+        Text(uiText(R.string.ui_unrecognized_media_url) + source, color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
         return
     }
     Box {
@@ -519,13 +519,13 @@ internal fun DataUrlInlinePreview(decoded: DecodedDataUrl) {
         } else {
             Text(
                 uiText(if (loading) R.string.ui_loading_media else R.string.notice_image_decode_failed),
-                color = if (loading) KimiMuted else MaterialTheme.colorScheme.error,
+                color = if (loading) ModernMutedDark else MaterialTheme.colorScheme.error,
                 style = MaterialTheme.typography.bodySmall,
             )
         }
     } else {
         val kind = mediaKindForSource("", decoded.mimeType)
-        Text("${decoded.mimeType} · ${decoded.bytes.size} bytes", color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+        Text("${decoded.mimeType} · ${decoded.bytes.size} bytes", color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
         if (kind == "video" || kind == "audio") {
             KimiChip(if (kind == "video") uiText(R.string.action_fullscreen_play) else uiText(R.string.media_preview_play), onClick = { previewOpen = true })
             if (previewOpen) {
@@ -907,7 +907,7 @@ internal fun TableBlock(block: MarkdownBlock.Table) {
                             .width(columnWidth)
                             .fillMaxHeight()
                             .background(if (rowIndex == 0) MaterialTheme.colorScheme.surfaceVariant else Color.Transparent)
-                            .border(1.dp, KimiLine.copy(alpha = 0.55f))
+                            .border(1.dp, ModernBorderDark.copy(alpha = 0.55f))
                             .padding(horizontal = 10.dp, vertical = 8.dp),
                     ) {
                         MarkdownText(
@@ -1904,7 +1904,7 @@ internal fun DataUrlPreviewDialog(dataUrl: String, onDismiss: () -> Unit, onCopy
                 if (decoded == null) {
                     Text(uiText(R.string.notice_cannot_parse_data_url), color = MaterialTheme.colorScheme.error)
                 } else {
-                    Text(decoded.mimeType, color = KimiMuted, style = MaterialTheme.typography.labelMedium)
+                    Text(decoded.mimeType, color = ModernMutedDark, style = MaterialTheme.typography.labelMedium)
                     val animated = remember(decoded.bytes, decoded.mimeType) { isAnimatedSvg(decoded.bytes, decoded.mimeType) }
                     if (animated) {
                         AnimatedSvgInlinePreview(decoded)
@@ -1917,10 +1917,10 @@ internal fun DataUrlPreviewDialog(dataUrl: String, onDismiss: () -> Unit, onCopy
                             Image(bitmap!!.asImageBitmap(), contentDescription = null, modifier = Modifier.fillMaxWidth().heightIn(max = 320.dp), contentScale = ContentScale.Fit)
                         }
                     } else {
-                        Text(uiText(R.string.ui_decoded) + "${decoded.bytes.size} bytes" + uiText(R.string.ui_audio_video_and_other_files_can_be_saved_and), color = KimiMuted)
+                        Text(uiText(R.string.ui_decoded) + "${decoded.bytes.size} bytes" + uiText(R.string.ui_audio_video_and_other_files_can_be_saved_and), color = ModernMutedDark)
                     }
                     val saveStatus = remember { mutableStateOf("") }
-                    if (saveStatus.value.isNotBlank()) Text(saveStatus.value, color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+                    if (saveStatus.value.isNotBlank()) Text(saveStatus.value, color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         KimiChip(uiText(R.string.action_copy_raw), onClick = onCopy)
                         KimiChip(uiText(R.string.action_save_to_download), onClick = {

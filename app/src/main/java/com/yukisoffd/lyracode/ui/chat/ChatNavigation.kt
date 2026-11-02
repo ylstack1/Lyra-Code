@@ -120,7 +120,7 @@ internal fun WorkspaceFileMentionPicker(
                 Column(Modifier.weight(1f)) {
                     Text(stringResource(R.string.workspace_file_picker_title), style = MaterialTheme.typography.labelMedium)
                     if (selected.isNotEmpty()) {
-                        Text(uiText(R.string.streaming_selected) + " ${selected.size}/24", color = KimiMuted, style = MaterialTheme.typography.labelSmall)
+                        Text(uiText(R.string.streaming_selected) + " ${selected.size}/24", color = ModernMutedDark, style = MaterialTheme.typography.labelSmall)
                     }
                 }
                 TextButton(onClick = onDone, enabled = enabled) { Text(uiText(R.string.status_done)) }
@@ -129,14 +129,14 @@ internal fun WorkspaceFileMentionPicker(
                 Text(
                     stringResource(R.string.workspace_file_indexing),
                     modifier = Modifier.padding(horizontal = 14.dp, vertical = 12.dp),
-                    color = KimiMuted,
+                    color = ModernMutedDark,
                     style = MaterialTheme.typography.bodySmall,
                 )
             } else if (matches.isEmpty()) {
                 Text(
                     stringResource(R.string.workspace_file_no_matches),
                     modifier = Modifier.padding(horizontal = 14.dp, vertical = 12.dp),
-                    color = KimiMuted,
+                    color = ModernMutedDark,
                     style = MaterialTheme.typography.bodySmall,
                 )
             } else {
@@ -155,7 +155,7 @@ internal fun WorkspaceFileMentionPicker(
                         Icon(Icons.Default.InsertDriveFile, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
                         Column(Modifier.weight(1f)) {
                             Text(file.name, maxLines = 1, overflow = TextOverflow.Ellipsis, style = MaterialTheme.typography.bodyMedium)
-                            Text(file.relativePath, maxLines = 1, overflow = TextOverflow.Ellipsis, color = KimiMuted, style = MaterialTheme.typography.labelSmall)
+                            Text(file.relativePath, maxLines = 1, overflow = TextOverflow.Ellipsis, color = ModernMutedDark, style = MaterialTheme.typography.labelSmall)
                         }
                         Icon(
                             if (isSelected) Icons.Default.CheckCircle else Icons.Default.Add,
@@ -216,7 +216,7 @@ internal fun ForcedSkillControls(
             horizontalArrangement = Arrangement.spacedBy(8.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Text(uiText(R.string.ui_forced_this_request), color = KimiMuted, style = MaterialTheme.typography.labelSmall)
+            Text(uiText(R.string.ui_forced_this_request), color = ModernMutedDark, style = MaterialTheme.typography.labelSmall)
             forcedSkills.forEach { skill ->
                 TextButton(
                     onClick = { onSkillIdsChange(forcedSkillIds - skill.id) },
@@ -249,14 +249,14 @@ internal fun ForcedSkillControls(
                     Icon(Icons.Default.Build, contentDescription = null, modifier = Modifier.size(18.dp), tint = MaterialTheme.colorScheme.primary)
                     Column(Modifier.weight(1f)) {
                         Text(uiText(R.string.ui_choose_skill), style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurface)
-                        Text(uiText(R.string.ui_type_to_choose_skills_for_this_request), style = MaterialTheme.typography.labelSmall, color = KimiMuted, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                        Text(uiText(R.string.ui_type_to_choose_skills_for_this_request), style = MaterialTheme.typography.labelSmall, color = ModernMutedDark, maxLines = 1, overflow = TextOverflow.Ellipsis)
                     }
                 }
                 if (matches.isEmpty()) {
                     Text(
                         uiText(R.string.ui_no_matching_skills),
                         modifier = Modifier.padding(horizontal = 14.dp, vertical = 10.dp),
-                        color = KimiMuted,
+                        color = ModernMutedDark,
                         style = MaterialTheme.typography.bodySmall,
                     )
                 } else {
@@ -276,11 +276,11 @@ internal fun ForcedSkillControls(
                                 Row(horizontalArrangement = Arrangement.spacedBy(6.dp), verticalAlignment = Alignment.CenterVertically) {
                                     Text(skill.name, maxLines = 1, overflow = TextOverflow.Ellipsis, style = MaterialTheme.typography.bodyMedium)
                                     if (!skill.enabled) {
-                                        Text(uiText(R.string.skill_status_disabled), color = KimiMuted, style = MaterialTheme.typography.labelSmall)
+                                        Text(uiText(R.string.skill_status_disabled), color = ModernMutedDark, style = MaterialTheme.typography.labelSmall)
                                     }
                                 }
                                 if (skill.description.isNotBlank()) {
-                                    Text(skill.description, maxLines = 1, overflow = TextOverflow.Ellipsis, color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+                                    Text(skill.description, maxLines = 1, overflow = TextOverflow.Ellipsis, color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
                                 }
                             }
                         }

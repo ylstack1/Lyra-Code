@@ -42,8 +42,8 @@ internal fun AppIconSettings(settings: AppSettings) {
         lifecycleOwner.lifecycle.addObserver(observer)
         onDispose { lifecycleOwner.lifecycle.removeObserver(observer) }
     }
-    KimiCardBox {
-        Text(stringResource(R.string.app_icon_description), style = MaterialTheme.typography.bodyMedium, color = KimiMuted)
+    ModernCardBox {
+        Text(stringResource(R.string.app_icon_description), style = MaterialTheme.typography.bodyMedium, color = ModernMutedDark)
         Column(Modifier.selectableGroup()) {
             AppIcon.entries.forEach { icon ->
                 val preview = remember(icon, context) {

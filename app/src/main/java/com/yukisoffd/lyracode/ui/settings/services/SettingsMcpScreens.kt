@@ -114,33 +114,33 @@ internal fun McpSettings(
         )
     }
 
-    KimiCardBox {
+    ModernCardBox {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Column(Modifier.weight(1f)) {
                 Text(uiText(R.string.detail_mcp), style = MaterialTheme.typography.titleMedium)
-                Text(uiText(R.string.mcp_desc), color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+                Text(uiText(R.string.mcp_desc), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
             }
             Button(onClick = {
                 editing = defaultMcpServer()
-            }, shape = KimiPillShape) { Text(uiText(R.string.action_add)) }
+            }, shape = ModernPillShape) { Text(uiText(R.string.action_add)) }
         }
         if (status.isNotBlank()) {
-            Text(status, color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+            Text(status, color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
         }
     }
     if (servers.isEmpty()) {
-        KimiCardBox {
+        ModernCardBox {
             Text(uiText(R.string.notice_no_mcp), style = MaterialTheme.typography.titleSmall)
-            Text(uiText(R.string.mcp_empty_hint), color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+            Text(uiText(R.string.mcp_empty_hint), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
         }
     }
     servers.forEach { server ->
-        KimiCardBox {
+        ModernCardBox {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                     Text(server.name, style = MaterialTheme.typography.titleMedium)
-                    Text(server.url, color = KimiMuted, maxLines = 1, overflow = TextOverflow.Ellipsis, style = MaterialTheme.typography.bodySmall)
-                    Text(context.getString(R.string.label_mcp_tools_count, transportLabel(server.transport), server.timeoutSeconds, server.tools.size), color = KimiMuted, style = MaterialTheme.typography.labelMedium)
+                    Text(server.url, color = ModernMutedDark, maxLines = 1, overflow = TextOverflow.Ellipsis, style = MaterialTheme.typography.bodySmall)
+                    Text(context.getString(R.string.label_mcp_tools_count, transportLabel(server.transport), server.timeoutSeconds, server.tools.size), color = ModernMutedDark, style = MaterialTheme.typography.labelMedium)
                     if (server.url.startsWith("http://", ignoreCase = true)) {
                         Text(uiText(R.string.notice_http_mcp_warning), color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.labelSmall)
                     }
@@ -168,7 +168,7 @@ internal fun McpSettings(
                             )
                         }
                     },
-                    shape = KimiPillShape,
+                    shape = ModernPillShape,
                 ) { Text(uiText(R.string.action_test_and_fetch)) }
                 IconButton(onClick = { editing = server }) {
                     Icon(Icons.Default.Edit, contentDescription = uiText(R.string.cd_edit_mcp))
@@ -178,7 +178,7 @@ internal fun McpSettings(
                 }
             }
             if (server.tools.isNotEmpty()) {
-                KimiDivider()
+                ModernDivider()
                 Row(
                     Modifier
                         .fillMaxWidth()
@@ -193,14 +193,14 @@ internal fun McpSettings(
                         Text(context.getString(R.string.label_fetched_tools, server.tools.size), style = MaterialTheme.typography.titleSmall)
                         Text(
                             uiText(R.string.mcp_tools_open_hint),
-                            color = KimiMuted,
+                            color = ModernMutedDark,
                             style = MaterialTheme.typography.bodySmall,
                         )
                     }
                     Icon(
                         Icons.Default.ChevronRight,
                         contentDescription = null,
-                        tint = KimiMuted,
+                        tint = ModernMutedDark,
                     )
                 }
             }
@@ -248,7 +248,7 @@ internal fun LocalMcpServerSettings(
         )
     }
 
-    KimiCardBox {
+    ModernCardBox {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(Icons.Default.Hub, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
             Spacer(Modifier.width(12.dp))
@@ -256,7 +256,7 @@ internal fun LocalMcpServerSettings(
                 Text(uiText(R.string.title_local_mcp_as_server), style = MaterialTheme.typography.titleMedium)
                 Text(
                     uiText(R.string.local_mcp_desc),
-                    color = KimiMuted,
+                    color = ModernMutedDark,
                     style = MaterialTheme.typography.bodySmall,
                 )
             }
@@ -274,38 +274,38 @@ internal fun LocalMcpServerSettings(
                 },
             )
         }
-        KimiDivider()
+        ModernDivider()
         Text(
             stringResource(
                     R.string.label_server_status,
                     if (localStatus.running) uiText(R.string.label_server_running) else uiText(R.string.notice_server_stopped),
                     localStatus.message,
                 ),
-            color = KimiMuted,
+            color = ModernMutedDark,
             style = MaterialTheme.typography.bodySmall,
         )
         Text(
             stringResource(R.string.label_local_address_info, localStatus.url),
-            color = KimiMuted,
+            color = ModernMutedDark,
             style = MaterialTheme.typography.bodySmall,
         )
         if (localStatus.lanUrls.isNotEmpty()) {
             Text(
                 uiText(R.string.ui_lan_address) + localStatus.lanUrls.joinToString("  "),
-                color = KimiMuted,
+                color = ModernMutedDark,
                 style = MaterialTheme.typography.bodySmall,
             )
         }
         Text(
             if (localConfig.authKey.isBlank()) uiText(R.string.local_mcp_auth_not_set) else uiText(R.string.local_mcp_auth_enabled),
-            color = if (localConfig.authKey.isBlank()) MaterialTheme.colorScheme.error else KimiMuted,
+            color = if (localConfig.authKey.isBlank()) MaterialTheme.colorScheme.error else ModernMutedDark,
             style = MaterialTheme.typography.bodySmall,
         )
         if (status.isNotBlank()) {
             Text(status, color = MaterialTheme.colorScheme.primary, style = MaterialTheme.typography.bodySmall)
         }
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            OutlinedButton(onClick = { editing = true }, shape = KimiPillShape) {
+            OutlinedButton(onClick = { editing = true }, shape = ModernPillShape) {
                 Icon(Icons.Default.Settings, contentDescription = null)
                 Spacer(Modifier.width(6.dp))
                 Text(uiText(R.string.action_configure))
@@ -319,7 +319,7 @@ internal fun LocalMcpServerSettings(
                     status = uiText(R.string.notice_local_mcp_restarted)
                     revision++
                 },
-                shape = KimiPillShape,
+                shape = ModernPillShape,
             ) {
                 Icon(Icons.Default.RestartAlt, contentDescription = null)
                 Spacer(Modifier.width(6.dp))
@@ -328,15 +328,15 @@ internal fun LocalMcpServerSettings(
         }
     }
 
-    KimiCardBox {
+    ModernCardBox {
         Text(uiText(R.string.title_external_usage), style = MaterialTheme.typography.titleMedium)
         Text(
             uiText(R.string.external_usage_desc),
-            color = KimiMuted,
+            color = ModernMutedDark,
             style = MaterialTheme.typography.bodySmall,
         )
         Text(uiText(R.string.ui_external_connection_raw_json), style = MaterialTheme.typography.titleSmall)
-        Text(uiText(R.string.mcp_local_protocol_hint), color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+        Text(uiText(R.string.mcp_local_protocol_hint), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
         Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
             MaterialChoiceButton(McpProtocol.LEGACY, exportProtocolVersion == McpProtocol.LEGACY) { exportProtocolVersion = McpProtocol.LEGACY }
             MaterialChoiceButton(uiText(R.string.mcp_protocol_stateless), exportProtocolVersion == McpProtocol.MODERN) { exportProtocolVersion = McpProtocol.MODERN }
@@ -348,7 +348,7 @@ internal fun LocalMcpServerSettings(
         )
         Text(
             uiText(R.string.ui_the_copied_config_only_includes_mcp_protocol_version_and),
-            color = KimiMuted,
+            color = ModernMutedDark,
             style = MaterialTheme.typography.bodySmall,
         )
     }
@@ -391,18 +391,18 @@ internal fun buildLocalMcpExternalConnectionJson(
 internal fun McpToolsPage(settings: AppSettings, serverId: String, externalRevision: Int, onOpenTool: (String) -> Unit) {
     val server = remember(serverId, externalRevision) { settings.mcpServers().firstOrNull { it.id == serverId } }
     if (server == null || server.tools.isEmpty()) {
-        KimiCardBox { Text(uiText(R.string.mcp_tools_unavailable)) }
+        ModernCardBox { Text(uiText(R.string.mcp_tools_unavailable)) }
         return
     }
-    KimiCardBox {
+    ModernCardBox {
         Text(server.name, style = MaterialTheme.typography.titleMedium)
-        Text(uiText(R.string.mcp_tools_open_hint), color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+        Text(uiText(R.string.mcp_tools_open_hint), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
     }
     server.tools.forEach { tool ->
-        KimiCardBox {
+        ModernCardBox {
             Row(Modifier.fillMaxWidth().clickable { onOpenTool(tool.name) }.padding(vertical = 8.dp), verticalAlignment = Alignment.CenterVertically) {
                 Text(tool.name, Modifier.weight(1f), style = MaterialTheme.typography.titleSmall)
-                Icon(Icons.Default.ChevronRight, contentDescription = uiText(R.string.mcp_tool_details), tint = KimiMuted)
+                Icon(Icons.Default.ChevronRight, contentDescription = uiText(R.string.mcp_tool_details), tint = ModernMutedDark)
             }
         }
     }
@@ -414,18 +414,18 @@ internal fun McpToolDetailPage(settings: AppSettings, serverId: String, toolName
         settings.mcpServers().firstOrNull { it.id == serverId }?.tools?.firstOrNull { it.name == toolName }
     }
     if (tool == null) {
-        KimiCardBox { Text(uiText(R.string.mcp_tools_unavailable)) }
+        ModernCardBox { Text(uiText(R.string.mcp_tools_unavailable)) }
         return
     }
     SelectionContainer {
         Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
-            KimiCardBox {
+            ModernCardBox {
                 Text(tool.name, style = MaterialTheme.typography.titleMedium)
                 Text(tool.description.ifBlank { uiText(R.string.label_no_description) }, style = MaterialTheme.typography.bodyMedium)
             }
-            KimiCardBox {
+            ModernCardBox {
                 Text(uiText(R.string.mcp_tool_parameters), style = MaterialTheme.typography.titleMedium)
-                Text(uiText(R.string.mcp_tool_parameters_hint), color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+                Text(uiText(R.string.mcp_tool_parameters_hint), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
                 Text(
                     runCatching { JSONObject(tool.inputSchema).toString(2) }.getOrDefault(tool.inputSchema),
                     style = MaterialTheme.typography.bodySmall.copy(fontFamily = FontFamily.Monospace),
@@ -457,7 +457,7 @@ internal fun LocalMcpServerDialog(
             ) {
                 Text(
                     uiText(R.string.local_mcp_dialog_hint),
-                    color = KimiMuted,
+                    color = ModernMutedDark,
                     style = MaterialTheme.typography.bodySmall,
                 )
                 OutlinedTextField(
@@ -538,7 +538,7 @@ internal fun McpServerDialog(
                 OutlinedTextField(parsed?.name.orEmpty(), { patch("name", it) }, Modifier.fillMaxWidth(), label = { Text(uiText(R.string.label_webdav_service_name)) }, singleLine = true)
                 OutlinedTextField(runCatching { parsed?.url.orEmpty() }.getOrDefault(""), { patch("url", it) }, Modifier.fillMaxWidth(), label = { Text("URL") }, singleLine = true)
                 OutlinedTextField(parsed?.authKey.orEmpty(), { patch("authKey", it) }, Modifier.fillMaxWidth(), label = { Text(uiText(R.string.label_auth_key_optional)) }, visualTransformation = PasswordVisualTransformation(), singleLine = true)
-                Text(uiText(R.string.mcp_auth_verbatim_hint), color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+                Text(uiText(R.string.mcp_auth_verbatim_hint), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     MaterialChoiceButton("Streamable HTTP", parsed?.transport == AppSettings.MCP_TRANSPORT_STREAMABLE_HTTP) { patch("transport", AppSettings.MCP_TRANSPORT_STREAMABLE_HTTP) }
                     MaterialChoiceButton("SSE", parsed?.transport == AppSettings.MCP_TRANSPORT_SSE) { patch("transport", AppSettings.MCP_TRANSPORT_SSE) }
@@ -609,7 +609,7 @@ internal fun McpRawJsonEditor(initialJson: String, onDismiss: () -> Unit, onAppl
                         )
                     }) { Text(uiText(R.string.file_editor_save)) }
                 }
-                Text(uiText(R.string.mcp_raw_json_hint), color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+                Text(uiText(R.string.mcp_raw_json_hint), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
                 if (error.isNotBlank()) Text(error, color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodySmall)
                 OutlinedTextField(
                     value = json, onValueChange = { json = it; error = "" },

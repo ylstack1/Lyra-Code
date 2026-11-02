@@ -108,13 +108,13 @@ internal fun ChatGptAccountPage(
         ChatGptLogo(Modifier.size(42.dp))
         Column(verticalArrangement = Arrangement.spacedBy(3.dp)) {
             Text("ChatGPT", style = MaterialTheme.typography.titleLarge)
-            Text(uiText(R.string.chatgpt_provided_by), style = MaterialTheme.typography.bodySmall, color = KimiMuted)
+            Text(uiText(R.string.chatgpt_provided_by), style = MaterialTheme.typography.bodySmall, color = ModernMutedDark)
         }
     }
     if (busy || !loaded) LinearProgressIndicator(Modifier.fillMaxWidth())
     if (notice.isNotBlank()) Text(notice, color = if (failed) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary,
         style = MaterialTheme.typography.bodySmall)
-    if (accounts.size > 1) KimiCardBox {
+    if (accounts.size > 1) ModernCardBox {
         Text(uiText(R.string.chatgpt_saved_accounts), style = MaterialTheme.typography.titleSmall)
         accounts.forEach { account ->
             Row(Modifier.fillMaxWidth().clickable(enabled = !busy) { onSelectAccount(account.clientId) }, verticalAlignment = Alignment.CenterVertically) {
@@ -125,7 +125,7 @@ internal fun ChatGptAccountPage(
                         account.isLoggedIn && account.clientId == settings.selectedProfile().chatGptAccountId -> R.string.chatgpt_active_account
                         account.isLoggedIn -> R.string.chatgpt_connected
                         else -> R.string.chatgpt_signed_out
-                    }), style = MaterialTheme.typography.bodySmall, color = KimiMuted)
+                    }), style = MaterialTheme.typography.bodySmall, color = ModernMutedDark)
                 }
             }
         }
@@ -180,10 +180,10 @@ internal fun ChatGptAccountPage(
 
 @Composable
 private fun ChatGptIdentityCard(label: String, value: String, modifier: Modifier) {
-    Card(modifier.heightIn(min = 124.dp).fillMaxHeight(), shape = KimiCardShape,
+    Card(modifier.heightIn(min = 124.dp).fillMaxHeight(), shape = ModernCardShape,
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.32f))) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            Text(label, style = MaterialTheme.typography.labelMedium, color = KimiMuted)
+            Text(label, style = MaterialTheme.typography.labelMedium, color = ModernMutedDark)
             SelectionContainer {
                 Text(value, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold,
                     maxLines = 4, overflow = TextOverflow.Ellipsis)
@@ -201,15 +201,15 @@ private fun ChatGptAllowanceCard(account: ChatGptAccount, minutes: Int, window: 
     val value = if (unlimited) "∞" else percentage ?: "—"
     val description = "$label: ${if (unlimited) uiText(R.string.chatgpt_window_not_applicable) else percentage ?: uiText(R.string.chatgpt_not_provided)}"
     val color = if (remaining != null && remaining < 10) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary
-    Card(modifier.heightIn(min = 236.dp).fillMaxHeight(), shape = KimiCardShape,
+    Card(modifier.heightIn(min = 236.dp).fillMaxHeight(), shape = ModernCardShape,
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.32f))) {
         Column(Modifier.fillMaxSize().padding(16.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(label, style = MaterialTheme.typography.labelMedium, color = KimiMuted, modifier = Modifier.align(Alignment.Start))
+            Text(label, style = MaterialTheme.typography.labelMedium, color = ModernMutedDark, modifier = Modifier.align(Alignment.Start))
             Spacer(Modifier.height(18.dp))
             Box(Modifier.size(96.dp).clearAndSetSemantics { contentDescription = description }, contentAlignment = Alignment.Center) {
                 CircularProgressIndicator(progress = { ((remaining ?: 0.0) / 100).toFloat() }, modifier = Modifier.fillMaxSize(),
                     color = color, strokeWidth = 6.dp, strokeCap = StrokeCap.Round, trackColor = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f))
-                Text(value, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.SemiBold, maxLines = 1, color = if (remaining == null && !unlimited) KimiMuted else color)
+                Text(value, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.SemiBold, maxLines = 1, color = if (remaining == null && !unlimited) ModernMutedDark else color)
             }
             Spacer(Modifier.height(18.dp))
             Spacer(Modifier.weight(1f))
@@ -217,7 +217,7 @@ private fun ChatGptAllowanceCard(account: ChatGptAccount, minutes: Int, window: 
                 window?.resetsAt?.takeIf { account.isLoggedIn && it > now }?.let {
                     DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(Date(it))
                 } ?: uiText(R.string.chatgpt_not_provided)),
-                style = MaterialTheme.typography.bodySmall, color = KimiMuted, textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth())
+                style = MaterialTheme.typography.bodySmall, color = ModernMutedDark, textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth())
         }
     }
 }

@@ -183,7 +183,7 @@ internal fun OpenSourceLicensesScreen() {
                     .fillMaxSize()
                     .navigationBarsPadding()
                     .padding(start = 18.dp, top = 18.dp, end = 18.dp, bottom = 34.dp),
-                shape = RoundedCornerShape(28.dp),
+                shape = RoundedCornerShape(12.dp),
                 color = MaterialTheme.colorScheme.surface,
                 tonalElevation = 6.dp,
             ) {
@@ -197,7 +197,7 @@ internal fun OpenSourceLicensesScreen() {
                             Icon(Icons.Default.Close, contentDescription = uiText(R.string.cd_close))
                         }
                     }
-                    KimiDivider()
+                    ModernDivider()
                     SelectionContainer {
                         Text(
                             notice.licenseText,
@@ -219,17 +219,17 @@ internal fun OpenSourceLicensesScreen() {
         verticalArrangement = Arrangement.spacedBy(10.dp),
     ) {
         item {
-            KimiCardBox {
+            ModernCardBox {
                 Text(uiText(R.string.title_licenses), style = MaterialTheme.typography.titleMedium)
                 Text(
                     uiText(R.string.licenses_desc),
-                    color = KimiMuted,
+                    color = ModernMutedDark,
                     style = MaterialTheme.typography.bodySmall,
                 )
             }
         }
         items(notices) { notice ->
-            KimiCardBox(
+            ModernCardBox(
                 modifier = Modifier.clickable { selectedNotice = notice },
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
@@ -237,9 +237,9 @@ internal fun OpenSourceLicensesScreen() {
                     Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                         Text(notice.name, style = MaterialTheme.typography.titleSmall)
                         Text(notice.license, style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary)
-                        Text(notice.note, color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+                        Text(notice.note, color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
                     }
-                    Icon(Icons.Default.ChevronRight, contentDescription = null, tint = KimiMuted)
+                    Icon(Icons.Default.ChevronRight, contentDescription = null, tint = ModernMutedDark)
                 }
             }
         }
@@ -505,24 +505,24 @@ internal fun AboutSoftwareScreen(
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             AboutLogoHeader()
-            KimiCardBox {
+            ModernCardBox {
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     Text(
                         uiText(R.string.about_description),
-                        color = KimiMuted,
+                        color = ModernMutedDark,
                         style = MaterialTheme.typography.bodySmall,
                     )
                 }
             }
             KimiSectionLabel(context.getString(R.string.section_version_update))
-            KimiCardBox {
+            ModernCardBox {
                 AboutVersionRow(
                     versionText = context.getString(R.string.label_version, versionName, versionCode),
                     value = if (checking) context.getString(R.string.action_checking_update) else if (updateAvailable) context.getString(R.string.notice_new_version_found) else context.getString(R.string.action_check_update),
                     updateAvailable = updateAvailable,
                     onClick = ::checkUpdate,
                 )
-                KimiDivider()
+                ModernDivider()
                 KimiMenuRow(
                     Icons.Default.Speed,
                     uiText(R.string.github_acceleration_title),
@@ -535,7 +535,7 @@ internal fun AboutSoftwareScreen(
                     },
                 )
                 pendingApk?.let { apk ->
-                    KimiDivider()
+                    ModernDivider()
                     KimiMenuRow(
                         Icons.Default.InstallMobile,
                         updateManager.pendingDownloadedApkLabel(),
@@ -543,13 +543,13 @@ internal fun AboutSoftwareScreen(
                         onClick = { openInstaller(apk) },
                     )
                 }
-                KimiDivider()
+                ModernDivider()
                 Row(Modifier.fillMaxWidth().padding(vertical = 8.dp), verticalAlignment = Alignment.CenterVertically) {
                     AboutIconBadge(Icons.Default.NotificationsOff)
                     Spacer(Modifier.width(14.dp))
                     Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
                         Text(uiText(R.string.label_no_update_prompt), style = MaterialTheme.typography.titleSmall)
-                        Text(uiText(R.string.no_update_prompt_desc), color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+                        Text(uiText(R.string.no_update_prompt_desc), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
                     }
                     Switch(
                         checked = updatePromptDisabled,
@@ -559,32 +559,32 @@ internal fun AboutSoftwareScreen(
                         },
                     )
                 }
-                KimiDivider()
+                ModernDivider()
                 KimiMenuRow(Icons.Default.Apps, uiText(R.string.label_app_id), context.packageName)
             }
             KimiSectionLabel(uiText(R.string.section_repos))
-            KimiCardBox {
+            ModernCardBox {
                 SocialLinkRow(
                     logo = { AboutIconBadge(Icons.Default.Public) },
                     title = uiText(R.string.label_website),
                     value = "lyracode.app",
                     onClick = { uriHandler.openUri("https://lyracode.app") },
                 )
-                KimiDivider()
+                ModernDivider()
                 SocialLinkRow(
                     logo = { AboutIconBadge(Icons.AutoMirrored.Filled.MenuBook) },
                     title = uiText(R.string.label_documentation),
                     value = "docs.lyracode.app",
                     onClick = { uriHandler.openUri("https://docs.lyracode.app/") },
                 )
-                KimiDivider()
+                ModernDivider()
                 SocialLinkRow(
                     logo = { AboutIconBadge(R.drawable.ic_simple_github) },
                     title = "GitHub",
                     value = "lyracode-app/Lyra-Code",
                     onClick = { uriHandler.openUri("https://github.com/lyracode-app/Lyra-Code") },
                 )
-                KimiDivider()
+                ModernDivider()
                 SocialLinkRow(
                     logo = { AboutIconBadge(R.drawable.ic_simple_gitee) },
                     title = "Gitee",
@@ -593,7 +593,7 @@ internal fun AboutSoftwareScreen(
                 )
             }
             KimiSectionLabel(context.getString(R.string.sponsor_development_title))
-            KimiCardBox {
+            ModernCardBox {
                 KimiMenuRow(
                     Icons.Default.Favorite,
                     context.getString(R.string.sponsor_development_title),
@@ -602,7 +602,7 @@ internal fun AboutSoftwareScreen(
                 )
             }
             KimiSectionLabel(context.getString(R.string.compliance_service_agreements))
-            KimiCardBox {
+            ModernCardBox {
                 KimiMenuRow(
                     Icons.Default.Policy,
                     context.getString(R.string.compliance_service_agreements),
@@ -611,9 +611,9 @@ internal fun AboutSoftwareScreen(
                 )
             }
             KimiSectionLabel(uiText(R.string.section_build_info))
-            KimiCardBox {
+            ModernCardBox {
                 KimiMenuRow(Icons.Default.PhoneAndroid, uiText(R.string.title_device_info), "${Build.MANUFACTURER} ${Build.MODEL}", onClick = onOpenDeviceInfo)
-                KimiDivider()
+                ModernDivider()
                 KimiMenuRowWithLongClick(
                     Icons.Default.CloudDownload,
                     uiText(R.string.menu_update_manifest),
@@ -646,7 +646,7 @@ internal fun DeviceInfoScreen() {
         contentPadding = PaddingValues(bottom = 24.dp),
     ) {
         item {
-            KimiCardBox {
+            ModernCardBox {
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                         Icon(Icons.Default.PhoneAndroid, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
@@ -654,7 +654,7 @@ internal fun DeviceInfoScreen() {
                     }
                     Text(
                         uiText(R.string.device_info_desc),
-                        color = KimiMuted,
+                        color = ModernMutedDark,
                         style = MaterialTheme.typography.bodySmall,
                     )
                 }
@@ -663,12 +663,12 @@ internal fun DeviceInfoScreen() {
         snapshot.sections.forEach { section ->
             item { KimiSectionLabel(section.title) }
             item {
-                KimiCardBox {
+                ModernCardBox {
                     SelectionContainer {
                         Column {
                             section.items.forEachIndexed { index, item ->
                                 DeviceInfoRow(item)
-                                if (index != section.items.lastIndex) KimiDivider()
+                                if (index != section.items.lastIndex) ModernDivider()
                             }
                         }
                     }
@@ -696,7 +696,7 @@ internal fun DeviceInfoRow(item: DeviceInfoItem) {
         Text(
             item.value,
             modifier = Modifier.weight(1f),
-            color = KimiMuted,
+            color = ModernMutedDark,
             style = MaterialTheme.typography.bodyMedium,
         )
     }
@@ -922,7 +922,7 @@ internal fun UpdateDialog(
                 if (info.apkSha256.isNotBlank()) {
                     Text(
                         "SHA-256：${info.apkSha256}",
-                        color = KimiMuted,
+                        color = ModernMutedDark,
                         style = MaterialTheme.typography.bodySmall.copy(fontFamily = FontFamily.Monospace),
                     )
                 }
@@ -935,7 +935,7 @@ internal fun UpdateDialog(
                         val totalText = if (it.totalBytes > 0) " / ${formatBytes(it.totalBytes)}" else ""
                         Text(
                             "${it.status} ${formatBytes(it.downloadedBytes)}$totalText",
-                            color = KimiMuted,
+                            color = ModernMutedDark,
                             style = MaterialTheme.typography.bodySmall,
                         )
                     }

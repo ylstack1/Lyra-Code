@@ -598,7 +598,7 @@ internal fun ChatScreen(
                     bottom = (if (keyboardShouldLiftOutput) keyboardLiftDp else 0.dp) +
                         (if (controller.pendingUserQuestion.value?.isMinimized == true) 64.dp else 0.dp),
                 ),
-                verticalArrangement = Arrangement.spacedBy(14.dp),
+                verticalArrangement = Arrangement.spacedBy(10.dp),
             ) {
                 items(renderItems, key = { it.key }) { item ->
                     if (item.process.isNotEmpty()) {
@@ -676,12 +676,9 @@ internal fun ChatScreen(
         if (statusLine.isNotBlank()) {
             AnimatedConversationStatus(statusLine)
         }
-        Card(
-            Modifier.fillMaxWidth().keyboardAwareInputOffset(resolvedKeyboardLiftPx),
-            shape = RoundedCornerShape(28.dp),
-            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
+        ModernCardBox(
+            modifier = Modifier.fillMaxWidth().keyboardAwareInputOffset(resolvedKeyboardLiftPx),
         ) {
-            Column(Modifier.padding(horizontal = 10.dp, vertical = 8.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 if (featureEnabled) {
                     ComposerQueueSection(
                         snapshot = activeQueueSnapshot,
@@ -875,7 +872,7 @@ private fun AnimatedConversationStatus(status: String) {
     ) {
         Text(
             text = status,
-            color = KimiMuted,
+            color = ModernMutedDark,
             style = MaterialTheme.typography.labelMedium,
             maxLines = 2,
             overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis,

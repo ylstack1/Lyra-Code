@@ -66,7 +66,7 @@ internal fun ProviderPresetPicker(
     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
         Text(
             uiText(R.string.ui_choose_a_preset_to_configure_its_endpoint_and_api),
-            color = KimiMuted,
+            color = ModernMutedDark,
             style = MaterialTheme.typography.bodySmall,
         )
         CustomProviderPresetRow(onClick = onCustom)
@@ -104,7 +104,7 @@ internal fun ProviderPresetPicker(
                                         append(plan.displayName())
                                     }
                                 },
-                                color = KimiMuted,
+                                color = ModernMutedDark,
                                 style = MaterialTheme.typography.bodySmall,
                                 maxLines = 1,
                                 overflow = TextOverflow.Ellipsis,
@@ -119,7 +119,7 @@ internal fun ProviderPresetPicker(
                                 tint = MaterialTheme.colorScheme.primary,
                             )
                         }
-                        Icon(Icons.Default.ChevronRight, contentDescription = null, tint = KimiMuted)
+                        Icon(Icons.Default.ChevronRight, contentDescription = null, tint = ModernMutedDark)
                     }
                 }
             }
@@ -158,11 +158,11 @@ private fun CustomProviderPresetRow(onClick: () -> Unit) {
                 Text(uiText(R.string.ui_custom_provider), style = MaterialTheme.typography.titleMedium)
                 Text(
                     uiText(R.string.ui_configure_the_api_format_base_url_and_request_path),
-                    color = KimiMuted,
+                    color = ModernMutedDark,
                     style = MaterialTheme.typography.bodySmall,
                 )
             }
-            Icon(Icons.Default.ChevronRight, contentDescription = null, tint = KimiMuted)
+            Icon(Icons.Default.ChevronRight, contentDescription = null, tint = ModernMutedDark)
         }
     }
 }
@@ -191,12 +191,12 @@ internal fun ModelProviderRow(
             Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(5.dp)) {
                 Text(profile.name.ifBlank { uiText(R.string.label_unnamed_platform) }, style = MaterialTheme.typography.titleMedium, maxLines = 1, overflow = TextOverflow.Ellipsis)
                 if (profile.baseUrl.isNotBlank()) {
-                    Text(profile.baseUrl, color = KimiMuted, style = MaterialTheme.typography.bodySmall, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                    Text(profile.baseUrl, color = ModernMutedDark, style = MaterialTheme.typography.bodySmall, maxLines = 1, overflow = TextOverflow.Ellipsis)
                 }
                 Text(
                     uiText(R.string.label_models_count, profile.enabledModels.size),
                     modifier = Modifier
-                        .clip(KimiPillShape)
+                        .clip(ModernPillShape)
                         .background(MaterialTheme.colorScheme.secondaryContainer)
                         .padding(horizontal = 9.dp, vertical = 3.dp),
                     color = MaterialTheme.colorScheme.onSecondaryContainer,
@@ -204,7 +204,7 @@ internal fun ModelProviderRow(
                 )
             }
             IconButton(onClick = onDelete) {
-                Icon(Icons.Default.DeleteOutline, contentDescription = uiText(R.string.file_action_delete), tint = KimiMuted)
+                Icon(Icons.Default.DeleteOutline, contentDescription = uiText(R.string.file_action_delete), tint = ModernMutedDark)
             }
         }
     }
@@ -252,19 +252,19 @@ internal fun WebSearchBlacklistSettings(
             .distinct()
             .count()
     }
-    KimiCardBox {
+    ModernCardBox {
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
             Icon(Icons.Default.Search, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
             Column(Modifier.weight(1f)) {
                 Text(uiText(R.string.title_domain_blacklist), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
                 Text(
                     uiText(R.string.blacklist_desc),
-                    color = KimiMuted,
+                    color = ModernMutedDark,
                     style = MaterialTheme.typography.bodySmall,
                 )
             }
         }
-        KimiDivider()
+        ModernDivider()
         OutlinedTextField(
             value = blacklist,
             onValueChange = {
@@ -280,7 +280,7 @@ internal fun WebSearchBlacklistSettings(
         )
         Text(
             uiText(R.string.blacklist_normalize_hint),
-            color = KimiMuted,
+            color = ModernMutedDark,
             style = MaterialTheme.typography.bodySmall,
         )
         Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
@@ -291,7 +291,7 @@ internal fun WebSearchBlacklistSettings(
                     notice = uiText(R.string.blocked_hosts_saved_count, settings.webSearchBlockedHosts().size)
                     onChanged()
                 },
-                shape = KimiPillShape,
+                shape = ModernPillShape,
             ) {
                 Icon(Icons.Default.Save, contentDescription = null, modifier = Modifier.size(18.dp))
                 Spacer(Modifier.width(8.dp))
@@ -304,7 +304,7 @@ internal fun WebSearchBlacklistSettings(
                     notice = uiText(R.string.notice_blacklist_cleared)
                     onChanged()
                 },
-                shape = KimiPillShape,
+                shape = ModernPillShape,
             ) {
                 Icon(Icons.Default.Clear, contentDescription = null, modifier = Modifier.size(18.dp))
                 Spacer(Modifier.width(8.dp))

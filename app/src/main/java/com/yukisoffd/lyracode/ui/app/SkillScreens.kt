@@ -60,7 +60,7 @@ internal fun SkillDrawerRow(skill: SkillPack, onToggle: () -> Unit, onDelete: ()
     ) {
         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
             Text(skill.name, maxLines = 1, overflow = TextOverflow.Ellipsis, style = MaterialTheme.typography.bodyLarge)
-            Text(context.getString(R.string.label_files_count_enabled, skill.fileCount, if (skill.enabled) context.getString(R.string.skill_status_enabled) else context.getString(R.string.skill_status_disabled)), color = KimiMuted, style = MaterialTheme.typography.labelSmall)
+            Text(context.getString(R.string.label_files_count_enabled, skill.fileCount, if (skill.enabled) context.getString(R.string.skill_status_enabled) else context.getString(R.string.skill_status_disabled)), color = ModernMutedDark, style = MaterialTheme.typography.labelSmall)
         }
         KimiChip(if (skill.enabled) context.getString(R.string.action_disable) else context.getString(R.string.action_enable), onClick = onToggle)
         Spacer(Modifier.width(6.dp))
@@ -133,19 +133,19 @@ internal fun SkillsScreen(
         Modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
-        KimiCardBox {
+        ModernCardBox {
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                 Icon(Icons.Default.School, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
                 Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                     Text(context.getString(R.string.label_skills_capability), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
                     Text(
                         context.getString(R.string.skills_description),
-                        color = KimiMuted,
+                        color = ModernMutedDark,
                         style = MaterialTheme.typography.bodySmall,
                     )
                 }
             }
-            KimiDivider()
+            ModernDivider()
             KimiMenuRow(
                 icon = Icons.Default.UploadFile,
                 title = context.getString(R.string.action_import_skills),
@@ -154,15 +154,15 @@ internal fun SkillsScreen(
             )
         }
         if (status.isNotBlank()) {
-            Text(status, color = KimiMuted, style = MaterialTheme.typography.labelMedium)
+            Text(status, color = ModernMutedDark, style = MaterialTheme.typography.labelMedium)
         }
         if (skills.isEmpty()) {
-            KimiCardBox {
+            ModernCardBox {
                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                         Icon(Icons.Default.Extension, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
                         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                             Text(context.getString(R.string.notice_no_skills), style = MaterialTheme.typography.titleMedium)
-                            Text(context.getString(R.string.skills_empty_hint), color = KimiMuted)
+                            Text(context.getString(R.string.skills_empty_hint), color = ModernMutedDark)
                         }
                     }
                 }
@@ -170,14 +170,14 @@ internal fun SkillsScreen(
             KimiSectionLabel(context.getString(R.string.label_installed))
         }
         if (skills.isNotEmpty()) {
-            KimiCardBox {
+            ModernCardBox {
                 skills.forEachIndexed { index, skill ->
                     SkillSettingsRow(
                         skill = skill,
                         onToggle = { onToggleSkill(skill.id, !skill.enabled) },
                         onDelete = { deleteTarget = skill },
                     )
-                    if (index != skills.lastIndex) KimiDivider()
+                    if (index != skills.lastIndex) ModernDivider()
                 }
             }
         }
@@ -198,7 +198,7 @@ internal fun SkillImportModeDialog(
     ) {
         Card(
             modifier = Modifier.fillMaxWidth(0.9f),
-            shape = RoundedCornerShape(28.dp),
+            shape = RoundedCornerShape(12.dp),
             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         ) {
             Column(
@@ -211,14 +211,14 @@ internal fun SkillImportModeDialog(
                     subtitle = context.getString(R.string.label_import_file_hint),
                     onClick = onImportFile,
                 )
-                KimiDivider()
+                ModernDivider()
                 SkillImportModeRow(
                     icon = Icons.Default.CloudDownload,
                     title = context.getString(R.string.action_import_from_repo),
                     subtitle = context.getString(R.string.label_import_repo_hint),
                     onClick = onImportRepository,
                 )
-                KimiDivider()
+                ModernDivider()
                 SkillImportModeRow(
                     icon = Icons.Default.Add,
                     title = context.getString(R.string.action_manual_add),
@@ -250,7 +250,7 @@ internal fun SkillImportModeRow(
             Text(title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
             Text(subtitle, color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
         }
-        Icon(Icons.Default.ChevronRight, contentDescription = null, tint = KimiMuted)
+        Icon(Icons.Default.ChevronRight, contentDescription = null, tint = ModernMutedDark)
     }
 }
 
@@ -269,7 +269,7 @@ internal fun SkillRepositoryImportDialog(
             modifier = Modifier
                 .fillMaxWidth(0.92f)
                 .heightIn(max = 620.dp),
-            shape = RoundedCornerShape(28.dp),
+            shape = RoundedCornerShape(12.dp),
             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         ) {
             Column(
@@ -302,7 +302,7 @@ internal fun SkillRepositoryImportDialog(
                     Button(
                         onClick = { onImportRepository(repoUrl.trim()) },
                         enabled = repoUrl.trim().isNotBlank(),
-                        shape = KimiPillShape,
+                        shape = ModernPillShape,
                     ) {
                         Icon(Icons.Default.CloudDownload, contentDescription = null)
                         Spacer(Modifier.width(8.dp))
@@ -355,7 +355,7 @@ internal fun SkillManualImportDialog(
             modifier = Modifier
                 .fillMaxWidth(0.92f)
                 .heightIn(max = 620.dp),
-            shape = RoundedCornerShape(28.dp),
+            shape = RoundedCornerShape(12.dp),
             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         ) {
             Column(
@@ -389,7 +389,7 @@ internal fun SkillManualImportDialog(
                     Button(
                         onClick = { onImportMarkdown(manualText) },
                         enabled = manualText.isNotBlank(),
-                        shape = KimiPillShape,
+                        shape = ModernPillShape,
                     ) {
                         Icon(Icons.Default.Save, contentDescription = null)
                         Spacer(Modifier.width(8.dp))
@@ -435,7 +435,7 @@ internal fun SkillSettingsRow(skill: SkillPack, onToggle: () -> Unit, onDelete: 
                     style = MaterialTheme.typography.bodySmall,
                 )
             }
-            Text(context.getString(R.string.label_files_and_id, skill.fileCount, skill.id), color = KimiMuted, style = MaterialTheme.typography.labelSmall)
+            Text(context.getString(R.string.label_files_and_id, skill.fileCount, skill.id), color = ModernMutedDark, style = MaterialTheme.typography.labelSmall)
         }
         Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(4.dp)) {
             Switch(checked = skill.enabled, onCheckedChange = { onToggle() })

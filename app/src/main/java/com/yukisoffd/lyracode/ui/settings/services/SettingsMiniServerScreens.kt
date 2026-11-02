@@ -178,37 +178,37 @@ internal fun MiniServerSettings(
         revision++
     }
 
-    KimiCardBox {
+    ModernCardBox {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(Icons.Default.Language, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
             Spacer(Modifier.width(12.dp))
             Column(Modifier.weight(1f)) {
                 Text(uiText(R.string.title_workspace_mini_server), style = MaterialTheme.typography.titleMedium)
-                Text(uiText(R.string.mini_server_desc), color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+                Text(uiText(R.string.mini_server_desc), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
             }
-            Text(if (status.running) uiText(R.string.label_server_running) else uiText(R.string.notice_server_stopped), color = if (status.running) MaterialTheme.colorScheme.primary else KimiMuted)
+            Text(if (status.running) uiText(R.string.label_server_running) else uiText(R.string.notice_server_stopped), color = if (status.running) MaterialTheme.colorScheme.primary else ModernMutedDark)
         }
-        KimiDivider()
+        ModernDivider()
         Text(
             stringResource(R.string.label_local_address, status.url),
-            color = KimiMuted,
+            color = ModernMutedDark,
             style = MaterialTheme.typography.bodySmall,
         )
         if (lanUrls.isNotEmpty()) {
-            Text(uiText(R.string.ui_lan_address) + lanUrls.joinToString("  "), color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+            Text(uiText(R.string.ui_lan_address) + lanUrls.joinToString("  "), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
         }
         if (customUrls.isNotEmpty()) {
-            Text(uiText(R.string.ui_bound_domains) + customUrls.joinToString("  "), color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+            Text(uiText(R.string.ui_bound_domains) + customUrls.joinToString("  "), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
         }
         if (status.message.isNotBlank()) {
-            Text(status.message, color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+            Text(status.message, color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
         }
         if (statusText.isNotBlank()) {
             Text(statusText, color = MaterialTheme.colorScheme.primary, style = MaterialTheme.typography.bodySmall)
         }
         OutlinedButton(
             onClick = onOpenLogs,
-            shape = KimiPillShape,
+            shape = ModernPillShape,
             modifier = Modifier.fillMaxWidth(),
         ) {
             Icon(Icons.Default.Article, contentDescription = null)
@@ -217,18 +217,18 @@ internal fun MiniServerSettings(
         }
     }
 
-    KimiCardBox {
+    ModernCardBox {
         Text(uiText(R.string.title_listen_config), style = MaterialTheme.typography.titleMedium)
-        KimiDivider()
+        ModernDivider()
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.fillMaxWidth()) {
             OutlinedButton(
                 onClick = { protocol = AppSettings.MINI_SERVER_PROTOCOL_HTTP },
-                shape = KimiPillShape,
+                shape = ModernPillShape,
                 modifier = Modifier.weight(1f),
             ) { Text(if (protocol == AppSettings.MINI_SERVER_PROTOCOL_HTTP) "HTTP ✓" else "HTTP") }
             OutlinedButton(
                 onClick = { protocol = AppSettings.MINI_SERVER_PROTOCOL_HTTPS },
-                shape = KimiPillShape,
+                shape = ModernPillShape,
                 modifier = Modifier.weight(1f),
             ) { Text(if (protocol == AppSettings.MINI_SERVER_PROTOCOL_HTTPS) "HTTPS ✓" else "HTTPS") }
         }
@@ -236,7 +236,7 @@ internal fun MiniServerSettings(
             Text(uiText(R.string.notice_https_self_signed), color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodySmall)
         }
         OutlinedTextField(value = host, onValueChange = { host = it }, modifier = Modifier.fillMaxWidth(), label = { Text(uiText(R.string.label_listen_host)) }, singleLine = true)
-        Text(uiText(R.string.listen_host_hint), color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+        Text(uiText(R.string.listen_host_hint), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
         OutlinedTextField(value = portText, onValueChange = { portText = it.filter(Char::isDigit).take(5) }, modifier = Modifier.fillMaxWidth(), label = { Text(uiText(R.string.label_port)) }, singleLine = true)
         OutlinedTextField(value = username, onValueChange = { username = it }, modifier = Modifier.fillMaxWidth(), label = { Text(uiText(R.string.label_access_username)) }, singleLine = true)
         OutlinedTextField(value = password, onValueChange = { password = it }, modifier = Modifier.fillMaxWidth(), label = { Text(uiText(R.string.label_access_password_optional)) }, visualTransformation = PasswordVisualTransformation(), singleLine = true)
@@ -253,19 +253,19 @@ internal fun MiniServerSettings(
         }
     }
 
-    KimiCardBox {
+    ModernCardBox {
         Text(uiText(R.string.title_https_cert), style = MaterialTheme.typography.titleMedium)
-        KimiDivider()
-        Text(uiText(R.string.https_cert_desc), color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+        ModernDivider()
+        Text(uiText(R.string.https_cert_desc), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.fillMaxWidth()) {
             OutlinedButton(
                 onClick = { keyStoreLauncher.launch("*/*") },
-                shape = KimiPillShape,
+                shape = ModernPillShape,
                 modifier = Modifier.weight(1f),
             ) { Text(if (tlsKeyStoreBase64.isBlank()) uiText(R.string.action_upload_keystore) else uiText(R.string.action_replace_keystore)) }
             OutlinedButton(
                 onClick = { tlsKeyStoreBase64 = "" },
-                shape = KimiPillShape,
+                shape = ModernPillShape,
                 enabled = tlsKeyStoreBase64.isNotBlank(),
                 modifier = Modifier.weight(1f),
             ) { Text(uiText(R.string.action_clear_keystore)) }
@@ -279,8 +279,8 @@ internal fun MiniServerSettings(
             singleLine = true,
         )
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.fillMaxWidth()) {
-            OutlinedButton(onClick = { certChainLauncher.launch("*/*") }, shape = KimiPillShape, modifier = Modifier.weight(1f)) { Text(uiText(R.string.action_upload_cert_chain)) }
-            OutlinedButton(onClick = { privateKeyLauncher.launch("*/*") }, shape = KimiPillShape, modifier = Modifier.weight(1f)) { Text(uiText(R.string.action_upload_private_key)) }
+            OutlinedButton(onClick = { certChainLauncher.launch("*/*") }, shape = ModernPillShape, modifier = Modifier.weight(1f)) { Text(uiText(R.string.action_upload_cert_chain)) }
+            OutlinedButton(onClick = { privateKeyLauncher.launch("*/*") }, shape = ModernPillShape, modifier = Modifier.weight(1f)) { Text(uiText(R.string.action_upload_private_key)) }
         }
         OutlinedTextField(
             value = tlsCertificateChain,
@@ -299,9 +299,9 @@ internal fun MiniServerSettings(
         )
     }
 
-    KimiCardBox {
+    ModernCardBox {
         Text(uiText(R.string.title_site_behavior), style = MaterialTheme.typography.titleMedium)
-        KimiDivider()
+        ModernDivider()
         WebDavSwitchRow(uiText(R.string.switch_spa_fallback), uiText(R.string.switch_spa_fallback_desc), spaFallback) { spaFallback = it }
         WebDavSwitchRow(uiText(R.string.switch_directory_listing), uiText(R.string.switch_directory_listing_desc), directoryListing) { directoryListing = it }
         WebDavSwitchRow(uiText(R.string.switch_mdns), uiText(R.string.switch_mdns_desc), mdnsEnabled) { mdnsEnabled = it }
@@ -310,16 +310,16 @@ internal fun MiniServerSettings(
         }
     }
 
-    KimiCardBox {
+    ModernCardBox {
         Text(uiText(R.string.title_operations), style = MaterialTheme.typography.titleMedium)
-        KimiDivider()
+        ModernDivider()
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.fillMaxWidth()) {
             Button(
                 onClick = {
                     settings.saveMiniServerConfig(currentConfig())
                     refresh(uiText(R.string.notice_mini_server_config_saved))
                 },
-                shape = KimiPillShape,
+                shape = ModernPillShape,
                 modifier = Modifier.weight(1f),
             ) { Text(uiText(R.string.file_editor_save)) }
             Button(
@@ -333,7 +333,7 @@ internal fun MiniServerSettings(
                         refresh(result)
                     }
                 },
-                shape = KimiPillShape,
+                shape = ModernPillShape,
                 modifier = Modifier.weight(1f),
             ) { Text(if (status.running) uiText(R.string.action_restart) else uiText(R.string.action_start)) }
         }
@@ -347,7 +347,7 @@ internal fun MiniServerSettings(
                     refresh(result)
                 }
             },
-            shape = KimiPillShape,
+            shape = ModernPillShape,
             enabled = status.running,
             modifier = Modifier.fillMaxWidth(),
         ) { Text(uiText(R.string.action_stop_service)) }
@@ -384,7 +384,7 @@ internal fun MiniServerLogSettings(miniServerManager: MiniServerManager) {
         terminalScroll.animateScrollTo(terminalScroll.maxValue)
     }
 
-    KimiCardBox {
+    ModernCardBox {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(Icons.Default.Terminal, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
             Spacer(Modifier.width(12.dp))
@@ -392,7 +392,7 @@ internal fun MiniServerLogSettings(miniServerManager: MiniServerManager) {
                 Text(uiText(R.string.title_terminal_log), style = MaterialTheme.typography.titleMedium)
                 Text(
                     uiText(R.string.terminal_log_desc),
-                    color = KimiMuted,
+                    color = ModernMutedDark,
                     style = MaterialTheme.typography.bodySmall,
                 )
             }
@@ -405,7 +405,7 @@ internal fun MiniServerLogSettings(miniServerManager: MiniServerManager) {
                 Icon(Icons.Default.DeleteSweep, contentDescription = uiText(R.string.cd_clear_logs), tint = MaterialTheme.colorScheme.primary)
             }
         }
-        KimiDivider()
+        ModernDivider()
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -415,7 +415,7 @@ internal fun MiniServerLogSettings(miniServerManager: MiniServerManager) {
         ) {
             Text(
                 "${if (payload.optBoolean("running")) "RUNNING" else "STOPPED"} · ${payload.optString("workspace")} · ${payload.optInt("count")} lines",
-                color = KimiMuted,
+                color = ModernMutedDark,
                 fontFamily = FontFamily.Monospace,
                 style = MaterialTheme.typography.labelMedium,
                 maxLines = 1,
@@ -423,7 +423,7 @@ internal fun MiniServerLogSettings(miniServerManager: MiniServerManager) {
             levels.forEach { (value, label) ->
                 TextButton(
                     onClick = { levelFilter = value },
-                    shape = KimiPillShape,
+                    shape = ModernPillShape,
                     contentPadding = PaddingValues(horizontal = 10.dp, vertical = 4.dp),
                 ) {
                     Text(

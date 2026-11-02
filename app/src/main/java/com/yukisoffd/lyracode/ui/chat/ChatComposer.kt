@@ -158,7 +158,7 @@ internal fun ChatMessageComposer(
                     .systemBarsPadding()
                     .navigationBarsPadding()
                     .padding(12.dp),
-                shape = RoundedCornerShape(28.dp),
+                shape = RoundedCornerShape(12.dp),
                 colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
             ) {
                 Column(
@@ -476,20 +476,20 @@ internal fun ContextWindowInfoDialog(
                 )
                 Text(
                     stringResource(R.string.context_usage_details, usage.contextMessageCount, usage.turnsSinceCompression),
-                    color = KimiMuted,
+                    color = ModernMutedDark,
                     style = MaterialTheme.typography.bodySmall,
                 )
                 if (usage.hasCompressedHistory) {
                     Text(stringResource(R.string.context_contains_summary), color = MaterialTheme.colorScheme.primary)
                 }
-                Text(stringResource(R.string.context_estimate_warning), color = KimiMuted, style = MaterialTheme.typography.bodySmall)
-                KimiDivider()
+                Text(stringResource(R.string.context_estimate_warning), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+                ModernDivider()
                 Text(stringResource(R.string.label_history_compression_model), style = MaterialTheme.typography.titleSmall)
                 Text(
                     settings.historyCompressionModel.ifBlank {
                         stringResource(R.string.current_conversation_model, controller.activeModel.value)
                     },
-                    color = KimiMuted,
+                    color = ModernMutedDark,
                     style = MaterialTheme.typography.bodyMedium,
                 )
                 OutlinedTextField(
@@ -530,12 +530,12 @@ internal fun ContextWindowInfoDialog(
                     ContextCompressionDialogStatus.WAITING_FOR_RESPONSE -> {
                         Text(
                             stringResource(R.string.status_history_compression_wait_for_response),
-                            color = KimiMuted,
+                            color = ModernMutedDark,
                             style = MaterialTheme.typography.bodySmall,
                         )
                     }
                     ContextCompressionDialogStatus.IDLE -> if (resultMessage.isNotBlank()) {
-                        Text(resultMessage, color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+                        Text(resultMessage, color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
                     }
                 }
             }
@@ -867,7 +867,7 @@ internal fun AttachmentActionBottomSheet(
                                 }
                                 Text(
                                     stringResource(R.string.auto_compression_limit_warning),
-                                    color = KimiMuted,
+                                    color = ModernMutedDark,
                                     style = MaterialTheme.typography.bodySmall,
                                 )
                             }
@@ -881,7 +881,7 @@ internal fun AttachmentActionBottomSheet(
                                 ActionSheetTile(Icons.Default.PhotoCamera, stringResource(R.string.action_camera), Modifier.weight(1f), onTakePhoto)
                                 ActionSheetTile(Icons.Default.AttachFile, stringResource(R.string.action_file), Modifier.weight(1f), onPickFile)
                             }
-                            KimiDivider()
+                            ModernDivider()
                             ActionSheetRow(
                                 icon = Icons.Default.Cloud,
                                 title = stringResource(R.string.label_provider),
@@ -1033,7 +1033,7 @@ internal fun ActionSheetRow(
         Column(Modifier.weight(1f)) {
             Text(title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
             if (subtitle.isNotBlank()) {
-                Text(subtitle, color = KimiMuted, style = MaterialTheme.typography.bodySmall, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                Text(subtitle, color = ModernMutedDark, style = MaterialTheme.typography.bodySmall, maxLines = 1, overflow = TextOverflow.Ellipsis)
             }
         }
         trailing?.let { Icon(it, contentDescription = null, tint = MaterialTheme.colorScheme.primary) }
@@ -1063,7 +1063,7 @@ internal fun ActionSheetSwitchRow(
         Column(Modifier.weight(1f)) {
             Text(title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurface.copy(alpha = alpha))
             if (subtitle.isNotBlank()) {
-                Text(subtitle, color = KimiMuted.copy(alpha = alpha), style = MaterialTheme.typography.bodySmall, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                Text(subtitle, color = ModernMutedDark.copy(alpha = alpha), style = MaterialTheme.typography.bodySmall, maxLines = 1, overflow = TextOverflow.Ellipsis)
             }
         }
         Switch(checked = checked, enabled = enabled, onCheckedChange = onCheckedChange)
@@ -1136,7 +1136,7 @@ internal fun MediaThumb(name: String, uri: String, kind: String, onRemove: (() -
                 modifier = Modifier
                     .align(Alignment.Center)
                     .clickable(enabled = kind == "video" || kind == "audio") { previewOpen = true },
-                color = KimiMuted,
+                color = ModernMutedDark,
                 style = MaterialTheme.typography.labelSmall,
             )
         }
@@ -1197,7 +1197,7 @@ internal fun MediaPlaceholder(name: String, kind: String, source: String = "", o
     ) {
         Column(Modifier.align(Alignment.CenterStart)) {
             Text(if (kind == "video") uiText(R.string.label_video) else uiText(R.string.media_preview_audio), style = MaterialTheme.typography.labelMedium)
-            Text(name, maxLines = 1, overflow = TextOverflow.Ellipsis, color = KimiMuted, style = MaterialTheme.typography.labelSmall)
+            Text(name, maxLines = 1, overflow = TextOverflow.Ellipsis, color = ModernMutedDark, style = MaterialTheme.typography.labelSmall)
         }
         if (onRemove != null) {
             TextButton(onClick = onRemove, modifier = Modifier.align(Alignment.TopEnd).size(28.dp), contentPadding = PaddingValues(0.dp)) {

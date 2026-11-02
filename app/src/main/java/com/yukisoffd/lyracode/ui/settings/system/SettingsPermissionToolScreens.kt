@@ -118,7 +118,7 @@ internal fun SystemPermissionSettings(
             Shizuku.removeBinderDeadListener(binderDeadListener)
         }
     }
-    KimiCardBox {
+    ModernCardBox {
         Row(Modifier.fillMaxWidth().padding(vertical = 8.dp), verticalAlignment = Alignment.CenterVertically) {
             Icon(Icons.Default.Security, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
             Spacer(Modifier.width(12.dp))
@@ -126,7 +126,7 @@ internal fun SystemPermissionSettings(
                 Text(uiText(R.string.title_root_permission), style = MaterialTheme.typography.titleSmall)
                 Text(
                     uiText(R.string.root_permission_desc),
-                    color = KimiMuted,
+                    color = ModernMutedDark,
                     style = MaterialTheme.typography.bodySmall,
                 )
             }
@@ -138,7 +138,7 @@ internal fun SystemPermissionSettings(
                 },
             )
         }
-        KimiDivider()
+        ModernDivider()
         Row(Modifier.fillMaxWidth().padding(vertical = 8.dp), verticalAlignment = Alignment.CenterVertically) {
             Icon(Icons.Default.Terminal, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
             Spacer(Modifier.width(12.dp))
@@ -150,7 +150,7 @@ internal fun SystemPermissionSettings(
                         shizukuRunning -> uiText(R.string.shell_shizuku_running)
                         else -> uiText(R.string.shell_need_shizuku)
                     },
-                    color = if (shellGranted) MaterialTheme.colorScheme.primary else KimiMuted,
+                    color = if (shellGranted) MaterialTheme.colorScheme.primary else ModernMutedDark,
                     style = MaterialTheme.typography.bodySmall,
                 )
             }
@@ -166,7 +166,7 @@ internal fun SystemPermissionSettings(
             )
         }
     }
-    KimiCardBox {
+    ModernCardBox {
         OutlinedTextField(
             value = suCommand,
             onValueChange = {
@@ -210,8 +210,8 @@ internal fun SystemPermissionSettings(
                 Text(uiText(R.string.action_detect_root))
             }
         }
-        Text(rootStatus, color = KimiMuted, style = MaterialTheme.typography.bodySmall)
-        KimiDivider()
+        Text(rootStatus, color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+        ModernDivider()
         SettingsExternalLinkRow(
             icon = Icons.Default.Link,
             title = "Shizuku GitHub",
@@ -221,7 +221,7 @@ internal fun SystemPermissionSettings(
     }
     Text(
         uiText(R.string.system_permissions_hint),
-        color = KimiMuted,
+        color = ModernMutedDark,
         style = MaterialTheme.typography.bodySmall,
     )
 }
@@ -243,7 +243,7 @@ internal fun PermissionSettings(termuxExecutor: TermuxExecutor) {
     val permissions = remember(context, termuxExecutor, revision) {
         appPermissionRows(context, termuxExecutor)
     }
-    KimiCardBox {
+    ModernCardBox {
         permissions.forEachIndexed { index, row ->
             val displayStatus = if (row.title == uiText(R.string.permission_read_app_list)) {
                 row.status
@@ -266,10 +266,10 @@ internal fun PermissionSettings(termuxExecutor: TermuxExecutor) {
                     openAppSettings(context)
                 }
             }
-            if (index != permissions.lastIndex) KimiDivider()
+            if (index != permissions.lastIndex) ModernDivider()
         }
     }
-    Text(uiText(R.string.permission_hint), color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+    Text(uiText(R.string.permission_hint), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
 }
 
 @Composable
@@ -295,7 +295,7 @@ internal fun AgentToolSettings(settings: AppSettings, termuxExecutor: TermuxExec
             matches("MCP ${server.name} ${tool.name} ${tool.description} ${settings.mcpToolFunctionName(server, tool)}")
         }
     }
-    KimiCardBox {
+    ModernCardBox {
         Text(uiText(R.string.title_search_tools), style = MaterialTheme.typography.titleSmall)
         CapsuleTextField(
             value = query,
@@ -310,13 +310,13 @@ internal fun AgentToolSettings(settings: AppSettings, termuxExecutor: TermuxExec
                     filteredLocalTools.size + filteredMcpTools.size,
                     localTools.size + mcpTools.size,
                 ),
-            color = KimiMuted,
+            color = ModernMutedDark,
             style = MaterialTheme.typography.labelSmall,
         )
     }
-    KimiCardBox {
+    ModernCardBox {
         if (filteredLocalTools.isEmpty() && filteredMcpTools.isEmpty()) {
-            Text(uiText(R.string.notice_no_matching_tools), color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+            Text(uiText(R.string.notice_no_matching_tools), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
         }
         filteredLocalTools.forEachIndexed { index, tool ->
             val lockedByPermission = tool.name == "run_command" && !termuxGranted
@@ -324,16 +324,16 @@ internal fun AgentToolSettings(settings: AppSettings, termuxExecutor: TermuxExec
             Row(Modifier.fillMaxWidth().padding(vertical = 8.dp), verticalAlignment = Alignment.CenterVertically) {
                 Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
                     Text(tool.title, style = MaterialTheme.typography.titleSmall)
-                    Text(tool.name, color = KimiMuted, style = MaterialTheme.typography.labelSmall)
-                    Text(tool.description, color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+                    Text(tool.name, color = ModernMutedDark, style = MaterialTheme.typography.labelSmall)
+                    Text(tool.description, color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
                     if (lockedByPermission) {
                         Text(uiText(R.string.notice_termux_permission_required), color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.labelSmall)
                     }
                     if (tool.name == "ssh_exec" && !sshToolsEnabled) {
-                        Text(uiText(R.string.notice_ssh_not_configured), color = KimiMuted, style = MaterialTheme.typography.labelSmall)
+                        Text(uiText(R.string.notice_ssh_not_configured), color = ModernMutedDark, style = MaterialTheme.typography.labelSmall)
                     }
                     if (protectedTool) {
-                        Text(uiText(R.string.notice_protected_tool), color = KimiMuted, style = MaterialTheme.typography.labelSmall)
+                        Text(uiText(R.string.notice_protected_tool), color = ModernMutedDark, style = MaterialTheme.typography.labelSmall)
                     }
                 }
                 Switch(
@@ -345,15 +345,15 @@ internal fun AgentToolSettings(settings: AppSettings, termuxExecutor: TermuxExec
                     },
                 )
             }
-            if (index != filteredLocalTools.lastIndex || filteredMcpTools.isNotEmpty()) KimiDivider()
+            if (index != filteredLocalTools.lastIndex || filteredMcpTools.isNotEmpty()) ModernDivider()
         }
         filteredMcpTools.forEachIndexed { index, (server, tool) ->
             val functionName = settings.mcpToolFunctionName(server, tool)
             Row(Modifier.fillMaxWidth().padding(vertical = 8.dp), verticalAlignment = Alignment.CenterVertically) {
                 Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
                     Text("MCP · ${server.name} / ${tool.name}", style = MaterialTheme.typography.titleSmall)
-                    Text(functionName, color = KimiMuted, style = MaterialTheme.typography.labelSmall)
-                    Text(tool.description.ifBlank { uiText(R.string.label_remote_mcp_tool) }, color = KimiMuted, style = MaterialTheme.typography.bodySmall, maxLines = 2, overflow = TextOverflow.Ellipsis)
+                    Text(functionName, color = ModernMutedDark, style = MaterialTheme.typography.labelSmall)
+                    Text(tool.description.ifBlank { uiText(R.string.label_remote_mcp_tool) }, color = ModernMutedDark, style = MaterialTheme.typography.bodySmall, maxLines = 2, overflow = TextOverflow.Ellipsis)
                 }
                 Switch(
                     checked = functionName !in disabled,
@@ -363,7 +363,7 @@ internal fun AgentToolSettings(settings: AppSettings, termuxExecutor: TermuxExec
                     },
                 )
             }
-            if (index != filteredMcpTools.lastIndex) KimiDivider()
+            if (index != filteredMcpTools.lastIndex) ModernDivider()
         }
     }
 }
@@ -373,16 +373,16 @@ internal fun TermuxSettings(settings: AppSettings, termuxExecutor: TermuxExecuto
     val context = LocalContext.current
     var revision by remember { mutableIntStateOf(0) }
     val permissionGranted = remember(revision) { termuxExecutor.hasRunCommandPermission() }
-    KimiCardBox {
+    ModernCardBox {
         KimiMenuRow(Icons.Default.Terminal, "Termux", if (termuxExecutor.isTermuxInstalled()) uiText(R.string.label_termux_installed) else uiText(R.string.label_termux_not_installed))
-        KimiDivider()
+        ModernDivider()
         KimiMenuRow(Icons.Default.Extension, "Termux:API", if (termuxExecutor.isTermuxApiInstalled()) uiText(R.string.label_available) else uiText(R.string.label_termux_not_installed))
-        KimiDivider()
+        ModernDivider()
         KimiMenuRow(Icons.Default.CheckCircle, uiText(R.string.ui_run_command_permission), if (permissionGranted) uiText(R.string.label_granted) else uiText(R.string.label_click_to_grant)) {
             requestTermuxRunCommandPermission(context)
             revision++
         }
-        KimiDivider()
+        ModernDivider()
         KimiMenuRow(Icons.Default.Folder, uiText(R.string.menu_termux_path), workspaceManager.termuxRootPath() ?: uiText(R.string.termux_path_primary))
     }
     TermuxSetupGuide()
@@ -410,7 +410,7 @@ internal fun ProotLinuxSettings() {
         }
     }
 
-    KimiCardBox {
+    ModernCardBox {
         Row(Modifier.fillMaxWidth().padding(vertical = 8.dp), verticalAlignment = Alignment.CenterVertically) {
             Icon(Icons.Default.Terminal, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
             Spacer(Modifier.width(12.dp))
@@ -418,7 +418,7 @@ internal fun ProotLinuxSettings() {
                 Text(uiText(R.string.proot_linux_title), style = MaterialTheme.typography.titleSmall)
                 Text(
                     if (runtime.isSupported()) uiText(R.string.proot_linux_count, state.instances.size) else uiText(R.string.debian_runtime_unsupported),
-                    color = KimiMuted,
+                    color = ModernMutedDark,
                     style = MaterialTheme.typography.bodySmall,
                 )
             }
@@ -453,7 +453,7 @@ internal fun ProotLinuxSettings() {
             )
             Text(
                 state.message.ifBlank { uiText(R.string.proot_linux_working) },
-                color = KimiMuted,
+                color = ModernMutedDark,
                 style = MaterialTheme.typography.bodySmall,
             )
         }
@@ -481,11 +481,11 @@ internal fun ProotLinuxSettings() {
             ) { Text(uiText(R.string.proot_linux_import_action)) }
         }
     }
-    KimiCardBox {
+    ModernCardBox {
         Text(uiText(R.string.proot_linux_supported_files), style = MaterialTheme.typography.titleSmall)
-        Text(uiText(R.string.proot_linux_supported_files_desc), color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+        Text(uiText(R.string.proot_linux_supported_files_desc), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
         Text(uiText(R.string.proot_linux_iso_warning), color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodySmall)
-        KimiDivider()
+        ModernDivider()
         Text(uiText(R.string.proot_linux_download_sources), style = MaterialTheme.typography.titleSmall)
         SettingsExternalLinkRow(
             icon = Icons.Default.CloudDownload,
@@ -493,7 +493,7 @@ internal fun ProotLinuxSettings() {
             subtitle = uiText(R.string.proot_linux_alpine_source_hint, if (architecture == ProotArchitecture.X86_64) "x86_64" else "aarch64"),
             url = "https://www.alpinelinux.org/downloads/",
         )
-        KimiDivider()
+        ModernDivider()
         SettingsExternalLinkRow(
             icon = Icons.Default.CloudDownload,
             title = "Ubuntu Base",
@@ -501,7 +501,7 @@ internal fun ProotLinuxSettings() {
             url = "https://cdimage.ubuntu.com/ubuntu-base/releases/",
         )
         if (architecture == ProotArchitecture.ARM64) {
-            KimiDivider()
+            ModernDivider()
             SettingsExternalLinkRow(
                 icon = Icons.Default.CloudDownload,
                 title = "Arch Linux ARM",
@@ -509,7 +509,7 @@ internal fun ProotLinuxSettings() {
                 url = "https://archlinuxarm.org/about/downloads",
             )
         }
-        KimiDivider()
+        ModernDivider()
         SettingsExternalLinkRow(
             icon = Icons.Default.Info,
             title = "Termux PRoot Distro",
@@ -518,25 +518,25 @@ internal fun ProotLinuxSettings() {
         )
     }
     if (state.instances.isNotEmpty()) {
-        KimiCardBox {
+        ModernCardBox {
             state.instances.forEachIndexed { index, linux ->
                 Row(Modifier.fillMaxWidth().padding(vertical = 8.dp), verticalAlignment = Alignment.CenterVertically) {
                     Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
                         Text(linux.name, style = MaterialTheme.typography.titleSmall)
-                        Text("Linux ID: ${linux.id}", color = KimiMuted, style = MaterialTheme.typography.labelSmall)
+                        Text("Linux ID: ${linux.id}", color = ModernMutedDark, style = MaterialTheme.typography.labelSmall)
                     }
                     Switch(checked = linux.enabled, onCheckedChange = { runtime.setEnabled(linux.id, it) })
                     IconButton(onClick = { deleteId = linux.id }) {
                         Icon(Icons.Default.Delete, contentDescription = uiText(R.string.proot_linux_delete_action), tint = MaterialTheme.colorScheme.error)
                     }
                 }
-                if (index != state.instances.lastIndex) KimiDivider()
+                if (index != state.instances.lastIndex) ModernDivider()
             }
         }
     }
     Text(
         uiText(R.string.proot_linux_preservation_hint),
-        color = KimiMuted,
+        color = ModernMutedDark,
         style = MaterialTheme.typography.bodySmall,
     )
 
@@ -783,7 +783,7 @@ internal fun TermuxSetupGuide() {
         "mkdir -p ~/.termux && (grep -qxF 'allow-external-apps=true' ~/.termux/termux.properties || echo 'allow-external-apps=true' >> ~/.termux/termux.properties) && termux-reload-settings"
     }
     val testCommand = remember { "python --version && pwd" }
-    KimiCardBox {
+    ModernCardBox {
         Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                 Icon(Icons.Default.Terminal, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
@@ -791,7 +791,7 @@ internal fun TermuxSetupGuide() {
             }
             Text(
                 uiText(R.string.termux_config_desc),
-                color = KimiMuted,
+                color = ModernMutedDark,
                 style = MaterialTheme.typography.bodySmall,
             )
             TermuxGuideStep("1", uiText(R.string.termux_step1))
@@ -839,9 +839,9 @@ internal fun SettingsExternalLinkRow(
         Icon(icon, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
             Text(title, style = MaterialTheme.typography.titleSmall)
-            Text(subtitle, color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+            Text(subtitle, color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
         }
-        Icon(Icons.Default.ChevronRight, contentDescription = null, tint = KimiMuted)
+        Icon(Icons.Default.ChevronRight, contentDescription = null, tint = ModernMutedDark)
     }
 }
 
@@ -857,7 +857,7 @@ internal fun TermuxGuideStep(index: String, text: String) {
         ) {
             Text(index, color = MaterialTheme.colorScheme.primary, style = MaterialTheme.typography.labelMedium)
         }
-        Text(text, modifier = Modifier.weight(1f), color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+        Text(text, modifier = Modifier.weight(1f), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
     }
 }
 
@@ -877,7 +877,7 @@ internal fun CommandCopyCard(command: String, buttonText: String, onCopy: () -> 
                 style = MaterialTheme.typography.bodySmall.copy(fontFamily = FontFamily.Monospace),
             )
         }
-        OutlinedButton(onClick = onCopy, shape = KimiPillShape) {
+        OutlinedButton(onClick = onCopy, shape = ModernPillShape) {
             Icon(Icons.Default.ContentCopy, contentDescription = null, modifier = Modifier.size(18.dp))
             Spacer(Modifier.width(8.dp))
             Text(buttonText)

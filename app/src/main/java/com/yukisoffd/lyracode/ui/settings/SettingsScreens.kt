@@ -247,8 +247,8 @@ internal fun SettingsScreen(
             extraSmall = RoundedCornerShape(14.dp),
             small = RoundedCornerShape(18.dp),
             medium = RoundedCornerShape(22.dp),
-            large = RoundedCornerShape(28.dp),
-            extraLarge = RoundedCornerShape(32.dp),
+            large = RoundedCornerShape(12.dp),
+            extraLarge = RoundedCornerShape(12.dp),
         ),
     ) {
         val renderPage: @Composable (String?) -> Unit = { target ->
@@ -508,7 +508,7 @@ internal fun SettingsScreen(
                     CompliancePageIds.PERSONAL_INFO,
                     CompliancePageIds.THIRD_PARTY,
                     CompliancePageIds.APP_PERMISSIONS -> ComplianceDocumentScreen(target)
-                    else -> Text(context.getString(R.string.settings_not_available), color = KimiMuted)
+                    else -> Text(context.getString(R.string.settings_not_available), color = ModernMutedDark)
                     }
                 }
                 return@pageContent
@@ -603,14 +603,14 @@ internal fun SettingsScreen(
             visibleGroups.forEach { (label, entries) ->
                 if (entries.isNotEmpty()) {
                     KimiSectionLabel(label)
-                    KimiCardBox {
+                    ModernCardBox {
                         entries.forEachIndexed { index, entry ->
                             KimiMenuRow(entry.icon, entry.title, entry.description,
                                 enabled = entry.target != "device_interaction" || com.yukisoffd.lyracode.interaction.DeviceInteractionAvailability.isSupported(),
                                 onDisabledClick = { showUnsupportedDevice = true }) {
                                 detail = entry.target
                             }
-                            if (index != entries.lastIndex) KimiDivider()
+                            if (index != entries.lastIndex) ModernDivider()
                         }
                     }
                 }
@@ -806,11 +806,11 @@ internal fun WorkspaceSettings(
     workspaceManager: WorkspaceManager,
     onPickWorkspace: () -> Unit,
 ) {
-    KimiCardBox {
+    ModernCardBox {
         KimiMenuRow(Icons.Default.Folder, uiText(R.string.menu_current_directory), workspaceDisplayName, onClick = onPickWorkspace)
-        KimiDivider()
+        ModernDivider()
         KimiMenuRow(Icons.Default.Terminal, uiText(R.string.menu_termux_path), workspaceManager.termuxRootPath() ?: uiText(R.string.termux_path_primary))
-        Text(uiText(R.string.workspace_hint), color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+        Text(uiText(R.string.workspace_hint), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
     }
 }
 

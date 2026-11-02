@@ -295,7 +295,7 @@ internal fun KimiDrawerContent(
                 .padding(horizontal = 14.dp, vertical = 14.dp),
         ) {
         item {
-            KimiCardBox {
+            ModernCardBox {
                 Row(
                     Modifier
                         .clip(RoundedCornerShape(18.dp))
@@ -331,7 +331,7 @@ internal fun KimiDrawerContent(
                             )
                         }
                         Spacer(Modifier.height(4.dp))
-                        KimiDivider()
+                        ModernDivider()
                     }
                 }
             }
@@ -353,12 +353,12 @@ internal fun KimiDrawerContent(
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .height(46.dp)
-                                    .clip(KimiPillShape)
+                                    .clip(ModernPillShape)
                                     .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.42f))
                                     .border(
                                         width = 1.dp,
                                         color = MaterialTheme.colorScheme.outline.copy(alpha = 0.18f),
-                                        shape = KimiPillShape,
+                                        shape = ModernPillShape,
                                     )
                                     .padding(3.dp),
                             ) {
@@ -441,7 +441,7 @@ internal fun KimiDrawerContent(
                             }
                             if (historyMode == "sessions" && selectedHistoryIds.isNotEmpty()) {
                                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
-                                    Text(context.getString(R.string.label_selected_count, selectedHistoryIds.size), modifier = Modifier.weight(1f), color = KimiMuted)
+                                    Text(context.getString(R.string.label_selected_count, selectedHistoryIds.size), modifier = Modifier.weight(1f), color = ModernMutedDark)
                                     KimiChip(context.getString(R.string.action_pin), onClick = {
                                         controller.setConversationsPinned(selectedHistoryIds, true)
                                         selectedHistoryIds = emptySet()
@@ -479,7 +479,7 @@ internal fun KimiDrawerContent(
                     DrawerHistoryContent(historyExpansionProgress) {
                         Text(
                             label,
-                            color = KimiMuted,
+                            color = ModernMutedDark,
                             style = MaterialTheme.typography.titleSmall,
                             modifier = historyContentModifier
                                 .padding(horizontal = 8.dp)
@@ -550,7 +550,7 @@ internal fun KimiDrawerContent(
                             ) {
                                 Text(
                                     context.getString(R.string.notice_no_project_sessions),
-                                    color = KimiMuted,
+                                    color = ModernMutedDark,
                                     style = MaterialTheme.typography.bodySmall,
                                     modifier = historyContentModifier
                                         .padding(start = 42.dp, end = 8.dp, top = 10.dp),
@@ -638,7 +638,7 @@ private fun HistoryModeButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val shape = KimiPillShape
+    val shape = ModernPillShape
     val containerColor by animateColorAsState(
         targetValue = if (selected) {
             MaterialTheme.colorScheme.primaryContainer
@@ -860,7 +860,7 @@ internal fun CapsuleTextField(
             Row(
                 Modifier
                     .fillMaxWidth()
-                    .clip(KimiPillShape)
+                    .clip(ModernPillShape)
                     .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.56f))
                     .padding(horizontal = 14.dp, vertical = 12.dp),
                 verticalAlignment = Alignment.CenterVertically,
@@ -878,7 +878,7 @@ internal fun CapsuleTextField(
                         ) { currentPlaceholder ->
                             Text(
                                 currentPlaceholder,
-                                color = KimiMuted,
+                                color = ModernMutedDark,
                                 maxLines = 1,
                                 overflow = TextOverflow.Ellipsis,
                             )
@@ -926,7 +926,7 @@ internal fun KimiDrawerShortcut(icon: String, label: String, onClick: () -> Unit
         verticalArrangement = Arrangement.spacedBy(4.dp),
     ) {
         Text(icon, style = MaterialTheme.typography.titleLarge)
-        Text(label, color = KimiMuted, style = MaterialTheme.typography.bodyMedium)
+        Text(label, color = ModernMutedDark, style = MaterialTheme.typography.bodyMedium)
     }
 }
 
@@ -1041,7 +1041,7 @@ private fun ProjectHeaderRow(
                 }
                 Text(
                     context.getString(R.string.project_session_count, conversationCount),
-                    color = KimiMuted,
+                    color = ModernMutedDark,
                     style = MaterialTheme.typography.labelSmall,
                 )
             }
@@ -1062,7 +1062,7 @@ private fun ProjectHeaderRow(
                 modifier = Modifier
                     .size(20.dp)
                     .graphicsLayer { rotationZ = expandIconRotation },
-                tint = KimiMuted,
+                tint = ModernMutedDark,
             )
         }
     }
@@ -1083,7 +1083,7 @@ internal fun KimiConversationRow(
     val borderWidth = if (selected) 2.dp else if (multiSelected) 1.5.dp else 0.dp
     val borderColor = when {
         selected -> MaterialTheme.colorScheme.primary
-        multiSelected -> KimiBlue
+        multiSelected -> ModernAccentDark
         else -> MaterialTheme.colorScheme.outline.copy(alpha = 0f)
     }
     Card(
@@ -1112,7 +1112,7 @@ internal fun KimiConversationRow(
                 }
                 Text(
                     listOf(conversation.status, conversation.model).filter { it.isNotBlank() }.joinToString(" · "),
-                    color = KimiMuted,
+                    color = ModernMutedDark,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     style = MaterialTheme.typography.labelMedium,

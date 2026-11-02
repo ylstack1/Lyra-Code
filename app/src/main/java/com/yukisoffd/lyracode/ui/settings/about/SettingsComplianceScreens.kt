@@ -52,7 +52,7 @@ private data class ComplianceSection(
 
 @Composable
 internal fun ServiceAgreementScreen(onOpenDocument: (String) -> Unit) {
-    KimiCardBox {
+    ModernCardBox {
         Row(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
@@ -61,34 +61,34 @@ internal fun ServiceAgreementScreen(onOpenDocument: (String) -> Unit) {
             Icon(Icons.Default.Policy, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
             Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
                 Text(stringResource(R.string.compliance_service_agreements), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
-                Text(stringResource(R.string.compliance_index_intro), color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+                Text(stringResource(R.string.compliance_index_intro), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
             }
         }
     }
     KimiSectionLabel(stringResource(R.string.compliance_documents))
-    KimiCardBox {
+    ModernCardBox {
         ComplianceMenuRow(Icons.Default.Gavel, R.string.compliance_user_agreement, R.string.compliance_user_agreement_desc) {
             onOpenDocument(CompliancePageIds.USER_AGREEMENT)
         }
-        KimiDivider()
+        ModernDivider()
         ComplianceMenuRow(Icons.Default.PrivacyTip, R.string.compliance_privacy_policy, R.string.compliance_privacy_policy_desc) {
             onOpenDocument(CompliancePageIds.PRIVACY_POLICY)
         }
-        KimiDivider()
+        ModernDivider()
         ComplianceMenuRow(Icons.AutoMirrored.Filled.FactCheck, R.string.compliance_personal_info_list, R.string.compliance_personal_info_list_desc) {
             onOpenDocument(CompliancePageIds.PERSONAL_INFO)
         }
-        KimiDivider()
+        ModernDivider()
         ComplianceMenuRow(Icons.Default.Hub, R.string.compliance_third_party_list, R.string.compliance_third_party_list_desc) {
             onOpenDocument(CompliancePageIds.THIRD_PARTY)
         }
-        KimiDivider()
+        ModernDivider()
         ComplianceMenuRow(Icons.Default.AdminPanelSettings, R.string.compliance_app_permissions, R.string.compliance_app_permissions_desc) {
             onOpenDocument(CompliancePageIds.APP_PERMISSIONS)
         }
     }
-    KimiCardBox {
-        Text(stringResource(R.string.compliance_review_notice), color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+    ModernCardBox {
+        Text(stringResource(R.string.compliance_review_notice), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
     }
 }
 
@@ -110,7 +110,7 @@ private fun ComplianceMenuRow(
 @Composable
 internal fun ComplianceDocumentScreen(pageId: String) {
     val document = complianceDocument(pageId)
-    KimiCardBox {
+    ModernCardBox {
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
             Icon(document.icon, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
             Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
@@ -119,12 +119,12 @@ internal fun ComplianceDocumentScreen(pageId: String) {
             }
         }
         SelectionContainer {
-            Text(stringResource(document.summary), color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+            Text(stringResource(document.summary), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
         }
     }
     document.sections.forEach { section ->
         KimiSectionLabel(stringResource(section.title))
-        KimiCardBox {
+        ModernCardBox {
             SelectionContainer {
                 Text(
                     text = stringResource(section.body),

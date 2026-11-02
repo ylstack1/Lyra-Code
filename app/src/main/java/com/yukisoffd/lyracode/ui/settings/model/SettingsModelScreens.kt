@@ -108,19 +108,19 @@ import kotlin.math.max
 
 @Composable
 internal fun ProfileSettingsSummary(settings: AppSettings, onServicesChanged: () -> Unit, onOpenChatGptAccount: () -> Unit, onOpenAccount: (String) -> Unit) {
-    KimiCardBox {
+    ModernCardBox {
         Row(verticalAlignment = Alignment.CenterVertically) {
             UserAvatar(settings.userAvatarPath, settings.userNickname.take(1).ifBlank { "L" }, Modifier.size(56.dp))
             Spacer(Modifier.width(12.dp))
             Column {
                 Text(settings.userNickname.ifBlank { uiText(R.string.default_user_name) }, style = MaterialTheme.typography.titleMedium)
-                Text(uiText(R.string.profile_hint), color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+                Text(uiText(R.string.profile_hint), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
             }
         }
     }
     KimiSectionLabel(uiText(R.string.mengxi_third_party_accounts))
-    KimiCardBox { NewApiAccountSection(settings, onServicesChanged, onOpenAccount) }
-    KimiCardBox { ChatGptAccountSection(settings, onOpenChatGptAccount) }
+    ModernCardBox { NewApiAccountSection(settings, onServicesChanged, onOpenAccount) }
+    ModernCardBox { ChatGptAccountSection(settings, onOpenChatGptAccount) }
 }
 
 @Composable
@@ -131,28 +131,28 @@ internal fun TopicSummaryModelSettings(
     onOpenOcr: () -> Unit,
     onOpenMedia: (MediaGenerationKind) -> Unit,
 ) {
-    KimiCardBox {
+    ModernCardBox {
         KimiMenuRow(
             icon = Icons.Default.Topic,
             title = uiText(R.string.ui_topic_summary_model),
             value = uiText(R.string.ui_generate_short_titles_for_new_conversations),
             onClick = onOpenTopic,
         )
-        KimiDivider()
+        ModernDivider()
         KimiMenuRow(
             icon = Icons.Default.Compress,
             title = uiText(R.string.label_history_compression_model),
             value = uiText(R.string.ui_choose_the_model_used_for_manual_and_automatic_compression),
             onClick = onOpenCompression,
         )
-        KimiDivider()
+        ModernDivider()
         KimiMenuRow(
             icon = Icons.Default.Visibility,
             title = uiText(R.string.label_vision_understanding_model),
             value = uiText(R.string.vision_understanding_model_desc),
             onClick = onOpenVision,
         )
-        KimiDivider()
+        ModernDivider()
         KimiMenuRow(
             icon = Icons.Default.DocumentScanner,
             title = uiText(R.string.label_ocr_model),
@@ -160,7 +160,7 @@ internal fun TopicSummaryModelSettings(
             onClick = onOpenOcr,
         )
         MediaGenerationKind.entries.forEach { kind ->
-            KimiDivider()
+            ModernDivider()
             KimiMenuRow(
                 icon = when (kind) {
                     MediaGenerationKind.IMAGE -> Icons.Default.Photo
@@ -197,13 +197,13 @@ internal fun VisionUnderstandingModelEditor(settings: AppSettings, controller: C
         AppSettings.VISION_SOURCE_MCP -> selectedMcp != null
         else -> selectedProfile != null && model.isNotBlank()
     }
-    KimiCardBox {
+    ModernCardBox {
         Text(uiText(R.string.label_vision_understanding_model), style = MaterialTheme.typography.titleMedium)
-        Text(uiText(R.string.vision_understanding_editor_desc), color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+        Text(uiText(R.string.vision_understanding_editor_desc), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
         Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
             Column(Modifier.weight(1f)) {
                 Text(uiText(R.string.action_enable_vision_understanding), style = MaterialTheme.typography.titleSmall)
-                Text(uiText(R.string.vision_understanding_privacy_hint), color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+                Text(uiText(R.string.vision_understanding_privacy_hint), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
             }
             Switch(checked = enabled, onCheckedChange = { enabled = it })
         }
@@ -288,9 +288,9 @@ internal fun VisionUnderstandingModelEditor(settings: AppSettings, controller: C
                 controller.settingsRevision.intValue++
                 notice = uiText(R.string.notice_vision_model_saved)
             },
-            shape = KimiPillShape,
+            shape = ModernPillShape,
         ) { Text(uiText(R.string.file_editor_save)) }
-        if (notice.isNotBlank()) Text(notice, color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+        if (notice.isNotBlank()) Text(notice, color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
     }
 }
 
@@ -305,13 +305,13 @@ internal fun OcrModelEditor(settings: AppSettings, controller: ChatController) {
         mutableStateOf(saved.model.takeIf { profileId == saved.profileId && it.isNotBlank() } ?: selectedProfile?.selectedModel.orEmpty())
     }
     var notice by remember { mutableStateOf("") }
-    KimiCardBox {
+    ModernCardBox {
         Text(uiText(R.string.label_ocr_model), style = MaterialTheme.typography.titleMedium)
-        Text(uiText(R.string.ocr_model_editor_desc), color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+        Text(uiText(R.string.ocr_model_editor_desc), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
         Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
             Column(Modifier.weight(1f)) {
                 Text(uiText(R.string.action_enable_ocr), style = MaterialTheme.typography.titleSmall)
-                Text(uiText(R.string.ocr_no_relay_prompt_hint), color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+                Text(uiText(R.string.ocr_no_relay_prompt_hint), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
             }
             Switch(checked = enabled, onCheckedChange = { enabled = it })
         }
@@ -356,9 +356,9 @@ internal fun OcrModelEditor(settings: AppSettings, controller: ChatController) {
                 controller.settingsRevision.intValue++
                 notice = uiText(R.string.notice_ocr_model_saved)
             },
-            shape = KimiPillShape,
+            shape = ModernPillShape,
         ) { Text(uiText(R.string.file_editor_save)) }
-        if (notice.isNotBlank()) Text(notice, color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+        if (notice.isNotBlank()) Text(notice, color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
     }
 }
 
@@ -374,11 +374,11 @@ internal fun TopicSummaryModelEditor(settings: AppSettings, controller: ChatCont
         )
     }
     var notice by remember { mutableStateOf("") }
-    KimiCardBox {
+    ModernCardBox {
         Text(uiText(R.string.ui_independent_topic_summary_model), style = MaterialTheme.typography.titleMedium)
         Text(
             uiText(R.string.ui_after_the_first_message_in_each_new_conversation_this),
-            color = KimiMuted,
+            color = ModernMutedDark,
             style = MaterialTheme.typography.bodySmall,
         )
         SubAgentDropdownPicker(
@@ -417,9 +417,9 @@ internal fun TopicSummaryModelEditor(settings: AppSettings, controller: ChatCont
                 controller.settingsRevision.intValue++
                 notice = uiText(R.string.ui_topic_summary_model_saved)
             },
-            shape = KimiPillShape,
+            shape = ModernPillShape,
         ) { Text(uiText(R.string.file_editor_save)) }
-        if (notice.isNotBlank()) Text(notice, color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+        if (notice.isNotBlank()) Text(notice, color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
     }
 }
 
@@ -441,11 +441,11 @@ internal fun HistoryCompressionModelEditor(settings: AppSettings, controller: Ch
             } ?: compressionProfile?.selectedModel.orEmpty(),
         )
     }
-    KimiCardBox {
+    ModernCardBox {
         Text(uiText(R.string.label_history_compression_model), style = MaterialTheme.typography.titleMedium)
         Text(
             uiText(R.string.ui_used_to_segment_conversation_history_for_manual_or_automatic),
-            color = KimiMuted,
+            color = ModernMutedDark,
             style = MaterialTheme.typography.bodySmall,
         )
         Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
@@ -453,7 +453,7 @@ internal fun HistoryCompressionModelEditor(settings: AppSettings, controller: Ch
                 Text(uiText(R.string.ui_use_a_separate_compression_model), style = MaterialTheme.typography.titleSmall)
                 Text(
                     if (compressionEnabled) uiText(R.string.skill_status_enabled) else uiText(R.string.ui_use_current_conversation_model),
-                    color = KimiMuted,
+                    color = ModernMutedDark,
                     style = MaterialTheme.typography.bodySmall,
                 )
             }
@@ -497,9 +497,9 @@ internal fun HistoryCompressionModelEditor(settings: AppSettings, controller: Ch
                 controller.settingsRevision.intValue++
                 compressionNotice = uiText(R.string.ui_additional_feature_models_saved)
             },
-            shape = KimiPillShape,
+            shape = ModernPillShape,
         ) { Text(uiText(R.string.file_editor_save)) }
-        if (compressionNotice.isNotBlank()) Text(compressionNotice, color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+        if (compressionNotice.isNotBlank()) Text(compressionNotice, color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
     }
 }
 
@@ -523,11 +523,11 @@ internal fun MediaGenerationModelEditor(
         )
     }
     var notice by remember(kind) { mutableStateOf("") }
-    KimiCardBox {
+    ModernCardBox {
         Text(uiText(mediaGenerationTitleRes(kind)), style = MaterialTheme.typography.titleMedium)
         Text(
             uiText(R.string.ui_media_generation_isolation_desc),
-            color = KimiMuted,
+            color = ModernMutedDark,
             style = MaterialTheme.typography.bodySmall,
         )
         Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
@@ -535,7 +535,7 @@ internal fun MediaGenerationModelEditor(
                 Text(uiText(R.string.ui_use_media_generation_model), style = MaterialTheme.typography.titleSmall)
                 Text(
                     uiText(mediaGenerationDescriptionRes(kind)),
-                    color = KimiMuted,
+                    color = ModernMutedDark,
                     style = MaterialTheme.typography.bodySmall,
                 )
             }
@@ -582,9 +582,9 @@ internal fun MediaGenerationModelEditor(
                 controller.settingsRevision.intValue++
                 notice = uiText(R.string.ui_media_generation_model_saved)
             },
-            shape = KimiPillShape,
+            shape = ModernPillShape,
         ) { Text(uiText(R.string.file_editor_save)) }
-        if (notice.isNotBlank()) Text(notice, color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+        if (notice.isNotBlank()) Text(notice, color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
     }
 }
 
@@ -943,8 +943,8 @@ internal fun ModelServiceSettings(
                     }
                 }
                 if (filtered.isEmpty()) {
-                    KimiCardBox {
-                        Text(uiText(R.string.notice_no_matching_models), color = KimiMuted)
+                    ModernCardBox {
+                        Text(uiText(R.string.notice_no_matching_models), color = ModernMutedDark)
                     }
                 } else {
                     filtered.forEach { profile ->
@@ -1023,7 +1023,7 @@ internal fun ModelServiceSettings(
                     .verticalScroll(editorScrollState),
                 verticalArrangement = Arrangement.spacedBy(14.dp),
             ) {
-                KimiCardBox {
+                ModernCardBox {
                     matchedPreset?.let { preset ->
                         Row(
                             Modifier.fillMaxWidth(),
@@ -1046,7 +1046,7 @@ internal fun ModelServiceSettings(
                                     } else {
                                         apiFormatShortName(apiFormat)
                                     },
-                                    color = KimiMuted,
+                                    color = ModernMutedDark,
                                     style = MaterialTheme.typography.bodySmall,
                                 )
                             }
@@ -1063,7 +1063,7 @@ internal fun ModelServiceSettings(
                     }
                     OutlinedTextField(value = name, onValueChange = { name = it }, modifier = Modifier.fillMaxWidth(), label = { Text(uiText(R.string.label_service_name)) }, singleLine = true)
                     if (current?.isChatGpt == true) {
-                        Text(uiText(R.string.chatgpt_service_description), color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+                        Text(uiText(R.string.chatgpt_service_description), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
                     } else {
                     ProviderKeysEditor(key, secondaryKeys) { primary, secondary -> key = primary; secondaryKeys = secondary }
                     Surface(
@@ -1084,7 +1084,7 @@ internal fun ModelServiceSettings(
                                 Text(uiText(R.string.ui_advanced), style = MaterialTheme.typography.titleSmall)
                                 Text(
                                     uiText(R.string.ui_endpoint_and_api_format_can_be_changed_at_any),
-                                    color = KimiMuted,
+                                    color = ModernMutedDark,
                                     style = MaterialTheme.typography.bodySmall,
                                 )
                             }
@@ -1131,7 +1131,7 @@ internal fun ModelServiceSettings(
                             }
                             Text(
                                 apiFormatDescription(apiFormat),
-                                color = KimiMuted,
+                                color = ModernMutedDark,
                                 style = MaterialTheme.typography.bodySmall,
                             )
                             Row(
@@ -1164,7 +1164,7 @@ internal fun ModelServiceSettings(
                             }
                             Text(
                                 uiText(R.string.gzip_request_bodies_hint),
-                                color = KimiMuted,
+                                color = ModernMutedDark,
                                 style = MaterialTheme.typography.bodySmall,
                             )
                             OutlinedTextField(value = baseUrl, onValueChange = { baseUrl = it }, modifier = Modifier.fillMaxWidth(), label = { Text(uiText(R.string.label_base_url)) }, singleLine = true)
@@ -1178,7 +1178,7 @@ internal fun ModelServiceSettings(
                             )
                             Text(
                                 uiText(R.string.ui_for_providers_that_use_a_non_default_request_path),
-                                color = KimiMuted,
+                                color = ModernMutedDark,
                                 style = MaterialTheme.typography.bodySmall,
                             )
                             if (baseUrl.trim().startsWith("http://", ignoreCase = true)) {
@@ -1190,7 +1190,7 @@ internal fun ModelServiceSettings(
                             }
                             Text(
                                 endpointHint(apiFormat, baseUrl, chatPath, useResponsesApi),
-                                color = KimiMuted,
+                                color = ModernMutedDark,
                                 style = MaterialTheme.typography.bodySmall,
                             )
                         }
@@ -1202,7 +1202,7 @@ internal fun ModelServiceSettings(
                         enabled = savedModels.isNotBlank() || enabledModels.isNotEmpty(),
                         onClick = { showEnabledModelsDialog = true },
                         modifier = Modifier.fillMaxWidth(),
-                        shape = KimiPillShape,
+                        shape = ModernPillShape,
                     ) {
                         Icon(Icons.Default.Checklist, contentDescription = null, modifier = Modifier.size(18.dp))
                         Spacer(Modifier.width(8.dp))
@@ -1212,7 +1212,7 @@ internal fun ModelServiceSettings(
                         enabled = reachabilityModels.isNotEmpty(),
                         onClick = { showReachabilityPage = true },
                         modifier = Modifier.fillMaxWidth(),
-                        shape = KimiPillShape,
+                        shape = ModernPillShape,
                     ) {
                         Icon(Icons.Default.NetworkCheck, contentDescription = null, modifier = Modifier.size(18.dp))
                         Spacer(Modifier.width(8.dp))
@@ -1223,7 +1223,7 @@ internal fun ModelServiceSettings(
                         horizontalArrangement = Arrangement.spacedBy(10.dp),
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
-                        Button(enabled = enabledModels.isNotEmpty(), onClick = { saveCurrentProfile() }, shape = KimiPillShape) { Text(uiText(R.string.file_editor_save)) }
+                        Button(enabled = enabledModels.isNotEmpty(), onClick = { saveCurrentProfile() }, shape = ModernPillShape) { Text(uiText(R.string.file_editor_save)) }
                         OutlinedButton(
                             modifier = Modifier.weight(1f),
                             onClick = {
@@ -1259,7 +1259,7 @@ internal fun ModelServiceSettings(
                                     )
                                 }
                             },
-                            shape = KimiPillShape,
+                            shape = ModernPillShape,
                         ) { Text(uiText(R.string.refresh_model_list), maxLines = 1, overflow = TextOverflow.Ellipsis) }
                         IconButton(
                             enabled = profiles.size > 1,
@@ -1269,7 +1269,7 @@ internal fun ModelServiceSettings(
                         }
                     }
                 }
-                if (status.isNotBlank()) Text(status, color = KimiMuted)
+                if (status.isNotBlank()) Text(status, color = ModernMutedDark)
             }
         }
         }
@@ -1342,7 +1342,7 @@ internal fun EnabledModelsDialog(
             ) {
                 Text(
                     uiText(R.string.enabled_models_description),
-                    color = KimiMuted,
+                    color = ModernMutedDark,
                     style = MaterialTheme.typography.bodySmall,
                 )
                 OutlinedTextField(
@@ -1357,7 +1357,7 @@ internal fun EnabledModelsDialog(
                     TextButton(onClick = { onEnabledModelsChange(emptySet()) }) { Text(uiText(R.string.ui_clear_selection)) }
                 }
                 if (filtered.isEmpty()) {
-                    Text(uiText(R.string.no_matching_models), color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+                    Text(uiText(R.string.no_matching_models), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
                 } else {
                     LazyColumn(Modifier.fillMaxWidth().weight(1f)) {
                         items(filtered, key = { it }) { modelName ->
@@ -1392,7 +1392,7 @@ internal fun EnabledModelsDialog(
             }
         },
         confirmButton = {
-            Button(enabled = enabledModels.isNotEmpty(), onClick = onConfirm, shape = KimiPillShape) {
+            Button(enabled = enabledModels.isNotEmpty(), onClick = onConfirm, shape = ModernPillShape) {
                 Text(uiText(R.string.save_enabled_models))
             }
         },
@@ -1416,8 +1416,8 @@ internal fun ReachabilitySelectionPage(
 ) {
     val resultByModel = remember(modelResults) { modelResults.associateBy { it.model } }
     Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
-        Text(providerName, color = KimiMuted, style = MaterialTheme.typography.bodySmall)
-        KimiCardBox {
+        Text(providerName, color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
+        ModernCardBox {
             Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                 Text(
                     "${uiText(R.string.streaming_selected)} ${selectedModels.size}/${models.size}",
@@ -1431,7 +1431,7 @@ internal fun ReachabilitySelectionPage(
                 enabled = !checking && selectedModels.isNotEmpty(),
                 onClick = onStartCheck,
                 modifier = Modifier.fillMaxWidth(),
-                shape = KimiPillShape,
+                shape = ModernPillShape,
             ) {
                 Icon(Icons.Default.NetworkCheck, contentDescription = null, modifier = Modifier.size(18.dp))
                 Spacer(Modifier.width(8.dp))
@@ -1448,19 +1448,19 @@ internal fun ReachabilitySelectionPage(
             if (providerLine.isNotBlank()) {
                 Text(
                     providerLine,
-                    color = if (provider?.available == false) MaterialTheme.colorScheme.error else KimiMuted,
+                    color = if (provider?.available == false) MaterialTheme.colorScheme.error else ModernMutedDark,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis,
                     style = MaterialTheme.typography.bodySmall,
                 )
             } else if (status.isNotBlank()) {
-                Text(status, color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+                Text(status, color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
             }
         }
-        KimiCardBox {
+        ModernCardBox {
             Text(uiText(R.string.ui_select_models_to_check), style = MaterialTheme.typography.titleSmall)
             if (models.isEmpty()) {
-                Text(uiText(R.string.ui_no_models_to_check), color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+                Text(uiText(R.string.ui_no_models_to_check), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
             } else {
                 models.forEach { model ->
                     val selected = model in selectedModels
@@ -1495,7 +1495,7 @@ internal fun ReachabilitySelectionPage(
                             if (detail.isNotBlank()) {
                                 Text(
                                     detail,
-                                    color = if (result?.available == false) MaterialTheme.colorScheme.error else KimiMuted,
+                                    color = if (result?.available == false) MaterialTheme.colorScheme.error else ModernMutedDark,
                                     maxLines = 2,
                                     overflow = TextOverflow.Ellipsis,
                                     style = MaterialTheme.typography.bodySmall,
@@ -1566,11 +1566,11 @@ internal fun SubAgentSettings(settings: AppSettings, controller: ChatController)
     }
     Box(Modifier.fillMaxSize()) {
         Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
-            KimiCardBox {
+            ModernCardBox {
                 Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                     Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                         Text(stringResource(R.string.title_sub_agent_orchestration), style = MaterialTheme.typography.titleMedium)
-                        Text(stringResource(R.string.sub_agent_settings_desc), color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+                        Text(stringResource(R.string.sub_agent_settings_desc), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
                     }
                     Switch(
                         checked = settings.subAgentOrchestrationEnabled,
@@ -1582,7 +1582,7 @@ internal fun SubAgentSettings(settings: AppSettings, controller: ChatController)
                     )
                 }
             }
-            KimiCardBox {
+            ModernCardBox {
                 Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                     Text(stringResource(R.string.label_sub_agent_models), modifier = Modifier.weight(1f), style = MaterialTheme.typography.titleMedium)
                     Button(
@@ -1598,7 +1598,7 @@ internal fun SubAgentSettings(settings: AppSettings, controller: ChatController)
                                 enabled = true,
                             )
                         },
-                        shape = KimiPillShape,
+                        shape = ModernPillShape,
                         contentPadding = PaddingValues(horizontal = 14.dp, vertical = 8.dp),
                     ) {
                         Icon(Icons.Default.Add, contentDescription = null, modifier = Modifier.size(18.dp))
@@ -1607,7 +1607,7 @@ internal fun SubAgentSettings(settings: AppSettings, controller: ChatController)
                     }
                 }
                 if (agents.isEmpty()) {
-                    Text(stringResource(R.string.sub_agent_empty_hint), color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+                    Text(stringResource(R.string.sub_agent_empty_hint), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
                 } else {
                     agents.forEach { agent ->
                         val profile = profiles.firstOrNull { it.id == agent.profileId }
@@ -1618,7 +1618,7 @@ internal fun SubAgentSettings(settings: AppSettings, controller: ChatController)
                             onToggle = { enabled -> save(agents.map { if (it.id == agent.id) it.copy(enabled = enabled) else it }) },
                             onDelete = { deleteTarget = agent },
                         )
-                        if (agent != agents.last()) KimiDivider()
+                        if (agent != agents.last()) ModernDivider()
                     }
                 }
             }
@@ -1667,8 +1667,8 @@ internal fun SubAgentRow(agent: SubAgentConfig, profileName: String, onEdit: () 
         Icon(Icons.Default.Hub, contentDescription = null, modifier = Modifier.size(28.dp), tint = MaterialTheme.colorScheme.primary)
         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
             Text(agent.name, style = MaterialTheme.typography.titleSmall)
-            Text("$profileName · ${agent.model}", color = KimiMuted, style = MaterialTheme.typography.bodySmall, maxLines = 1, overflow = TextOverflow.Ellipsis)
-            if (agent.description.isNotBlank()) Text(agent.description, color = KimiMuted, style = MaterialTheme.typography.labelSmall, maxLines = 2, overflow = TextOverflow.Ellipsis)
+            Text("$profileName · ${agent.model}", color = ModernMutedDark, style = MaterialTheme.typography.bodySmall, maxLines = 1, overflow = TextOverflow.Ellipsis)
+            if (agent.description.isNotBlank()) Text(agent.description, color = ModernMutedDark, style = MaterialTheme.typography.labelSmall, maxLines = 2, overflow = TextOverflow.Ellipsis)
         }
         Switch(checked = agent.enabled, onCheckedChange = onToggle)
         IconButton(onClick = onDelete) { Icon(Icons.Default.DeleteOutline, contentDescription = stringResource(R.string.action_delete)) }
@@ -1723,7 +1723,7 @@ internal fun SubAgentEditDialog(initial: SubAgentConfig, profiles: List<ApiProfi
             Button(
                 enabled = profileId.isNotBlank() && model.isNotBlank(),
                 onClick = { onSave(initial.copy(name = name.trim().ifBlank { context.getString(R.string.label_sub_agent_default_name) }, profileId = profileId, model = model.trim(), description = description.trim(), enabled = enabled)) },
-                shape = KimiPillShape,
+                shape = ModernPillShape,
             ) { Text(stringResource(R.string.action_save)) }
         },
         dismissButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.action_cancel)) } },
@@ -1751,7 +1751,7 @@ internal fun <T> SubAgentDropdownPicker(
             ) {
                 Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp), horizontalAlignment = Alignment.Start) {
                     Text("$label: $value", maxLines = 1, overflow = TextOverflow.Ellipsis, style = MaterialTheme.typography.titleSmall)
-                    if (subtitle.isNotBlank()) Text(subtitle, color = KimiMuted, maxLines = 1, overflow = TextOverflow.Ellipsis, style = MaterialTheme.typography.bodySmall)
+                    if (subtitle.isNotBlank()) Text(subtitle, color = ModernMutedDark, maxLines = 1, overflow = TextOverflow.Ellipsis, style = MaterialTheme.typography.bodySmall)
                 }
                 Icon(Icons.Default.ArrowDropDown, contentDescription = null)
             }
@@ -1767,7 +1767,7 @@ internal fun <T> SubAgentDropdownPicker(
                                 Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
                                     Text(itemTitle(item), maxLines = 1, overflow = TextOverflow.Ellipsis)
                                     val childSubtitle = itemSubtitle(item)
-                                    if (childSubtitle.isNotBlank()) Text(childSubtitle, color = KimiMuted, maxLines = 1, overflow = TextOverflow.Ellipsis, style = MaterialTheme.typography.bodySmall)
+                                    if (childSubtitle.isNotBlank()) Text(childSubtitle, color = ModernMutedDark, maxLines = 1, overflow = TextOverflow.Ellipsis, style = MaterialTheme.typography.bodySmall)
                                 }
                                 if (isSelected(item)) Icon(Icons.Default.Check, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
                             }
@@ -1798,7 +1798,7 @@ internal fun MaterialChoiceButton(
         Button(
             onClick = onClick,
             modifier = modifier,
-            shape = KimiPillShape,
+            shape = ModernPillShape,
             contentPadding = PaddingValues(horizontal = 16.dp, vertical = 10.dp),
         ) {
             Text(label, maxLines = 1, overflow = TextOverflow.Ellipsis)
@@ -1807,7 +1807,7 @@ internal fun MaterialChoiceButton(
         OutlinedButton(
             onClick = onClick,
             modifier = modifier,
-            shape = KimiPillShape,
+            shape = ModernPillShape,
             contentPadding = PaddingValues(horizontal = 16.dp, vertical = 10.dp),
         ) {
             Text(label, maxLines = 1, overflow = TextOverflow.Ellipsis)
@@ -1822,12 +1822,12 @@ internal fun ReachabilityReportCard(
     modelResults: List<ModelReachabilityResult>,
     checking: Boolean,
 ) {
-    KimiCardBox {
+    ModernCardBox {
         Text(uiText(R.string.ui_reachability_results), style = MaterialTheme.typography.titleSmall)
         if (provider == null) {
             Text(
                 uiText(R.string.ui_checking_provider),
-                color = KimiMuted,
+                color = ModernMutedDark,
                 style = MaterialTheme.typography.bodySmall,
             )
         } else {
@@ -1854,7 +1854,7 @@ internal fun ReachabilityReportCard(
                     Text(result.model, maxLines = 1, overflow = TextOverflow.Ellipsis, style = MaterialTheme.typography.bodyMedium)
                     Text(
                         "${formatReachabilityLatency(result.latencyMs)} · ${result.message}",
-                        color = KimiMuted,
+                        color = ModernMutedDark,
                         maxLines = 2,
                         overflow = TextOverflow.Ellipsis,
                         style = MaterialTheme.typography.bodySmall,
@@ -1864,7 +1864,7 @@ internal fun ReachabilityReportCard(
         }
         if (checking) {
             LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
-            Text(uiText(R.string.ui_checking), color = KimiMuted, style = MaterialTheme.typography.bodySmall)
+            Text(uiText(R.string.ui_checking), color = ModernMutedDark, style = MaterialTheme.typography.bodySmall)
         }
     }
 }
