@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import com.yukisoffd.lyracode.ai.ModelRequestPreviews
 import com.yukisoffd.lyracode.data.ApiProfile
 import com.yukisoffd.lyracode.data.ModelRequestCustomization
+import com.yukisoffd.lyracode.IconColor
 import org.json.JSONObject
 import org.json.JSONTokener
 
@@ -165,7 +166,7 @@ private fun RequestFieldEditor(field: RequestField, json: Boolean, onChange: (Re
                 IconButton(onClick = { confirmDelete = true }, enabled = !field.removing) {
                     Icon(Icons.Outlined.DeleteOutline,
                         contentDescription = uiText(R.string.request_delete_field, field.name.ifBlank { "—" }),
-                        tint = MaterialTheme.colorScheme.error)
+                        tint = IconColor.Error)
                 }
             }
             OutlinedTextField(value = field.value, onValueChange = { onChange(field.copy(value = it, changed = true)) },

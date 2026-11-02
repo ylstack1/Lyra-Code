@@ -79,6 +79,7 @@ import com.yukisoffd.lyracode.data.AppSettings
 import com.yukisoffd.lyracode.data.FontLibraryItem
 import com.yukisoffd.lyracode.AllThemePresets
 import com.yukisoffd.lyracode.findThemePreset
+import com.yukisoffd.lyracode.IconColor
 import kotlinx.coroutines.launch
 import java.util.Locale
 import kotlin.math.roundToInt
@@ -115,7 +116,7 @@ internal fun ThemeSettings(
                 Icons.Default.AutoAwesome,
                 contentDescription = null,
                 modifier = Modifier.width(36.dp).size(24.dp),
-                tint = MaterialTheme.colorScheme.primary,
+                tint = IconColor.Primary,
             )
             Text(uiText(R.string.label_dynamic_color), modifier = Modifier.weight(1f), style = MaterialTheme.typography.titleMedium)
             Switch(checked = dynamicColorEnabled, onCheckedChange = onDynamicColorChange)
@@ -126,7 +127,7 @@ internal fun ThemeSettings(
                 Icons.Default.Gesture,
                 contentDescription = null,
                 modifier = Modifier.width(36.dp).size(24.dp),
-                tint = MaterialTheme.colorScheme.primary,
+                tint = IconColor.Primary,
             )
             Text(
                 stringResource(R.string.predictive_back_title),
@@ -213,12 +214,12 @@ private fun StreamingAnimationOptionRow(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(10.dp),
     ) {
-        Icon(icon, contentDescription = null, modifier = Modifier.width(36.dp).size(24.dp), tint = MaterialTheme.colorScheme.primary)
+        Icon(icon, contentDescription = null, modifier = Modifier.width(36.dp).size(24.dp), tint = IconColor.Primary)
         Column(Modifier.weight(1f)) {
             Text(title, style = MaterialTheme.typography.titleMedium)
             Text(subtitle, color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
         }
-        if (value == selected) Icon(Icons.Default.Check, contentDescription = stringResource(R.string.streaming_selected), tint = MaterialTheme.colorScheme.primary)
+        if (value == selected) Icon(Icons.Default.Check, contentDescription = stringResource(R.string.streaming_selected), tint = IconColor.Primary)
     }
 }
 
@@ -573,11 +574,11 @@ internal fun ThemeOptionRow(title: String, value: String, selected: String, onSe
             Icons.Default.Palette,
             contentDescription = null,
             modifier = Modifier.width(36.dp).size(24.dp),
-            tint = MaterialTheme.colorScheme.primary,
+            tint = IconColor.Primary,
         )
         Text(title, modifier = Modifier.weight(1f), color = if (enabled) MaterialTheme.colorScheme.onSurface else ModernMutedDark, style = MaterialTheme.typography.titleMedium)
         if (value == selected && enabled) {
-            Icon(Icons.Default.Check, contentDescription = uiText(R.string.streaming_selected), tint = MaterialTheme.colorScheme.primary)
+            Icon(Icons.Default.Check, contentDescription = uiText(R.string.streaming_selected), tint = IconColor.Primary)
         }
     }
 }
@@ -602,14 +603,14 @@ internal fun LanguageOptionRow(
             Icons.Default.Language,
             contentDescription = null,
             modifier = Modifier.width(36.dp).size(24.dp),
-            tint = MaterialTheme.colorScheme.primary,
+            tint = IconColor.Primary,
         )
         Column(Modifier.weight(1f)) {
             Text(title, style = MaterialTheme.typography.titleMedium)
             Text(subtitle, color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
         }
         if (value == selected) {
-            Icon(Icons.Default.Check, contentDescription = uiText(R.string.streaming_selected), tint = MaterialTheme.colorScheme.primary)
+            Icon(Icons.Default.Check, contentDescription = uiText(R.string.streaming_selected), tint = IconColor.Primary)
         }
     }
 }
@@ -628,11 +629,11 @@ internal fun RefreshRateOptionRow(title: String, value: String, selected: String
             Icons.Default.Speed,
             contentDescription = null,
             modifier = Modifier.width(36.dp).size(24.dp),
-            tint = MaterialTheme.colorScheme.primary,
+            tint = IconColor.Primary,
         )
         Text(title, modifier = Modifier.weight(1f), style = MaterialTheme.typography.titleMedium)
         if (value == selected) {
-            Icon(Icons.Default.Check, contentDescription = uiText(R.string.streaming_selected), tint = MaterialTheme.colorScheme.primary)
+            Icon(Icons.Default.Check, contentDescription = uiText(R.string.streaming_selected), tint = IconColor.Primary)
         }
     }
 }
@@ -738,7 +739,7 @@ internal fun FontSizeSettings(
                 Modifier.fillMaxWidth().clip(RoundedCornerShape(14.dp)).clickable(onClick = onOpenFontLibrary).padding(vertical = 4.dp),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                Icon(Icons.Default.FontDownload, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+                Icon(Icons.Default.FontDownload, contentDescription = null, tint = IconColor.Primary)
                 Spacer(Modifier.width(12.dp))
                 Column(Modifier.weight(1f)) {
                     Text(uiText(R.string.ui_font_library), style = MaterialTheme.typography.titleMedium)
@@ -1056,7 +1057,7 @@ private fun ThemePresetOptionRow(
             Text(preset.description, color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
         }
         if (selected) {
-            Icon(Icons.Default.Check, contentDescription = uiText(R.string.streaming_selected), tint = MaterialTheme.colorScheme.primary)
+            Icon(Icons.Default.Check, contentDescription = uiText(R.string.streaming_selected), tint = IconColor.Primary)
         }
     }
 }
@@ -1082,7 +1083,7 @@ internal fun CustomThemeJsonSettings(
                     Icons.Default.Code,
                     contentDescription = null,
                     modifier = Modifier.size(20.dp),
-                    tint = MaterialTheme.colorScheme.primary,
+                    tint = IconColor.Primary,
                 )
                 Text(uiText(R.string.title_custom_theme_json), style = MaterialTheme.typography.titleMedium)
             }

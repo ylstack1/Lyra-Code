@@ -254,7 +254,7 @@ private fun GitHubSettingsIcon(icon: ImageVector) {
         Modifier.size(36.dp).clip(CircleShape).background(MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.72f)),
         contentAlignment = Alignment.Center,
     ) {
-        Icon(icon, contentDescription = null, modifier = Modifier.size(21.dp), tint = MaterialTheme.colorScheme.onPrimaryContainer)
+        Icon(icon, contentDescription = null, modifier = Modifier.size(21.dp), tint = Color.WhiteContainer)
     }
 }
 

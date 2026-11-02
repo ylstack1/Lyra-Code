@@ -54,6 +54,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import com.yukisoffd.lyracode.data.SkillPack
 import com.yukisoffd.lyracode.workspace.WorkspaceFileReference
+import com.yukisoffd.lyracode.IconColor
 import java.io.File
 import kotlin.math.max
 import kotlin.math.abs
@@ -152,7 +153,7 @@ internal fun WorkspaceFileMentionPicker(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.spacedBy(10.dp),
                     ) {
-                        Icon(Icons.Default.InsertDriveFile, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+                        Icon(Icons.Default.InsertDriveFile, contentDescription = null, tint = IconColor.Primary)
                         Column(Modifier.weight(1f)) {
                             Text(file.name, maxLines = 1, overflow = TextOverflow.Ellipsis, style = MaterialTheme.typography.bodyMedium)
                             Text(file.relativePath, maxLines = 1, overflow = TextOverflow.Ellipsis, color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.labelSmall)
@@ -160,7 +161,7 @@ internal fun WorkspaceFileMentionPicker(
                         Icon(
                             if (isSelected) Icons.Default.CheckCircle else Icons.Default.Add,
                             contentDescription = stringResource(if (isSelected) R.string.workspace_file_remove else R.string.workspace_file_select),
-                            tint = MaterialTheme.colorScheme.primary,
+                            tint = IconColor.Primary,
                         )
                     }
                 }
@@ -246,7 +247,7 @@ internal fun ForcedSkillControls(
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    Icon(Icons.Default.Build, contentDescription = null, modifier = Modifier.size(18.dp), tint = MaterialTheme.colorScheme.primary)
+                    Icon(Icons.Default.Build, contentDescription = null, modifier = Modifier.size(18.dp), tint = IconColor.Primary)
                     Column(Modifier.weight(1f)) {
                         Text(uiText(R.string.ui_choose_skill), style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurface)
                         Text(uiText(R.string.ui_type_to_choose_skills_for_this_request), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 1, overflow = TextOverflow.Ellipsis)
@@ -271,7 +272,7 @@ internal fun ForcedSkillControls(
                             horizontalArrangement = Arrangement.spacedBy(10.dp),
                             verticalAlignment = Alignment.CenterVertically,
                         ) {
-                            Icon(Icons.Default.Build, contentDescription = null, modifier = Modifier.size(18.dp), tint = MaterialTheme.colorScheme.primary)
+                            Icon(Icons.Default.Build, contentDescription = null, modifier = Modifier.size(18.dp), tint = IconColor.Primary)
                             Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
                                 Row(horizontalArrangement = Arrangement.spacedBy(6.dp), verticalAlignment = Alignment.CenterVertically) {
                                     Text(skill.name, maxLines = 1, overflow = TextOverflow.Ellipsis, style = MaterialTheme.typography.bodyMedium)
@@ -389,7 +390,7 @@ internal fun ConversationNavigationControls(
                     icon,
                     contentDescription = description,
                     modifier = Modifier.size(28.dp),
-                    tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                    tint = Color.White,
                 )
             }
         }

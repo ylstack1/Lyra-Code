@@ -81,6 +81,7 @@ import androidx.compose.material.icons.filled.*
 import com.yukisoffd.lyracode.data.AppUpdateInfo
 import com.yukisoffd.lyracode.data.UpdateDownloadProgress
 import com.yukisoffd.lyracode.data.UpdateManager
+import com.yukisoffd.lyracode.IconColor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.ensureActive
@@ -233,7 +234,7 @@ internal fun OpenSourceLicensesScreen() {
                 modifier = Modifier.clickable { selectedNotice = notice },
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                    Icon(Icons.Default.Description, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+                    Icon(Icons.Default.Description, contentDescription = null, tint = IconColor.Primary)
                     Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                         Text(notice.name, style = MaterialTheme.typography.titleSmall)
                         Text(notice.license, style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary)
@@ -649,7 +650,7 @@ internal fun DeviceInfoScreen() {
             ModernCardBox {
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                        Icon(Icons.Default.PhoneAndroid, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+                        Icon(Icons.Default.PhoneAndroid, contentDescription = null, tint = IconColor.Primary)
                         Text(uiText(R.string.title_device_info), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
                     }
                     Text(
@@ -743,7 +744,7 @@ internal fun AboutVersionRow(
             Icons.Default.ChevronRight,
             contentDescription = null,
             modifier = Modifier.size(20.dp),
-            tint = MaterialTheme.colorScheme.onSurfaceVariant,
+            tint = IconColor.Secondary,
         )
     }
 }
@@ -788,7 +789,7 @@ internal fun SocialLinkRow(
             Icons.Default.ChevronRight,
             contentDescription = null,
             modifier = Modifier.size(20.dp),
-            tint = MaterialTheme.colorScheme.onSurfaceVariant,
+            tint = IconColor.Secondary,
         )
     }
 }
@@ -806,7 +807,7 @@ internal fun AboutIconBadge(icon: ImageVector) {
             imageVector = icon,
             contentDescription = null,
             modifier = Modifier.size(23.dp),
-            tint = MaterialTheme.colorScheme.onPrimaryContainer,
+            tint = Color.WhiteContainer,
         )
     }
 }
@@ -826,7 +827,7 @@ internal fun AboutIconBadge(
             painter = painterResource(iconRes),
             contentDescription = null,
             modifier = Modifier.size(23.dp),
-            tint = MaterialTheme.colorScheme.onPrimaryContainer,
+            tint = Color.WhiteContainer,
         )
     }
 }
@@ -873,7 +874,7 @@ internal fun AboutLogoHeader() {
                     Icons.Default.AutoAwesome,
                     contentDescription = null,
                     modifier = Modifier.size(72.dp),
-                    tint = MaterialTheme.colorScheme.primary,
+                    tint = IconColor.Primary,
                 )
             }
         }

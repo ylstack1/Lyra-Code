@@ -65,6 +65,7 @@ import com.yukisoffd.lyracode.mcp.LocalMcpServerManager
 import com.yukisoffd.lyracode.mcp.McpClientManager
 import com.yukisoffd.lyracode.mcp.McpJsonConfig
 import com.yukisoffd.lyracode.mcp.McpProtocol
+import com.yukisoffd.lyracode.IconColor
 import kotlinx.coroutines.launch
 import org.json.JSONArray
 import org.json.JSONObject
@@ -188,7 +189,7 @@ internal fun McpSettings(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.spacedBy(12.dp),
                 ) {
-                    Icon(Icons.Default.Extension, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+                    Icon(Icons.Default.Extension, contentDescription = null, tint = IconColor.Primary)
                     Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
                         Text(context.getString(R.string.label_fetched_tools, server.tools.size), style = MaterialTheme.typography.titleSmall)
                         Text(
@@ -250,7 +251,7 @@ internal fun LocalMcpServerSettings(
 
     ModernCardBox {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Icon(Icons.Default.Hub, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+            Icon(Icons.Default.Hub, contentDescription = null, tint = IconColor.Primary)
             Spacer(Modifier.width(12.dp))
             Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                 Text(uiText(R.string.title_local_mcp_as_server), style = MaterialTheme.typography.titleMedium)

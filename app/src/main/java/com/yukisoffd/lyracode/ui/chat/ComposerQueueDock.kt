@@ -242,7 +242,7 @@ private fun QueueRowActionButton(
             Icons.Default.Send,
             contentDescription = description,
             modifier = Modifier.size(18.dp),
-            tint = MaterialTheme.colorScheme.onPrimary,
+            tint = Color.White,
         )
     }
 }

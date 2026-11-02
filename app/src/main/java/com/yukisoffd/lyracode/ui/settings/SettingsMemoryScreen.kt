@@ -42,6 +42,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.yukisoffd.lyracode.data.AppSettings
 import com.yukisoffd.lyracode.data.MemoryEntry
+import com.yukisoffd.lyracode.IconColor
 
 @Composable
 internal fun MemorySettingsScreen(settings: AppSettings) {
@@ -110,7 +111,7 @@ internal fun MemorySettingsScreen(settings: AppSettings) {
                         Icon(
                             Icons.Default.Psychology,
                             contentDescription = null,
-                            tint = MaterialTheme.colorScheme.primary,
+                            tint = IconColor.Primary,
                             modifier = Modifier
                                 .padding(top = 2.dp)
                                 .size(24.dp),

@@ -87,6 +87,7 @@ import com.yukisoffd.lyracode.tasks.ScheduledTaskManager
 import com.yukisoffd.lyracode.termux.TermuxExecutor
 import com.yukisoffd.lyracode.webdav.WebDavClient
 import com.yukisoffd.lyracode.workspace.WorkspaceManager
+import com.yukisoffd.lyracode.IconColor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.ensureActive
@@ -443,7 +444,7 @@ internal fun LyraCodeApp(
                                     uiText(R.string.expand_conversation_details)
                                 },
                                 modifier = Modifier.size(14.dp),
-                                tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                                tint = IconColor.Secondary,
                             )
                         }
                     }

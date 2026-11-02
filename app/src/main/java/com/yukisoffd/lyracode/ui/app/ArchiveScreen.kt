@@ -35,6 +35,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.yukisoffd.lyracode.data.ChatProject
 import com.yukisoffd.lyracode.data.Conversation
+import com.yukisoffd.lyracode.IconColor
 
 @Composable
 internal fun ArchivedConversationsScreen(controller: ChatController) {
@@ -141,7 +142,7 @@ internal fun ArchivedConversationsScreen(controller: ChatController) {
                         Icon(
                             Icons.Default.Search,
                             contentDescription = null,
-                            tint = MaterialTheme.colorScheme.primary,
+                            tint = IconColor.Primary,
                         )
                     },
                 )
@@ -215,7 +216,7 @@ private fun ArchivedProjectCard(
                     Icon(
                         Icons.Default.DeleteForever,
                         contentDescription = null,
-                        tint = MaterialTheme.colorScheme.error,
+                        tint = IconColor.Error,
                     )
                     Spacer(Modifier.width(8.dp))
                     Text(
@@ -266,7 +267,7 @@ private fun ArchivedConversationCard(
                     Icon(
                         Icons.Default.DeleteForever,
                         contentDescription = null,
-                        tint = MaterialTheme.colorScheme.error,
+                        tint = IconColor.Error,
                     )
                     Spacer(Modifier.width(8.dp))
                     Text(

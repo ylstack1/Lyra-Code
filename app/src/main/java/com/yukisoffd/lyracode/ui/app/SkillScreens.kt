@@ -44,6 +44,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import com.yukisoffd.lyracode.data.SkillPack
+import com.yukisoffd.lyracode.IconColor
 import java.net.URL
 import kotlin.math.min
 import kotlin.math.max
@@ -135,7 +136,7 @@ internal fun SkillsScreen(
     ) {
         ModernCardBox {
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                Icon(Icons.Default.School, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+                Icon(Icons.Default.School, contentDescription = null, tint = IconColor.Primary)
                 Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                     Text(context.getString(R.string.label_skills_capability), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
                     Text(
@@ -159,7 +160,7 @@ internal fun SkillsScreen(
         if (skills.isEmpty()) {
             ModernCardBox {
                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                        Icon(Icons.Default.Extension, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+                        Icon(Icons.Default.Extension, contentDescription = null, tint = IconColor.Primary)
                         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                             Text(context.getString(R.string.notice_no_skills), style = MaterialTheme.typography.titleMedium)
                             Text(context.getString(R.string.skills_empty_hint), color = MaterialTheme.colorScheme.onSurfaceVariant)
@@ -245,7 +246,7 @@ internal fun SkillImportModeRow(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(16.dp),
     ) {
-        Icon(icon, contentDescription = null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(28.dp))
+        Icon(icon, contentDescription = null, tint = IconColor.Primary, modifier = Modifier.size(28.dp))
         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
             Text(title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
             Text(subtitle, color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
@@ -440,7 +441,7 @@ internal fun SkillSettingsRow(skill: SkillPack, onToggle: () -> Unit, onDelete: 
         Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(4.dp)) {
             Switch(checked = skill.enabled, onCheckedChange = { onToggle() })
             IconButton(onClick = onDelete, modifier = Modifier.size(36.dp)) {
-                Icon(Icons.Default.DeleteOutline, contentDescription = context.getString(R.string.action_delete_skill), tint = MaterialTheme.colorScheme.error)
+                Icon(Icons.Default.DeleteOutline, contentDescription = context.getString(R.string.action_delete_skill), tint = IconColor.Error)
             }
         }
     }

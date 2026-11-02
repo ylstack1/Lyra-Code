@@ -55,6 +55,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import com.yukisoffd.lyracode.LocalCodeFontFamily
+import com.yukisoffd.lyracode.IconColor
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -125,7 +126,7 @@ private fun ToolCallSummaryCard(
             Icon(
                 Icons.Default.Build,
                 contentDescription = null,
-                tint = MaterialTheme.colorScheme.primary,
+                tint = IconColor.Primary,
                 modifier = Modifier.size(if (compact) 16.dp else 20.dp),
             )
             Text(
@@ -139,7 +140,7 @@ private fun ToolCallSummaryCard(
             Icon(
                 if (expanded) Icons.Default.ExpandLess else Icons.Default.ExpandMore,
                 contentDescription = if (expanded) uiText(R.string.ui_collapse) else uiText(R.string.ui_view_details),
-                tint = MaterialTheme.colorScheme.primary,
+                tint = IconColor.Primary,
                 modifier = Modifier.size(if (compact) 18.dp else 24.dp),
             )
         }
@@ -243,7 +244,7 @@ private fun ToolResultCard(
                         Icons.Default.Output,
                         contentDescription = null,
                         modifier = Modifier.size(18.dp),
-                        tint = MaterialTheme.colorScheme.primary,
+                        tint = IconColor.Primary,
                     )
                     Text(
                         uiText(R.string.tool_output_title),
@@ -255,7 +256,7 @@ private fun ToolResultCard(
                         Icon(
                             Icons.Default.ContentCopy,
                             contentDescription = uiText(R.string.file_action_copy),
-                            tint = MaterialTheme.colorScheme.primary,
+                            tint = IconColor.Primary,
                             modifier = Modifier.size(18.dp),
                         )
                     }
@@ -297,7 +298,7 @@ private fun ToolCallSummaryButton(text: String, compact: Boolean, onClick: () ->
         Icon(
             Icons.Default.Build,
             contentDescription = null,
-            tint = MaterialTheme.colorScheme.onPrimaryContainer,
+            tint = Color.White,
             modifier = Modifier.size(if (compact) 15.dp else 19.dp),
         )
         Spacer(Modifier.width(if (compact) 6.dp else 9.dp))
@@ -312,7 +313,7 @@ private fun ToolCallSummaryButton(text: String, compact: Boolean, onClick: () ->
         Icon(
             Icons.Default.ChevronRight,
             contentDescription = uiText(R.string.ui_view_details),
-            tint = MaterialTheme.colorScheme.onPrimaryContainer,
+            tint = Color.White,
             modifier = Modifier.size(if (compact) 17.dp else 24.dp),
         )
     }
@@ -349,7 +350,7 @@ internal fun ToolCallDetailPage(
                     },
                     navigationIcon = {
                         IconButton(onClick = onClose) {
-                            Icon(Icons.Default.ArrowBack, contentDescription = uiText(R.string.cd_back), tint = MaterialTheme.colorScheme.primary)
+                            Icon(Icons.Default.ArrowBack, contentDescription = uiText(R.string.cd_back), tint = IconColor.Primary)
                         }
                     },
                     colors = TopAppBarDefaults.topAppBarColors(
@@ -413,7 +414,7 @@ private fun ToolJsonSection(title: String, content: String, onCopy: () -> Unit) 
                 ) {
                     Text("json", modifier = Modifier.weight(1f), color = MaterialTheme.colorScheme.onSurfaceVariant, fontFamily = codeFontFamily)
                     IconButton(onClick = onCopy) {
-                        Icon(Icons.Default.ContentCopy, contentDescription = uiText(R.string.file_action_copy), tint = MaterialTheme.colorScheme.primary)
+                        Icon(Icons.Default.ContentCopy, contentDescription = uiText(R.string.file_action_copy), tint = IconColor.Primary)
                     }
                 }
                 ModernDivider()

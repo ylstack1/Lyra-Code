@@ -53,6 +53,7 @@ import com.yukisoffd.lyracode.interaction.overlay.OverlayPermission
 import com.yukisoffd.lyracode.interaction.service.AccessibilityConnection
 import com.yukisoffd.lyracode.interaction.session.ManualControlController
 import com.yukisoffd.lyracode.interaction.session.DeviceTaskCoordinator
+import com.yukisoffd.lyracode.IconColor
 
 @Composable
 internal fun DeviceInteractionSettings(
@@ -99,7 +100,7 @@ internal fun DeviceInteractionSettings(
             Icon(
                 Icons.Default.AccessibilityNew,
                 contentDescription = null,
-                tint = MaterialTheme.colorScheme.primary,
+                tint = IconColor.Primary,
             )
             Spacer(Modifier.width(12.dp))
             Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
@@ -141,7 +142,7 @@ internal fun DeviceInteractionSettings(
             modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Icon(Icons.Default.Security, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+            Icon(Icons.Default.Security, contentDescription = null, tint = IconColor.Primary)
             Spacer(Modifier.width(12.dp))
             Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
                 Text(
@@ -177,7 +178,7 @@ internal fun DeviceInteractionSettings(
             modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Icon(Icons.Default.Layers, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+            Icon(Icons.Default.Layers, contentDescription = null, tint = IconColor.Primary)
             Spacer(Modifier.width(12.dp))
             Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
                 Text(
@@ -213,7 +214,7 @@ internal fun DeviceInteractionSettings(
             modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Icon(Icons.Default.Security, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+            Icon(Icons.Default.Security, contentDescription = null, tint = IconColor.Primary)
             Spacer(Modifier.width(12.dp))
             Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
                 Text(context.getString(R.string.device_full_access_title), style = MaterialTheme.typography.titleSmall)

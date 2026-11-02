@@ -356,6 +356,38 @@ internal val ModernPillShape = RoundedCornerShape(999.dp)
 internal val ModernShape = RoundedCornerShape(8.dp)
 
 // ============================================================================
+// Hardcoded Icon Colors by Type (do not change with theme)
+// ============================================================================
+
+internal object IconColor {
+    // Action colors
+    val Save = Color(0xFF4CAF50)      // Green - save, confirm, check
+    val Delete = Color(0xFFF44336)    // Red - delete, remove, error
+    val Edit = Color(0xFF2196F3)      // Blue - edit, modify, change
+    val Info = Color(0xFF9E9E9E)      // Gray - info, details, secondary
+    val Add = Color(0xFF4CAF50)       // Green - add, create, new
+    val Settings = Color(0xFF9E9E9E)  // Gray - settings, config
+    val Copy = Color(0xFF9E9E9E)      // Gray - copy, duplicate
+    val Share = Color(0xFF9E9E9E)     // Gray - share, export
+    val Download = Color(0xFF2196F3)  // Blue - download, import
+    val Upload = Color(0xFF2196F3)    // Blue - upload, send
+    val Search = Color(0xFF9E9E9E)    // Gray - search, find
+    val Menu = Color(0xFF9E9E9E)      // Gray - menu, navigation
+    val Back = Color(0xFF9E9E9E)      // Gray - back, close, cancel
+    val Warning = Color(0xFFFF9800)   // Amber - warning, alert
+    val Success = Color(0xFF4CAF50)   // Green - success, done
+    val Error = Color(0xFFF44336)     // Red - error, failure
+    val Primary = Color(0xFF6366F1)   // Indigo - primary action
+    val Secondary = Color(0xFF9E9E9E) // Gray - secondary action
+}
+
+// ============================================================================
+// End Icon Colors
+// ============================================================================
+
+
+
+// ============================================================================
 // Theme Preset System - Built-in dark themes (Vercel, Obsidian, GitHub, etc.)
 // ============================================================================
 
@@ -562,10 +594,10 @@ internal fun KimiMenuRow(
             modifier = Modifier
                 .size(40.dp)
                 .clip(CircleShape)
-                .background(iconContainer),
+                .background(IconColor.Primary.copy(alpha = 0.15f)),
             contentAlignment = Alignment.Center,
         ) {
-            Text(icon, color = iconContent, style = MaterialTheme.typography.titleMedium)
+            Text(icon, color = IconColor.Primary, style = MaterialTheme.typography.titleMedium)
         }
         Spacer(Modifier.width(14.dp))
         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
@@ -589,7 +621,7 @@ internal fun KimiMenuRow(
             Icons.Default.ChevronRight,
             contentDescription = null,
             modifier = Modifier.size(20.dp),
-            tint = MaterialTheme.colorScheme.onSurfaceVariant,
+            tint = IconColor.Secondary,
         )
     }
 }
@@ -625,7 +657,7 @@ internal fun KimiMenuRow(
                 icon,
                 contentDescription = null,
                 modifier = Modifier.size(23.dp),
-                tint = iconContent,
+                tint = IconColor.Primary,
             )
         }
         Spacer(Modifier.width(14.dp))
@@ -650,7 +682,7 @@ internal fun KimiMenuRow(
             Icons.Default.ChevronRight,
             contentDescription = null,
             modifier = Modifier.size(20.dp),
-            tint = MaterialTheme.colorScheme.onSurfaceVariant,
+            tint = IconColor.Secondary,
         )
     }
 }
@@ -684,7 +716,7 @@ internal fun KimiMenuRowWithLongClick(
                 icon,
                 contentDescription = null,
                 modifier = Modifier.size(23.dp),
-                tint = iconContent,
+                tint = IconColor.Primary,
             )
         }
         Spacer(Modifier.width(14.dp))
@@ -709,7 +741,7 @@ internal fun KimiMenuRowWithLongClick(
             Icons.Default.ChevronRight,
             contentDescription = null,
             modifier = Modifier.size(20.dp),
-            tint = MaterialTheme.colorScheme.onSurfaceVariant,
+            tint = IconColor.Secondary,
         )
     }
 }
@@ -728,7 +760,7 @@ internal fun PlusBadgeIcon(
                 .align(Alignment.TopEnd)
                 .background(MaterialTheme.colorScheme.background, CircleShape)
                 .padding(horizontal = 1.dp),
-            color = MaterialTheme.colorScheme.primary,
+            color = IconColor.Primary,
             style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
         )
     }
@@ -745,9 +777,9 @@ internal fun KimiChip(
         modifier = modifier
             .clip(ModernPillShape)
             .clickable(onClick = onClick)
-            .background(MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.62f))
+            .background(IconColor.Primary.copy(alpha = 0.15f))
             .padding(horizontal = 14.dp, vertical = 7.dp),
-        color = MaterialTheme.colorScheme.onPrimaryContainer,
+        color = IconColor.Primary,
         style = MaterialTheme.typography.bodyMedium,
         maxLines = 1,
         overflow = TextOverflow.Ellipsis,
@@ -755,8 +787,13 @@ internal fun KimiChip(
 }
 
 @Composable
+internal enum class NoticeType {
+    SUCCESS, WARNING, ERROR, INFO
+}
+
 internal fun TransientNotice(
     message: String,
+    type: NoticeType = NoticeType.SUCCESS,
     modifier: Modifier = Modifier,
     durationMillis: Long = 2400L,
     onDismiss: () -> Unit,
@@ -770,6 +807,12 @@ internal fun TransientNotice(
         kotlinx.coroutines.delay(220)
         onDismiss()
     }
+    val (bgColor, icon, iconRes) = when (type) {
+        NoticeType.SUCCESS -> Color(0xFF4CAF50) to Icons.Default.CheckCircle to null
+        NoticeType.WARNING -> Color(0xFFFF9800) to Icons.Default.Warning to null
+        NoticeType.ERROR -> Color(0xFFF44336) to Icons.Default.Error to null
+        NoticeType.INFO -> Color(0xFF2196F3) to Icons.Default.Info to null
+    }
     Box(modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
         AnimatedVisibility(
             visible = visible && message.isNotBlank(),
@@ -778,7 +821,7 @@ internal fun TransientNotice(
         ) {
             Surface(
                 shape = ModernPillShape,
-                color = MaterialTheme.colorScheme.inverseSurface.copy(alpha = 0.94f),
+                color = bgColor,
                 tonalElevation = 8.dp,
                 shadowElevation = 8.dp,
             ) {
@@ -787,10 +830,10 @@ internal fun TransientNotice(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.spacedBy(10.dp),
                 ) {
-                    Icon(Icons.Default.CheckCircle, contentDescription = null, tint = MaterialTheme.colorScheme.inverseOnSurface)
+                    Icon(icon, contentDescription = null, tint = Color.White)
                     Text(
                         message,
-                        color = MaterialTheme.colorScheme.inverseOnSurface,
+                        color = Color.White,
                         style = MaterialTheme.typography.bodyMedium,
                         maxLines = 2,
                         overflow = TextOverflow.Ellipsis,

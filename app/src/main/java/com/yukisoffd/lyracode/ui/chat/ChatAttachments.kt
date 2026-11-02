@@ -32,6 +32,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import com.yukisoffd.lyracode.ai.ChatRecord
+import com.yukisoffd.lyracode.IconColor
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.File
@@ -87,7 +88,7 @@ internal fun UploadedFileCard(file: UploadedFilePreview) {
                 Icon(
                     Icons.Default.Description,
                     contentDescription = null,
-                    tint = MaterialTheme.colorScheme.primary,
+                    tint = IconColor.Primary,
                     modifier = Modifier.size(32.dp),
                 )
             }

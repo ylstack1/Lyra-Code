@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.yukisoffd.lyracode.data.AppSettings
+import com.yukisoffd.lyracode.IconColor
 
 /**
  * Settings detail page for mid-run composer delivery. Writes each change to
@@ -57,7 +58,7 @@ internal fun ComposerSettingsSection(
                 Icons.Default.Send,
                 contentDescription = null,
                 modifier = Modifier.width(36.dp).size(24.dp),
-                tint = MaterialTheme.colorScheme.primary,
+                tint = IconColor.Primary,
             )
             Column(Modifier.weight(1f)) {
                 Text(

@@ -71,6 +71,7 @@ import com.yukisoffd.lyracode.system.SystemCommandExecutor
 import com.yukisoffd.lyracode.termux.TermuxExecutor
 import com.yukisoffd.lyracode.webdav.WebDavClient
 import com.yukisoffd.lyracode.workspace.WorkspaceManager
+import com.yukisoffd.lyracode.IconColor
 
 
 private data class SettingsMenuEntry(
@@ -605,7 +606,7 @@ internal fun SettingsScreen(
                         Icons.Default.Search,
                         contentDescription = null,
                         modifier = Modifier.size(21.dp),
-                        tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                        tint = IconColor.Secondary,
                     )
                 },
             )

@@ -44,6 +44,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import com.yukisoffd.lyracode.data.ApiProfile
 import com.yukisoffd.lyracode.data.AppSettings
+import com.yukisoffd.lyracode.IconColor
 import java.net.URL
 
 
@@ -116,7 +117,7 @@ internal fun ProviderPresetPicker(
                             Icon(
                                 Icons.Default.OpenInNew,
                                 contentDescription = uiText(R.string.ui_open_provider_website),
-                                tint = MaterialTheme.colorScheme.primary,
+                                tint = IconColor.Primary,
                             )
                         }
                         Icon(Icons.Default.ChevronRight, contentDescription = null, tint = ModernMutedDark)
@@ -254,7 +255,7 @@ internal fun WebSearchBlacklistSettings(
     }
     ModernCardBox {
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            Icon(Icons.Default.Search, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+            Icon(Icons.Default.Search, contentDescription = null, tint = IconColor.Primary)
             Column(Modifier.weight(1f)) {
                 Text(uiText(R.string.title_domain_blacklist), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
                 Text(

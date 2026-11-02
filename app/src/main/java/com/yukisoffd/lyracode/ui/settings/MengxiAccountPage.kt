@@ -51,6 +51,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.yukisoffd.lyracode.data.AppSettings
 import com.yukisoffd.lyracode.data.NewApiAccountClient
+import com.yukisoffd.lyracode.IconColor
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -115,7 +116,7 @@ internal fun MengxiAccountPage(settings: AppSettings, initialNotice: String, onS
     }
     if (!loggedIn || user == null) {
         ModernCardBox {
-            Icon(Icons.Default.Cloud, null, Modifier.size(40.dp), tint = MaterialTheme.colorScheme.primary)
+            Icon(Icons.Default.Cloud, null, Modifier.size(40.dp), tint = IconColor.Primary)
             Text(uiText(R.string.mengxi_not_signed_in), style = MaterialTheme.typography.titleMedium)
             Button(enabled = !busy, onClick = { showLogin = true }) { Text(uiText(R.string.new_api_sign_in_register)) }
         }
@@ -137,7 +138,7 @@ internal fun MengxiAccountPage(settings: AppSettings, initialNotice: String, onS
                     Text(displayName, style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.SemiBold)
                     Text("@$username", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
-                Icon(Icons.Default.CheckCircle, uiText(R.string.mengxi_connected), tint = MaterialTheme.colorScheme.primary)
+                Icon(Icons.Default.CheckCircle, uiText(R.string.mengxi_connected), tint = IconColor.Primary)
             }
             Row(
                 Modifier.fillMaxWidth(),
@@ -175,11 +176,11 @@ internal fun MengxiAccountPage(settings: AppSettings, initialNotice: String, onS
         ModernCardBox {
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(20.dp)) {
                 Row(Modifier.weight(1f), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    Icon(Icons.Default.Key, null, tint = MaterialTheme.colorScheme.primary)
+                    Icon(Icons.Default.Key, null, tint = IconColor.Primary)
                     Text(uiText(R.string.mengxi_keys_count, profile?.allApiKeys?.size ?: 0), style = MaterialTheme.typography.bodyMedium)
                 }
                 Row(Modifier.weight(1f), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    Icon(Icons.Default.ViewModule, null, tint = MaterialTheme.colorScheme.primary)
+                    Icon(Icons.Default.ViewModule, null, tint = IconColor.Primary)
                     Text(uiText(R.string.label_models_count, profile?.savedModels?.size ?: 0), style = MaterialTheme.typography.bodyMedium)
                 }
             }
@@ -205,7 +206,7 @@ internal fun MengxiAccountPage(settings: AppSettings, initialNotice: String, onS
     }
     if (loggedIn) {
         TextButton(enabled = !busy, modifier = Modifier.fillMaxWidth(), onClick = { runAction(signOut = true) { account.logout(); "" } }) {
-            Icon(Icons.Default.Logout, null, Modifier.padding(end = 8.dp).size(18.dp), tint = MaterialTheme.colorScheme.error)
+            Icon(Icons.Default.Logout, null, Modifier.padding(end = 8.dp).size(18.dp), tint = IconColor.Error)
             Text(uiText(R.string.new_api_logout), color = MaterialTheme.colorScheme.error)
         }
         Text(uiText(R.string.new_api_logout_hint), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)

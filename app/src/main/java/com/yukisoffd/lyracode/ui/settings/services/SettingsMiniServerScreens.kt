@@ -57,6 +57,7 @@ import androidx.compose.material.icons.filled.*
 import com.yukisoffd.lyracode.data.AppSettings
 import com.yukisoffd.lyracode.data.MiniServerConfig
 import com.yukisoffd.lyracode.server.MiniServerManager
+import com.yukisoffd.lyracode.IconColor
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -180,7 +181,7 @@ internal fun MiniServerSettings(
 
     ModernCardBox {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Icon(Icons.Default.Language, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+            Icon(Icons.Default.Language, contentDescription = null, tint = IconColor.Primary)
             Spacer(Modifier.width(12.dp))
             Column(Modifier.weight(1f)) {
                 Text(uiText(R.string.title_workspace_mini_server), style = MaterialTheme.typography.titleMedium)
@@ -386,7 +387,7 @@ internal fun MiniServerLogSettings(miniServerManager: MiniServerManager) {
 
     ModernCardBox {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Icon(Icons.Default.Terminal, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+            Icon(Icons.Default.Terminal, contentDescription = null, tint = IconColor.Primary)
             Spacer(Modifier.width(12.dp))
             Column(Modifier.weight(1f)) {
                 Text(uiText(R.string.title_terminal_log), style = MaterialTheme.typography.titleMedium)
@@ -402,7 +403,7 @@ internal fun MiniServerLogSettings(miniServerManager: MiniServerManager) {
                     revision++
                 },
             ) {
-                Icon(Icons.Default.DeleteSweep, contentDescription = uiText(R.string.cd_clear_logs), tint = MaterialTheme.colorScheme.primary)
+                Icon(Icons.Default.DeleteSweep, contentDescription = uiText(R.string.cd_clear_logs), tint = IconColor.Primary)
             }
         }
         ModernDivider()

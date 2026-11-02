@@ -114,50 +114,51 @@ internal fun ProfileEditDialog(
         onDismissRequest = onDismiss,
         title = { Text(context.getString(R.string.label_profile)) },
         text = {
-            Column(Modifier.verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(12.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-                Box(
-                    Modifier
-                        .size(128.dp)
-                        .clip(CircleShape)
-                        .background(MaterialTheme.colorScheme.surfaceVariant),
-                    contentAlignment = Alignment.Center,
+            Column(
+                Modifier
+                    .verticalScroll(rememberScrollState())
+                    .padding(horizontal = 16.dp, vertical = 12.dp),
+                verticalArrangement = Arrangement.spacedBy(16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                // Avatar section
+                Column(
+                    Modifier.align(Alignment.CenterHorizontally),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
                 ) {
-                    if (previewBitmap != null) {
-                        val frameSize = 128.dp
-                        val aspect = previewBitmap.width.toFloat() / previewBitmap.height.toFloat()
-                        val baseWidth = if (aspect >= 1f) frameSize * aspect else frameSize
-                        val baseHeight = if (aspect >= 1f) frameSize else frameSize / aspect
-                        val maxShiftX = with(density) { ((baseWidth * zoom - frameSize) / 2f).coerceAtLeast(0.dp).toPx() }
-                        val maxShiftY = with(density) { ((baseHeight * zoom - frameSize) / 2f).coerceAtLeast(0.dp).toPx() }
-                        Image(
-                            bitmap = previewBitmap.asImageBitmap(),
-                            contentDescription = null,
-                            modifier = Modifier
-                                .requiredWidth(baseWidth)
-                                .requiredHeight(baseHeight)
-                                .graphicsLayer(
-                                    scaleX = zoom,
-                                    scaleY = zoom,
-                                    translationX = -offsetX * maxShiftX,
-                                    translationY = -offsetY * maxShiftY,
-                                )
-                                .pointerInput(zoom) {
-                                    detectDragGestures { change, dragAmount ->
-                                        change.consume()
-                                        if (maxShiftX > 0f) {
-                                            offsetX = (offsetX - dragAmount.x / maxShiftX).coerceIn(-1f, 1f)
-                                        }
-                                        if (maxShiftY > 0f) {
-                                            offsetY = (offsetY - dragAmount.y / maxShiftY).coerceIn(-1f, 1f)
-                                        }
-                                    }
-                                },
-                            contentScale = ContentScale.FillBounds,
-                        )
-                    } else {
-                        Text(draftName.take(1).ifBlank { "L" }, style = MaterialTheme.typography.headlineLarge)
+                    Box(
+                        Modifier
+                            .size(100.dp)
+                            .clip(CircleShape)
+                            .background(MaterialTheme.colorScheme.surfaceVariant),
+                        contentAlignment = Alignment.Center,
+                    ) {
+                        if (previewBitmap != null) {
+                            Image(
+                                bitmap = previewBitmap.asImageBitmap(),
+                                contentDescription = null,
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .contentScale(ContentScale.Crop),
+                            )
+                        } else {
+                            Text(
+                                draftName.take(1).ifBlank { "L" },
+                                style = MaterialTheme.typography.headlineMedium,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            )
+                        }
+                    }
+                    OutlinedButton(
+                        onClick = { avatarLauncher.launch("image/*") },
+                        shape = ModernPillShape,
+                    ) {
+                        Text(context.getString(R.string.action_select_avatar))
                     }
                 }
+
+                // Nickname
                 OutlinedTextField(
                     value = draftName,
                     onValueChange = { draftName = it },
@@ -165,107 +166,94 @@ internal fun ProfileEditDialog(
                     label = { Text(context.getString(R.string.label_nickname)) },
                     singleLine = true,
                 )
-                OutlinedButton(onClick = { avatarLauncher.launch("image/*") }, shape = ModernPillShape) {
-                    Text(context.getString(R.string.action_select_avatar))
-                }
-                if (previewBitmap != null) {
-                    Text(context.getString(R.string.label_crop_zoom), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.labelMedium)
-                    Slider(value = zoom, onValueChange = { zoom = it }, valueRange = 1f..3f)
-                    Text(context.getString(R.string.label_horizontal_position), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.labelMedium)
-                    Slider(value = offsetX, onValueChange = { offsetX = it }, valueRange = -1f..1f)
-                    Text(context.getString(R.string.label_vertical_position), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.labelMedium)
-                    Slider(value = offsetY, onValueChange = { offsetY = it }, valueRange = -1f..1f)
-                }
-                KimiSectionLabel(context.getString(R.string.label_profile_details))
-                ModernCardBox {
-                    Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                        OutlinedTextField(
-                            value = draftName,
-                            onValueChange = { draftName = it },
-                            modifier = Modifier.fillMaxWidth(),
-                            label = { Text(context.getString(R.string.label_nickname)) },
-                            singleLine = true,
+
+                // Gender
+                Column(
+                    Modifier.fillMaxWidth(),
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                ) {
+                    Text(
+                        uiText(R.string.label_gender),
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    ) {
+                        val genders = listOf(
+                            uiText(R.string.gender_male) to "male",
+                            uiText(R.string.gender_female) to "female",
+                            uiText(R.string.gender_other) to "other",
+                            uiText(R.string.gender_prefer_not_to_say) to "prefer_not_to_say",
                         )
-                        // Gender selection chips
-                        Text(uiText(R.string.label_gender), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.spacedBy(8.dp),
-                        ) {
-                            val genders = listOf(
-                                uiText(R.string.gender_male) to "male",
-                                uiText(R.string.gender_female) to "female",
-                                uiText(R.string.gender_other) to "other",
-                                uiText(R.string.gender_prefer_not_to_say) to "prefer_not_to_say",
-                            )
-                            genders.forEachIndexed { index, (label, value) ->
-                                val isSelected = settings.userGender == value
-                                Box(
-                                    modifier = Modifier
-                                        .weight(1f)
-                                        .clip(RoundedCornerShape(12.dp))
-                                        .background(
-                                            if (isSelected) MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.4f)
-                                            else MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)
-                                        )
-                                        .border(
-                                            if (isSelected) 2.dp else 1.dp,
-                                            if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f),
-                                            RoundedCornerShape(12.dp),
-                                        )
-                                        .clickable { settings.userGender = value },
-                                    contentAlignment = Alignment.Center,
-                                ) {
-                                    Text(
-                                        label,
-                                        style = MaterialTheme.typography.labelMedium,
-                                        color = if (isSelected) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.onSurfaceVariant,
+                        genders.forEachIndexed { index, (label, value) ->
+                            val isSelected = settings.userGender == value
+                            Box(
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .clip(RoundedCornerShape(10.dp))
+                                    .background(
+                                        if (isSelected) Color(0xFF6366F1).copy(alpha = 0.15f)
+                                        else MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)
                                     )
-                                }
+                                    .border(
+                                        if (isSelected) 2.dp else 1.dp,
+                                        if (isSelected) Color(0xFF6366F1) else MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f),
+                                        RoundedCornerShape(10.dp),
+                                    )
+                                    .clickable { settings.userGender = value },
+                                contentAlignment = Alignment.Center,
+                            ) {
+                                Text(
+                                    label,
+                                    style = MaterialTheme.typography.labelMedium,
+                                    color = if (isSelected) Color(0xFF6366F1) else MaterialTheme.colorScheme.onSurfaceVariant,
+                                )
                             }
                         }
-
-                        // Age input
-                        var draftAge by remember(settings.userAge) { mutableStateOf(settings.userAge) }
-                        OutlinedTextField(
-                            value = draftAge,
-                            onValueChange = { draftAge = it; settings.userAge = it },
-                            modifier = Modifier.fillMaxWidth(),
-                            label = { Text(uiText(R.string.label_age)) },
-                            singleLine = true,
-
-                        )
-                        OutlinedTextField(
-                            value = settings.userBio,
-                            onValueChange = { settings.userBio = it },
-                            modifier = Modifier.fillMaxWidth().heightIn(min = 80.dp),
-                            label = { Text(uiText(R.string.label_bio)) },
-                            singleLine = false,
-                        )
-                        Text(
-                            uiText(R.string.profile_ai_context_desc),
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                            style = MaterialTheme.typography.bodySmall,
-                        )
                     }
                 }
+
+                // Age
+                var draftAge by remember(settings.userAge) { mutableStateOf(settings.userAge) }
+                OutlinedTextField(
+                    value = draftAge,
+                    onValueChange = { draftAge = it; settings.userAge = it },
+                    modifier = Modifier.fillMaxWidth(),
+                    label = { Text(uiText(R.string.label_age)) },
+                    singleLine = true,
+                )
+
+                // Bio
+                OutlinedTextField(
+                    value = settings.userBio,
+                    onValueChange = { settings.userBio = it },
+                    modifier = Modifier.fillMaxWidth().heightIn(min = 80.dp),
+                    label = { Text(uiText(R.string.label_bio)) },
+                    singleLine = false,
+                )
+
+                Text(
+                    uiText(R.string.profile_ai_context_desc),
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    style = MaterialTheme.typography.bodySmall,
+                )
             }
         },
         confirmButton = {
             Button(
                 onClick = {
-                    val newAvatarPath = selectedUri?.let { saveCroppedAvatar(context, it, zoom, offsetX, offsetY) } ?: avatarPath
+                    val newAvatarPath = selectedUri?.let { saveCroppedAvatar(context, it, 1f, 0f, 0f) } ?: avatarPath
                     settings.userNickname = draftName
                     settings.userAvatarPath = newAvatarPath
                     onSaved(settings.userNickname, newAvatarPath)
                 },
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF6366F1)),
             ) { Text(context.getString(R.string.action_save)) }
         },
-        dismissButton = { TextButton(onClick = onDismiss) { Text(context.getString(R.string.action_cancel)) } },
-    )
-}
-
-internal fun decodeBitmap(context: Context, uri: Uri): Bitmap? {
+        dismissButton = { TextButton(onClick = onDismiss) { Text(context.getString(R.string.action_cancel)) } }
+    )(context: Context, uri: Uri): Bitmap? {
     return runCatching {
         context.contentResolver.openInputStream(uri)?.use { BitmapFactory.decodeStream(it) }
     }.getOrNull()

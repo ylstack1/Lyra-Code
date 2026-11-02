@@ -151,6 +151,7 @@ import com.yukisoffd.lyracode.debian.ProotLinuxInstance
 import com.yukisoffd.lyracode.debian.ProotLinuxManager
 import com.yukisoffd.lyracode.system.SystemCommandExecutor
 import com.yukisoffd.lyracode.termux.TermuxExecutor
+import com.yukisoffd.lyracode.IconColor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -1058,7 +1059,7 @@ private fun DualPaneFileManager(
                     IconButton(onClick = {
                         pendingBatchOperation = PendingBatchOperation(BatchOperation.DELETE, activeBatchSelection())
                     }) {
-                        Icon(Icons.Default.Delete, contentDescription = context.getString(R.string.file_batch_delete), tint = MaterialTheme.colorScheme.error)
+                        Icon(Icons.Default.Delete, contentDescription = context.getString(R.string.file_batch_delete), tint = IconColor.Error)
                     }
                     IconButton(onClick = ::clearSelection) { Icon(Icons.Default.Close, contentDescription = context.getString(R.string.file_clear_selection)) }
                 }
@@ -1455,7 +1456,7 @@ private fun FileRow(
         Icon(
             Icons.Default.CheckCircle,
             contentDescription = null,
-            tint = MaterialTheme.colorScheme.onPrimaryContainer,
+            tint = Color.WhiteContainer,
             modifier = Modifier
                 .align(if (displayedOffset >= 0f) Alignment.CenterStart else Alignment.CenterEnd)
                 .padding(horizontal = 16.dp)

@@ -97,6 +97,7 @@ import com.yukisoffd.lyracode.data.MediaGenerationKind
 import com.yukisoffd.lyracode.data.OcrModelConfig
 import com.yukisoffd.lyracode.data.SubAgentConfig
 import com.yukisoffd.lyracode.data.VisionUnderstandingConfig
+import com.yukisoffd.lyracode.IconColor
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.io.File
@@ -925,7 +926,7 @@ internal fun ModelServiceSettings(
                         onValueChange = { query = it },
                         modifier = Modifier.weight(1f),
                         placeholder = uiText(R.string.search_models_placeholder),
-                        leadingIcon = { Icon(Icons.Default.Search, contentDescription = null, modifier = Modifier.size(18.dp), tint = MaterialTheme.colorScheme.primary) },
+                        leadingIcon = { Icon(Icons.Default.Search, contentDescription = null, modifier = Modifier.size(18.dp), tint = IconColor.Primary) },
                     )
                     IconButton(
                         onClick = {
@@ -938,7 +939,7 @@ internal fun ModelServiceSettings(
                         Icon(
                             Icons.Default.Add,
                             contentDescription = uiText(R.string.action_add_model_service),
-                            tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                            tint = Color.WhiteContainer,
                         )
                     }
                 }
@@ -1056,7 +1057,7 @@ internal fun ModelServiceSettings(
                                 Icon(
                                     Icons.Default.OpenInNew,
                                     contentDescription = uiText(R.string.ui_open_provider_website),
-                                    tint = MaterialTheme.colorScheme.primary,
+                                    tint = IconColor.Primary,
                                 )
                             }
                         }
@@ -1664,7 +1665,7 @@ internal fun SubAgentRow(agent: SubAgentConfig, profileName: String, onEdit: () 
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(12.dp),
     ) {
-        Icon(Icons.Default.Hub, contentDescription = null, modifier = Modifier.size(28.dp), tint = MaterialTheme.colorScheme.primary)
+        Icon(Icons.Default.Hub, contentDescription = null, modifier = Modifier.size(28.dp), tint = IconColor.Primary)
         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
             Text(agent.name, style = MaterialTheme.typography.titleSmall)
             Text("$profileName · ${agent.model}", color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall, maxLines = 1, overflow = TextOverflow.Ellipsis)
@@ -1769,7 +1770,7 @@ internal fun <T> SubAgentDropdownPicker(
                                     val childSubtitle = itemSubtitle(item)
                                     if (childSubtitle.isNotBlank()) Text(childSubtitle, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 1, overflow = TextOverflow.Ellipsis, style = MaterialTheme.typography.bodySmall)
                                 }
-                                if (isSelected(item)) Icon(Icons.Default.Check, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+                                if (isSelected(item)) Icon(Icons.Default.Check, contentDescription = null, tint = IconColor.Primary)
                             }
                         },
                         onClick = {

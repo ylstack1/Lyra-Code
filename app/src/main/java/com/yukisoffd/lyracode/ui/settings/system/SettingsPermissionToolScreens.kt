@@ -72,6 +72,7 @@ import com.yukisoffd.lyracode.debian.ProotOperationPhase
 import com.yukisoffd.lyracode.debian.ProotArchitecture
 import com.yukisoffd.lyracode.debian.RootfsImportException
 import com.yukisoffd.lyracode.debian.RootfsImportProblem
+import com.yukisoffd.lyracode.IconColor
 import kotlinx.coroutines.launch
 import java.net.URL
 import rikka.shizuku.Shizuku
@@ -120,7 +121,7 @@ internal fun SystemPermissionSettings(
     }
     ModernCardBox {
         Row(Modifier.fillMaxWidth().padding(vertical = 8.dp), verticalAlignment = Alignment.CenterVertically) {
-            Icon(Icons.Default.Security, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+            Icon(Icons.Default.Security, contentDescription = null, tint = IconColor.Primary)
             Spacer(Modifier.width(12.dp))
             Column(Modifier.weight(1f)) {
                 Text(uiText(R.string.title_root_permission), style = MaterialTheme.typography.titleSmall)
@@ -140,7 +141,7 @@ internal fun SystemPermissionSettings(
         }
         ModernDivider()
         Row(Modifier.fillMaxWidth().padding(vertical = 8.dp), verticalAlignment = Alignment.CenterVertically) {
-            Icon(Icons.Default.Terminal, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+            Icon(Icons.Default.Terminal, contentDescription = null, tint = IconColor.Primary)
             Spacer(Modifier.width(12.dp))
             Column(Modifier.weight(1f)) {
                 Text(uiText(R.string.title_shell_permission), style = MaterialTheme.typography.titleSmall)
@@ -302,7 +303,7 @@ internal fun AgentToolSettings(settings: AppSettings, termuxExecutor: TermuxExec
             onValueChange = { query = it },
             modifier = Modifier.fillMaxWidth(),
             placeholder = uiText(R.string.search_tools_placeholder),
-            leadingIcon = { Icon(Icons.Default.Search, contentDescription = null, modifier = Modifier.size(18.dp), tint = MaterialTheme.colorScheme.primary) },
+            leadingIcon = { Icon(Icons.Default.Search, contentDescription = null, modifier = Modifier.size(18.dp), tint = IconColor.Primary) },
         )
         Text(
             stringResource(
@@ -412,7 +413,7 @@ internal fun ProotLinuxSettings() {
 
     ModernCardBox {
         Row(Modifier.fillMaxWidth().padding(vertical = 8.dp), verticalAlignment = Alignment.CenterVertically) {
-            Icon(Icons.Default.Terminal, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+            Icon(Icons.Default.Terminal, contentDescription = null, tint = IconColor.Primary)
             Spacer(Modifier.width(12.dp))
             Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
                 Text(uiText(R.string.proot_linux_title), style = MaterialTheme.typography.titleSmall)
@@ -430,7 +431,7 @@ internal fun ProotLinuxSettings() {
             verticalArrangement = Arrangement.spacedBy(6.dp),
         ) {
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                Icon(Icons.Default.Info, contentDescription = null, tint = MaterialTheme.colorScheme.onPrimaryContainer)
+                Icon(Icons.Default.Info, contentDescription = null, tint = Color.WhiteContainer)
                 Text(
                     if (architecture != null) uiText(R.string.proot_linux_device_architecture, architecture.abi)
                     else uiText(R.string.proot_linux_architecture_unavailable),
@@ -527,7 +528,7 @@ internal fun ProotLinuxSettings() {
                     }
                     Switch(checked = linux.enabled, onCheckedChange = { runtime.setEnabled(linux.id, it) })
                     IconButton(onClick = { deleteId = linux.id }) {
-                        Icon(Icons.Default.Delete, contentDescription = uiText(R.string.proot_linux_delete_action), tint = MaterialTheme.colorScheme.error)
+                        Icon(Icons.Default.Delete, contentDescription = uiText(R.string.proot_linux_delete_action), tint = IconColor.Error)
                     }
                 }
                 if (index != state.instances.lastIndex) ModernDivider()
@@ -786,7 +787,7 @@ internal fun TermuxSetupGuide() {
     ModernCardBox {
         Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                Icon(Icons.Default.Terminal, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+                Icon(Icons.Default.Terminal, contentDescription = null, tint = IconColor.Primary)
                 Text(uiText(R.string.title_termux_config), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
             }
             Text(
@@ -836,7 +837,7 @@ internal fun SettingsExternalLinkRow(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(12.dp),
     ) {
-        Icon(icon, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+        Icon(icon, contentDescription = null, tint = IconColor.Primary)
         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
             Text(title, style = MaterialTheme.typography.titleSmall)
             Text(subtitle, color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)

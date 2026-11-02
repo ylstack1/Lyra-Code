@@ -97,6 +97,7 @@ import androidx.compose.material.icons.filled.*
 import com.yukisoffd.lyracode.data.AppSettings
 import com.yukisoffd.lyracode.data.ChatProject
 import com.yukisoffd.lyracode.data.Conversation
+import com.yukisoffd.lyracode.IconColor
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -410,7 +411,7 @@ internal fun KimiDrawerContent(
                                                 Icons.Default.Search,
                                                 contentDescription = null,
                                                 modifier = Modifier.size(19.dp),
-                                                tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                                                tint = IconColor.Secondary,
                                             )
                                         },
                                     )
@@ -694,7 +695,7 @@ private fun NewProjectButton(onClick: () -> Unit) {
             Icon(
                 Icons.Default.CreateNewFolder,
                 contentDescription = context.getString(R.string.action_create_project),
-                tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                tint = Color.WhiteContainer,
             )
         }
     }
@@ -964,7 +965,7 @@ internal fun DrawerSectionHeader(
             modifier = Modifier
                 .size(20.dp)
                 .graphicsLayer { rotationZ = expandIconRotation },
-            tint = MaterialTheme.colorScheme.onSurfaceVariant,
+            tint = IconColor.Secondary,
         )
     }
 }
@@ -1025,7 +1026,7 @@ private fun ProjectHeaderRow(
                             Icons.Default.PushPin,
                             contentDescription = context.getString(R.string.label_pinned_icon),
                             modifier = Modifier.size(14.dp),
-                            tint = MaterialTheme.colorScheme.primary,
+                            tint = IconColor.Primary,
                         )
                         Spacer(Modifier.width(4.dp))
                     }
@@ -1046,7 +1047,7 @@ private fun ProjectHeaderRow(
                 Icon(
                     Icons.Default.AddComment,
                     contentDescription = context.getString(R.string.action_new_project_session),
-                    tint = MaterialTheme.colorScheme.primary,
+                    tint = IconColor.Primary,
                 )
             }
             Icon(
@@ -1102,7 +1103,7 @@ internal fun KimiConversationRow(
                 Row(verticalAlignment = Alignment.CenterVertically) {
                 if (conversation.pinnedAt > 0L) {
                         val contextForPinned = LocalContext.current
-                        Icon(Icons.Default.PushPin, contentDescription = contextForPinned.getString(R.string.label_pinned_icon), modifier = Modifier.size(16.dp), tint = MaterialTheme.colorScheme.primary)
+                        Icon(Icons.Default.PushPin, contentDescription = contextForPinned.getString(R.string.label_pinned_icon), modifier = Modifier.size(16.dp), tint = IconColor.Primary)
                         Spacer(Modifier.width(4.dp))
                     }
                     Text(conversation.title, maxLines = 1, overflow = TextOverflow.Ellipsis, style = MaterialTheme.typography.titleSmall)

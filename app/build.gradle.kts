@@ -86,8 +86,9 @@ android {
 
     buildTypes {
         debug {
-            applicationIdSuffix = ".debug"
-            versionNameSuffix = "-debug"
+            applicationIdSuffix = ".dev"
+            versionNameSuffix = "-dev"
+            resValue("string", "app_name", ""Lyra Code Dev"")
         }
         create("beta") {
             applicationIdSuffix = ".beta"

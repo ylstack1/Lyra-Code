@@ -86,6 +86,7 @@ import com.yukisoffd.lyracode.ai.ChatRecord
 import com.yukisoffd.lyracode.ai.MEDIA_MESSAGE_ROLE
 import com.yukisoffd.lyracode.ai.TodoItem
 import com.yukisoffd.lyracode.data.AppSettings
+import com.yukisoffd.lyracode.IconColor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.ensureActive
@@ -1064,7 +1065,7 @@ internal fun MessageCard(
                                                         Icon(
                                                             Icons.Default.MoreVert,
                                                             contentDescription = uiText(R.string.action_more),
-                                                            tint = MaterialTheme.colorScheme.primary,
+                                                            tint = IconColor.Primary,
                                                             modifier = Modifier.size(18.dp),
                                                         )
                                                     }
@@ -1317,7 +1318,7 @@ internal fun CollapsedStatusLine(
         Icon(
             if (expanded) Icons.Default.ExpandLess else Icons.Default.ExpandMore,
             contentDescription = if (expanded) uiText(R.string.cd_expand) else uiText(R.string.cd_expand_alt),
-            tint = MaterialTheme.colorScheme.primary,
+            tint = IconColor.Primary,
         )
     }
 }

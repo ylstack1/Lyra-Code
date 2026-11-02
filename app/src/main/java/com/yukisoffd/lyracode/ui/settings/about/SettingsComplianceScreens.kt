@@ -58,7 +58,7 @@ internal fun ServiceAgreementScreen(onOpenDocument: (String) -> Unit) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-            Icon(Icons.Default.Policy, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+            Icon(Icons.Default.Policy, contentDescription = null, tint = IconColor.Primary)
             Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
                 Text(stringResource(R.string.compliance_service_agreements), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
                 Text(stringResource(R.string.compliance_index_intro), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
@@ -112,7 +112,7 @@ internal fun ComplianceDocumentScreen(pageId: String) {
     val document = complianceDocument(pageId)
     ModernCardBox {
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            Icon(document.icon, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+            Icon(document.icon, contentDescription = null, tint = IconColor.Primary)
             Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
                 Text(stringResource(document.title), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
                 Text(stringResource(R.string.compliance_effective_date), color = MaterialTheme.colorScheme.primary, style = MaterialTheme.typography.labelMedium)

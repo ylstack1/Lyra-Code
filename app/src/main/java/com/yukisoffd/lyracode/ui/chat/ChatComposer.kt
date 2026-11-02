@@ -93,6 +93,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import com.yukisoffd.lyracode.data.AppSettings
 import com.yukisoffd.lyracode.workspace.UploadedFile
+import com.yukisoffd.lyracode.IconColor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.File
@@ -275,7 +276,7 @@ internal fun ComposerStopButton(
                 Icons.Default.Stop,
                 contentDescription = stringResource(R.string.cd_stop),
                 modifier = Modifier.size(15.dp),
-                tint = MaterialTheme.colorScheme.onPrimary,
+                tint = Color.White,
             )
         }
     }
@@ -398,7 +399,7 @@ private fun ComposerActionBar(
                         },
                     ),
                     modifier = Modifier.size(16.dp),
-                    tint = MaterialTheme.colorScheme.onPrimary,
+                    tint = Color.White,
                 )
             }
         }
@@ -675,7 +676,7 @@ internal fun AttachmentActionBottomSheet(
                                 onValueChange = onSearchChange,
                                 modifier = Modifier.fillMaxWidth(),
                                 placeholder = stringResource(R.string.search_provider_placeholder),
-                                leadingIcon = { Icon(Icons.Default.Search, contentDescription = null, modifier = Modifier.size(18.dp), tint = MaterialTheme.colorScheme.primary) },
+                                leadingIcon = { Icon(Icons.Default.Search, contentDescription = null, modifier = Modifier.size(18.dp), tint = IconColor.Primary) },
                             )
                             val filteredProfiles = profiles.filter { search.isBlank() || it.name.contains(search, ignoreCase = true) }
                             LazyColumn(
@@ -707,7 +708,7 @@ internal fun AttachmentActionBottomSheet(
                                 onValueChange = onSearchChange,
                                 modifier = Modifier.fillMaxWidth(),
                                 placeholder = stringResource(R.string.search_model_placeholder),
-                                leadingIcon = { Icon(Icons.Default.Search, contentDescription = null, modifier = Modifier.size(18.dp), tint = MaterialTheme.colorScheme.primary) },
+                                leadingIcon = { Icon(Icons.Default.Search, contentDescription = null, modifier = Modifier.size(18.dp), tint = IconColor.Primary) },
                             )
                             val filteredModels = activeProfile?.enabledModels.orEmpty()
                                 .filter { search.isBlank() || it.contains(search, ignoreCase = true) || activeProfile?.modelDisplayName(it).orEmpty().contains(search, ignoreCase = true) }
@@ -740,7 +741,7 @@ internal fun AttachmentActionBottomSheet(
                                 onValueChange = onSearchChange,
                                 modifier = Modifier.fillMaxWidth(),
                                 placeholder = stringResource(R.string.search_prompt_placeholder),
-                                leadingIcon = { Icon(Icons.Default.Search, contentDescription = null, modifier = Modifier.size(18.dp), tint = MaterialTheme.colorScheme.primary) },
+                                leadingIcon = { Icon(Icons.Default.Search, contentDescription = null, modifier = Modifier.size(18.dp), tint = IconColor.Primary) },
                             )
                             val filteredPrompts = prompts.filter {
                                 search.isBlank() ||
@@ -996,7 +997,7 @@ internal fun ActionSheetTile(icon: ImageVector, title: String, modifier: Modifie
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
-        Icon(icon, contentDescription = null, modifier = Modifier.size(30.dp), tint = MaterialTheme.colorScheme.primary)
+        Icon(icon, contentDescription = null, modifier = Modifier.size(30.dp), tint = IconColor.Primary)
         Spacer(Modifier.height(10.dp))
         Text(title, style = MaterialTheme.typography.titleMedium)
     }
@@ -1028,7 +1029,7 @@ internal fun ActionSheetRow(
                 modifier = Modifier.size(34.dp),
             )
         } else {
-            Icon(icon, contentDescription = null, modifier = Modifier.size(30.dp), tint = MaterialTheme.colorScheme.primary)
+            Icon(icon, contentDescription = null, modifier = Modifier.size(30.dp), tint = IconColor.Primary)
         }
         Column(Modifier.weight(1f)) {
             Text(title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
@@ -1036,7 +1037,7 @@ internal fun ActionSheetRow(
                 Text(subtitle, color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall, maxLines = 1, overflow = TextOverflow.Ellipsis)
             }
         }
-        trailing?.let { Icon(it, contentDescription = null, tint = MaterialTheme.colorScheme.primary) }
+        trailing?.let { Icon(it, contentDescription = null, tint = IconColor.Primary) }
     }
 }
 
@@ -1059,7 +1060,7 @@ internal fun ActionSheetSwitchRow(
         horizontalArrangement = Arrangement.spacedBy(14.dp),
     ) {
         val alpha = if (enabled) 1f else 0.48f
-        Icon(icon, contentDescription = null, modifier = Modifier.size(30.dp), tint = MaterialTheme.colorScheme.primary.copy(alpha = alpha))
+        Icon(icon, contentDescription = null, modifier = Modifier.size(30.dp), tint = IconColor.Primary.copy(alpha = alpha))
         Column(Modifier.weight(1f)) {
             Text(title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurface.copy(alpha = alpha))
             if (subtitle.isNotBlank()) {
@@ -1082,7 +1083,7 @@ internal fun DropdownSearchField(
             onValueChange = onValueChange,
             modifier = Modifier.widthIn(min = 220.dp, max = 320.dp),
             placeholder = placeholder,
-            leadingIcon = { Icon(Icons.Default.Search, contentDescription = null, modifier = Modifier.size(16.dp), tint = MaterialTheme.colorScheme.primary) },
+            leadingIcon = { Icon(Icons.Default.Search, contentDescription = null, modifier = Modifier.size(16.dp), tint = IconColor.Primary) },
         )
     }
 }
