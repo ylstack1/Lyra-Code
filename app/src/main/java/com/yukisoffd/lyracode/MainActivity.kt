@@ -497,7 +497,6 @@ class MainActivity : ComponentActivity() {
         if (BuildConfig.DEBUG && Build.VERSION.SDK_INT >= Android17Compatibility.API_LEVEL) {
             StrictMode.setVmPolicy(
                 StrictMode.VmPolicy.Builder(StrictMode.getVmPolicy())
-                    .detectImplicitUriPermissionGrant()
                     .penaltyLog()
                     .build(),
             )

@@ -752,7 +752,6 @@ internal fun ChatScreen(
         }
     }
 }
-}
 
 /**
  * Wires one conversation's queue snapshot into the dock. Kept internal so the
