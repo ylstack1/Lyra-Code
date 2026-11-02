@@ -233,7 +233,7 @@ internal fun ProfileEditDialog(
                             modifier = Modifier.fillMaxWidth(),
                             label = { Text(uiText(R.string.label_age)) },
                             singleLine = true,
-                            keyboardOptions = androidx.compose.foundation.text.KeyboardOptions(keyboardType = androidx.compose.foundation.text.KeyboardType.Number),
+
                         )
                         OutlinedTextField(
                             value = settings.userBio,
