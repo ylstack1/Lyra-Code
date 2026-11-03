@@ -399,8 +399,8 @@ internal fun LyraCodeApp(
             colors = TopAppBarDefaults.topAppBarColors(
                 containerColor = MaterialTheme.colorScheme.background,
                 titleContentColor = MaterialTheme.colorScheme.onBackground,
-                navigationIconContentColor = MaterialTheme.colorScheme.primary,
-                actionIconContentColor = MaterialTheme.colorScheme.primary,
+                navigationIconContentColor = IconColor.Primary,
+                actionIconContentColor = IconColor.Primary,
             ),
             navigationIcon = {
                 IconButton(

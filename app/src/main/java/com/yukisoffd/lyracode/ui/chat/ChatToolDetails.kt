@@ -356,7 +356,7 @@ internal fun ToolCallDetailPage(
                     colors = TopAppBarDefaults.topAppBarColors(
                         containerColor = MaterialTheme.colorScheme.surface,
                         titleContentColor = MaterialTheme.colorScheme.onSurface,
-                        navigationIconContentColor = MaterialTheme.colorScheme.onSurface,
+                        navigationIconContentColor = IconColor.Secondary,
                     ),
                 )
             },

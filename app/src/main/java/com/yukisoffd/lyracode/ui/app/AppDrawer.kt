@@ -439,7 +439,7 @@ internal fun KimiDrawerContent(
                             }
                             if (historyMode == "sessions" && selectedHistoryIds.isNotEmpty()) {
                                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
-                                    Text(context.getString(R.string.label_selected_count, selectedHistoryIds.size), modifier = Modifier.weight(1f), color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                    Text(context.getString(R.string.label_selected_count, selectedHistoryIds.size), modifier = Modifier.weight(1f), color = IconColor.Secondary)
                                     KimiChip(context.getString(R.string.action_pin), onClick = {
                                         controller.setConversationsPinned(selectedHistoryIds, true)
                                         selectedHistoryIds = emptySet()
@@ -457,13 +457,13 @@ internal fun KimiDrawerContent(
                                 Text(
                                     context.getString(R.string.notice_no_sessions),
                                     modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp),
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                    color = IconColor.Secondary,
                                 )
                             } else if (historyMode == "projects" && projectGroups.isEmpty()) {
                                 Text(
                                     context.getString(R.string.notice_no_projects),
                                     modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp),
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                    color = IconColor.Secondary,
                                 )
                             }
                         }
@@ -477,7 +477,7 @@ internal fun KimiDrawerContent(
                     DrawerHistoryContent(historyExpansionProgress) {
                         Text(
                             label,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            color = IconColor.Secondary,
                             style = MaterialTheme.typography.titleSmall,
                             modifier = historyContentModifier
                                 .padding(horizontal = 8.dp)
@@ -548,7 +548,7 @@ internal fun KimiDrawerContent(
                             ) {
                                 Text(
                                     context.getString(R.string.notice_no_project_sessions),
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                    color = IconColor.Secondary,
                                     style = MaterialTheme.typography.bodySmall,
                                     modifier = historyContentModifier
                                         .padding(start = 42.dp, end = 8.dp, top = 10.dp),
@@ -639,7 +639,7 @@ private fun HistoryModeButton(
     val shape = ModernPillShape
     val containerColor by animateColorAsState(
         targetValue = if (selected) {
-            MaterialTheme.colorScheme.primaryContainer
+            IconColor.PrimaryContainer
         } else {
             Color.Transparent
         },
@@ -650,7 +650,7 @@ private fun HistoryModeButton(
         targetValue = if (selected) {
             MaterialTheme.colorScheme.onPrimaryContainer
         } else {
-            MaterialTheme.colorScheme.onSurfaceVariant
+            IconColor.Secondary
         },
         animationSpec = tween(240),
         label = "history-mode-content",
@@ -682,12 +682,12 @@ private fun NewProjectButton(onClick: () -> Unit) {
         modifier = Modifier
             .size(48.dp)
             .border(
-                BorderStroke(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.42f)),
+                BorderStroke(1.dp, IconColor.Primary.copy(alpha = 0.42f)),
                 shape,
             ),
         shape = shape,
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer,
+            containerColor = IconColor.PrimaryContainer,
             contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
         ),
     ) {
@@ -724,7 +724,7 @@ private fun KimiFunctionRow(
     val shape = RoundedCornerShape(18.dp)
     val containerColor by animateColorAsState(
         targetValue = if (selected) {
-            MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.68f)
+            IconColor.PrimaryContainer.copy(alpha = 0.68f)
         } else {
             Color.Transparent
         },
@@ -755,7 +755,7 @@ private fun KimiFunctionRow(
                 .width(4.dp)
                 .height(28.dp)
                 .clip(RoundedCornerShape(topEnd = 4.dp, bottomEnd = 4.dp))
-                .background(if (selected) MaterialTheme.colorScheme.primary else Color.Transparent),
+                .background(if (selected) IconColor.Primary else Color.Transparent),
         )
         Box(
             modifier = Modifier.width(50.dp),
@@ -765,7 +765,7 @@ private fun KimiFunctionRow(
                 imageVector = icon,
                 contentDescription = null,
                 modifier = Modifier.size(22.dp),
-                tint = if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
+                tint = if (selected) IconColor.Primary else IconColor.Secondary,
             )
         }
         Text(
@@ -876,7 +876,7 @@ internal fun CapsuleTextField(
                         ) { currentPlaceholder ->
                             Text(
                                 currentPlaceholder,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                color = IconColor.Secondary,
                                 maxLines = 1,
                                 overflow = TextOverflow.Ellipsis,
                             )
@@ -924,7 +924,7 @@ internal fun KimiDrawerShortcut(icon: String, label: String, onClick: () -> Unit
         verticalArrangement = Arrangement.spacedBy(4.dp),
     ) {
         Text(icon, style = MaterialTheme.typography.titleLarge)
-        Text(label, color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodyMedium)
+        Text(label, color = IconColor.Secondary, style = MaterialTheme.typography.bodyMedium)
     }
 }
 
@@ -995,7 +995,7 @@ private fun ProjectHeaderRow(
             .border(
                 BorderStroke(
                     if (active) 2.dp else 0.dp,
-                    if (active) MaterialTheme.colorScheme.primary else Color.Transparent,
+                    if (active) IconColor.Primary else Color.Transparent,
                 ),
                 shape,
             )
@@ -1003,7 +1003,7 @@ private fun ProjectHeaderRow(
         shape = shape,
         colors = CardDefaults.cardColors(
             containerColor = if (active) {
-                MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.34f)
+                IconColor.PrimaryContainer.copy(alpha = 0.34f)
             } else {
                 MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
             },
@@ -1016,7 +1016,7 @@ private fun ProjectHeaderRow(
             Icon(
                 Icons.Default.Folder,
                 contentDescription = null,
-                tint = if (active) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
+                tint = if (active) IconColor.Primary else IconColor.Secondary,
             )
             Spacer(Modifier.width(10.dp))
             Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
@@ -1039,7 +1039,7 @@ private fun ProjectHeaderRow(
                 }
                 Text(
                     context.getString(R.string.project_session_count, conversationCount),
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    color = IconColor.Secondary,
                     style = MaterialTheme.typography.labelSmall,
                 )
             }
@@ -1080,7 +1080,7 @@ internal fun KimiConversationRow(
     val rowShape = RoundedCornerShape(18.dp)
     val borderWidth = if (selected) 2.dp else if (multiSelected) 1.5.dp else 0.dp
     val borderColor = when {
-        selected -> MaterialTheme.colorScheme.primary
+        selected -> IconColor.Primary
         multiSelected -> ModernAccentDark
         else -> MaterialTheme.colorScheme.outline.copy(alpha = 0f)
     }
@@ -1110,7 +1110,7 @@ internal fun KimiConversationRow(
                 }
                 Text(
                     listOf(conversation.status, conversation.model).filter { it.isNotBlank() }.joinToString(" · "),
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    color = IconColor.Secondary,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     style = MaterialTheme.typography.labelMedium,

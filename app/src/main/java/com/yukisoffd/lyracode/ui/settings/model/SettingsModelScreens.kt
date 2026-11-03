@@ -115,7 +115,7 @@ internal fun ProfileSettingsSummary(settings: AppSettings, onServicesChanged: ()
             Spacer(Modifier.width(12.dp))
             Column {
                 Text(settings.userNickname.ifBlank { uiText(R.string.default_user_name) }, style = MaterialTheme.typography.titleMedium)
-                Text(uiText(R.string.profile_hint), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
+                Text(uiText(R.string.profile_hint), color = IconColor.SecondaryVariant, style = MaterialTheme.typography.bodySmall)
             }
         }
     }
@@ -200,11 +200,11 @@ internal fun VisionUnderstandingModelEditor(settings: AppSettings, controller: C
     }
     ModernCardBox {
         Text(uiText(R.string.label_vision_understanding_model), style = MaterialTheme.typography.titleMedium)
-        Text(uiText(R.string.vision_understanding_editor_desc), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
+        Text(uiText(R.string.vision_understanding_editor_desc), color = IconColor.SecondaryVariant, style = MaterialTheme.typography.bodySmall)
         Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
             Column(Modifier.weight(1f)) {
                 Text(uiText(R.string.action_enable_vision_understanding), style = MaterialTheme.typography.titleSmall)
-                Text(uiText(R.string.vision_understanding_privacy_hint), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
+                Text(uiText(R.string.vision_understanding_privacy_hint), color = IconColor.SecondaryVariant, style = MaterialTheme.typography.bodySmall)
             }
             Switch(checked = enabled, onCheckedChange = { enabled = it })
         }
@@ -256,7 +256,7 @@ internal fun VisionUnderstandingModelEditor(settings: AppSettings, controller: C
                     onSelect = { (server, tool) -> mcpServerId = server.id; mcpToolName = tool.name },
                 )
                 if (mcpTools.isEmpty()) {
-                    Text(uiText(R.string.notice_no_enabled_mcp_vision_tools), color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodySmall)
+                    Text(uiText(R.string.notice_no_enabled_mcp_vision_tools), color = IconColor.Error, style = MaterialTheme.typography.bodySmall)
                 }
             }
             OutlinedTextField(
@@ -291,7 +291,7 @@ internal fun VisionUnderstandingModelEditor(settings: AppSettings, controller: C
             },
             shape = ModernPillShape,
         ) { Text(uiText(R.string.file_editor_save)) }
-        if (notice.isNotBlank()) Text(notice, color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
+        if (notice.isNotBlank()) Text(notice, color = IconColor.SecondaryVariant, style = MaterialTheme.typography.bodySmall)
     }
 }
 
@@ -308,11 +308,11 @@ internal fun OcrModelEditor(settings: AppSettings, controller: ChatController) {
     var notice by remember { mutableStateOf("") }
     ModernCardBox {
         Text(uiText(R.string.label_ocr_model), style = MaterialTheme.typography.titleMedium)
-        Text(uiText(R.string.ocr_model_editor_desc), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
+        Text(uiText(R.string.ocr_model_editor_desc), color = IconColor.SecondaryVariant, style = MaterialTheme.typography.bodySmall)
         Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
             Column(Modifier.weight(1f)) {
                 Text(uiText(R.string.action_enable_ocr), style = MaterialTheme.typography.titleSmall)
-                Text(uiText(R.string.ocr_no_relay_prompt_hint), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
+                Text(uiText(R.string.ocr_no_relay_prompt_hint), color = IconColor.SecondaryVariant, style = MaterialTheme.typography.bodySmall)
             }
             Switch(checked = enabled, onCheckedChange = { enabled = it })
         }
@@ -359,7 +359,7 @@ internal fun OcrModelEditor(settings: AppSettings, controller: ChatController) {
             },
             shape = ModernPillShape,
         ) { Text(uiText(R.string.file_editor_save)) }
-        if (notice.isNotBlank()) Text(notice, color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
+        if (notice.isNotBlank()) Text(notice, color = IconColor.SecondaryVariant, style = MaterialTheme.typography.bodySmall)
     }
 }
 
@@ -379,7 +379,7 @@ internal fun TopicSummaryModelEditor(settings: AppSettings, controller: ChatCont
         Text(uiText(R.string.ui_independent_topic_summary_model), style = MaterialTheme.typography.titleMedium)
         Text(
             uiText(R.string.ui_after_the_first_message_in_each_new_conversation_this),
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            color = IconColor.SecondaryVariant,
             style = MaterialTheme.typography.bodySmall,
         )
         SubAgentDropdownPicker(
@@ -420,7 +420,7 @@ internal fun TopicSummaryModelEditor(settings: AppSettings, controller: ChatCont
             },
             shape = ModernPillShape,
         ) { Text(uiText(R.string.file_editor_save)) }
-        if (notice.isNotBlank()) Text(notice, color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
+        if (notice.isNotBlank()) Text(notice, color = IconColor.SecondaryVariant, style = MaterialTheme.typography.bodySmall)
     }
 }
 
@@ -446,7 +446,7 @@ internal fun HistoryCompressionModelEditor(settings: AppSettings, controller: Ch
         Text(uiText(R.string.label_history_compression_model), style = MaterialTheme.typography.titleMedium)
         Text(
             uiText(R.string.ui_used_to_segment_conversation_history_for_manual_or_automatic),
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            color = IconColor.SecondaryVariant,
             style = MaterialTheme.typography.bodySmall,
         )
         Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
@@ -454,7 +454,7 @@ internal fun HistoryCompressionModelEditor(settings: AppSettings, controller: Ch
                 Text(uiText(R.string.ui_use_a_separate_compression_model), style = MaterialTheme.typography.titleSmall)
                 Text(
                     if (compressionEnabled) uiText(R.string.skill_status_enabled) else uiText(R.string.ui_use_current_conversation_model),
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    color = IconColor.SecondaryVariant,
                     style = MaterialTheme.typography.bodySmall,
                 )
             }
@@ -500,7 +500,7 @@ internal fun HistoryCompressionModelEditor(settings: AppSettings, controller: Ch
             },
             shape = ModernPillShape,
         ) { Text(uiText(R.string.file_editor_save)) }
-        if (compressionNotice.isNotBlank()) Text(compressionNotice, color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
+        if (compressionNotice.isNotBlank()) Text(compressionNotice, color = IconColor.SecondaryVariant, style = MaterialTheme.typography.bodySmall)
     }
 }
 
@@ -528,7 +528,7 @@ internal fun MediaGenerationModelEditor(
         Text(uiText(mediaGenerationTitleRes(kind)), style = MaterialTheme.typography.titleMedium)
         Text(
             uiText(R.string.ui_media_generation_isolation_desc),
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            color = IconColor.SecondaryVariant,
             style = MaterialTheme.typography.bodySmall,
         )
         Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
@@ -536,7 +536,7 @@ internal fun MediaGenerationModelEditor(
                 Text(uiText(R.string.ui_use_media_generation_model), style = MaterialTheme.typography.titleSmall)
                 Text(
                     uiText(mediaGenerationDescriptionRes(kind)),
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    color = IconColor.SecondaryVariant,
                     style = MaterialTheme.typography.bodySmall,
                 )
             }
@@ -585,7 +585,7 @@ internal fun MediaGenerationModelEditor(
             },
             shape = ModernPillShape,
         ) { Text(uiText(R.string.file_editor_save)) }
-        if (notice.isNotBlank()) Text(notice, color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
+        if (notice.isNotBlank()) Text(notice, color = IconColor.SecondaryVariant, style = MaterialTheme.typography.bodySmall)
     }
 }
 
@@ -882,7 +882,7 @@ internal fun ModelServiceSettings(
                 windowInsets = WindowInsets(0, 0, 0, 0),
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background,
                     titleContentColor = MaterialTheme.colorScheme.onBackground,
-                    navigationIconContentColor = MaterialTheme.colorScheme.primary),
+                    navigationIconContentColor = IconColor.Primary),
                 navigationIcon = {
                     IconButton(onClick = { if (page == 0) onBack() else navigateBackWithinModel() }, modifier = Modifier.size(56.dp)) {
                         Icon(Icons.Default.ArrowBack, contentDescription = uiText(R.string.cd_back))
@@ -934,7 +934,7 @@ internal fun ModelServiceSettings(
                         },
                         modifier = Modifier
                             .clip(CircleShape)
-                            .background(MaterialTheme.colorScheme.primaryContainer),
+                            .background(IconColor.PrimaryContainer),
                     ) {
                         Icon(
                             Icons.Default.Add,
@@ -945,7 +945,7 @@ internal fun ModelServiceSettings(
                 }
                 if (filtered.isEmpty()) {
                     ModernCardBox {
-                        Text(uiText(R.string.notice_no_matching_models), color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        Text(uiText(R.string.notice_no_matching_models), color = IconColor.SecondaryVariant)
                     }
                 } else {
                     filtered.forEach { profile ->
@@ -1047,7 +1047,7 @@ internal fun ModelServiceSettings(
                                     } else {
                                         apiFormatShortName(apiFormat)
                                     },
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                    color = IconColor.SecondaryVariant,
                                     style = MaterialTheme.typography.bodySmall,
                                 )
                             }
@@ -1064,7 +1064,7 @@ internal fun ModelServiceSettings(
                     }
                     OutlinedTextField(value = name, onValueChange = { name = it }, modifier = Modifier.fillMaxWidth(), label = { Text(uiText(R.string.label_service_name)) }, singleLine = true)
                     if (current?.isChatGpt == true) {
-                        Text(uiText(R.string.chatgpt_service_description), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
+                        Text(uiText(R.string.chatgpt_service_description), color = IconColor.SecondaryVariant, style = MaterialTheme.typography.bodySmall)
                     } else {
                     ProviderKeysEditor(key, secondaryKeys) { primary, secondary -> key = primary; secondaryKeys = secondary }
                     Surface(
@@ -1085,7 +1085,7 @@ internal fun ModelServiceSettings(
                                 Text(uiText(R.string.ui_advanced), style = MaterialTheme.typography.titleSmall)
                                 Text(
                                     uiText(R.string.ui_endpoint_and_api_format_can_be_changed_at_any),
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                    color = IconColor.SecondaryVariant,
                                     style = MaterialTheme.typography.bodySmall,
                                 )
                             }
@@ -1132,7 +1132,7 @@ internal fun ModelServiceSettings(
                             }
                             Text(
                                 apiFormatDescription(apiFormat),
-                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                color = IconColor.SecondaryVariant,
                                 style = MaterialTheme.typography.bodySmall,
                             )
                             Row(
@@ -1165,7 +1165,7 @@ internal fun ModelServiceSettings(
                             }
                             Text(
                                 uiText(R.string.gzip_request_bodies_hint),
-                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                color = IconColor.SecondaryVariant,
                                 style = MaterialTheme.typography.bodySmall,
                             )
                             OutlinedTextField(value = baseUrl, onValueChange = { baseUrl = it }, modifier = Modifier.fillMaxWidth(), label = { Text(uiText(R.string.label_base_url)) }, singleLine = true)
@@ -1179,19 +1179,19 @@ internal fun ModelServiceSettings(
                             )
                             Text(
                                 uiText(R.string.ui_for_providers_that_use_a_non_default_request_path),
-                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                color = IconColor.SecondaryVariant,
                                 style = MaterialTheme.typography.bodySmall,
                             )
                             if (baseUrl.trim().startsWith("http://", ignoreCase = true)) {
                                 Text(
                                     uiText(R.string.notice_http_warning),
-                                    color = MaterialTheme.colorScheme.error,
+                                    color = IconColor.Error,
                                     style = MaterialTheme.typography.bodySmall,
                                 )
                             }
                             Text(
                                 endpointHint(apiFormat, baseUrl, chatPath, useResponsesApi),
-                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                color = IconColor.SecondaryVariant,
                                 style = MaterialTheme.typography.bodySmall,
                             )
                         }
@@ -1270,7 +1270,7 @@ internal fun ModelServiceSettings(
                         }
                     }
                 }
-                if (status.isNotBlank()) Text(status, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                if (status.isNotBlank()) Text(status, color = IconColor.SecondaryVariant)
             }
         }
         }
@@ -1343,7 +1343,7 @@ internal fun EnabledModelsDialog(
             ) {
                 Text(
                     uiText(R.string.enabled_models_description),
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    color = IconColor.SecondaryVariant,
                     style = MaterialTheme.typography.bodySmall,
                 )
                 OutlinedTextField(
@@ -1358,7 +1358,7 @@ internal fun EnabledModelsDialog(
                     TextButton(onClick = { onEnabledModelsChange(emptySet()) }) { Text(uiText(R.string.ui_clear_selection)) }
                 }
                 if (filtered.isEmpty()) {
-                    Text(uiText(R.string.no_matching_models), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
+                    Text(uiText(R.string.no_matching_models), color = IconColor.SecondaryVariant, style = MaterialTheme.typography.bodySmall)
                 } else {
                     LazyColumn(Modifier.fillMaxWidth().weight(1f)) {
                         items(filtered, key = { it }) { modelName ->
@@ -1387,7 +1387,7 @@ internal fun EnabledModelsDialog(
                 }
                 Text(
                     uiText(R.string.enabled_models_count, enabledModels.size),
-                    color = MaterialTheme.colorScheme.primary,
+                    color = IconColor.Primary,
                     style = MaterialTheme.typography.bodySmall,
                 )
             }
@@ -1417,7 +1417,7 @@ internal fun ReachabilitySelectionPage(
 ) {
     val resultByModel = remember(modelResults) { modelResults.associateBy { it.model } }
     Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
-        Text(providerName, color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
+        Text(providerName, color = IconColor.SecondaryVariant, style = MaterialTheme.typography.bodySmall)
         ModernCardBox {
             Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                 Text(
@@ -1449,19 +1449,19 @@ internal fun ReachabilitySelectionPage(
             if (providerLine.isNotBlank()) {
                 Text(
                     providerLine,
-                    color = if (provider?.available == false) MaterialTheme.colorScheme.error else ModernMutedDark,
+                    color = if (provider?.available == false) IconColor.Error else ModernMutedDark,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis,
                     style = MaterialTheme.typography.bodySmall,
                 )
             } else if (status.isNotBlank()) {
-                Text(status, color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
+                Text(status, color = IconColor.SecondaryVariant, style = MaterialTheme.typography.bodySmall)
             }
         }
         ModernCardBox {
             Text(uiText(R.string.ui_select_models_to_check), style = MaterialTheme.typography.titleSmall)
             if (models.isEmpty()) {
-                Text(uiText(R.string.ui_no_models_to_check), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
+                Text(uiText(R.string.ui_no_models_to_check), color = IconColor.SecondaryVariant, style = MaterialTheme.typography.bodySmall)
             } else {
                 models.forEach { model ->
                     val selected = model in selectedModels
@@ -1496,7 +1496,7 @@ internal fun ReachabilitySelectionPage(
                             if (detail.isNotBlank()) {
                                 Text(
                                     detail,
-                                    color = if (result?.available == false) MaterialTheme.colorScheme.error else ModernMutedDark,
+                                    color = if (result?.available == false) IconColor.Error else ModernMutedDark,
                                     maxLines = 2,
                                     overflow = TextOverflow.Ellipsis,
                                     style = MaterialTheme.typography.bodySmall,
@@ -1507,7 +1507,7 @@ internal fun ReachabilitySelectionPage(
                             result != null -> Icon(
                                 if (result.available) Icons.Default.CheckCircle else Icons.Default.ErrorOutline,
                                 contentDescription = null,
-                                tint = if (result.available) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error,
+                                tint = if (result.available) IconColor.Primary else IconColor.Error,
                                 modifier = Modifier.size(18.dp),
                             )
                             checking && selected && activeModel == model -> LinearProgressIndicator(modifier = Modifier.width(48.dp))
@@ -1571,7 +1571,7 @@ internal fun SubAgentSettings(settings: AppSettings, controller: ChatController)
                 Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                     Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                         Text(stringResource(R.string.title_sub_agent_orchestration), style = MaterialTheme.typography.titleMedium)
-                        Text(stringResource(R.string.sub_agent_settings_desc), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
+                        Text(stringResource(R.string.sub_agent_settings_desc), color = IconColor.SecondaryVariant, style = MaterialTheme.typography.bodySmall)
                     }
                     Switch(
                         checked = settings.subAgentOrchestrationEnabled,
@@ -1608,7 +1608,7 @@ internal fun SubAgentSettings(settings: AppSettings, controller: ChatController)
                     }
                 }
                 if (agents.isEmpty()) {
-                    Text(stringResource(R.string.sub_agent_empty_hint), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
+                    Text(stringResource(R.string.sub_agent_empty_hint), color = IconColor.SecondaryVariant, style = MaterialTheme.typography.bodySmall)
                 } else {
                     agents.forEach { agent ->
                         val profile = profiles.firstOrNull { it.id == agent.profileId }
@@ -1668,8 +1668,8 @@ internal fun SubAgentRow(agent: SubAgentConfig, profileName: String, onEdit: () 
         Icon(Icons.Default.Hub, contentDescription = null, modifier = Modifier.size(28.dp), tint = IconColor.Primary)
         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
             Text(agent.name, style = MaterialTheme.typography.titleSmall)
-            Text("$profileName · ${agent.model}", color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall, maxLines = 1, overflow = TextOverflow.Ellipsis)
-            if (agent.description.isNotBlank()) Text(agent.description, color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.labelSmall, maxLines = 2, overflow = TextOverflow.Ellipsis)
+            Text("$profileName · ${agent.model}", color = IconColor.SecondaryVariant, style = MaterialTheme.typography.bodySmall, maxLines = 1, overflow = TextOverflow.Ellipsis)
+            if (agent.description.isNotBlank()) Text(agent.description, color = IconColor.SecondaryVariant, style = MaterialTheme.typography.labelSmall, maxLines = 2, overflow = TextOverflow.Ellipsis)
         }
         Switch(checked = agent.enabled, onCheckedChange = onToggle)
         IconButton(onClick = onDelete) { Icon(Icons.Default.DeleteOutline, contentDescription = stringResource(R.string.action_delete)) }
@@ -1752,7 +1752,7 @@ internal fun <T> SubAgentDropdownPicker(
             ) {
                 Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp), horizontalAlignment = Alignment.Start) {
                     Text("$label: $value", maxLines = 1, overflow = TextOverflow.Ellipsis, style = MaterialTheme.typography.titleSmall)
-                    if (subtitle.isNotBlank()) Text(subtitle, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 1, overflow = TextOverflow.Ellipsis, style = MaterialTheme.typography.bodySmall)
+                    if (subtitle.isNotBlank()) Text(subtitle, color = IconColor.SecondaryVariant, maxLines = 1, overflow = TextOverflow.Ellipsis, style = MaterialTheme.typography.bodySmall)
                 }
                 Icon(Icons.Default.ArrowDropDown, contentDescription = null)
             }
@@ -1768,7 +1768,7 @@ internal fun <T> SubAgentDropdownPicker(
                                 Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
                                     Text(itemTitle(item), maxLines = 1, overflow = TextOverflow.Ellipsis)
                                     val childSubtitle = itemSubtitle(item)
-                                    if (childSubtitle.isNotBlank()) Text(childSubtitle, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 1, overflow = TextOverflow.Ellipsis, style = MaterialTheme.typography.bodySmall)
+                                    if (childSubtitle.isNotBlank()) Text(childSubtitle, color = IconColor.SecondaryVariant, maxLines = 1, overflow = TextOverflow.Ellipsis, style = MaterialTheme.typography.bodySmall)
                                 }
                                 if (isSelected(item)) Icon(Icons.Default.Check, contentDescription = null, tint = IconColor.Primary)
                             }
@@ -1828,14 +1828,14 @@ internal fun ReachabilityReportCard(
         if (provider == null) {
             Text(
                 uiText(R.string.ui_checking_provider),
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                color = IconColor.SecondaryVariant,
                 style = MaterialTheme.typography.bodySmall,
             )
         } else {
             val providerText = if (provider.available) uiText(R.string.ui_provider_available) else uiText(R.string.ui_provider_unavailable)
             Text(
                 "$providerText · ${formatReachabilityLatency(provider.latencyMs)} · ${provider.message}",
-                color = if (provider.available) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error,
+                color = if (provider.available) IconColor.Primary else IconColor.Error,
                 style = MaterialTheme.typography.bodySmall,
             )
         }
@@ -1848,14 +1848,14 @@ internal fun ReachabilityReportCard(
                 Icon(
                     if (result.available) Icons.Default.CheckCircle else Icons.Default.ErrorOutline,
                     contentDescription = null,
-                    tint = if (result.available) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error,
+                    tint = if (result.available) IconColor.Primary else IconColor.Error,
                     modifier = Modifier.size(18.dp),
                 )
                 Column(Modifier.weight(1f)) {
                     Text(result.model, maxLines = 1, overflow = TextOverflow.Ellipsis, style = MaterialTheme.typography.bodyMedium)
                     Text(
                         "${formatReachabilityLatency(result.latencyMs)} · ${result.message}",
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        color = IconColor.SecondaryVariant,
                         maxLines = 2,
                         overflow = TextOverflow.Ellipsis,
                         style = MaterialTheme.typography.bodySmall,
@@ -1865,7 +1865,7 @@ internal fun ReachabilityReportCard(
         }
         if (checking) {
             LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
-            Text(uiText(R.string.ui_checking), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
+            Text(uiText(R.string.ui_checking), color = IconColor.SecondaryVariant, style = MaterialTheme.typography.bodySmall)
         }
     }
 }

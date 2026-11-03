@@ -380,6 +380,8 @@ internal object IconColor {
     val Error = Color(0xFFF44336)     // Red - error, failure
     val Primary = Color(0xFF6366F1)   // Indigo - primary action
     val Secondary = Color(0xFF9E9E9E) // Gray - secondary action
+    val SecondaryVariant = Color(0xFFB0B0B0) // Light gray - secondary text
+    val PrimaryContainer = Color(0xFF6366F1).copy(alpha = 0.15f) // Indigo container
 }
 
 // ============================================================================

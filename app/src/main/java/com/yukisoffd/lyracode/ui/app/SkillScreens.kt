@@ -61,7 +61,7 @@ internal fun SkillDrawerRow(skill: SkillPack, onToggle: () -> Unit, onDelete: ()
     ) {
         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
             Text(skill.name, maxLines = 1, overflow = TextOverflow.Ellipsis, style = MaterialTheme.typography.bodyLarge)
-            Text(context.getString(R.string.label_files_count_enabled, skill.fileCount, if (skill.enabled) context.getString(R.string.skill_status_enabled) else context.getString(R.string.skill_status_disabled)), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.labelSmall)
+            Text(context.getString(R.string.label_files_count_enabled, skill.fileCount, if (skill.enabled) context.getString(R.string.skill_status_enabled) else context.getString(R.string.skill_status_disabled)), color = IconColor.Secondary, style = MaterialTheme.typography.labelSmall)
         }
         KimiChip(if (skill.enabled) context.getString(R.string.action_disable) else context.getString(R.string.action_enable), onClick = onToggle)
         Spacer(Modifier.width(6.dp))
@@ -141,7 +141,7 @@ internal fun SkillsScreen(
                     Text(context.getString(R.string.label_skills_capability), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
                     Text(
                         context.getString(R.string.skills_description),
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        color = IconColor.Secondary,
                         style = MaterialTheme.typography.bodySmall,
                     )
                 }
@@ -155,7 +155,7 @@ internal fun SkillsScreen(
             )
         }
         if (status.isNotBlank()) {
-            Text(status, color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.labelMedium)
+            Text(status, color = IconColor.Secondary, style = MaterialTheme.typography.labelMedium)
         }
         if (skills.isEmpty()) {
             ModernCardBox {
@@ -163,7 +163,7 @@ internal fun SkillsScreen(
                         Icon(Icons.Default.Extension, contentDescription = null, tint = IconColor.Primary)
                         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                             Text(context.getString(R.string.notice_no_skills), style = MaterialTheme.typography.titleMedium)
-                            Text(context.getString(R.string.skills_empty_hint), color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            Text(context.getString(R.string.skills_empty_hint), color = IconColor.Secondary)
                         }
                     }
                 }
@@ -249,7 +249,7 @@ internal fun SkillImportModeRow(
         Icon(icon, contentDescription = null, tint = IconColor.Primary, modifier = Modifier.size(28.dp))
         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
             Text(title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
-            Text(subtitle, color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
+            Text(subtitle, color = IconColor.Secondary, style = MaterialTheme.typography.bodySmall)
         }
         Icon(Icons.Default.ChevronRight, contentDescription = null, tint = ModernMutedDark)
     }
@@ -282,7 +282,7 @@ internal fun SkillRepositoryImportDialog(
                 Text(context.getString(R.string.title_import_from_repo), style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
                 Text(
                     context.getString(R.string.repo_import_description),
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    color = IconColor.Secondary,
                     style = MaterialTheme.typography.bodySmall,
                 )
                 OutlinedTextField(
@@ -368,7 +368,7 @@ internal fun SkillManualImportDialog(
                 Text(context.getString(R.string.title_manual_add), style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
                 Text(
                     context.getString(R.string.manual_add_description),
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    color = IconColor.Secondary,
                     style = MaterialTheme.typography.bodySmall,
                 )
                 OutlinedTextField(
@@ -415,7 +415,7 @@ internal fun SkillSettingsRow(skill: SkillPack, onToggle: () -> Unit, onDelete: 
         Icon(
             Icons.Default.Extension,
             contentDescription = null,
-            tint = if (skill.enabled) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
+            tint = if (skill.enabled) IconColor.Primary else IconColor.Secondary,
             modifier = Modifier.size(26.dp),
         )
         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
@@ -423,20 +423,20 @@ internal fun SkillSettingsRow(skill: SkillPack, onToggle: () -> Unit, onDelete: 
                 Text(skill.name, style = MaterialTheme.typography.titleMedium, maxLines = 1, overflow = TextOverflow.Ellipsis)
             Text(
                     if (skill.enabled) context.getString(R.string.skill_status_enabled) else context.getString(R.string.skill_status_disabled),
-                    color = if (skill.enabled) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
+                    color = if (skill.enabled) IconColor.Primary else IconColor.Secondary,
                     style = MaterialTheme.typography.labelSmall,
                 )
             }
             if (skill.description.isNotBlank()) {
                 Text(
                     skill.description,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    color = IconColor.Secondary,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis,
                     style = MaterialTheme.typography.bodySmall,
                 )
             }
-            Text(context.getString(R.string.label_files_and_id, skill.fileCount, skill.id), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.labelSmall)
+            Text(context.getString(R.string.label_files_and_id, skill.fileCount, skill.id), color = IconColor.Secondary, style = MaterialTheme.typography.labelSmall)
         }
         Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(4.dp)) {
             Switch(checked = skill.enabled, onCheckedChange = { onToggle() })

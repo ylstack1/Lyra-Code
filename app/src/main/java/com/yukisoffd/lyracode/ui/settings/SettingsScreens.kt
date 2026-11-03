@@ -272,7 +272,7 @@ internal fun SettingsScreen(
                         colors = TopAppBarDefaults.topAppBarColors(
                             containerColor = MaterialTheme.colorScheme.background,
                             titleContentColor = MaterialTheme.colorScheme.onBackground,
-                            navigationIconContentColor = MaterialTheme.colorScheme.primary,
+                            navigationIconContentColor = IconColor.Primary,
                         ),
                         navigationIcon = {
                             IconButton(

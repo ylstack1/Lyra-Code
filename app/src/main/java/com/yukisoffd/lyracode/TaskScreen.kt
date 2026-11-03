@@ -135,7 +135,7 @@ internal fun TaskScreen(
                         Text(uiText(R.string.notification_channel_name), style = MaterialTheme.typography.titleMedium)
                         Text(
                             uiText(R.string.ui_send_system_notifications_when_downloads_or_scheduled_tasks_complete),
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            color = IconColor.SecondaryVariant,
                             style = MaterialTheme.typography.bodySmall,
                         )
                     }
@@ -184,7 +184,7 @@ internal fun TaskScreen(
                     Text(uiText(R.string.ui_no_scheduled_tasks), style = MaterialTheme.typography.titleMedium)
                     Text(
                         uiText(R.string.ui_add_tasks_manually_here_or_ask_the_ai_to),
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        color = IconColor.SecondaryVariant,
                         style = MaterialTheme.typography.bodyMedium,
                     )
                 }
@@ -221,7 +221,7 @@ internal fun TaskScreen(
                     Text(uiText(R.string.ui_no_download_tasks), style = MaterialTheme.typography.titleMedium)
                     Text(
                         uiText(R.string.ui_when_the_ai_uses_the_download_tool_progress_speed),
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        color = IconColor.SecondaryVariant,
                         style = MaterialTheme.typography.bodyMedium,
                     )
                 }
@@ -272,18 +272,18 @@ private fun ScheduledTaskCard(
                     ScheduledTaskStatus.IDLE -> Icons.Default.Schedule
                 },
                 contentDescription = null,
-                tint = if (task.status == ScheduledTaskStatus.FAILED) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary,
+                tint = if (task.status == ScheduledTaskStatus.FAILED) IconColor.Error else IconColor.Primary,
             )
             Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(5.dp)) {
                 Text(task.title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
-                Text(task.prompt, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 3, overflow = TextOverflow.Ellipsis)
+                Text(task.prompt, color = IconColor.SecondaryVariant, maxLines = 3, overflow = TextOverflow.Ellipsis)
                 Text(
                     "${scheduleLabel(task)} · ${task.model}",
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    color = IconColor.SecondaryVariant,
                     style = MaterialTheme.typography.bodySmall,
                 )
                 if (task.nextRunAt > 0L) {
-                    Text(uiText(R.string.ui_next_run_1_s, formatTaskTime(task.nextRunAt)), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
+                    Text(uiText(R.string.ui_next_run_1_s, formatTaskTime(task.nextRunAt)), color = IconColor.SecondaryVariant, style = MaterialTheme.typography.bodySmall)
                 }
                 if (task.lastRunAt > 0L) {
                     Text(
@@ -292,7 +292,7 @@ private fun ScheduledTaskCard(
                             ScheduledTaskStatus.RUNNING -> task.error.ifBlank { uiText(R.string.ui_running) }
                             else -> uiText(R.string.ui_last_result) + task.result.ifBlank { uiText(R.string.ui_completed) }
                         },
-                        color = if (task.status == ScheduledTaskStatus.FAILED) MaterialTheme.colorScheme.error else ModernMutedDark,
+                        color = if (task.status == ScheduledTaskStatus.FAILED) IconColor.Error else ModernMutedDark,
                         style = MaterialTheme.typography.bodySmall,
                         maxLines = 4,
                         overflow = TextOverflow.Ellipsis,
@@ -300,7 +300,7 @@ private fun ScheduledTaskCard(
                     if (detail.length > 160) {
                         Text(
                             uiText(R.string.ui_tap_to_view_full_result),
-                            color = MaterialTheme.colorScheme.primary,
+                            color = IconColor.Primary,
                             style = MaterialTheme.typography.labelMedium,
                         )
                     }
@@ -334,7 +334,7 @@ private fun ScheduledTaskDetailDialog(
                             uiText(R.string.task_schedule_format, scheduleLabel(task)) +
                             uiText(R.string.task_model_format, task.model) +
                             if (task.lastRunAt > 0L) uiText(R.string.task_last_run_format, formatTaskTime(task.lastRunAt)) else uiText(R.string.ui_not_run_yet),
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        color = IconColor.SecondaryVariant,
                         style = MaterialTheme.typography.bodySmall,
                     )
                 }
@@ -347,7 +347,7 @@ private fun ScheduledTaskDetailDialog(
                 if (task.error.isNotBlank()) {
                     item {
                         Text(uiText(R.string.ui_error), style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold)
-                        Text(task.error, color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodyMedium)
+                        Text(task.error, color = IconColor.Error, style = MaterialTheme.typography.bodyMedium)
                     }
                 }
             }
@@ -504,7 +504,7 @@ private fun ScheduledTaskEditorDialog(
                     }
                 }
                 if (validationError.isNotBlank()) {
-                    item { Text(validationError, color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodySmall) }
+                    item { Text(validationError, color = IconColor.Error, style = MaterialTheme.typography.bodySmall) }
                 }
             }
         },
@@ -583,7 +583,7 @@ private fun DownloadTaskCard(task: DownloadTask) {
                     DownloadTaskStatus.RUNNING -> Icons.Default.CloudDownload
                 },
                 contentDescription = null,
-                tint = if (task.status == DownloadTaskStatus.FAILED) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary,
+                tint = if (task.status == DownloadTaskStatus.FAILED) IconColor.Error else IconColor.Primary,
             )
             Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(5.dp)) {
                 Text(
@@ -593,7 +593,7 @@ private fun DownloadTaskCard(task: DownloadTask) {
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis,
                 )
-                Text(task.path, color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall, maxLines = 2, overflow = TextOverflow.Ellipsis)
+                Text(task.path, color = IconColor.SecondaryVariant, style = MaterialTheme.typography.bodySmall, maxLines = 2, overflow = TextOverflow.Ellipsis)
                 if (task.status == DownloadTaskStatus.RUNNING) {
                     if (progress != null) {
                         LinearProgressIndicator(progress = { progress }, modifier = Modifier.fillMaxWidth())
@@ -603,11 +603,11 @@ private fun DownloadTaskCard(task: DownloadTask) {
                     Row(Modifier.fillMaxWidth()) {
                         Text(
                             "${formatTaskBytes(task.downloadedBytes)} / ${formatTaskTotal(task.totalBytes)}",
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            color = IconColor.SecondaryVariant,
                             style = MaterialTheme.typography.labelMedium,
                             modifier = Modifier.weight(1f),
                         )
-                        Text("${formatTaskBytes(task.bytesPerSecond)}/s", color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.labelMedium)
+                        Text("${formatTaskBytes(task.bytesPerSecond)}/s", color = IconColor.SecondaryVariant, style = MaterialTheme.typography.labelMedium)
                     }
                 } else {
                     Text(
@@ -617,11 +617,11 @@ private fun DownloadTaskCard(task: DownloadTask) {
                             DownloadTaskStatus.FAILED -> uiText(R.string.ui_failed) + task.error.ifBlank { uiText(R.string.label_unknown_error) }
                             DownloadTaskStatus.RUNNING -> ""
                         },
-                        color = if (task.status == DownloadTaskStatus.FAILED) MaterialTheme.colorScheme.error else ModernMutedDark,
+                        color = if (task.status == DownloadTaskStatus.FAILED) IconColor.Error else ModernMutedDark,
                         style = MaterialTheme.typography.bodySmall,
                     )
                 }
-                Text(formatTaskTime(task.startedAt), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.labelSmall)
+                Text(formatTaskTime(task.startedAt), color = IconColor.SecondaryVariant, style = MaterialTheme.typography.labelSmall)
             }
         }
     }

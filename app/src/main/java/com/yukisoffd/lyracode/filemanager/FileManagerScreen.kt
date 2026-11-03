@@ -422,7 +422,7 @@ private fun PrivilegedFileAccessDialog(
             Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                 Text(
                     context.getString(R.string.file_privileged_access_message),
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    color = IconColor.SecondaryVariant,
                 )
                 OutlinedButton(
                     onClick = {
@@ -487,9 +487,9 @@ private fun PrivilegedFileAccessDialog(
                         color = if (
                             status.startsWith(context.getString(R.string.file_privileged_access_ready_prefix))
                         ) {
-                            MaterialTheme.colorScheme.primary
+                            IconColor.Primary
                         } else {
-                            MaterialTheme.colorScheme.onSurfaceVariant
+                            IconColor.SecondaryVariant
                         },
                     )
                 }
@@ -717,7 +717,7 @@ private fun DualPaneFileManager(
                     if (prootInstances.isEmpty()) {
                         Text(
                             context.getString(R.string.file_proot_instances_empty),
-                            color = MaterialTheme.colorScheme.error,
+                            color = IconColor.Error,
                         )
                     } else {
                         prootInstances.forEach { instance ->
@@ -733,7 +733,7 @@ private fun DualPaneFileManager(
                                     Text(
                                         context.getString(R.string.file_proot_instance_id, instance.id),
                                         style = MaterialTheme.typography.labelSmall,
-                                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                        color = IconColor.SecondaryVariant,
                                     )
                                 }
                             }
@@ -789,7 +789,7 @@ private fun DualPaneFileManager(
                 TextButton(onClick = {
                     deleteTarget = null
                     perform { fileOperations.delete(selected.file) }
-                }) { Text(context.getString(R.string.file_action_delete), color = MaterialTheme.colorScheme.error) }
+                }) { Text(context.getString(R.string.file_action_delete), color = IconColor.Error) }
             },
             dismissButton = { TextButton(onClick = { deleteTarget = null }) { Text(context.getString(android.R.string.cancel)) } },
         )
@@ -834,7 +834,7 @@ private fun DualPaneFileManager(
                                 BatchOperation.DELETE -> R.string.file_action_delete
                             },
                         ),
-                        color = if (pending.operation == BatchOperation.DELETE) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary,
+                        color = if (pending.operation == BatchOperation.DELETE) IconColor.Error else IconColor.Primary,
                     )
                 }
             },
@@ -1111,7 +1111,7 @@ private fun FileManagerHeader(
             Column(Modifier.weight(1f)) {
                 Text(
                     context.getString(if (activePane == 0) R.string.file_manager_left_pane else R.string.file_manager_right_pane),
-                    color = MaterialTheme.colorScheme.primary,
+                    color = IconColor.Primary,
                     style = MaterialTheme.typography.labelSmall,
                     fontWeight = FontWeight.SemiBold,
                 )
@@ -1132,7 +1132,7 @@ private fun FileManagerHeader(
                             summary.fileCount,
                         )
                     },
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    color = IconColor.SecondaryVariant,
                     style = MaterialTheme.typography.labelSmall,
                 )
             }
@@ -1149,7 +1149,7 @@ private fun FileManagerHeader(
                                     Text(
                                         privilegedAccessLabel,
                                         style = MaterialTheme.typography.labelSmall,
-                                        color = MaterialTheme.colorScheme.primary,
+                                        color = IconColor.Primary,
                                     )
                                 }
                             }
@@ -1182,7 +1182,7 @@ private fun FileManagerHeader(
                     Text(
                         context.getString(R.string.file_manager_sort_by),
                         style = MaterialTheme.typography.labelMedium,
-                        color = MaterialTheme.colorScheme.primary,
+                        color = IconColor.Primary,
                         modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
                     )
                     FileSortMode.entries.forEach { mode ->
@@ -1224,7 +1224,7 @@ private fun FileManagerHeader(
                         TextButton(onClick = { onSearchScope(scope) }) {
                             Text(
                                 context.getString(scope.labelResource()),
-                                color = if (scope == searchScope) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
+                                color = if (scope == searchScope) IconColor.Primary else IconColor.SecondaryVariant,
                                 fontWeight = if (scope == searchScope) FontWeight.Bold else FontWeight.Normal,
                             )
                         }
@@ -1344,13 +1344,13 @@ private fun FilePane(
             .background(MaterialTheme.colorScheme.surface)
             .border(
                 width = 2.dp,
-                color = if (active) MaterialTheme.colorScheme.primary else Color.Transparent,
+                color = if (active) IconColor.Primary else Color.Transparent,
             ),
     ) {
         Box(Modifier.weight(1f).fillMaxWidth()) {
             when {
                 displayedLoading -> Text(context.getString(R.string.file_loading), modifier = Modifier.align(Alignment.Center))
-                displayedError.isNotBlank() -> Text(displayedError, color = MaterialTheme.colorScheme.error, modifier = Modifier.padding(12.dp))
+                displayedError.isNotBlank() -> Text(displayedError, color = IconColor.Error, modifier = Modifier.padding(12.dp))
                 displayedEntries.isEmpty() -> Text(
                     context.getString(if (searchResults != null) R.string.file_manager_search_empty else R.string.file_empty_folder),
                     modifier = Modifier.align(Alignment.Center),
@@ -1449,7 +1449,7 @@ private fun FileRow(
         Modifier
             .fillMaxWidth()
             .background(
-                if (abs(displayedOffset) > 1f) MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.72f)
+                if (abs(displayedOffset) > 1f) IconColor.PrimaryContainer.copy(alpha = 0.72f)
                 else Color.Transparent,
             ),
     ) {
@@ -1466,7 +1466,7 @@ private fun FileRow(
             Modifier
                 .fillMaxWidth()
                 .graphicsLayer { translationX = displayedOffset }
-                .background(if (selected) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surface)
+                .background(if (selected) IconColor.PrimaryContainer else MaterialTheme.colorScheme.surface)
                 .pointerInput(entry.file.absolutePath) {
                     val maximumDrag = 88.dp.toPx()
                     val selectionThreshold = 48.dp.toPx()
@@ -1508,7 +1508,7 @@ private fun FileRow(
                     parentPath ?: if (entry.directory) DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(entry.modifiedAt)
                     else formatBytes(entry.size),
                     maxLines = 1,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    color = IconColor.SecondaryVariant,
                     style = MaterialTheme.typography.labelSmall,
                 )
             }
@@ -1528,7 +1528,7 @@ private fun FileVisual(entry: LocalFileEntry) {
     val mediaKind = mediaPreviewKind(entry.file)
     when {
         mediaKind == MediaPreviewKind.IMAGE -> ImageThumbnail(entry.file)
-        mediaKind == MediaPreviewKind.VIDEO -> FileCategoryIcon(Icons.Default.Movie, MaterialTheme.colorScheme.primary)
+        mediaKind == MediaPreviewKind.VIDEO -> FileCategoryIcon(Icons.Default.Movie, IconColor.Primary)
         mediaKind == MediaPreviewKind.AUDIO -> FileCategoryIcon(Icons.Default.MusicNote, Color(0xFF7E57C2))
         isAndroidPackageFile(entry.file) -> FileCategoryIcon(Icons.Default.Android, Color(0xFF3DDC84))
         extension in archiveExtensions -> FileCategoryIcon(Icons.Default.UnfoldMore, Color(0xFFFF8F00))
@@ -1537,7 +1537,7 @@ private fun FileVisual(entry: LocalFileEntry) {
         extension in wordExtensions -> FormatBadge("DOC", Color(0xFF1976D2))
         extension in spreadsheetExtensions -> FormatBadge("XLS", Color(0xFF2E7D32))
         extension in presentationExtensions -> FormatBadge("PPT", Color(0xFFEF6C00))
-        else -> FileCategoryIcon(Icons.Default.Description, MaterialTheme.colorScheme.onSurfaceVariant)
+        else -> FileCategoryIcon(Icons.Default.Description, IconColor.SecondaryVariant)
     }
 }
 
@@ -1554,7 +1554,7 @@ private fun ImageThumbnail(file: File) {
             modifier = Modifier.fillMaxSize(),
         )
     } else {
-        FileCategoryIcon(Icons.Default.ImageIcon, MaterialTheme.colorScheme.primary)
+        FileCategoryIcon(Icons.Default.ImageIcon, IconColor.Primary)
     }
 }
 
@@ -1692,7 +1692,7 @@ private fun OpenWithDialog(
             Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
                 Text(
                     file.name,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    color = IconColor.SecondaryVariant,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis,
                     modifier = Modifier.padding(horizontal = 12.dp, vertical = 4.dp),
@@ -1728,9 +1728,9 @@ private fun OpenWithDialog(
 @Composable
 private fun DialogAction(icon: androidx.compose.ui.graphics.vector.ImageVector, label: String, onClick: () -> Unit, destructive: Boolean = false) {
     TextButton(onClick = onClick, modifier = Modifier.fillMaxWidth()) {
-        Icon(icon, contentDescription = null, tint = if (destructive) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary)
+        Icon(icon, contentDescription = null, tint = if (destructive) IconColor.Error else IconColor.Primary)
         Spacer(Modifier.width(10.dp))
-        Text(label, modifier = Modifier.weight(1f), color = if (destructive) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurface)
+        Text(label, modifier = Modifier.weight(1f), color = if (destructive) IconColor.Error else IconColor.Secondary)
     }
 }
 
@@ -2117,7 +2117,7 @@ private fun FileEditorScreen(
                         Text(
                             context.getString(R.string.file_editor_search_results, searchResultCount),
                             modifier = Modifier.weight(1f),
-                            color = MaterialTheme.colorScheme.primary,
+                            color = IconColor.Primary,
                             style = MaterialTheme.typography.titleSmall,
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
@@ -2174,7 +2174,7 @@ private fun FileEditorScreen(
                         Text(
                             searchMessage,
                             modifier = Modifier.padding(horizontal = 12.dp, vertical = 2.dp),
-                            color = MaterialTheme.colorScheme.primary,
+                            color = IconColor.Primary,
                             style = MaterialTheme.typography.labelSmall,
                             maxLines = 2,
                             overflow = TextOverflow.Ellipsis,
@@ -2265,7 +2265,7 @@ private fun FileEditorScreen(
                 }
             }
             if (status.isNotBlank()) {
-                Text(status, modifier = Modifier.padding(horizontal = 10.dp, vertical = 3.dp), color = MaterialTheme.colorScheme.primary, style = MaterialTheme.typography.labelSmall)
+                Text(status, modifier = Modifier.padding(horizontal = 10.dp, vertical = 3.dp), color = IconColor.Primary, style = MaterialTheme.typography.labelSmall)
             }
             if (!aiOpen && controller.isActiveConversationRunning()) {
                 Surface(
@@ -2469,7 +2469,7 @@ private fun EditorConversationHistory(
                 val selected = controller.activeConversationId.value == conversation.id
                 Surface(
                     shape = RoundedCornerShape(10.dp),
-                    color = if (selected) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surfaceVariant,
+                    color = if (selected) IconColor.PrimaryContainer else MaterialTheme.colorScheme.surfaceVariant,
                     modifier = Modifier
                         .fillMaxWidth()
                         .combinedClickable(
@@ -2495,7 +2495,7 @@ private fun EditorConversationHistory(
                                     append(DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(conversation.updatedAt))
                                 }
                             },
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            color = IconColor.SecondaryVariant,
                             style = MaterialTheme.typography.labelSmall,
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
@@ -2523,9 +2523,9 @@ private fun SearchOptionButton(
         Text(
             label,
             color = if (selected) {
-                MaterialTheme.colorScheme.primary
+                IconColor.Primary
             } else {
-                MaterialTheme.colorScheme.onSurfaceVariant
+                IconColor.SecondaryVariant
             },
             fontWeight = if (selected) FontWeight.Bold else FontWeight.Normal,
             maxLines = 1,
