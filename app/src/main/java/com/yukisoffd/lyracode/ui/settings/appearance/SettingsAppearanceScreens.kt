@@ -1327,6 +1327,7 @@ internal fun CustomThemeJsonSettings(
                     }
                 }
             },
+            confirmButton = { },
             dismissButton = { TextButton(onClick = { showExampleDialog = false }) { Text(uiText(R.string.action_cancel)) } },
         )
     }
