@@ -409,6 +409,7 @@ internal fun SettingsScreen(
                         },
                     )
                     "custom_theme_color" -> CustomThemeColorSettings(settings, controller)
+                    "custom_theme_json" -> CustomThemeJsonSettings(settings, controller)
                     "language" -> LanguageSettings(
                         languageMode = languageMode,
                         onLanguageModeChange = onLanguageModeChange,
