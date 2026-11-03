@@ -1,5 +1,7 @@
-package com.yukisoffd.lyracode.ai
+package com.yukisoffd.lyracode.ai.agent
 
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import com.yukisoffd.lyracode.AllThemePresets
 import com.yukisoffd.lyracode.data.AppSettings
 import com.yukisoffd.lyracode.findThemePreset
