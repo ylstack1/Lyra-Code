@@ -12,8 +12,10 @@ import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.togetherWith
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.ui.Alignment
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -43,9 +45,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -624,7 +624,8 @@ internal fun SettingsScreen(
                     Row(
                         Modifier
                             .fillMaxWidth()
-                            .clickable { toggleGroup(label) },
+                            .clickable { toggleGroup(label) }
+                            .padding(vertical = 8.dp),
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.spacedBy(8.dp),
                     ) {
@@ -647,9 +648,10 @@ internal fun SettingsScreen(
                                 KimiMenuRow(entry.icon, entry.title, entry.description,
                                     enabled = entry.target != "device_interaction" || com.yukisoffd.lyracode.interaction.DeviceInteractionAvailability.isSupported(),
                                     onDisabledClick = { showUnsupportedDevice = true }) {
-                                detail = entry.target
+                                    detail = entry.target
+                                }
+                                if (index != entries.lastIndex) ModernDivider()
                             }
-                            if (index != entries.lastIndex) ModernDivider()
                         }
                     }
                 }
