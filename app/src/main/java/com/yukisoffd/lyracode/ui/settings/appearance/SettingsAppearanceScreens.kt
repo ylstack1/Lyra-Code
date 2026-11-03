@@ -1687,8 +1687,3 @@ internal fun applyThemeJson(json: String, settings: AppSettings, controller: Cha
     }
 }
 
-internal fun themeJsonExample(): String {
-    return "{\"schema\": \"lyra_theme_v1\", \"name\": \"My Custom Theme\", \"preset_id\": \"vercel_dark\", \"custom_enabled\": true, \"custom_color\": \"#FF0000FF\"}"
-}
-
-
