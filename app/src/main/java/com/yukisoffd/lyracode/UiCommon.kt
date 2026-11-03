@@ -361,28 +361,29 @@ internal val ModernShape = RoundedCornerShape(8.dp)
 // ============================================================================
 
 internal object IconColor {
-    // All icons use the same hardcoded color for consistent visibility
-    val Save = Color(0xFFE0E0E0)
-    val Delete = Color(0xFFE0E0E0)
-    val Edit = Color(0xFFE0E0E0)
-    val Info = Color(0xFFE0E0E0)
-    val Add = Color(0xFFE0E0E0)
-    val Settings = Color(0xFFE0E0E0)
-    val Copy = Color(0xFFE0E0E0)
-    val Share = Color(0xFFE0E0E0)
-    val Download = Color(0xFFE0E0E0)
-    val Upload = Color(0xFFE0E0E0)
-    val Search = Color(0xFFE0E0E0)
-    val Menu = Color(0xFFE0E0E0)
-    val Back = Color(0xFFE0E0E0)
-    val Warning = Color(0xFFE0E0E0)
-    val Success = Color(0xFFE0E0E0)
-    val Error = Color(0xFFE0E0E0)
-    val Primary = Color(0xFFE0E0E0)
-    val Secondary = Color(0xFFE0E0E0)
-    val SecondaryVariant = Color(0xFFE0E0E0)
-    val PrimaryContainer = Color(0xFFE0E0E0)
+    // Action colors
+    val Save = Color(0xFF4CAF50)      // Green - save, confirm, check
+    val Delete = Color(0xFFF44336)    // Red - delete, remove, error
+    val Edit = Color(0xFF2196F3)      // Blue - edit, modify, change
+    val Info = Color(0xFF9E9E9E)      // Gray - info, details, secondary
+    val Add = Color(0xFF4CAF50)       // Green - add, create, new
+    val Settings = Color(0xFF9E9E9E)  // Gray - settings, config
+    val Copy = Color(0xFF9E9E9E)      // Gray - copy, duplicate
+    val Share = Color(0xFF9E9E9E)     // Gray - share, export
+    val Download = Color(0xFF2196F3)  // Blue - download, import
+    val Upload = Color(0xFF2196F3)    // Blue - upload, send
+    val Search = Color(0xFF9E9E9E)    // Gray - search, find
+    val Menu = Color(0xFF9E9E9E)      // Gray - menu, navigation
+    val Back = Color(0xFF9E9E9E)      // Gray - back, close, cancel
+    val Warning = Color(0xFFFF9800)   // Amber - warning, alert
+    val Success = Color(0xFF4CAF50)   // Green - success, done
+    val Error = Color(0xFFF44336)     // Red - error, failure
+    val Primary = Color(0xFF6366F1)   // Indigo - primary action
+    val Secondary = Color(0xFF9E9E9E) // Gray - secondary action
+    val SecondaryVariant = Color(0xFFB0B0B0) // Light gray - secondary text
+    val PrimaryContainer = Color(0xFF6366F1).copy(alpha = 0.15f) // Indigo container
 }
+
 // ============================================================================
 // End Icon Colors
 // ============================================================================
