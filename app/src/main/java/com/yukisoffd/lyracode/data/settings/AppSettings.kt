@@ -307,8 +307,7 @@ class AppSettings(context: Context) {
     fun removeCustomTheme(index: Int) {
         val current = customThemes
         if (index >= 0 && index < current.size) {
-            current.removeAt(index)
-            customThemes = current
+            customThemes = current.filterIndexed { i, _ -> i != index }
         }
     }
 

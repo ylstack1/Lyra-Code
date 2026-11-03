@@ -90,7 +90,7 @@ internal fun themeToolResult(
         "set_theme_preset" -> {
             val presetId = callArgs.getString("preset_id")
             if (findThemePreset(presetId) == null) {
-                "ERROR: Unknown theme preset ID: $preset_id. Available: ${AllThemePresets.joinToString(",") { it.id }}"
+                "ERROR: Unknown theme preset ID: ${presetId}. Available: ${AllThemePresets.joinToString(",") { it.id }}"
             } else {
                 settings.selectedThemePreset = presetId
                 "Theme preset changed to: $presetId"
@@ -134,7 +134,27 @@ internal fun themeToolResult(
             result.getOrElse { "ERROR: ${it.message}" }
         }
         "export_theme_json" -> {
-            com.yukisoffd.lyracode.ui.settings.appearance.SettingsAppearanceScreens.buildThemeJson(settings)
+            val preset = findThemePreset(settings.selectedThemePreset) ?: defaultThemePreset()
+            JSONObject()
+                .put("schema", "lyra_theme_v1")
+                .put("name", preset.name)
+                .put("description", preset.description)
+                .put("preset_id", settings.selectedThemePreset)
+                .put("custom_enabled", settings.customThemeColorEnabled)
+                .put("custom_color", settings.customThemeColor)
+                .put("background", preset.background.toArgb())
+                .put("surface", preset.surface.toArgb())
+                .put("surface_elevated", preset.surfaceElevated.toArgb())
+                .put("border", preset.border.toArgb())
+                .put("text", preset.text.toArgb())
+                .put("on_background", preset.onBackground.toArgb())
+                .put("on_surface", preset.onSurface.toArgb())
+                .put("muted", preset.muted.toArgb())
+                .put("accent", preset.accent.toArgb())
+                .put("on_accent", preset.onAccent.toArgb())
+                .put("accent_container", preset.accentContainer.toArgb())
+                .put("outline_variant", preset.outlineVariant.toArgb())
+                .toString()
         }
         else -> "ERROR: Unknown theme tool: $callName"
     }

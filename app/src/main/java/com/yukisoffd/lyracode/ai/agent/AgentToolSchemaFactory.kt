@@ -1,6 +1,7 @@
 package com.yukisoffd.lyracode.ai
 
 import android.util.Log
+import com.yukisoffd.lyracode.ai.agent.ThemeToolSchema
 import com.yukisoffd.lyracode.data.AppSettings
 import com.yukisoffd.lyracode.data.MediaGenerationKind
 import com.yukisoffd.lyracode.data.McpServerConfig
