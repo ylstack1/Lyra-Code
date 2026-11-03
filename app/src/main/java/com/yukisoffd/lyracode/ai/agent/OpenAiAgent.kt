@@ -1,6 +1,5 @@
 package com.yukisoffd.lyracode.ai
 
-import com.yukisoffd.lyracode.ai.agent.ThemeToolSchema
 import com.yukisoffd.lyracode.ai.customizedFor
 import android.Manifest
 import android.content.Context
@@ -2123,12 +2122,7 @@ class OpenAiAgent(
                 "mark_web_sources" -> ToolExecution(webSourceMarkResult(args))
                 "create_chart" -> ToolExecution(com.yukisoffd.lyracode.charts.chartToolResult(args))
                 "get_circuit_symbols" -> ToolExecution(com.yukisoffd.lyracode.charts.circuitSymbolsToolResult(args))
-                "get_theme_info" -> ToolExecution(com.yukisoffd.lyracode.ai.agent.ThemeToolSchema.themeToolResult(settings, "get_theme_info", args))
-                "list_theme_presets" -> ToolExecution(com.yukisoffd.lyracode.ai.agent.ThemeToolSchema.themeToolResult(settings, "list_theme_presets", args))
-                "set_theme_preset" -> ToolExecution(com.yukisoffd.lyracode.ai.agent.ThemeToolSchema.themeToolResult(settings, "set_theme_preset", args))
-                "get_custom_themes" -> ToolExecution(com.yukisoffd.lyracode.ai.agent.ThemeToolSchema.themeToolResult(settings, "get_custom_themes", args))
-                "apply_custom_theme" -> ToolExecution(com.yukisoffd.lyracode.ai.agent.ThemeToolSchema.themeToolResult(settings, "apply_custom_theme", args))
-                "export_theme_json" -> ToolExecution(com.yukisoffd.lyracode.ai.agent.ThemeToolSchema.themeToolResult(settings, "export_theme_json", args))
+
                 "manage_app_config" -> ToolExecution(configTools.manageAppConfig(args))
                 "run_sub_agents" -> ToolExecution(runSubAgents(conversationId, args, onStatus))
                 "ask_user" -> ToolExecution(
