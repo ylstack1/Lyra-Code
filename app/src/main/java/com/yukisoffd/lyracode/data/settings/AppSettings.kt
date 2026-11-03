@@ -291,6 +291,34 @@ class AppSettings(context: Context) {
         get() = plainPrefs.getString(KEY_SELECTED_THEME_PRESET, "vercel_dark").orEmpty().ifBlank { "vercel_dark" }
         set(value) = plainPrefs.edit().putString(KEY_SELECTED_THEME_PRESET, value).apply()
 
+    var customThemes: List<String>
+        get() = plainPrefs.getString(KEY_CUSTOM_THEMES, "[]").orEmpty().ifBlank { "[]" }
+            .let { runCatching { JSONArray(it) }.getOrDefault(JSONArray()) }
+            .let { array -> (0 until array.length()).map { array.optString(it) } }
+        set(value) = plainPrefs.edit().putString(KEY_CUSTOM_THEMES, JSONArray(value).toString()).apply()
+
+    fun addCustomTheme(themeJson: String) {
+        val current = customThemes
+        if (!current.contains(themeJson)) {
+            customThemes = current + themeJson
+        }
+    }
+
+    fun removeCustomTheme(index: Int) {
+        val current = customThemes
+        if (index >= 0 && index < current.size) {
+            current.removeAt(index)
+            customThemes = current
+        }
+    }
+
+    fun getCustomTheme(index: Int): String? {
+        val current = customThemes
+        return if (index >= 0 && index < current.size) current[index] else null
+    }
+
+    fun customThemeCount(): Int = customThemes.size
+
     var languageMode: String
         get() = normalizeLanguageMode(
             plainPrefs.getString(KEY_LANGUAGE_MODE, LANGUAGE_SYSTEM)
@@ -1495,6 +1523,7 @@ class AppSettings(context: Context) {
             .put("customThemeColorEnabled", customThemeColorEnabled)
             .put("customThemeColor", customThemeColor)
             .put("selectedThemePreset", selectedThemePreset)
+            .put("customThemes", JSONArray(customThemes))
             .put("languageMode", languageMode)
             .put("refreshRateMode", refreshRateMode)
             .put("fontScaleMode", fontScaleMode)
@@ -1633,6 +1662,13 @@ class AppSettings(context: Context) {
         if (root.has("customThemeColorEnabled")) customThemeColorEnabled = root.optBoolean("customThemeColorEnabled")
         root.optString("customThemeColor").takeIf { it.isNotBlank() }?.let { customThemeColor = it }
         root.optString("selectedThemePreset").takeIf { it.isNotBlank() }?.let { selectedThemePreset = it }
+        root.optJSONArray("customThemes")?.let { array ->
+            val imported = (0 until array.length()).map { array.optString(it) }.filter { it.isNotBlank() }
+            if (imported.isNotEmpty()) {
+                val current = customThemes
+                customThemes = current + imported
+            }
+        }
         if (root.has("dynamicColorEnabled")) dynamicColorEnabled = root.optBoolean("dynamicColorEnabled")
         if (root.has("predictiveBackEnabled")) predictiveBackEnabled = root.optBoolean("predictiveBackEnabled")
         root.optString("languageMode").takeIf { it.isNotBlank() }?.let { languageMode = it }
@@ -2382,6 +2418,7 @@ class AppSettings(context: Context) {
         private const val KEY_CUSTOM_THEME_COLOR_ENABLED = "custom_theme_color_enabled"
         private const val KEY_CUSTOM_THEME_COLOR = "custom_theme_color"
         private const val KEY_SELECTED_THEME_PRESET = "selected_theme_preset"
+        private const val KEY_CUSTOM_THEMES = "custom_themes"
         private const val KEY_LANGUAGE_MODE = "language_mode"
         private const val KEY_REFRESH_RATE_MODE = "refresh_rate_mode"
         private const val KEY_DOWNLOAD_COMPLETION_NOTIFICATIONS = "download_completion_notifications"

@@ -182,7 +182,7 @@ private fun ToolResultCard(
                         Icons.Default.Input,
                         contentDescription = null,
                         modifier = Modifier.size(18.dp),
-                        tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                        tint = IconColor.Secondary,
                     )
                     Text(
                         uiText(R.string.tool_input_title),
@@ -194,7 +194,7 @@ private fun ToolResultCard(
                         Icon(
                             Icons.Default.ContentCopy,
                             contentDescription = uiText(R.string.file_action_copy),
-                            tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                            tint = IconColor.Secondary,
                             modifier = Modifier.size(18.dp),
                         )
                     }

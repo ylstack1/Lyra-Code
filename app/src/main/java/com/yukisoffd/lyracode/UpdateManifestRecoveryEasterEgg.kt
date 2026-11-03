@@ -209,7 +209,7 @@ private fun RecoveryBreakoutScreen(
                     Icon(
                         Icons.AutoMirrored.Filled.ExitToApp,
                         contentDescription = null,
-                        tint = MaterialTheme.colorScheme.primary,
+                        tint = IconColor.Primary,
                         modifier = Modifier.size(20.dp),
                     )
                     androidx.compose.foundation.layout.Spacer(Modifier.width(10.dp))

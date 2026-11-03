@@ -2122,6 +2122,12 @@ class OpenAiAgent(
                 "mark_web_sources" -> ToolExecution(webSourceMarkResult(args))
                 "create_chart" -> ToolExecution(com.yukisoffd.lyracode.charts.chartToolResult(args))
                 "get_circuit_symbols" -> ToolExecution(com.yukisoffd.lyracode.charts.circuitSymbolsToolResult(args))
+                "get_theme_info" -> ToolExecution(com.yukisoffd.lyracode.ai.ThemeToolSchema.themeToolResult(settings, "get_theme_info", args))
+                "list_theme_presets" -> ToolExecution(com.yukisoffd.lyracode.ai.ThemeToolSchema.themeToolResult(settings, "list_theme_presets", args))
+                "set_theme_preset" -> ToolExecution(com.yukisoffd.lyracode.ai.ThemeToolSchema.themeToolResult(settings, "set_theme_preset", args))
+                "get_custom_themes" -> ToolExecution(com.yukisoffd.lyracode.ai.ThemeToolSchema.themeToolResult(settings, "get_custom_themes", args))
+                "apply_custom_theme" -> ToolExecution(com.yukisoffd.lyracode.ai.ThemeToolSchema.themeToolResult(settings, "apply_custom_theme", args))
+                "export_theme_json" -> ToolExecution(com.yukisoffd.lyracode.ai.ThemeToolSchema.themeToolResult(settings, "export_theme_json", args))
                 "manage_app_config" -> ToolExecution(configTools.manageAppConfig(args))
                 "run_sub_agents" -> ToolExecution(runSubAgents(conversationId, args, onStatus))
                 "ask_user" -> ToolExecution(
@@ -3856,6 +3862,12 @@ class OpenAiAgent(
         private val CONFIGURABLE_AGENT_TOOLS = listOf(
             "create_chart",
             "get_circuit_symbols",
+            "get_theme_info",
+            "list_theme_presets",
+            "set_theme_preset",
+            "get_custom_themes",
+            "apply_custom_theme",
+            "export_theme_json",
             "list_directory",
             "read_file",
             "read_file_lines",

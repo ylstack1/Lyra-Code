@@ -63,6 +63,7 @@ import com.yukisoffd.lyracode.tasks.ScheduledTask
 import com.yukisoffd.lyracode.tasks.ScheduledTaskManager
 import com.yukisoffd.lyracode.tasks.ScheduledTaskStatus
 import com.yukisoffd.lyracode.tasks.ScheduledTaskType
+import com.yukisoffd.lyracode.IconColor
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -129,7 +130,7 @@ internal fun TaskScreen(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.spacedBy(12.dp),
                 ) {
-                    Icon(Icons.Default.Notifications, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+                    Icon(Icons.Default.Notifications, contentDescription = null, tint = IconColor.Primary)
                     Column(Modifier.weight(1f)) {
                         Text(uiText(R.string.notification_channel_name), style = MaterialTheme.typography.titleMedium)
                         Text(
@@ -172,7 +173,7 @@ internal fun TaskScreen(
                     Icon(
                         Icons.Default.Add,
                         contentDescription = uiText(R.string.ui_add_scheduled_task),
-                        tint = MaterialTheme.colorScheme.primary,
+                        tint = IconColor.Primary,
                     )
                 }
             }

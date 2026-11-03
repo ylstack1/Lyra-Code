@@ -26,6 +26,7 @@ import com.yukisoffd.lyracode.rememberPredictiveBackGestureState
 import com.yukisoffd.lyracode.predictiveBackTransform
 import androidx.activity.compose.BackHandler
 import com.yukisoffd.lyracode.data.AppSettings
+import com.yukisoffd.lyracode.IconColor
 import org.json.JSONObject
 import java.util.Locale
 
@@ -94,7 +95,7 @@ class DesktopPetSettingsActivity : ComponentActivity() {
                 Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer), shape = RoundedCornerShape(12.dp)) {
                     Column(Modifier.fillMaxWidth().padding(20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
                         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-                            Icon(Icons.Default.Pets, null, Modifier.size(40.dp), tint = MaterialTheme.colorScheme.onSecondaryContainer)
+                            Icon(Icons.Default.Pets, null, Modifier.size(40.dp), tint = IconColor.Secondary)
                             Column(Modifier.weight(1f)) {
                                 Text(if (DevicePetStore.activeKey(this@DesktopPetSettingsActivity) == "builtin") getString(R.string.pet_builtin_name) else manifest.getString("name"), style = MaterialTheme.typography.titleLarge)
                                 Text(getString(R.string.pet_available_count, catalog.size), style = MaterialTheme.typography.bodyMedium)

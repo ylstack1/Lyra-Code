@@ -8,6 +8,7 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.widget.Toast
 import com.yukisoffd.lyracode.charts.isChartLanguage
+import com.yukisoffd.lyracode.IconColor
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
@@ -580,7 +581,7 @@ private fun RichTable(node: ASTNode, content: String) {
                 Icons.Default.FileDownload,
                 contentDescription = uiText(R.string.cd_export_csv),
                 modifier = Modifier.size(19.dp),
-                tint = MaterialTheme.colorScheme.primary,
+                tint = IconColor.Primary,
             )
         }
     }

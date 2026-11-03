@@ -817,6 +817,13 @@
     <string name="label_theme_json">Theme JSON</string>
     <string name="notice_theme_imported">Theme imported successfully</string>
     <string name="notice_theme_import_failed">Failed to import theme</string>
+    <string name="notice_theme_applied">Theme applied successfully</string>
+    <string name="saved_custom_themes">Saved Custom Themes</string>
+    <string name="title_example_theme_json">Example Theme JSON</string>
+    <string name="example_theme_json_desc">Copy or use this example theme template</string>
+    <string name="action_generate_example">Generate Example</string>
+    <string name="action_use_this_theme">Use This Theme</string>
+    <string name="action_example_theme_json">Example Template</string>
     <string name="action_apply">Apply</string>
     <string name="theme_name_system">Follow system</string>
     <string name="font_name_small">Font Name Small</string>

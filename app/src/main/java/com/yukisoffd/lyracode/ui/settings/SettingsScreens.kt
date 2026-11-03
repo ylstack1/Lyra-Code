@@ -42,7 +42,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -133,6 +135,11 @@ internal fun SettingsScreen(
     onDeleteSkill: (String) -> Unit,
 ) {
     var showUnsupportedDevice by rememberSaveable { mutableStateOf(false) }
+    var expandedGroups by rememberSaveable { mutableStateOf(setOf<String>()) }
+    fun toggleGroup(label: String) {
+        expandedGroups = if (expandedGroups.contains(label)) expandedGroups - label else expandedGroups + label
+    }
+    fun isExpanded(label: String): Boolean = expandedGroups.contains(label)
     var detail by rememberSaveable { mutableStateOf<String?>(null) }
     var accountNotice by rememberSaveable { mutableStateOf("") }
     var accountPageVersion by rememberSaveable { mutableIntStateOf(0) }
@@ -612,12 +619,32 @@ internal fun SettingsScreen(
             )
             visibleGroups.forEach { (label, entries) ->
                 if (entries.isNotEmpty()) {
-                    KimiSectionLabel(label)
-                    ModernCardBox {
-                        entries.forEachIndexed { index, entry ->
-                            KimiMenuRow(entry.icon, entry.title, entry.description,
-                                enabled = entry.target != "device_interaction" || com.yukisoffd.lyracode.interaction.DeviceInteractionAvailability.isSupported(),
-                                onDisabledClick = { showUnsupportedDevice = true }) {
+                    val isGroupExpanded = isExpanded(label)
+                    Row(
+                        Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        clickable = { toggleGroup(label) },
+                    ) {
+                        Text(
+                            label,
+                            style = MaterialTheme.typography.titleMedium,
+                            color = MaterialTheme.colorScheme.onSurface,
+                        )
+                        Spacer(Modifier.weight(1f))
+                        Icon(
+                            if (isGroupExpanded) Icons.Default.ExpandLess else Icons.Default.ExpandMore,
+                            contentDescription = null,
+                            modifier = Modifier.size(20.dp),
+                            tint = IconColor.Secondary,
+                        )
+                    }
+                    if (isGroupExpanded) {
+                        ModernCardBox {
+                            entries.forEachIndexed { index, entry ->
+                                KimiMenuRow(entry.icon, entry.title, entry.description,
+                                    enabled = entry.target != "device_interaction" || com.yukisoffd.lyracode.interaction.DeviceInteractionAvailability.isSupported(),
+                                    onDisabledClick = { showUnsupportedDevice = true }) {
                                 detail = entry.target
                             }
                             if (index != entries.lastIndex) ModernDivider()

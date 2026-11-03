@@ -68,6 +68,7 @@ import com.yukisoffd.lyracode.data.ModelUsageStat
 import com.yukisoffd.lyracode.data.UsageStatisticsRepository
 import com.yukisoffd.lyracode.data.UsageStatsPeriod
 import com.yukisoffd.lyracode.data.UsageStatsSummary
+import com.yukisoffd.lyracode.IconColor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.ensureActive
@@ -229,7 +230,7 @@ private fun StatsRangeCard(
                     Icons.Default.CalendarMonth,
                     contentDescription = null,
                     modifier = Modifier.size(22.dp),
-                    tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                    tint = Color.White,
                 )
             }
             Spacer(Modifier.width(12.dp))
@@ -429,13 +430,13 @@ private fun StatsExpandableCard(
                 .padding(vertical = 6.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Icon(icon, contentDescription = null, modifier = Modifier.size(23.dp), tint = MaterialTheme.colorScheme.primary)
+            Icon(icon, contentDescription = null, modifier = Modifier.size(23.dp), tint = IconColor.Primary)
             Spacer(Modifier.width(12.dp))
             Text(title, modifier = Modifier.weight(1f), style = MaterialTheme.typography.titleMedium)
             Icon(
                 if (expanded) Icons.Default.ExpandLess else Icons.Default.ExpandMore,
                 contentDescription = null,
-                tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                tint = IconColor.Secondary,
             )
         }
         AnimatedVisibility(visible = expanded) {
@@ -467,7 +468,7 @@ private fun StatsValueRow(icon: ImageVector, title: String, value: String) {
                 icon,
                 contentDescription = null,
                 modifier = Modifier.size(21.dp),
-                tint = MaterialTheme.colorScheme.onSecondaryContainer,
+                tint = IconColor.Secondary,
             )
         }
         Spacer(Modifier.width(12.dp))
@@ -493,7 +494,7 @@ private fun TokenUsageRow(
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Icon(icon, contentDescription = null, modifier = Modifier.size(20.dp), tint = MaterialTheme.colorScheme.primary)
+            Icon(icon, contentDescription = null, modifier = Modifier.size(20.dp), tint = IconColor.Primary)
             Spacer(Modifier.width(10.dp))
             Text(title, modifier = Modifier.weight(1f), style = MaterialTheme.typography.bodyMedium)
             Text(formatStatsNumber(value, compactNumbers), style = MaterialTheme.typography.titleSmall)

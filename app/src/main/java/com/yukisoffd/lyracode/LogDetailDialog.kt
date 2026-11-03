@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import com.yukisoffd.lyracode.data.AuditEntry
 import com.yukisoffd.lyracode.data.AuditLogStore
 import com.yukisoffd.lyracode.data.AuditSection
+import com.yukisoffd.lyracode.IconColor
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -227,7 +228,7 @@ private fun AuditField(node: AuditTreeNode, open: Boolean, palette: AuditSyntaxP
         }
         Row(Modifier.fillMaxWidth().background(background).then(if (node.expandable) Modifier.clickable(onClick = onToggle) else Modifier)
             .padding(start = indent, end = 10.dp, top = 7.dp, bottom = 7.dp), verticalAlignment = Alignment.Top) {
-            if (node.expandable) Icon(if (open) Icons.Default.ExpandMore else Icons.Default.ChevronRight, null, Modifier.size(20.dp), tint = MaterialTheme.colorScheme.onSurfaceVariant)
+            if (node.expandable) Icon(if (open) Icons.Default.ExpandMore else Icons.Default.ChevronRight, null, Modifier.size(20.dp), tint = IconColor.Secondary)
             else Spacer(Modifier.width(20.dp))
             SelectionContainer { Text(text, fontFamily = FontFamily.Monospace, style = MaterialTheme.typography.bodySmall) }
         }

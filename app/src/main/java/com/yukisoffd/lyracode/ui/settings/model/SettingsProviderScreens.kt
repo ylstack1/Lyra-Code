@@ -152,7 +152,7 @@ private fun CustomProviderPresetRow(onClick: () -> Unit) {
                 Icon(
                     Icons.Default.Tune,
                     contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onSecondaryContainer,
+                    tint = IconColor.Secondary,
                 )
             }
             Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {

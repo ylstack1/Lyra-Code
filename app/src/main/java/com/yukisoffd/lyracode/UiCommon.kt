@@ -195,6 +195,7 @@ import com.yukisoffd.lyracode.workspace.NativeFileManager
 import com.yukisoffd.lyracode.workspace.UploadedFile
 import com.yukisoffd.lyracode.workspace.UploadedFileManager
 import com.yukisoffd.lyracode.workspace.WorkspaceManager
+import com.yukisoffd.lyracode.IconColor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -862,7 +863,7 @@ internal fun ConfirmDeleteDialog(
     }
     AlertDialog(
         onDismissRequest = onDismiss,
-        icon = { Icon(Icons.Default.Delete, contentDescription = null, tint = MaterialTheme.colorScheme.error) },
+        icon = { Icon(Icons.Default.Delete, contentDescription = null, tint = IconColor.Error) },
         title = { Text(title) },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {

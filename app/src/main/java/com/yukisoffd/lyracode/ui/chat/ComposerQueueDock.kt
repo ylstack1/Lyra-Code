@@ -106,7 +106,7 @@ internal fun ComposerQueueDock(
                         Icons.Default.KeyboardArrowDown
                     },
                     contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                    tint = IconColor.Secondary,
                 )
             }
         }
@@ -220,7 +220,7 @@ private fun ComposerQueueRow(
                 Icons.Default.Close,
                 contentDescription = removeDescription,
                 modifier = Modifier.size(18.dp),
-                tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                tint = IconColor.Secondary,
             )
         }
     }
