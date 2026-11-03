@@ -1,5 +1,6 @@
 package com.yukisoffd.lyracode.ai
 
+import com.yukisoffd.lyracode.ai.agent.ThemeToolSchema
 import com.yukisoffd.lyracode.ai.customizedFor
 import android.Manifest
 import android.content.Context
