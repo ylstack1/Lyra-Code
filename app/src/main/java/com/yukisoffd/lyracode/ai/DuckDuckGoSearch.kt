@@ -64,8 +64,7 @@ object DuckDuckGoSearch {
                         else Response.Error("CAPTCHA", "DuckDuckGo bot challenge; retry later")
                     }
                     if (vqd.isBlank()) {
-                        vqd = Regex("""vqd=['"]?([\d-]+)['"]?""").find(body)?.groupValues?.value.orEmpty()
-                        vqd = Regex("""[\d-]+""").find(vqd)?.value.orEmpty()
+                        vqd = Regex("""vqd=['"]?([\d-]+)['"]?""").find(body)?.groupValues?.getOrNull(1)?.value.orEmpty()
                     }
                     parsePage(body, results)
                 }
@@ -103,7 +102,15 @@ object DuckDuckGoSearch {
         } else if (href.startsWith("http")) href else ""
     }
 
-    private fun stripTags(html: String): String =
-        TAG_REGEX.replace(html, "").replace("&", "&").replace(""", "\"")
-            .replace("&#x27;", "'").replace("<", "<").replace(">", ">").trim()
+    private fun stripTags(html: String): String {
+        var text = TAG_REGEX.replace(html, "")
+        text = text.replace("&amp;", "&")
+            .replace("&quot;", "\"")
+            .replace("&#x27;", "'")
+            .replace("&#39;", "'")
+            .replace("&lt;", "<")
+            .replace("&gt;", ">")
+            .replace("&nbsp;", " ")
+        return text.trim()
+    }
 }
