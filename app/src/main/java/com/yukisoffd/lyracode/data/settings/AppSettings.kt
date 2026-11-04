@@ -141,6 +141,13 @@ class AppSettings(context: Context) {
             .putInt(KEY_HISTORY_COMPRESSION_CHUNK_COUNT, value.coerceIn(MIN_HISTORY_COMPRESSION_CHUNKS, MAX_HISTORY_COMPRESSION_CHUNKS))
             .apply()
 
+    var contextTokenBudget: Int
+        get() = plainPrefs.getInt(KEY_CONTEXT_TOKEN_BUDGET, DEFAULT_CONTEXT_TOKEN_BUDGET)
+            .coerceIn(MIN_CONTEXT_TOKEN_BUDGET, MAX_CONTEXT_TOKEN_BUDGET)
+        set(value) = plainPrefs.edit()
+            .putInt(KEY_CONTEXT_TOKEN_BUDGET, value.coerceIn(MIN_CONTEXT_TOKEN_BUDGET, MAX_CONTEXT_TOKEN_BUDGET))
+            .apply()
+
     fun historyCompressionProfileOrNull(): ApiProfile? {
         if (historyCompressionProfileId.isBlank() || historyCompressionModel.isBlank()) return null
         return profiles().firstOrNull { it.id == historyCompressionProfileId }
@@ -1574,6 +1581,7 @@ class AppSettings(context: Context) {
             .put("historyCompressionProfileId", historyCompressionProfileId)
             .put("historyCompressionModel", historyCompressionModel)
             .put("historyCompressionChunkCount", historyCompressionChunkCount)
+            .put("contextTokenBudget", contextTokenBudget)
             .put("visionSupplementEnabled", visionSupplementEnabled)
             .put("visionUnderstanding", visionUnderstandingConfig().let { config ->
                 JSONObject()
@@ -2388,6 +2396,7 @@ class AppSettings(context: Context) {
         private const val KEY_HISTORY_COMPRESSION_PROFILE_ID = "history_compression_profile_id"
         private const val KEY_HISTORY_COMPRESSION_MODEL = "history_compression_model"
         private const val KEY_HISTORY_COMPRESSION_CHUNK_COUNT = "history_compression_chunk_count"
+    private const val KEY_CONTEXT_TOKEN_BUDGET = "context_token_budget"
         private const val KEY_IMAGE_GENERATION_PROFILE_ID = "image_generation_profile_id"
         private const val KEY_IMAGE_GENERATION_MODEL = "image_generation_model"
         private const val KEY_VISION_SUPPLEMENT_ENABLED = "vision_supplement_enabled"
