@@ -372,6 +372,7 @@ class MainActivity : ComponentActivity() {
             CompositionLocalProvider(
                 LocalActivityResultRegistryOwner provides this@MainActivity,
                 LocalOnBackPressedDispatcherOwner provides this@MainActivity,
+                LocalHapticFeedbackEnabled provides settings.hapticFeedbackEnabled,
             ) {
                 LyraCodeTheme(
                     darkMode = darkMode,

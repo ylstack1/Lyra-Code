@@ -14,7 +14,7 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import okio.Buffer
 
 internal class CompressionOutputLimitException : IllegalStateException(
-    "会话历史压缩输出达到 token 上限，未得到完整摘要；原上下文已保留。请增加分段块数或更换压缩模型。",
+    "History compression hit the token limit without a complete summary; original context preserved. Increase chunk count or switch the compression model.",
 )
 
 internal fun isMiMoCompressionModel(profile: ApiProfile, model: String): Boolean =
@@ -117,13 +117,13 @@ internal fun extractCompressionSummary(root: JSONObject, profile: ApiProfile): S
     }
     if (reason.lowercase() in setOf("length", "max_tokens", "max_output_tokens")) throw CompressionOutputLimitException()
     val refusal = choice?.optJSONObject("message")?.optString("refusal").orEmpty()
-    require(refusal.isBlank() || refusal == "null") { "压缩模型拒绝生成摘要：$refusal；原上下文已保留" }
+    require(refusal.isBlank() || refusal == "null") { "Compression model refused to summarize: $refusal; original context preserved" }
     require(root.optString("status") !in setOf("failed", "incomplete", "queued", "in_progress")) {
-        "压缩模型未完成摘要（${root.optString("status")} / $reason），原上下文已保留"
+        "Compression model did not finish the summary (${root.optString("status")} / $reason); original context preserved"
     }
     val text = extractModelResponseText(root, profile.apiFormat, profile.usesResponsesApi).trim()
     require(text.isNotBlank()) {
-        "压缩模型没有返回摘要正文（结束原因：${reason.ifBlank { "未提供" }}）。可能只返回了思考内容或被拦截；原上下文已保留。"
+        "Compression model returned no summary body (finish reason: ${reason.ifBlank { "not provided" }}). It may have returned only thinking or was blocked; original context preserved."
     }
     return text
 }
@@ -133,7 +133,7 @@ internal fun normalizeCompressionSummary(summary: String): String {
     if (text.startsWith("```") && text.endsWith("```")) {
         text = text.substringAfter('\n').removeSuffix("```").trim()
     }
-    require(text.isNotBlank()) { "压缩模型没有返回摘要正文，原上下文已保留" }
+    require(text.isNotBlank()) { "Compression model returned no summary body; original context preserved" }
     return if (text.startsWith("LYRA_STRUCTURED_CONTEXT_V2")) text else
         "LYRA_STRUCTURED_CONTEXT_V2\npreserved_unstructured_context: |\n" + text.lineSequence().joinToString("\n") { "  $it" }
 }

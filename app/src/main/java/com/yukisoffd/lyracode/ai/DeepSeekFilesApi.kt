@@ -194,13 +194,13 @@ internal class DeepSeekFilesApi(
         client.newCall(request).execute().use { response ->
             val responseBody = response.body?.string().orEmpty()
             if (!response.isSuccessful) {
-                throw IOException("DeepSeek Files API 上传失败 ${response.code}: ${responseBody.take(500)}")
+                throw IOException("DeepSeek Files API upload failed ${response.code}: ${responseBody.take(500)}")
             }
             val root = runCatching { JSONObject(responseBody) }.getOrElse { error ->
-                throw IOException("DeepSeek Files API 返回了无效 JSON", error)
+                throw IOException("DeepSeek Files API returned invalid JSON", error)
             }
             val fileId = root.optString("id")
-            if (!fileId.startsWith("file-api-")) throw IOException("DeepSeek Files API 未返回有效 file_id")
+            if (!fileId.startsWith("file-api-")) throw IOException("DeepSeek Files API did not return a valid file_id")
             val serverExpiryMillis = root.optLong("expires_at", 0L).takeIf { it > 0L }?.times(1000L)
             return DeepSeekCachedFile(
                 fileId = fileId,

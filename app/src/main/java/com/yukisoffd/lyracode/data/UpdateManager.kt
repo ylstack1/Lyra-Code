@@ -108,7 +108,7 @@ class UpdateManager(private val context: Context) {
     fun checkForUpdate(): Result<AppUpdateInfo?> = runCatching {
         val sources = buildList<Pair<String, () -> AppUpdateInfo>> {
             manifestUrl().takeIf { it.isNotBlank() }?.let { url ->
-                add("网站 JSON" to { parseUpdateInfo(fetchJson(url)) })
+                add("Website JSON" to { parseUpdateInfo(fetchJson(url)) })
             }
             add("GitHub" to {
                 parseReleaseUpdateInfo(
@@ -134,7 +134,7 @@ class UpdateManager(private val context: Context) {
                 failures += "$name：${error.message.orEmpty().ifBlank { error.javaClass.simpleName }}"
             }
         }
-        error("版本检测失败，所有更新来源均不可用：${failures.joinToString("；")}")
+        error("Update check failed; all update sources unavailable: ${failures.joinToString("; ")}")
     }
 
     fun checkDailyForUpdateIfNeeded(): Result<AppUpdateInfo?> = runCatching {

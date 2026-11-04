@@ -111,7 +111,7 @@ internal fun fallbackConversationTitle(composedInput: String, defaultTitle: Stri
     val attachmentTitle = markerRegex.find(composedInput)?.let { match ->
         runCatching { JSONObject(match.groupValues[1]).optString("name") }.getOrNull()
             ?.takeIf { it.isNotBlank() }
-            ?.let { "上传附件：$it" }
+            ?.let { "Uploaded attachment: $it" }
     }
     return editorRegex.replace(workspaceRegex.replace(markerRegex.replace(composedInput, ""), ""), "")
         .lineSequence()

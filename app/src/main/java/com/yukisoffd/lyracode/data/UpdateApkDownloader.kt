@@ -18,15 +18,15 @@ internal class UpdateApkDownloader(private val client: OkHttpClient, private val
         onProgress: (target: GitHubDownloadTarget, downloaded: Long, total: Long) -> Unit,
     ): File {
         val expected = if (expectedSha256.isBlank()) null else
-            requireNotNull(normalizeApkSha256(expectedSha256)) { "更新清单中的 apkSha256 格式无效" }
+            requireNotNull(normalizeApkSha256(expectedSha256)) { "Invalid apkSha256 format in update manifest" }
         require(targets.isNotEmpty())
-        val directory = output.parentFile ?: throw IOException("保存安装包失败")
-        if (!directory.isDirectory && !directory.mkdirs()) throw IOException("无法创建更新下载目录")
+        val directory = output.parentFile ?: throw IOException("Failed to save the APK")
+        if (!directory.isDirectory && !directory.mkdirs()) throw IOException("Could not create the update download directory")
         val partial = File(directory, "${output.name}.part")
         val failures = mutableListOf<String>()
         try {
             for (target in targets) {
-                if (partial.exists() && !partial.delete()) throw IOException("无法清理未完成的更新文件")
+                if (partial.exists() && !partial.delete()) throw IOException("Could not clean up the unfinished update file")
                 onProgress(target, 0, -1)
                 try {
                     downloadAttempt(target.url, partial, expected) { downloaded, total ->
@@ -36,11 +36,11 @@ internal class UpdateApkDownloader(private val client: OkHttpClient, private val
                     failures += "${target.acceleratorName ?: "GitHub"}：${error.message}"
                     continue
                 }
-                if (output.exists() && !output.delete()) throw IOException("无法替换已下载的更新文件")
-                if (!partial.renameTo(output)) throw IOException("保存安装包失败")
+                if (output.exists() && !output.delete()) throw IOException("Could not replace the downloaded update file")
+                if (!partial.renameTo(output)) throw IOException("Failed to save the APK")
                 return output
             }
-            throw IOException("下载安装包失败：${failures.joinToString("；")}")
+            throw IOException("APK download failed: ${failures.joinToString("; ")}")
         } finally {
             partial.delete()
         }
@@ -63,7 +63,7 @@ internal class UpdateApkDownloader(private val client: OkHttpClient, private val
         }
         response.use {
             if (!it.isSuccessful) throw RetryableUpdateDownloadException("HTTP ${it.code}")
-            val body = it.body ?: throw RetryableUpdateDownloadException("响应为空")
+            val body = it.body ?: throw RetryableUpdateDownloadException("Empty response")
             val total = body.contentLength()
             body.byteStream().use { input ->
                 partial.outputStream().use { stream ->
@@ -83,11 +83,11 @@ internal class UpdateApkDownloader(private val client: OkHttpClient, private val
                 }
             }
             if (partial.length() == 0L || (total >= 0 && partial.length() != total)) {
-                throw RetryableUpdateDownloadException("安装包为空或下载不完整")
+                throw RetryableUpdateDownloadException("APK is empty or the download is incomplete")
             }
-            if (!isZipApk(partial)) throw RetryableUpdateDownloadException("下载到的不是 APK 文件")
+            if (!isZipApk(partial)) throw RetryableUpdateDownloadException("Downloaded file is not an APK")
             if (expected != null && !apkSha256(partial).equals(expected, ignoreCase = true)) {
-                throw RetryableUpdateDownloadException("安装包校验失败：SHA-256 不一致")
+                throw RetryableUpdateDownloadException("APK verification failed: SHA-256 mismatch")
             }
         }
     }

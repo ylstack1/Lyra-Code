@@ -337,13 +337,13 @@ internal fun SkillManualImportDialog(
             } else {
                 """
                 ---
-                name: 自定义 Skill
-                description: 简要说明这个 Skill 的用途
+                name: Custom Skill
+                description: Briefly describe what this Skill does
                 ---
 
-                # 自定义 Skill
+                # Custom Skill
 
-                在这里写给 AI 的能力说明、适用场景、使用步骤和约束。
+                Write the capability instructions, applicable scenarios, usage steps, and constraints for the AI here.
                 """.trimIndent()
             },
         )

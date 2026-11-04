@@ -145,6 +145,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalView
+import android.view.HapticFeedbackConstants
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.viewinterop.AndroidView
@@ -399,6 +401,34 @@ internal object IconColor {
 
 // ============================================================================
 // End Icon Colors
+// ============================================================================
+
+// ============================================================================
+// Haptic Feedback - respects the user's hapticFeedbackEnabled setting
+// ============================================================================
+
+internal val LocalHapticFeedbackEnabled = staticCompositionLocalOf { true }
+
+@Composable
+internal fun rememberHapticFeedback(): (HapticFeedbackType) -> Unit {
+    val enabled = LocalHapticFeedbackEnabled.current
+    val view = LocalView.current
+    return remember(enabled) {
+        { type ->
+            if (enabled) {
+                view.performHapticFeedback(
+                    when (type) {
+                        HapticFeedbackType.LongPress -> HapticFeedbackConstants.LONG_PRESS
+                        else -> HapticFeedbackConstants.VIRTUAL_KEY
+                    },
+                )
+            }
+        }
+    }
+}
+
+// ============================================================================
+// End Haptic Feedback
 // ============================================================================
 
 

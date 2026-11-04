@@ -173,7 +173,7 @@ internal fun LyraCodeApp(
     }
     val activeConversationId = controller.activeConversationId.value
     val workspaceName = remember(activeConversationId, controller.settingsRevision.intValue) { controller.workspaceDisplayName() }
-    val workspaceLabel = if (workspaceName == "未选择工作目录") {
+    val workspaceLabel = if (workspaceName == "No workspace selected") {
         context.getString(R.string.label_no_workspace)
     } else {
         workspaceName

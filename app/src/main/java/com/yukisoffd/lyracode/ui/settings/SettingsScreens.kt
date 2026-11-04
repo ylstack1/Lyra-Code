@@ -137,11 +137,13 @@ internal fun SettingsScreen(
     onDeleteSkill: (String) -> Unit,
 ) {
     var showUnsupportedDevice by rememberSaveable { mutableStateOf(false) }
-    var expandedGroups by rememberSaveable { mutableStateOf(setOf<String>()) }
+    // Collapsed groups: empty set = all expanded by default (first visit).
+    // Only groups the user explicitly collapses are remembered across visits.
+    var collapsedGroups by rememberSaveable { mutableStateOf(setOf<String>()) }
     fun toggleGroup(label: String) {
-        expandedGroups = if (expandedGroups.contains(label)) expandedGroups - label else expandedGroups + label
+        collapsedGroups = if (collapsedGroups.contains(label)) collapsedGroups - label else collapsedGroups + label
     }
-    fun isExpanded(label: String): Boolean = expandedGroups.contains(label)
+    fun isExpanded(label: String): Boolean = !collapsedGroups.contains(label)
     var detail by rememberSaveable { mutableStateOf<String?>(null) }
     var accountNotice by rememberSaveable { mutableStateOf("") }
     var accountPageVersion by rememberSaveable { mutableIntStateOf(0) }

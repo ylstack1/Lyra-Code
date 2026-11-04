@@ -741,7 +741,7 @@ class ChatController(
     fun createProject(uri: Uri): ChatProject? {
         val workspaceUri = workspaceManager.persistWorkspace(uri)
         val projectName = workspaceManager.displayName()
-            .takeUnless { it == "未选择工作目录" }
+            .takeUnless { it == "No workspace selected" }
             .orEmpty()
             .ifBlank { appContext.getString(R.string.default_project_name) }
         val projectId = conversationStore.createProject(projectName, workspaceUri)
@@ -925,7 +925,7 @@ class ChatController(
         return withContext(Dispatchers.Main) {
             editorFileMutations.removeAll { it.id == pending.first }
             editorMutationWaiters.remove(pending.first)
-            AgentFileEditResult.failed("等待文件编辑器应用 AI 修改超时，已取消磁盘写入。")
+            AgentFileEditResult.failed("Timed out waiting for the file editor to apply AI changes; disk write cancelled.")
         }
     }
 

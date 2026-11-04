@@ -136,6 +136,17 @@ internal fun ThemeSettings(
         ModernDivider()
         Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(
+                Icons.Default.Vibration,
+                contentDescription = null,
+                modifier = Modifier.width(36.dp).size(24.dp),
+                tint = IconColor.Primary,
+            )
+            Text("Haptic Feedback", modifier = Modifier.weight(1f), style = MaterialTheme.typography.titleMedium)
+            Switch(checked = settings.hapticFeedbackEnabled, onCheckedChange = { settings.hapticFeedbackEnabled = it })
+        }
+        ModernDivider()
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Icon(
                 Icons.Default.Gesture,
                 contentDescription = null,
                 modifier = Modifier.width(36.dp).size(24.dp),
@@ -800,7 +811,7 @@ internal fun FontLibrarySettings(
                     notice = uiText(R.string.ui_imported_1_s_fonts, imported.size)
                     fontRevision++
                 },
-                onFailure = { error -> notice = error.message.orEmpty().ifBlank { "字体导入失败" } },
+                onFailure = { error -> notice = error.message.orEmpty().ifBlank { "Font import failed" } },
             )
         }
     }
