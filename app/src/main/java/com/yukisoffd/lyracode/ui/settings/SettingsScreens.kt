@@ -506,6 +506,7 @@ internal fun SettingsScreen(
                         onToggleSkill = onToggleSkill,
                         onDeleteSkill = onDeleteSkill,
                     )
+                    "developer_mode" -> DeveloperModeSettings(settings)
                     "licenses" -> OpenSourceLicensesScreen()
                     "about" -> AboutSoftwareScreen(
                         updateAvailable = updateAvailable,
@@ -584,6 +585,7 @@ internal fun SettingsScreen(
             SettingsMenuEntry(Icons.Default.AccessibilityNew, context.getString(R.string.menu_device_interaction), context.getString(R.string.menu_device_interaction_desc), "device_interaction"),
             SettingsMenuEntry(Icons.Default.Security, context.getString(R.string.menu_app_permissions), context.getString(R.string.menu_app_permissions_desc), "permissions"),
             SettingsMenuEntry(Icons.Default.Description, context.getString(R.string.menu_licenses), context.getString(R.string.menu_licenses_desc), "licenses"),
+            SettingsMenuEntry(Icons.Default.Code, "Developer Mode", "Tool call JSON details and diagnostics", "developer_mode"),
             SettingsMenuEntry(Icons.Default.Info, context.getString(R.string.menu_about), context.getString(R.string.menu_about_desc), "about"),
         )
         val normalizedQuery = settingsQuery.trim()
@@ -859,3 +861,31 @@ internal fun WorkspaceSettings(
     }
 }
 
+
+
+@Composable
+internal fun DeveloperModeSettings(settings: AppSettings) {
+    var enabled by remember { mutableStateOf(settings.developerModeEnabled) }
+    ModernCardBox {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Icon(
+                Icons.Default.Code,
+                contentDescription = null,
+                modifier = Modifier.width(36.dp).size(24.dp),
+                tint = IconColor.Primary,
+            )
+            Column(Modifier.weight(1f)) {
+                Text("Developer Mode", style = MaterialTheme.typography.titleMedium)
+                Text(
+                    "Show raw tool call JSON, diagnostics, and advanced details",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            }
+            Switch(checked = enabled, onCheckedChange = {
+                enabled = it
+                settings.developerModeEnabled = it
+            })
+        }
+    }
+}

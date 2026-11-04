@@ -2117,7 +2117,12 @@ class OpenAiAgent(
                         )
                     }
                 }
-                "web_search" -> ToolExecution(webAgent.search(args.getString("query"), args.optInt("limit", 6)))
+                "web_search" -> {
+                    val query = args.getString("query")
+                    val limit = args.optInt("limit", 6)
+                    val config = com.yukisoffd.lyracode.ai.WebSearchProviders.fromSettings(settings)
+                    ToolExecution(com.yukisoffd.lyracode.ai.WebSearchProviders.search(config, query, limit))
+                }
                 "read_web_page" -> ToolExecution(webAgent.readPage(args.getString("url")))
                 "mark_web_sources" -> ToolExecution(webSourceMarkResult(args))
                 "create_chart" -> ToolExecution(com.yukisoffd.lyracode.charts.chartToolResult(args))

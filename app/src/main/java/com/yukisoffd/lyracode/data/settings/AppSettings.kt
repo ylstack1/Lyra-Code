@@ -284,6 +284,22 @@ class AppSettings(context: Context) {
         get() = plainPrefs.getBoolean(KEY_HAPTIC_FEEDBACK_ENABLED, true)
         set(value) = plainPrefs.edit().putBoolean(KEY_HAPTIC_FEEDBACK_ENABLED, value).apply()
 
+    var developerModeEnabled: Boolean
+        get() = plainPrefs.getBoolean(KEY_DEVELOPER_MODE_ENABLED, false)
+        set(value) = plainPrefs.edit().putBoolean(KEY_DEVELOPER_MODE_ENABLED, value).apply()
+
+    var webSearchProvider: String
+        get() = normalizeWebSearchProvider(plainPrefs.getString(KEY_WEB_SEARCH_PROVIDER, WEB_SEARCH_DUCKDUCKGO).orEmpty())
+        set(value) = plainPrefs.edit().putString(KEY_WEB_SEARCH_PROVIDER, normalizeWebSearchProvider(value)).apply()
+
+    var webSearchApiKey: String
+        get() = plainPrefs.getString(KEY_WEB_SEARCH_API_KEY, "").orEmpty()
+        set(value) = plainPrefs.edit().putString(KEY_WEB_SEARCH_API_KEY, value.trim()).apply()
+
+    var webSearchApiBaseUrl: String
+        get() = plainPrefs.getString(KEY_WEB_SEARCH_API_BASE_URL, "").orEmpty().trim()
+        set(value) = plainPrefs.edit().putString(KEY_WEB_SEARCH_API_BASE_URL, value.trim()).apply()
+
     var predictiveBackEnabled: Boolean
         get() = plainPrefs.getBoolean(KEY_PREDICTIVE_BACK_ENABLED, false)
         set(value) = plainPrefs.edit().putBoolean(KEY_PREDICTIVE_BACK_ENABLED, value).apply()
@@ -1535,6 +1551,8 @@ class AppSettings(context: Context) {
             .put("dynamicColorEnabled", dynamicColorEnabled)
             .put("amoledBackgroundEnabled", amoledBackgroundEnabled)
             .put("hapticFeedbackEnabled", hapticFeedbackEnabled)
+            .put("developerModeEnabled", developerModeEnabled)
+            .put("webSearchProvider", webSearchProvider)
             .put("predictiveBackEnabled", predictiveBackEnabled)
             .put("customThemeColorEnabled", customThemeColorEnabled)
             .put("customThemeColor", customThemeColor)
@@ -1689,6 +1707,8 @@ class AppSettings(context: Context) {
         if (root.has("dynamicColorEnabled")) dynamicColorEnabled = root.optBoolean("dynamicColorEnabled")
         if (root.has("amoledBackgroundEnabled")) amoledBackgroundEnabled = root.optBoolean("amoledBackgroundEnabled")
         if (root.has("hapticFeedbackEnabled")) hapticFeedbackEnabled = root.optBoolean("hapticFeedbackEnabled")
+        if (root.has("developerModeEnabled")) developerModeEnabled = root.optBoolean("developerModeEnabled")
+        if (root.has("webSearchProvider")) webSearchProvider = root.optString("webSearchProvider")
         if (root.has("predictiveBackEnabled")) predictiveBackEnabled = root.optBoolean("predictiveBackEnabled")
         root.optString("languageMode").takeIf { it.isNotBlank() }?.let { languageMode = it }
         root.optString("refreshRateMode").takeIf { it.isNotBlank() }?.let { refreshRateMode = it }
@@ -2425,6 +2445,22 @@ class AppSettings(context: Context) {
         const val MIN_HISTORY_COMPRESSION_CHUNKS = 1
         const val MAX_HISTORY_COMPRESSION_CHUNKS = 16
         const val DEFAULT_HISTORY_COMPRESSION_CHUNKS = 1
+        const val WEB_SEARCH_DUCKDUCKGO = "duckduckgo"
+        const val WEB_SEARCH_SEARXNG = "searxng"
+        const val WEB_SEARCH_BRAVE = "brave"
+        const val WEB_SEARCH_TAVILY = "tavily"
+        const val WEB_SEARCH_SERPER = "serper"
+        const val WEB_SEARCH_KAGI = "kagi"
+
+        fun normalizeWebSearchProvider(value: String): String = when (value) {
+            WEB_SEARCH_SEARXNG, WEB_SEARCH_BRAVE, WEB_SEARCH_TAVILY, WEB_SEARCH_SERPER, WEB_SEARCH_KAGI -> value
+            else -> WEB_SEARCH_DUCKDUCKGO
+        }
+
+        fun webSearchProviderRequiresKey(provider: String): Boolean = when (provider) {
+            WEB_SEARCH_DUCKDUCKGO, WEB_SEARCH_SEARXNG -> false
+            else -> true
+        }
         const val DEFAULT_CONTEXT_TOKEN_BUDGET = 32000
         const val MIN_CONTEXT_TOKEN_BUDGET = 4000
         const val MAX_CONTEXT_TOKEN_BUDGET = 1000000
@@ -2438,6 +2474,10 @@ class AppSettings(context: Context) {
         private const val KEY_DYNAMIC_COLOR_ENABLED = "dynamic_color_enabled"
     private const val KEY_AMOLED_BACKGROUND_ENABLED = "amoled_background_enabled"
     private const val KEY_HAPTIC_FEEDBACK_ENABLED = "haptic_feedback_enabled"
+    private const val KEY_DEVELOPER_MODE_ENABLED = "developer_mode_enabled"
+    private const val KEY_WEB_SEARCH_PROVIDER = "web_search_provider"
+    private const val KEY_WEB_SEARCH_API_KEY = "web_search_api_key"
+    private const val KEY_WEB_SEARCH_API_BASE_URL = "web_search_api_base_url"
         private const val KEY_PREDICTIVE_BACK_ENABLED = "predictive_back_enabled"
         private const val KEY_DEVICE_INTERACTION_EXPERIMENTAL_ENABLED = "device_interaction_experimental_enabled"
         private const val KEY_CUSTOM_THEME_COLOR_ENABLED = "custom_theme_color_enabled"

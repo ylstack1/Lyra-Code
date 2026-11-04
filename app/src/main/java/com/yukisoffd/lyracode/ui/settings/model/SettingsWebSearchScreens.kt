@@ -2,6 +2,11 @@ package com.yukisoffd.lyracode
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.RadioButton
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.draw.clip
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Block
@@ -34,6 +39,66 @@ internal fun WebSearchSettings(
 ) {
     val search = remember(externalRevision) { settings.deepSeekSearchConfig }
     val fetch = remember(externalRevision) { settings.deepSeekFetchConfig }
+    var provider by remember(externalRevision) { mutableStateOf(settings.webSearchProvider) }
+    var apiKey by remember(externalRevision) { mutableStateOf(settings.webSearchApiKey) }
+    var baseUrl by remember(externalRevision) { mutableStateOf(settings.webSearchApiBaseUrl) }
+    val needsKey = AppSettings.webSearchProviderRequiresKey(provider)
+    ModernCardBox {
+        Text("Search Provider", style = MaterialTheme.typography.titleSmall, color = MaterialTheme.colorScheme.onSurface)
+        Spacer(Modifier.height(8.dp))
+        val providers = listOf(
+            "duckduckgo" to "DuckDuckGo (no key)",
+            "searxng" to "SearXNG (no key)",
+            "brave" to "Brave Search",
+            "tavily" to "Tavily",
+            "serper" to "Serper",
+            "kagi" to "Kagi",
+        )
+        providers.forEach { (id, label) ->
+            Row(
+                Modifier
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(10.dp))
+                    .clickable {
+                        provider = id
+                        settings.webSearchProvider = id
+                    }
+                    .padding(horizontal = 8.dp, vertical = 6.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                RadioButton(selected = provider == id, onClick = {
+                    provider = id
+                    settings.webSearchProvider = id
+                })
+                Text(label, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.weight(1f))
+            }
+        }
+        if (needsKey) {
+            Spacer(Modifier.height(6.dp))
+            OutlinedTextField(
+                value = apiKey,
+                onValueChange = {
+                    apiKey = it
+                    settings.webSearchApiKey = it
+                },
+                label = { Text("API Key") },
+                singleLine = true,
+                modifier = Modifier.fillMaxWidth(),
+            )
+            if (provider == "searxng") {
+                OutlinedTextField(
+                    value = baseUrl,
+                    onValueChange = {
+                        baseUrl = it
+                        settings.webSearchApiBaseUrl = it
+                    },
+                    label = { Text("Base URL (optional)") },
+                    singleLine = true,
+                    modifier = Modifier.fillMaxWidth(),
+                )
+            }
+        }
+    }
     ModernCardBox {
         KimiMenuRow(
             Icons.Default.Search, uiText(R.string.deepseek_search_title),
