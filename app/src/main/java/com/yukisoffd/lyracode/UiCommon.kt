@@ -283,6 +283,19 @@ internal fun LyraCodeTheme(
         surfaceTint = if (settings.customThemeColorEnabled) ModernAccentDark else selectedPreset.accent,
     )
     val baseScheme = if (darkMode) dark else light
+    val amoledScheme = if (darkMode && settings.amoledBackgroundEnabled) {
+        baseScheme.copy(
+            background = Color.Black,
+            surface = Color.Black,
+            surfaceVariant = Color(0xFF0A0A0A),
+            surfaceContainer = Color(0xFF0A0A0A),
+            surfaceContainerLow = Color(0xFF050505),
+            surfaceContainerLowest = Color.Black,
+            surfaceContainerHigh = Color(0xFF111111),
+            surfaceContainerHighest = Color(0xFF1A1A1A),
+            surfaceDim = Color.Black,
+        )
+    } else baseScheme
     val colorScheme = if (dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
         val dynamicScheme = remember(dynamicColorRevision, darkMode, context) {
             if (darkMode) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
@@ -310,7 +323,7 @@ internal fun LyraCodeTheme(
             surfaceTint = dynamicScheme.primary,
         )
     } else {
-        baseScheme
+        amoledScheme
     }
     val defaults = Typography()
     val typography = defaults.copy(

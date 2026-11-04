@@ -125,6 +125,17 @@ internal fun ThemeSettings(
         ModernDivider()
         Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(
+                Icons.Default.DarkMode,
+                contentDescription = null,
+                modifier = Modifier.width(36.dp).size(24.dp),
+                tint = IconColor.Primary,
+            )
+            Text("AMOLED Black Background", modifier = Modifier.weight(1f), style = MaterialTheme.typography.titleMedium)
+            Switch(checked = settings.amoledBackgroundEnabled, onCheckedChange = { settings.amoledBackgroundEnabled = it })
+        }
+        ModernDivider()
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Icon(
                 Icons.Default.Gesture,
                 contentDescription = null,
                 modifier = Modifier.width(36.dp).size(24.dp),

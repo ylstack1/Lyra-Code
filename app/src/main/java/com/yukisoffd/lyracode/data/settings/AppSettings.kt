@@ -269,6 +269,10 @@ class AppSettings(context: Context) {
         get() = plainPrefs.getBoolean(KEY_DYNAMIC_COLOR_ENABLED, false)
         set(value) = plainPrefs.edit().putBoolean(KEY_DYNAMIC_COLOR_ENABLED, value).apply()
 
+    var amoledBackgroundEnabled: Boolean
+        get() = plainPrefs.getBoolean(KEY_AMOLED_BACKGROUND_ENABLED, false)
+        set(value) = plainPrefs.edit().putBoolean(KEY_AMOLED_BACKGROUND_ENABLED, value).apply()
+
     var predictiveBackEnabled: Boolean
         get() = plainPrefs.getBoolean(KEY_PREDICTIVE_BACK_ENABLED, false)
         set(value) = plainPrefs.edit().putBoolean(KEY_PREDICTIVE_BACK_ENABLED, value).apply()
@@ -1518,6 +1522,7 @@ class AppSettings(context: Context) {
             .put("appIconId", appIconId)
             .put("themeMode", themeMode)
             .put("dynamicColorEnabled", dynamicColorEnabled)
+            .put("amoledBackgroundEnabled", amoledBackgroundEnabled)
             .put("predictiveBackEnabled", predictiveBackEnabled)
             .put("customThemeColorEnabled", customThemeColorEnabled)
             .put("customThemeColor", customThemeColor)
@@ -1669,6 +1674,7 @@ class AppSettings(context: Context) {
             }
         }
         if (root.has("dynamicColorEnabled")) dynamicColorEnabled = root.optBoolean("dynamicColorEnabled")
+        if (root.has("amoledBackgroundEnabled")) amoledBackgroundEnabled = root.optBoolean("amoledBackgroundEnabled")
         if (root.has("predictiveBackEnabled")) predictiveBackEnabled = root.optBoolean("predictiveBackEnabled")
         root.optString("languageMode").takeIf { it.isNotBlank() }?.let { languageMode = it }
         root.optString("refreshRateMode").takeIf { it.isNotBlank() }?.let { refreshRateMode = it }
@@ -2412,6 +2418,7 @@ class AppSettings(context: Context) {
         private const val KEY_DARK_MODE = "dark_mode"
         private const val KEY_THEME_MODE = "theme_mode"
         private const val KEY_DYNAMIC_COLOR_ENABLED = "dynamic_color_enabled"
+    private const val KEY_AMOLED_BACKGROUND_ENABLED = "amoled_background_enabled"
         private const val KEY_PREDICTIVE_BACK_ENABLED = "predictive_back_enabled"
         private const val KEY_DEVICE_INTERACTION_EXPERIMENTAL_ENABLED = "device_interaction_experimental_enabled"
         private const val KEY_CUSTOM_THEME_COLOR_ENABLED = "custom_theme_color_enabled"
