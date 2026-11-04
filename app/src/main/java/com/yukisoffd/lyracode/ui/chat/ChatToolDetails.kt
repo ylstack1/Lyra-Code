@@ -66,6 +66,7 @@ import org.json.JSONArray
 import org.json.JSONObject
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun ToolResultContent(
     content: String,
