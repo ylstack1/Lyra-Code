@@ -111,6 +111,8 @@ internal fun ThemeSettings(
     onOpenAppIconSettings: () -> Unit,
 ) {
     val hasBackground = !settings.chatBackgroundPath.isNullOrBlank()
+    var amoledEnabled by remember { mutableStateOf(settings.amoledBackgroundEnabled) }
+    var hapticEnabled by remember { mutableStateOf(settings.hapticFeedbackEnabled) }
     ModernCardBox {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(
@@ -131,7 +133,10 @@ internal fun ThemeSettings(
                 tint = IconColor.Primary,
             )
             Text("AMOLED Black Background", modifier = Modifier.weight(1f), style = MaterialTheme.typography.titleMedium)
-            Switch(checked = settings.amoledBackgroundEnabled, onCheckedChange = { settings.amoledBackgroundEnabled = it })
+            Switch(checked = amoledEnabled, onCheckedChange = {
+                amoledEnabled = it
+                settings.amoledBackgroundEnabled = it
+            })
         }
         ModernDivider()
         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -142,7 +147,10 @@ internal fun ThemeSettings(
                 tint = IconColor.Primary,
             )
             Text("Haptic Feedback", modifier = Modifier.weight(1f), style = MaterialTheme.typography.titleMedium)
-            Switch(checked = settings.hapticFeedbackEnabled, onCheckedChange = { settings.hapticFeedbackEnabled = it })
+            Switch(checked = hapticEnabled, onCheckedChange = {
+                hapticEnabled = it
+                settings.hapticFeedbackEnabled = it
+            })
         }
         ModernDivider()
         Row(verticalAlignment = Alignment.CenterVertically) {

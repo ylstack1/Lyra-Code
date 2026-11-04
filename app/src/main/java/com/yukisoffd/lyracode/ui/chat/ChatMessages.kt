@@ -87,6 +87,7 @@ import com.yukisoffd.lyracode.ai.MEDIA_MESSAGE_ROLE
 import com.yukisoffd.lyracode.ai.TodoItem
 import com.yukisoffd.lyracode.data.AppSettings
 import com.yukisoffd.lyracode.IconColor
+import com.yukisoffd.lyracode.rememberHapticFeedback
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.ensureActive
@@ -991,10 +992,14 @@ internal fun MessageCard(
                                 Text(uiText(R.string.stats_tool_results), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.labelMedium)
                             }
                             if (message.thinking.isNotBlank()) {
+                                val haptic = rememberHapticFeedback()
                                 CollapsedStatusLine(
                                     text = if (showThinking) uiText(R.string.thinking_details_expanded) else if (isStreaming) "thinking..." else uiText(R.string.label_thinking_done),
                                     expanded = showThinking,
-                                    onClick = { showThinking = !showThinking },
+                                    onClick = {
+                                        haptic(HapticFeedbackType.TextHandleMove)
+                                        showThinking = !showThinking
+                                    },
                                 )
                                 AnimatedVisibility(showThinking) {
                                     key(selectionResetKey) {
@@ -1011,17 +1016,81 @@ internal fun MessageCard(
                                 }
                             }
                             if (message.role == "tool") {
+                                val toolHaptic = rememberHapticFeedback()
                                 ToolResultContent(
                                     content = message.content,
                                     toolName = message.toolName,
                                     toolInput = message.toolInput,
                                     expanded = showToolResult,
-                                    onToggle = { showToolResult = !showToolResult },
+                                    onToggle = {
+                                        toolHaptic(HapticFeedbackType.TextHandleMove)
+                                        showToolResult = !showToolResult
+                                    },
                                     compact = compactToolResult,
                                     inlineDetails = inlineToolDetails,
                                 )
                             } else {
-                                if (visibleContent.isNotBlank()) {
+                                if (visibleContent.isNotBlank() && message.role == "assistant" && !inProcessRecord && !isStreaming) {
+                                    // Final summary card: collapsed preview, click to expand full markdown answer.
+                                    var summaryExpanded by rememberSaveable(message.id) { mutableStateOf(true) }
+                                    val summaryHaptic = rememberHapticFeedback()
+                                    Card(
+                                        Modifier
+                                            .fillMaxWidth()
+                                            .clickable {
+                                                summaryHaptic(HapticFeedbackType.TextHandleMove)
+                                                summaryExpanded = !summaryExpanded
+                                            },
+                                        shape = RoundedCornerShape(14.dp),
+                                        colors = CardDefaults.cardColors(
+                                            containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.35f),
+                                        ),
+                                        border = BorderStroke(
+                                            1.dp,
+                                            MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.35f),
+                                        ),
+                                    ) {
+                                        Column(Modifier.padding(horizontal = 14.dp, vertical = 10.dp)) {
+                                            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                                                Icon(
+                                                    Icons.Default.Summarize,
+                                                    contentDescription = null,
+                                                    tint = IconColor.Success,
+                                                    modifier = Modifier.size(18.dp),
+                                                )
+                                                Text(
+                                                    "Summary",
+                                                    style = MaterialTheme.typography.labelMedium,
+                                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                                    modifier = Modifier.weight(1f),
+                                                )
+                                                Icon(
+                                                    if (summaryExpanded) Icons.Default.ExpandLess else Icons.Default.ExpandMore,
+                                                    contentDescription = null,
+                                                    tint = IconColor.Secondary,
+                                                    modifier = Modifier.size(18.dp),
+                                                )
+                                            }
+                                            if (summaryExpanded) {
+                                                ModernDivider()
+                                                key(localSelectionResetKey) {
+                                                    SelectionContainer {
+                                                        RichMarkdownContent(visibleContent)
+                                                    }
+                                                }
+                                            } else {
+                                                Spacer(Modifier.height(4.dp))
+                                                Text(
+                                                    visibleContent.lineSequence().take(2).joinToString(" ").take(160),
+                                                    style = MaterialTheme.typography.bodySmall,
+                                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                                    maxLines = 2,
+                                                    overflow = TextOverflow.Ellipsis,
+                                                )
+                                            }
+                                        }
+                                    }
+                                } else if (visibleContent.isNotBlank()) {
                                     key(selectionResetKey) {
                                         if (isUser) {
                                             Text(visibleContent, color = contentColor, style = MaterialTheme.typography.bodyLarge)
@@ -1221,7 +1290,7 @@ private fun rememberStreamingTextFrame(
         // Render every received character immediately; only the newest tail fades in.
         opaquePosition.animateTo(
             targetValue = targetPosition,
-            animationSpec = tween(durationMillis = 500),
+            animationSpec = tween(durationMillis = 260),
         )
     }
 
@@ -1239,7 +1308,16 @@ private fun rememberStreamingTextFrame(
             }
             val pending = target.length - renderedContent.length
             if (pending > 0) {
-                renderedContent = target.take(renderedContent.length + 1)
+                // Adaptive reveal: catch up faster when a large backlog accumulates
+                // so streaming never feels slower than the network delivers.
+                val step = when {
+                    pending > 400 -> 24
+                    pending > 200 -> 12
+                    pending > 80 -> 6
+                    pending > 30 -> 3
+                    else -> 2
+                }
+                renderedContent = target.take(renderedContent.length + step)
             }
             delay(12L)
         }

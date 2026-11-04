@@ -94,6 +94,7 @@ import androidx.compose.material.icons.filled.*
 import com.yukisoffd.lyracode.data.AppSettings
 import com.yukisoffd.lyracode.workspace.UploadedFile
 import com.yukisoffd.lyracode.IconColor
+import com.yukisoffd.lyracode.rememberHapticFeedback
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.File
@@ -381,13 +382,17 @@ private fun ComposerActionBar(
             )
         }
         ComposerStopButton(visible = stopVisible, accent = composerAccent.first, onStop = onStop)
+        val haptic = rememberHapticFeedback()
         AnimatedVisibility(canSend && (!isRunning || sendWhileRunning)) {
             Box(
                 modifier = Modifier
                     .size(26.dp)
                     .clip(CircleShape)
                     .background(composerAccent.first)
-                    .clickable(enabled = canSend, onClick = onSend),
+                    .clickable(enabled = canSend) {
+                        haptic(HapticFeedbackType.TextHandleMove)
+                        onSend()
+                    },
                 contentAlignment = Alignment.Center,
             ) {
                 Icon(

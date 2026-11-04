@@ -26,6 +26,12 @@ import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.selection.SelectionContainer
+import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.rememberModalBottomSheetState
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -75,6 +81,7 @@ internal fun ToolResultContent(
     } else {
         uiText(R.string.ui_tool_call_2)
     }
+    var showSheet by remember { mutableStateOf(false) }
     Column(
         Modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -82,16 +89,70 @@ internal fun ToolResultContent(
         ToolCallSummaryCard(
             text = summary,
             compact = compact,
-            onClick = onToggle,
+            onClick = { showSheet = true },
             expanded = expanded,
         )
-        if (expanded) {
+        if (expanded && inlineDetails) {
             ToolResultCard(
                 toolName = toolName,
                 toolInput = toolInput.ifBlank { "{}" },
                 toolOutput = content.ifBlank { uiText(R.string.label_empty_result) },
                 onCopy = { },
             )
+        }
+    }
+    if (showSheet) {
+        val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = false)
+        ModalBottomSheet(
+            onDismissRequest = { showSheet = false },
+            sheetState = sheetState,
+            containerColor = MaterialTheme.colorScheme.surface,
+            tonalElevation = 0.dp,
+        ) {
+            ToolResultSheetContent(
+                toolName = toolName,
+                toolInput = toolInput.ifBlank { "{}" },
+                toolOutput = content.ifBlank { uiText(R.string.label_empty_result) },
+            )
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun ToolResultSheetContent(
+    toolName: String,
+    toolInput: String,
+    toolOutput: String,
+) {
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .fillMaxHeight(0.62f)
+            .padding(horizontal = 16.dp),
+        verticalArrangement = Arrangement.spacedBy(10.dp),
+    ) {
+        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            Icon(Icons.Default.Build, contentDescription = null, tint = IconColor.Primary, modifier = Modifier.size(20.dp))
+            Text(
+                if (toolName.isNotBlank()) uiText(R.string.ui_tool_call) + " $toolName" else uiText(R.string.ui_tool_call_2),
+                style = MaterialTheme.typography.titleMedium,
+                color = MaterialTheme.colorScheme.onSurface,
+                modifier = Modifier.weight(1f),
+            )
+        }
+        LazyColumn(
+            Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(10.dp),
+        ) {
+            item {
+                ToolResultCard(
+                    toolName = toolName,
+                    toolInput = toolInput,
+                    toolOutput = toolOutput,
+                    onCopy = { },
+                )
+            }
         }
     }
 }
