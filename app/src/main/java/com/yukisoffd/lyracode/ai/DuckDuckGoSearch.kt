@@ -64,7 +64,7 @@ object DuckDuckGoSearch {
                         else Response.Error("CAPTCHA", "DuckDuckGo bot challenge; retry later")
                     }
                     if (vqd.isBlank()) {
-                        vqd = Regex("""vqd=['"]?([\d-]+)['"]?""").find(body)?.groupValues?.getOrNull(1)?.value.orEmpty()
+                        vqd = Regex("""vqd=['"]?([\d-]+)['"]?""").find(body)?.groupValues?.getOrNull(1).orEmpty()
                     }
                     parsePage(body, results)
                 }

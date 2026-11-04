@@ -1,6 +1,6 @@
 package com.yukisoffd.lyracode.ai
 
-import com.yukisoffd.lyracode.data.settings.AppSettings
+import com.yukisoffd.lyracode.data.AppSettings
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
